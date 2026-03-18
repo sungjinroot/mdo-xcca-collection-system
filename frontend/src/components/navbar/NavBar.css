@@ -20,6 +20,11 @@
     padding: 8px 12px;
 }
 
+.search input:focus {
+    outline: none; 
+    box-shadow: none; 
+}
+
 .search select {
     width: 40%;              
     border: none;            

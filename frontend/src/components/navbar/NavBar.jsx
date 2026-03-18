@@ -16,7 +16,7 @@ function NavBar(){
                     {/*To do later: Make select dynamic and fetch from the categories table... */}
 
                     <select>
-                        <option> None </option>
+                        <option> No Category </option>
                         <option> 2 </option>
                         <option> 3 </option>
                         <option> 4 </option>
