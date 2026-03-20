@@ -1,38 +1,142 @@
 .card-container {
   width: 300px;
-  height: 350px;
+  min-height: 300px;
   border-radius: 12px;
   background: #fff;
   transition: transform 0.25s ease, box-shadow 0.25s ease;  margin-top: 30px;
-  margin-bottom: 30px;
+  margin-top: 25px;
+  margin-bottom: 80px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
+
+  opacity: 0;
+  transform: scale(0.8);
+  animation: popIn 1s forwards;
 }
 
+
+@keyframes popIn {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.artifacts-grid .card-container:nth-child(1) { animation-delay: 0s; }
+.artifacts-grid .card-container:nth-child(2) { animation-delay: 0.1s; }
+.artifacts-grid .card-container:nth-child(3) { animation-delay: 0.2s; }
+
 .card-container:hover {
-  transform: translateY(-15px);
   box-shadow: 0 12px 40px rgba(58, 82, 163, 0.6);
 }
 
-.card-img{
-    height: 180px;
-    border-radius: 12px;
+.card-container:hover .card-img {
+    border: 1.3px ridge #283971;
 }
 
-.card-img img{
+.card-img {
+    height: 180px;
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
+    border: 0 solid transparent;
+    transition: border 3s ease;
+}
+
+.card-img img {
     height: 180px;
     width: 100%;
-    border-radius: 12px;
-
+    object-fit: cover; 
+    object-position: center; 
+    border-top-left-radius: 12px;
+    border-top-right-radius: 12px;
+    border-bottom-left-radius: 0;
+    border-bottom-right-radius: 0;
 }
 
 .card-info{
-    background-color: #36454F;
+    background-color: #3a52a3;
     border-radius: 0 0 12px 12px;
-    flex: 1
+    flex: 1;
+    display: flex;
+    flex-direction: column;
 }
 
-p{
+.basic-info{
+    flex: 1;
+}
+
+.basic-functions{
+    display: flex;
+    justify-content: space-around;
+}
+
+.basic-functions:hover{
+    display: flex;
+    justify-content: space-around;
+    border-radius: 0 0 10px 10px;
+}
+
+.basic-info{
+    display: flex;
+    flex-direction: column;
+}
+
+.artifact-display-data{
+    padding: 10px;
     color: white;
+    text-align: center;
+    font-weight: bold;
+}
+
+.artifact-display-data:hover{
+    padding: 10px;
+    background-color: #283971; 
+    text-align: center;
+    font-weight: bold;
+}
+
+.card-container:hover .basic-functions {
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.basic-functions {
+    display: flex;
+    justify-content: space-around;
+
+    max-height: 0;
+    overflow: hidden;
+    opacity: 0;
+
+    transition: max-height 1s ease, opacity 2.5s ease;
+}
+
+.basic-functions:hover{
+   background-color: #283971;
+}
+
+.card-container:hover .basic-functions {
+    max-height: 100px; 
+    opacity: 1;
+}
+
+.card-functions{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: #283971;
+    color: white
+}
+
+.card-functions:hover{
+    padding: 10px;
+    margin: 10px;
+    border-radius: 10px;
+    border: none;
+    background-color: white;
+    color: #283971;
 }

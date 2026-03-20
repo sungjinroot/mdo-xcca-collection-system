@@ -25,7 +25,6 @@ function App() {
         </div> 
 
 
-
         <div className="artifacts-grid"> 
           <Artifact/> 
           <Artifact/> 
@@ -73,7 +72,6 @@ function App() {
           <Artifact/> 
           <Artifact/> 
         </div>
-
 
 
         <div className="move-right move"> 
