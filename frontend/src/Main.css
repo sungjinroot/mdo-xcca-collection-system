@@ -15,7 +15,7 @@ html, body, #root {
 }
 
 .gnome-container{
-    background-color: green;
+    background-color: white;
     height: 90%;
     display: flex;
     justify-content: space-between;
@@ -25,22 +25,19 @@ html, body, #root {
     display: flex;
     align-items: center;
     cursor: pointer;
-    background-color: orange;
+    background-color: white;
     width: 5%;
+    transition: background 0.3s ease, opacity 0.3s ease;
 }
+
 
 .footer{
     display: flex;
     justify-content: center;
     align-items: center;
     height: 10%;
-    background-color: #b99430;
+    background-color: #3a52a3;
 }
-
-.artifacts-grid{
-    flex: 1;
-}
-
 
 
 .move-icon:hover {
@@ -50,9 +47,16 @@ html, body, #root {
 }
 
 .artifacts-grid{
+    flex: 1;
     display: grid;
     overflow: scroll;
     grid-template-columns: repeat(auto-fill,320px);
     grid-column-gap: 1px;
     justify-content: center;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.artifacts-grid::-webkit-scrollbar {
+    display: none; 
 }

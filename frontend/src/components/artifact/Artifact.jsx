@@ -11,11 +11,13 @@ function Artifact(){
 
             <div className="card-info">
                 <div className="basic-info">
-                    basic
+                    <p> English Name </p>
+                    <p> Vernacular name </p>
+                    <p> Year </p>
                 </div>
 
                 <div className="basic-functions">
-
+                    <p> tset </p>
                 </div>
             </div>
         </div>

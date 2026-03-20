@@ -3,7 +3,6 @@
   height: 350px;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
   transition: transform 0.25s ease, box-shadow 0.25s ease;  margin-top: 30px;
   margin-bottom: 30px;
   cursor: pointer;
@@ -12,8 +11,8 @@
 }
 
 .card-container:hover {
-  transform: translateY(-12px) scale(1.05);
-  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
+  transform: translateY(-15px);
+  box-shadow: 0 12px 40px rgba(58, 82, 163, 0.6);
 }
 
 .card-img{
@@ -29,5 +28,11 @@
 }
 
 .card-info{
-    background-color: red;
+    background-color: #36454F;
+    border-radius: 0 0 12px 12px;
+    flex: 1
+}
+
+p{
+    color: white;
 }
