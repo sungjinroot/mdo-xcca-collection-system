@@ -3,17 +3,31 @@
   height: 350px;
   border-radius: 12px;
   background: #fff;
-  box-shadow: 0 4px 12px rgba(0,0,0,0.1);
-  transition: transform 0.2s ease;
-  margin-top: 30px;
+  box-shadow: 0 6px 16px rgba(0,0,0,0.12);
+  transition: transform 0.25s ease, box-shadow 0.25s ease;  margin-top: 30px;
   margin-bottom: 30px;
+  cursor: pointer;
+  display: flex;
+  flex-direction: column;
+}
+
+.card-container:hover {
+  transform: translateY(-12px) scale(1.05);
+  box-shadow: 0 10px 20px rgba(0,0,0,0.18);
 }
 
 .card-img{
     height: 180px;
+    border-radius: 12px;
 }
 
 .card-img img{
-    height: 175px;
+    height: 180px;
     width: 100%;
+    border-radius: 12px;
+
+}
+
+.card-info{
+    background-color: red;
 }

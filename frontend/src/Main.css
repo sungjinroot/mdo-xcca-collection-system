@@ -22,8 +22,11 @@ html, body, #root {
 }
 
 .move{
+    display: flex;
+    align-items: center;
+    cursor: pointer;
     background-color: orange;
-    width: 3%;
+    width: 5%;
 }
 
 .footer{
@@ -38,11 +41,7 @@ html, body, #root {
     flex: 1;
 }
 
-.move{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-}
+
 
 .move-icon:hover {
   transform: scale(1.2); 
@@ -53,7 +52,7 @@ html, body, #root {
 .artifacts-grid{
     display: grid;
     overflow: scroll;
-    grid-template-columns: repeat(auto-fill,325px);
-    grid-column-gap: 15px;
+    grid-template-columns: repeat(auto-fill,320px);
+    grid-column-gap: 1px;
     justify-content: center;
 }

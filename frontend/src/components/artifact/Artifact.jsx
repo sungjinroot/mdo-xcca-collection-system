@@ -10,7 +10,13 @@ function Artifact(){
             </div>
 
             <div className="card-info">
-                testing
+                <div className="basic-info">
+                    basic
+                </div>
+
+                <div className="basic-functions">
+
+                </div>
             </div>
         </div>
     );
