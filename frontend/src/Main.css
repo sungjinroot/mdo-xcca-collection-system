@@ -41,7 +41,7 @@ html, body, #root {
     display: grid;
     overflow: scroll;
     grid-template-columns: repeat(auto-fill,320px);
-    grid-column-gap: 100px;
+    grid-column-gap: 85px;
     justify-content: center;
     scrollbar-width: none;
     -ms-overflow-style: none;
