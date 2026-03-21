@@ -12,7 +12,7 @@ function Artifact(){
             <div className="card-info">
                 <div className="basic-info">
                     <div className="artifact-display-data">
-                        Fossilized Poo
+                        FOSSILIZED SHIT
                     </div>
 
                     <div className="artifact-display-data">

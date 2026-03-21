@@ -71,6 +71,11 @@ function App() {
           <Artifact/> 
           <Artifact/> 
           <Artifact/> 
+                    <Artifact/> 
+          <Artifact/> 
+          <Artifact/> 
+          <Artifact/> 
+
         </div>
 
 
@@ -79,9 +84,11 @@ function App() {
         </div> 
       </div>
       
+      
       <div className="footer"> 
         <Pagination count={20} shape="rounded" sx={{color:'white','& .MuiPaginationItem-root':{color:'white',borderColor:'white'},'& .Mui-selected':{backgroundColor:'white',color:'#000'}}} /> {/* Calculate based on table size soon of artifacts*/}
       </div>
+      
     </div>
   
 
