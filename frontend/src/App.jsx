@@ -71,7 +71,7 @@ function App() {
           <Artifact/> 
           <Artifact/> 
           <Artifact/> 
-                    <Artifact/> 
+          <Artifact/> 
           <Artifact/> 
           <Artifact/> 
           <Artifact/> 
