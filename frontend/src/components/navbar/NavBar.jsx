@@ -1,4 +1,6 @@
 import './NavBar.css'
+import Select from '@mui/material/Select';
+import MenuItem from '@mui/material/MenuItem';
 
 function NavBar(){
 
@@ -14,7 +16,8 @@ function NavBar(){
                     <input type="text" placeholder="Search by keyword..."/>
 
                     {/*To do later: Make select dynamic and fetch from the categories table... */}
-
+                    
+                    {/*Turn into div scrollbar */}
                     <select>
                         <option> No Category </option>
                         <option> 2 </option>

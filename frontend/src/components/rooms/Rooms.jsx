@@ -14,9 +14,17 @@ function Rooms(){
         <button className="button-utils-right utils" onClick={() => alert(5)}> Add Room </button>
 
         <Carousel.Caption>
-          <h2 style={{color: '#b99430'}}> The Collection in it's entirety </h2>
-          <h3 style={{color: '#b99430'}}>Museo De Oro</h3>
-          <p style={{color: '#b99430'}}>Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history.</p>
+          <h2 style={{color: 'white'}}>
+             <span className="highlight"> The Collection in it's entirety </span> 
+          </h2>
+          
+          <h3 style={{color: 'white'}}>
+            <span className="highlight"> Museo De Oro </span>
+          </h3>
+          
+          <p style={{color: 'white'}}>
+            <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
+          </p>
         </Carousel.Caption>
       </Carousel.Item>
 

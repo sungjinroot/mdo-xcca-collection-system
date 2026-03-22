@@ -5,6 +5,7 @@ import Pagination from '@mui/material/Pagination';
 import NavBar from './components/navbar/NavBar.jsx';
 import Rooms from './components/rooms/Rooms.jsx';
 import Artifact from './components/artifact/Artifact.jsx';
+import AddArtifact from './components/artifact/AddArtifact.jsx';
 
 function App() {
 
@@ -26,6 +27,8 @@ function App() {
 
 
         <div className="artifacts-grid"> 
+          <AddArtifact/> 
+          <Artifact/> 
           <Artifact/> 
           <Artifact/> 
           <Artifact/> 

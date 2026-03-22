@@ -73,6 +73,9 @@
 .basic-functions{
     display: flex;
     justify-content: space-around;
+    background-color: #283971;
+    border-radius: 0 0 10px 10px;
+
 }
 
 .basic-functions:hover{
@@ -89,16 +92,20 @@
 .artifact-display-data{
     padding: 10px;
     color: white;
-    text-align: center;
     font-weight: bold;
+    width: 100%;
+
+    white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis
 }
 
 .artifact-display-data:hover{
-    padding: 10px;
-    background-color: #283971; 
-    text-align: center;
-    font-weight: bold;
+    font-size: 17px;
 }
+
+
+
 
 .card-container:hover .basic-functions {
     opacity: 1;
@@ -120,6 +127,10 @@
    background-color: #283971;
 }
 
+.basic-functions select{
+    text-align: center;
+}
+
 .card-container:hover .basic-functions {
     max-height: 100px; 
     opacity: 1;
@@ -131,7 +142,9 @@
     border-radius: 10px;
     border: none;
     background-color: #283971;
-    color: white
+    color: white;
+    width: 50%;
+    font-weight: bold;
 }
 
 .card-functions:hover{
@@ -181,3 +194,5 @@
 .delete-button img:active {
     transform: scale(0.95);
 }
+
+

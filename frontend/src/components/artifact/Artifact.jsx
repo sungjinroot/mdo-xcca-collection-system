@@ -20,11 +20,11 @@ function Artifact(){
             <div className="card-info">
                 <div className="basic-info">
                     <div className="artifact-display-data">
-                        FOSSILIZED SHIT
+                        Pre-Historic Fossilized Shit  
                     </div>
 
                     <div className="artifact-display-data">
-                        <i> Lumang Tae </i>
+                        <i> Taeng Fossil na pre-historic  </i>
                     </div>
                     
                     <div className="artifact-display-data">
@@ -33,7 +33,7 @@ function Artifact(){
                 </div>
 
                 <div className="basic-functions">
-                    <button className="card-functions"> Download </button>
+                    <button className="card-functions"> Export </button>
 
                     <select className="card-functions">
                         <option> Room 1</option>
