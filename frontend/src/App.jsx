@@ -21,12 +21,11 @@ function App() {
 
     {/*To optimize soon... as is for now*/}
     <div className="main-content">
-
+      <Options/>
       <div className="gnome-container"> 
         <div className="move-left move"> 
           <span aria-hidden="true" className="carousel-control-prev-icon move-icon"></span>
         </div> 
-
 
         <div className="artifacts-grid"> 
           <Artifact/> 
@@ -79,22 +78,16 @@ function App() {
           <Artifact/> 
           <Artifact/> 
           <Artifact/> 
-
         </div>
-
 
         <div className="move-right move"> 
           <span aria-hidden="true" className="carousel-control-next-icon move-icon"></span> 
-          <Options/>
-
         </div> 
       </div>
       
     </div>
   
-
     <Footer/>
-
   
     </>
   );
