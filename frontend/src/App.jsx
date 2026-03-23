@@ -5,7 +5,8 @@ import Pagination from '@mui/material/Pagination';
 import NavBar from './components/navbar/NavBar.jsx';
 import Rooms from './components/rooms/Rooms.jsx';
 import Artifact from './components/artifact/Artifact.jsx';
-import AddArtifact from './components/artifact/AddArtifact.jsx';
+import Footer from './components/footer/Footer.jsx';
+import Options from './components/options/Options.jsx';
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
 
     {/*To optimize soon... as is for now*/}
     <div className="main-content">
+
       <div className="gnome-container"> 
         <div className="move-left move"> 
           <span aria-hidden="true" className="carousel-control-prev-icon move-icon"></span>
@@ -27,7 +29,6 @@ function App() {
 
 
         <div className="artifacts-grid"> 
-          <AddArtifact/> 
           <Artifact/> 
           <Artifact/> 
           <Artifact/> 
@@ -84,20 +85,19 @@ function App() {
 
         <div className="move-right move"> 
           <span aria-hidden="true" className="carousel-control-next-icon move-icon"></span> 
+          <Options/>
+
         </div> 
-      </div>
-      
-      
-      <div className="footer"> 
-        <Pagination count={20} shape="rounded" sx={{color:'white','& .MuiPaginationItem-root':{color:'white',borderColor:'white'},'& .Mui-selected':{backgroundColor:'white',color:'#000'}}} /> {/* Calculate based on table size soon of artifacts*/}
       </div>
       
     </div>
   
+
+    <Footer/>
 
   
     </>
   );
 }
 
-export default App
+export default App;

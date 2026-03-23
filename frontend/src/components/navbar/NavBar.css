@@ -1,5 +1,4 @@
-
-.nav-container{
+.nav-container {
     background-color: #283971;
     padding: 10px;
     display: flex;
@@ -8,12 +7,13 @@
     height: 80px;
 }
 
-.search{
+.search {
     border-radius: 50px;
     width: 70%;
+    display: flex; 
 }
 
-.search input{
+.search input {
     width: 60%;
     border-radius: 50px 0px 0px 50px;
     border: none;
@@ -21,31 +21,25 @@
 }
 
 .search input:focus {
-    outline: none; 
-    box-shadow: none; 
+    outline: none;
+    box-shadow: none;
 }
 
-.search select {
-    width: 40%;              
-    border: none;            
-    border-left: 1px solid #ccc; 
-    border-radius: 0 50px 50px 0; 
-    padding: 8px 12px;       
-    background-color: #fff;   
-    font-size: 16px;          
-    cursor: pointer;
-    outline: none;            
-    appearance: none;        
+.search .MuiSelect-root {
+    width: 40%;
+    height: 40px;
+    border-radius: 0px 50px 50px 0px; 
+    padding: 8px 12px;
+    background-color: white;
 }
 
-.nav-functions-container{
+.nav-functions-container {
     display: flex;
     align-items: center;
     justify-content: space-around;
     width: 40%;
 }
 
-.profile img{
-    cursor: pointer
+.profile img {
+    cursor: pointer;
 }
-

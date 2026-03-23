@@ -17,20 +17,8 @@ function NavBar(){
 
                     {/*To do later: Make select dynamic and fetch from the categories table... */}
                     
-                    {/*Turn into div scrollbar */}
-                    <select>
-                        <option> No Category </option>
-                        <option> 2 </option>
-                        <option> 3 </option>
-                        <option> 4 </option>
-                        <option> 5 </option>
-                        <option> 6 </option>
-                        <option> 7 </option>
-                        <option> 8 </option>
-                        <option> 9 </option>
-                        <option> 10 </option>
-                        <option> 11 </option>
-                    </select>
+                    {/*make custom dropdown here. increase width. add more dropdowns!*/}
+
                 </div>
 
                 <div className="profile">
