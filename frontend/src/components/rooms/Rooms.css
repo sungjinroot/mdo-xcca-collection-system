@@ -32,7 +32,7 @@
     transform: scale(0.95);
 }
 
-.highlight{
+.highlight:hover{
     background-color: #b99430;
     padding: 2.4px;
     border-radius: 5px;

@@ -1,11 +1,11 @@
 .card-container {
   width: 350px;
-  min-height: 300px;
+  min-height: 250px;
   border-radius: 12px;
   background: #fff;
   transition: transform 0.25s ease, box-shadow 0.25s ease;  margin-top: 30px;
   margin-top: 25px;
-  margin-bottom: 80px;
+  margin-bottom: 140px;
   cursor: pointer;
   display: flex;
   flex-direction: column;
