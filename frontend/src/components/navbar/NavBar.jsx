@@ -1,14 +1,12 @@
 import './NavBar.css'
-import Select from '@mui/material/Select';
-import MenuItem from '@mui/material/MenuItem';
+import Logo from './Logo.jsx';
 
 function NavBar(){
 
     return (
         <nav className="nav-container">
-            <div className="logo">
-                <img src="src/assets/logo.png"/>
-            </div>
+            
+            <Logo LogoSrc="src/assets/logo.png"/>
 
             <div className="nav-functions-container">
                 
