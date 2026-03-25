@@ -1,5 +1,6 @@
 import './Artifact.css';
-
+import './ArtifactData';
+import ArtifactData from './ArtifactData';
 
 function Artifact(){
 
@@ -19,22 +20,15 @@ function Artifact(){
 
             <div className="card-info">
                 <div className="basic-info">
-                    <div className="artifact-display-data">
-                        Pre-Historic Fossilized Shit  
-                    </div>
-
-                    <div className="artifact-display-data">
-                        <i> Taeng Fossil na pre-historic  </i>
-                    </div>
-                    
-                    <div className="artifact-display-data">
-                        1945/12/12
-                    </div>
+                    <ArtifactData style="artifact-display-data" artifactData="Pre-Historic Fossilized Shit"/>
+                    <ArtifactData style="artifact-display-data" artifactData="Taeng Fossilized na pre-historic" italic={true}/>
+                    <ArtifactData style="artifact-display-data" artifactData="1945/12/12"/>
                 </div>
 
                 <div className="basic-functions">
                     <button className="card-functions"> Export </button>
 
+                    
                     <select className="card-functions">
                         <option> Room 1</option>
                         <option> Room 2</option>
@@ -44,7 +38,8 @@ function Artifact(){
                         <option> Room 6</option>
                         <option> Room 7</option>
                         <option> Room 8</option>
-                    </select>
+                    </select> 
+
                 </div>
             </div>
         </div>
