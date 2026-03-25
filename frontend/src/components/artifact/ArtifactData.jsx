@@ -1,22 +1,24 @@
 
-function ArtifactData(props){
+function ArtifactData({ style, englishName, vernacularName, dateReceived }){
     
-    if (props.italic){
-        return (
-            <div className={props.style}>
-                <i> {props.artifactData} </i> 
+    return (
+        <>
+            <div className={style}>
+                {englishName}
             </div>
-        )
-    }
 
-    else{
-
-        return (
-            <div className={props.style}>
-                {props.artifactData}  
+            <div className={style}>
+                <i> {vernacularName} </i>
             </div>
-        )
-    }   
+
+            <div className={style}>
+                {dateReceived}
+            </div>
+
+        </>
+    )
+    
 }
 
 export default ArtifactData;
+

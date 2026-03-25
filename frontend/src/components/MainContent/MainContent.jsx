@@ -28,7 +28,7 @@ function MainContent(){
                 <div className="move-right move"> 
                     <span aria-hidden="true" className="carousel-control-next-icon move-icon"></span> 
                 </div> 
-            </div>
+            </div> 
       
         </div>
         
