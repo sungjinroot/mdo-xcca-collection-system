@@ -1,6 +1,9 @@
 .card-container {
+  
   width: 350px;
-  height: 300px; 
+  height: 300px;
+  
+  
   border-radius: 16px;
   background: #fff;
   margin-top: 25px;
@@ -44,17 +47,18 @@
   color: white;
 
   transform: translateY(55%);
-  transition: transform 0.2s ease, opacity 3s ease;
+  transition: transform 0.2s ease, background-color 0.185s ease;
   border-radius: 0 0 16px 16px;
 
   display: flex;
   flex-direction: column;
-  opacity: 0.9;
+  opacity: 0.675;
 }
 
 .card-container:hover .card-info {
+  background-color: transparent;
   transform: translateY(0);
-  opacity: 0.8;
+  opacity: 0.75;
 }
 
 .artifact-display-data {
@@ -63,6 +67,8 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+
+  text-shadow: 0px 0px 5px #ffffff;
 }
 
 .artifact-display-data:hover {

@@ -1,7 +1,14 @@
 import './NavBar.css'
 import Logo from './Logo.jsx';
+import { useState } from 'react';
 
 function NavBar(){
+
+    const [category, setCategory] = useState('');
+
+    const handleChange = (event) => {
+        setCategory(event.target.value);
+    };
 
     return (
         <nav className="nav-container">
@@ -13,14 +20,20 @@ function NavBar(){
                 <div className="search">
                     <input type="text" placeholder="Search by keyword..."/>
 
-                    {/*To do later: Make select dynamic and fetch from the categories table... */}
-                    
-                    {/*make custom dropdown here. increase width. add more dropdowns!*/}
-
+                    <select>
+                        <option> No Category </option>
+                        <option> Second </option>
+                        <option> Third </option>
+                        <option> Second </option>
+                    </select>
                 </div>
 
                 <div className="profile">
-                    <img src="src/assets/profile.png" onClick="alert(5)"/>
+                    <img 
+                        src="src/assets/profile.png" 
+                        onClick={() => alert(5)}
+                        alt="profile"
+                    />
                 </div>
 
             </div>

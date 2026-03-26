@@ -4,15 +4,17 @@ function ArtifactData({ style, englishName, vernacularName, dateReceived }){
     return (
         <>
             <div className={style}>
-                {englishName}
+                {englishName} 
             </div>
 
             <div className={style}>
-                <i> {vernacularName} </i>
+                <i> 
+                    {vernacularName} 
+                </i>
             </div>
 
             <div className={style}>
-                {dateReceived}
+                {dateReceived} 
             </div>
 
         </>

@@ -25,14 +25,6 @@
     box-shadow: none;
 }
 
-.search .MuiSelect-root {
-    width: 40%;
-    height: 40px;
-    border-radius: 0px 50px 50px 0px; 
-    padding: 8px 12px;
-    background-color: white;
-}
-
 .nav-functions-container {
     display: flex;
     align-items: center;
@@ -42,4 +34,14 @@
 
 .profile img {
     cursor: pointer;
+}
+
+.search select{
+    width: 40%;
+    border-radius: 0px 50px 50px 0px; 
+    border: none;
+    background-color: white;
+    text-align: center;
+    border-left: 1px solid gray;
+
 }

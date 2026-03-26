@@ -7,7 +7,7 @@ function Artifact(){
     return (
         <div className="card-container">
             <div className="card-img">
-                <img src="https://static.wikia.nocookie.net/dreamworks/images/6/67/Shrek_Profile.jpg/revision/latest?cb=20231223041813"/>
+                <img src="https://asti.dost.gov.ph/wp-content/uploads/2020/12/2.jpg"/>
                 
 
                 <button className="delete-button">
@@ -20,7 +20,7 @@ function Artifact(){
             <div className="card-info">
                 <div className="basic-info">
             
-                    <ArtifactData style={"artifact-display-data"} englishName={"Native Snare Drum"} vernacularName={"Lumang Tae"} dateReceived={"1945/12/12"} />
+                    <ArtifactData style={"artifact-display-data"} englishName={"Native Snare Drum"} vernacularName={"Tahoy"} dateReceived={"1945/12/12"} />
                 </div>
 
                 <div className="basic-functions">
