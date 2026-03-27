@@ -17,6 +17,7 @@ function MainContent(){
                     <span aria-hidden="true" className="carousel-control-prev-icon move-icon"></span>
                 </div> 
                 
+                
 
                 <div className="artifacts-grid"> 
                     <Artifact/> 
@@ -52,7 +53,7 @@ function MainContent(){
                 <div className="move-right move"> 
                     <span aria-hidden="true" className="carousel-control-next-icon move-icon"></span> 
                 </div>
-                
+            
                 
             </div> 
       

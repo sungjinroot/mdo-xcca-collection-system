@@ -29,7 +29,7 @@ function NewArtifact(props){
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
                 <img src="src/assets/logo.png"/>
 
-                <h3 className="mx-auto text-white">New Artifact</h3>
+                <h3 className="mx-auto text-white">New Artifact Entry</h3>
                 
             
             </Modal.Header>

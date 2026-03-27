@@ -40,9 +40,9 @@ html, body, #root {
     flex: 1;
     display: grid;
     overflow: scroll;
-    grid-template-columns: repeat(auto-fill,310px);
+    grid-template-columns: repeat(auto-fill,300px);
     grid-column-gap: 80px;
-    justify-content: center;
+    justify-content: center; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;

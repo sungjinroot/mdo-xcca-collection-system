@@ -7,7 +7,7 @@ function Artifact(){
     return (
         <div className="card-container">
             <div className="card-img">
-                <img src="https://asti.dost.gov.ph/wp-content/uploads/2020/12/2.jpg"/>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQJhlnjdQRASZchajfQBcWhVZSBHKWWg3GICw&s"/>
                 
 
                 <button className="delete-button">
