@@ -1,0 +1,46 @@
+
+.stepper-page{
+    border-radius: 20px;
+    margin-top: 15px;
+    background-color: #3a52a3;
+    height: 94%;
+    display: flex;
+    flex-direction: column;
+}
+
+.stepper-content{
+    background-color: green;
+    border-top-left-radius: 20px;
+    border-top-right-radius: 20px;
+    flex: 1;
+}
+
+.stepper-movement{
+    height: 80px;
+    display: flex;
+    align-items: center;
+    justify-content: end;
+}
+
+.stepper-movement-options{
+    background-color: red;
+    width: 15%;
+    display: flex;
+    justify-content: center;
+}
+
+.single-button {
+    padding: 15px;
+    width: 50%;
+    border-radius: 12px;
+    background-color: white;  
+    color: black;               
+    font-size: 16px;            
+    border: none;               
+    cursor: pointer;            
+    transition: all 0.3s ease;  
+    box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+}
+
+
+
