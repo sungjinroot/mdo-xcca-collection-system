@@ -4,8 +4,43 @@ import './ModalSizeHeight.css';
 import './ModalSizeWidth.css';
 import { StepLabel,Stepper,Step } from '@mui/material';
 
-import RenderStep from './Pages/RenderStep.jsx';
 
+import BasicInformation from './Pages/BasicInformation.jsx';
+import Acquisition from './Pages/Acquisition.jsx';
+import ContactPersons from './Pages/ContactPersons.jsx';
+import PhysicalDescription from './Pages/PhysicalDescription.jsx';
+import ImagesPage from './Pages/ImagesPage.jsx';
+
+
+function RenderStep(current,prevStep,nextStep, setShow){
+
+    switch (current){
+        case 0: 
+            return (         
+                <BasicInformation nextStep={nextStep}/>
+            )
+
+        case 1:
+            return (
+                <Acquisition prevStep={prevStep} nextStep={nextStep}/>
+            )
+
+        case 2:
+            return (
+                <PhysicalDescription prevStep={prevStep} nextStep={nextStep}/>
+            )
+        
+        case 3:
+            return (
+                <ContactPersons prevStep={prevStep} nextStep={nextStep}/>
+            )
+        
+        case 4:
+            return (
+                <ImagesPage prevStep={prevStep} setShow={setShow}/>
+            )
+    }
+}
 
 function NewArtifact(props){
 
@@ -46,9 +81,7 @@ function NewArtifact(props){
                     ))}
                 </Stepper>
                 
-                {/*Centralize this*/}
-                <RenderStep current={currentStep} prevStep={prevStep} nextStep={nextStep} setShow={props.setShow}/>
-                
+                {RenderStep(currentStep,prevStep,nextStep,props.setShow)}
 
             </Modal.Body>
         </Modal>

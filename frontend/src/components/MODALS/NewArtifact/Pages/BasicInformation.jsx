@@ -4,7 +4,7 @@ function BasicInformation({ nextStep }){
     return (
         <div className="stepper-page">
             <div className="stepper-content">
-                test
+                hurrah
             </div>
 
             <div className="stepper-movement">
