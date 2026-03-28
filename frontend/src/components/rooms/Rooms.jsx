@@ -29,7 +29,7 @@ function Rooms(){
       </Carousel.Item>
 
       <Carousel.Item>
-        <img className="d-block w-100" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcRbyajt37u5oufDCuI7akC5fFIVbch6tql-pg&s" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+        <img className="d-block w-100" src="https://eu-images.contentstack.com/v3/assets/blt740a130ae3c5d529/blt7cf50ad6e093d4fa/65bd183462eebe040a132e1c/Backrooms_model.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
         <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
         <button className="button-utils-right utils" onClick={() => alert(5)}> New Room </button>
 

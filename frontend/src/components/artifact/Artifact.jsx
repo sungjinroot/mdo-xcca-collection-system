@@ -20,7 +20,7 @@ function Artifact(){
             <div className="card-info">
                 <div className="basic-info">
             
-                    <ArtifactData style={"artifact-display-data"} englishName={"Native Snare Drum"} vernacularName={"Tahoy"} dateReceived={"1945/12/12"} />
+                    <ArtifactData style={"artifact-display-data"} englishName={"Shrek Buddha"} vernacularName={"Shrek na buddha"} dateReceived={"1945/12/12"} />
                 </div>
 
                 <div className="basic-functions">

@@ -1,38 +1,45 @@
 
 .stepper-page{
     border-radius: 20px;
-    margin-top: 15px;
-    background-color: #3a52a3;
-    height: 94%;
+    margin-top: 1px;
+    height: 100%;
     display: flex;
     flex-direction: column;
+    padding: 15px; 
+
 }
 
+
+
 .stepper-content{
-    background-color: green;
-    border-top-left-radius: 20px;
-    border-top-right-radius: 20px;
+    display: flex;
+    gap: 20px;
+    background-color: #3a52a3;
+    border-radius: 16px; 
     flex: 1;
+    padding: 20px; 
+    
+    box-shadow: 0 10px 25px rgba(0,0,0,0.15);
 }
 
 .stepper-movement{
-    height: 80px;
+    margin: 10px;
+    height: 40px;
     display: flex;
     align-items: center;
     justify-content: end;
 }
 
 .stepper-movement-options{
-    background-color: red;
-    width: 15%;
+    width: 50%;
     display: flex;
-    justify-content: center;
+    justify-content: space-evenly;
 }
 
 .single-button {
-    padding: 15px;
-    width: 50%;
-    border-radius: 12px;
+    border-radius: 20px;
+    padding: 8px;
+    width: 45%;
     background-color: white;  
     color: black;               
     font-size: 16px;            
@@ -40,6 +47,72 @@
     cursor: pointer;            
     transition: all 0.3s ease;  
     box-shadow: 0 4px 6px rgba(0,0,0,0.1); 
+    background-color: #3a52a3;
+    color: white;
+    font-weight: bold;
+}
+
+.single-button:hover {
+    transform: translateY(-1px);
+}
+
+.solo-button{
+    width: 80%;
+}
+
+
+
+
+.basic-info-form-container{
+    flex: 1;
+    background-color: white;
+    border-radius: 14px;
+    padding: 30px 25px;
+    
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    gap: 20px;
+
+    box-shadow: inset 0 0 0 1px rgba(58, 82, 163, 0.1);
+}
+
+.basic-info-form-container h2{
+    margin-bottom: 10px;
+    color: #3a52a3;
+    font-weight: 600;
+    text-align: center;
+}
+
+.basic-fields{
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    width: 100%;
+}
+
+.basic-fields input{
+    padding: 13px 15px;
+    border-radius: 10px;
+    border: 1px solid #d0d7ff;
+    outline: none;
+    font-size: 14px;
+    transition: all 0.25s ease;
+    margin: 10px;
+}
+
+.basic-fields input:focus{
+    border-color: #3a52a3;
+    box-shadow: 0 0 0 3px rgba(58, 82, 163, 0.15);
+}
+
+.basic-info-categories{
+    flex: 1;
+    background-color: white;
+    border-radius: 14px;
+    padding: 20px;
+
+    box-shadow: inset 0 0 0 1px rgba(255, 153, 0, 0.15);
 }
 
 

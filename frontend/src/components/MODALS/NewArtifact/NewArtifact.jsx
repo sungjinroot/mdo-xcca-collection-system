@@ -4,13 +4,11 @@ import './ModalSizeHeight.css';
 import './ModalSizeWidth.css';
 import { StepLabel,Stepper,Step } from '@mui/material';
 
-
 import BasicInformation from './Pages/BasicInformation.jsx';
 import Acquisition from './Pages/Acquisition.jsx';
 import ContactPersons from './Pages/ContactPersons.jsx';
 import PhysicalDescription from './Pages/PhysicalDescription.jsx';
 import ImagesPage from './Pages/ImagesPage.jsx';
-
 
 function RenderStep(current,prevStep,nextStep, setShow){
 
@@ -60,9 +58,11 @@ function NewArtifact(props){
         }
     };
 
+    //Data here
+
     
     return (
-        <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
+        <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
                 <img src="src/assets/logo.png"/>
 
