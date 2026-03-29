@@ -1,6 +1,7 @@
-import './Layout.css';
+import '../Layout.css';
 
-function ImagesPage({prevStep, setShow}){
+function ContactPersons({ prevStep, nextStep }){
+
     return (
     
         <div className="stepper-container">
@@ -8,6 +9,9 @@ function ImagesPage({prevStep, setShow}){
                 <div className="stepper-left">
                     Left Box
                 </div>
+
+
+
 
 
 
@@ -26,7 +30,7 @@ function ImagesPage({prevStep, setShow}){
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => nextStep()}> Submit </div> 
+                <div className="stepper-navigation-right" onClick={() => nextStep()}> Continue </div> 
             </div>
         </div>
     
@@ -34,4 +38,4 @@ function ImagesPage({prevStep, setShow}){
 }
 
 
-export default ImagesPage;
+export default ContactPersons;

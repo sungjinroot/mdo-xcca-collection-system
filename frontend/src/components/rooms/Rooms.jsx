@@ -49,7 +49,7 @@ function Rooms(){
       </Carousel.Item>
 
       <Carousel.Item>
-        <img className="d-block w-100" src="https://www.xu.edu.ph/images/2016/img/may/Museo1.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+        <img className="d-block w-100" src="https://www.alphr.com/wp-content/uploads/2021/02/2021-03-02_13.42.14.png" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
         <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
         <button className="button-utils-right utils" onClick={() => alert(5)}> New Room </button>
 

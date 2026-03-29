@@ -1,0 +1,108 @@
+.stepper-container {
+    height: 95%;
+    display: flex;
+    flex-direction: column;
+    font-family: Arial, sans-serif;
+    padding: 10px;
+    box-sizing: border-box;
+    overflow: hidden; 
+}
+
+.stepper-content {
+    flex: 1;
+    display: flex;
+    gap: 10px;
+    min-height: 0; 
+    overflow: hidden;
+}
+
+.stepper-left{
+    flex: 1; 
+    min-width: 0;   
+    min-height: 0;  
+    padding: 10px;
+    max-height: 415px;
+    background-color: green;
+    display: flex;
+    justify-content: start;
+    border-radius: 12px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    flex-direction: column;
+
+    overflow: scroll;
+}
+
+.stepper-right {
+    flex: 1; 
+    min-width: 0;   
+    min-height: 0;  
+    padding: 10px;
+    max-height: 415px;
+
+    background-color: white;
+    display: flex;
+    justify-content: start;
+    border: 2px solid #283971;
+    border-radius: 12px; 
+    box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
+    flex-direction: column;
+
+    overflow: scroll;
+}
+
+
+
+.stepper-navigation-single {
+    background-color: #3a52a3; 
+    height: 50px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+}
+
+.stepper-navigation-multi {
+    background-color: #3a52a3; 
+    height: 50px;
+    display: flex;
+    font-weight: bold;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    margin-top: 10px;
+    transition: background-color 0.2s;
+
+    display: flex;
+}
+
+.stepper-navigation-left{
+    background-color: #3a52a3;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+    border-top-left-radius: 8px;
+    border-bottom-left-radius: 8px;
+
+}
+
+.stepper-navigation-right{
+    background-color: #283971;
+    flex: 1;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+
+
+    border-top-right-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+
+

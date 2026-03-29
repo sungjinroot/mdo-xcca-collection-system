@@ -4,10 +4,10 @@ import './ModalSizeHeight.css';
 import './ModalSizeWidth.css';
 import { StepLabel,Stepper,Step } from '@mui/material';
 
-import BasicInformation from './Pages/BasicInformation.jsx';
-import Acquisition from './Pages/Acquisition.jsx';
-import ContactPersons from './Pages/ContactPersons.jsx';
-import PhysicalDescription from './Pages/PhysicalDescription.jsx';
+import BasicInformation from './Pages/BasicInformation/BasicInformation.jsx';
+import Acquisition from './Pages/Acquisition/Acquisition.jsx';
+import ContactPersons from './Pages/ContactPersons/ContactPersons.jsx';
+import PhysicalDescription from './Pages/PhysicalDescription/PhysicalDescription.jsx';
 import ImagesPage from './Pages/ImagesPage.jsx';
 
 function RenderStep(current,prevStep,nextStep, setShow){

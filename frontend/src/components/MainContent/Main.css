@@ -17,36 +17,23 @@ html, body, #root {
 .gnome-container{
     background-color: white;
     height: 100%;
-    display: flex;
-    justify-content: space-between;
 }
 
-.move{
-    display: flex;
-    align-items: center;
-    cursor: pointer;
-    background-color: white;
-    width: 5%;
-    transition: background 0.3s ease, opacity 0.3s ease;
-}
 
-.move-icon:hover {
-  transform: scale(1.2); 
-  opacity: 0.5; 
-  background-color: rgba(0, 0, 0, 0.1);
-}
+
 
 .artifacts-grid{
     flex: 1;
     display: grid;
     overflow: scroll;
-    grid-template-columns: repeat(auto-fill,300px);
-    grid-column-gap: 80px;
+    grid-template-columns: repeat(auto-fit,300px); 
+    grid-column-gap: 70px;
     justify-content: center; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
     padding-bottom: 100px;    
+    padding-right: 50px;
 }
 
 .artifacts-grid::-webkit-scrollbar {

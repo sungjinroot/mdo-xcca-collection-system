@@ -1,0 +1,47 @@
+.stepper-acquisition-provenance-container {
+  background-color: white;
+  height: auto; 
+  margin-bottom: 15px;
+  border-radius: 16px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stepper-acquisition-provenance-fields {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.stepper-acquisition-provenance-fields label {
+  font-size: 14px;
+  font-weight: 600;
+  color: #374151;
+}
+
+
+.stepper-acquisition-provenance-fields input {
+  padding: 10px 12px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+  font-size: 14px;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.stepper-acquisition-provenance-fields input:focus {
+  outline: none;
+  border-color: #6366f1;
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+}
+
+.stepper-acquisition-provenance-container h3 {
+  font-size: 16px;
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}

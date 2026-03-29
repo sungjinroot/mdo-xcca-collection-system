@@ -12,11 +12,7 @@ function MainContent(){
             <Options/>
             <div className="gnome-container"> 
                 
-                
-                <div className="move-left move"> 
-                    <span aria-hidden="true" className="carousel-control-prev-icon move-icon"></span>
-                </div> 
-                
+               
                 
 
                 <div className="artifacts-grid"> 
@@ -49,11 +45,7 @@ function MainContent(){
 
                 </div>
                 
-                
-                <div className="move-right move"> 
-                    <span aria-hidden="true" className="carousel-control-next-icon move-icon"></span> 
-                </div>
-            
+               
                 
             </div> 
       
