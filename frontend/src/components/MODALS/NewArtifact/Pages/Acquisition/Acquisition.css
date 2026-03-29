@@ -45,3 +45,84 @@
   color: #374151;
   margin-bottom: 8px;
 }
+
+
+
+
+
+
+
+
+
+
+
+
+/*right side */
+
+.stepper-acquisition-collection-means-container-usual,
+.stepper-acquisition-collection-means-container-special {
+  background-color: white;
+  height: auto;
+  margin-bottom: 15px;
+  border-radius: 16px;
+  padding: 20px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.stepper-acquisition-collection-means-container-usual h3 {
+  font-size: 18px; /* increased */
+  font-weight: 600;
+  color: #374151;
+  margin-bottom: 8px;
+}
+
+.stepper-acquisition-collection-means-fields {
+  display: flex;
+  gap: 12px;
+}
+
+.stepper-acquisition-collection-means-forms {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+
+  flex: 1;
+  padding: 12px 14px;
+
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+}
+
+.stepper-acquisition-collection-means-forms input {
+  accent-color: #6366f1;
+  transform: scale(1.1); 
+}
+
+.stepper-acquisition-collection-means-forms label {
+  font-size: 15.5px; 
+  font-weight: 500;
+  color: #374151;
+  cursor: pointer;
+}
+
+.stepper-acquisition-collection-means-container-special {
+  flex-direction: row;
+  align-items: center;
+  gap: 10px;
+}
+
+.stepper-acquisition-collection-means-container-special label {
+  font-size: 16px; 
+  font-weight: 600;
+  color: #374151;
+}
+
+.stepper-acquisition-collection-means-container-special input {
+  accent-color: #6366f1;
+  transform: scale(1.15);
+}

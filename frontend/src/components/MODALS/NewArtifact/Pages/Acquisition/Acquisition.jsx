@@ -33,38 +33,46 @@ function Acquisition({ nextStep,prevStep }){
 
 
 
-                <div className="stepper-right custom-padding">
-                    <div className="acquisition-header">
-                        <h3> Collection Means </h3>
-                    </div>  
+                <div className="stepper-right">
+                    <div className="stepper-acquisition-collection-means-container-usual">
+                        <h3> How artifact was collected </h3>
 
-                    <div className="acquisition-form-options">
-                        <div className="acquisition-radio-form">
-                            <input type="radio" name="acquisition"/>
-                            <label> Donated </label>
+                        <div className="stepper-acquisition-collection-means-fields">
+                            <div className="stepper-acquisition-collection-means-forms">
+                                <input type="radio" name="collection"/>
+                                <label> Donated </label>
+                            </div>
+
+                            <div className="stepper-acquisition-collection-means-forms">
+                                <input type="radio" name="collection"/>
+                                <label> Excavated </label>
+                            </div>
+
                         </div>
 
-                        <div className="acquisition-radio-form">
-                            <input type="radio" name="acquisition"/>
-                            <label> Excavated </label>
+                        <div className="stepper-acquisition-collection-means-fields">
+                            
+                            <div className="stepper-acquisition-collection-means-forms">
+
+                                <input type="radio" name="collection"/>
+                                <label> On Loan </label>
+                            </div>
+
+                            <div className="stepper-acquisition-collection-means-forms">
+
+                                <input type="radio" name="collection"/>
+                                <label> Found </label>
+                            </div>
+
                         </div>
 
-                        <div className="acquisition-radio-form">
-                            <input type="radio" name="acquisition"/>
-                            <label> On Loan </label>
-                        </div>
-
-                        <div className="acquisition-radio-form">
-                            <input type="radio" name="acquisition"/>
-                            <label> Found </label>
-                        </div>
-
-                        <div className="acquisition-form-options-special">
-                            <input type="radio" name="acquisition"/>
-                            <label> Bought </label>
-                            <input type="number" className="price-field"/>
-                        </div>
                     </div>
+
+                    <div className="stepper-acquisition-collection-means-container-special">
+                        <label> Purchased </label>
+                        <input type="radio" name="collection"/>
+                    </div>
+                    
 
                     
 

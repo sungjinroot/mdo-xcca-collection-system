@@ -7,7 +7,7 @@ function Artifact(){
     return (
         <div className="card-container">
             <div className="card-img">
-                <img src="https://preview.redd.it/did-we-ever-got-an-oficial-info-about-what-are-the-ender-v0-l4t73uiund2f1.jpeg?auto=webp&s=7974bd7b5006d96a3bb28bef0e1067fed135ba7c"/>
+                <img src="https://www.xu.edu.ph/images/2016/img/may/Museo1.jpg"/>
                 
 
                 <button className="delete-button">
