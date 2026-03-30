@@ -39,10 +39,9 @@
     padding: 10px;
     max-height: 415px;
 
-    background-color: red;
+    background-color: #283971;
     display: flex;
     justify-content: start;
-    border: 2px solid #283971;
     border-radius: 12px; 
     box-shadow: 0 2px 5px rgba(0,0,0,0.1); 
     flex-direction: column;
@@ -93,7 +92,7 @@
 }
 
 .stepper-navigation-right{
-    background-color: #283971;
+    background-color: #3a52a3;
     flex: 1;
     display: flex;
     align-items: center;

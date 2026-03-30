@@ -47,8 +47,30 @@ function PhysicalDescription({ prevStep, nextStep }){
 
 
                 <div className="stepper-right">
-                    {/* content for right box */}
-                    Right Box
+                    <div className="stepper-physical-description-paragraph-container">
+                        <label> Details </label>
+                        <textarea>
+                        
+                        </textarea>
+                    </div>
+
+                    <div className="stepper-physical-description-paragraph-container">
+                        <label> Function </label>
+                        <textarea>
+                            
+                        </textarea>
+                    </div>
+
+                    <div className="stepper-physical-description-paragraph-container">
+                        <label> Condition of the artifact upon receipt </label>
+                        <textarea>
+                            
+                        </textarea>
+                    </div>
+
+
+
+
                 </div>
             </div>
 

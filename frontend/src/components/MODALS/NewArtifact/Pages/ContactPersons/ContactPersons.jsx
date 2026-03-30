@@ -1,3 +1,4 @@
+import './ContactPersons.css';
 import '../Layout.css';
 
 function ContactPersons({ prevStep, nextStep }){
@@ -7,7 +8,22 @@ function ContactPersons({ prevStep, nextStep }){
         <div className="stepper-container">
             <div className="stepper-content">
                 <div className="stepper-left">
-                    Left Box
+                    <div className="stepper-contact-person-container-left">
+                        <div className="stepper-contact-person-fields">
+                            <label>Full name of donor/loaner/vendor</label>
+                            <input type="text"/>
+                        </div>
+
+                        <div className="stepper-contact-person-fields">
+                            <label>Name of the receiver of the artifact</label>
+                            <input type="text"/>
+                        </div>
+
+                        <div className="stepper-contact-person-fields">
+                            <label>Recorded By</label>
+                            <input type="text"/>
+                        </div>
+                    </div>
                 </div>
 
 
@@ -23,8 +39,19 @@ function ContactPersons({ prevStep, nextStep }){
 
 
                 <div className="stepper-right">
-                    {/* content for right box */}
-                    Right Box
+                    <div className="stepper-contact-person-container-right">
+                        <div className="stepper-contact-person-date-fields">
+                            <label>Date of when the artifact was collected by the Donor/Loaner/Vendor</label>
+                            <input type="date"/>
+                        </div>
+
+                        <div className="stepper-contact-person-date-fields">
+                            <label>Date of when the artifact was Donated/Sold/Loaned to the Musuem</label>
+                            <input type="date"/>
+                        </div>
+                    </div>
+
+
                 </div>
             </div>
 

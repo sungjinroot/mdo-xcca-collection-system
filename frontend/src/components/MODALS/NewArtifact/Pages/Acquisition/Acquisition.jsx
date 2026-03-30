@@ -72,8 +72,8 @@ function Acquisition({ nextStep,prevStep }){
                         <label> Purchased </label>
                         <input type="radio" name="collection"/>
                     </div>
-                    
 
+                   
                     
 
 
