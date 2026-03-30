@@ -45,8 +45,50 @@ function BasicInformation({ nextStep }) {
 
 
                 <div className="stepper-right">
-                    {/* content for right box */}
-                    Right Box
+                    <div className="stepper-artifact-categories-container">
+                        <h3> Categorize an artifact </h3>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> First </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Second </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Third </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
+                        
+                    </div> 
                 </div>
             </div>
 
