@@ -87,7 +87,21 @@ function BasicInformation({ nextStep }) {
                             <input type="checkbox" name="categories"/>
                             <label> Fourth </label>
                         </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
                         
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
+
+                        <div className="stepper-artifact-category-fields">
+                            <input type="checkbox" name="categories"/>
+                            <label> Fourth </label>
+                        </div>
                     </div> 
                 </div>
             </div>

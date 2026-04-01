@@ -4,12 +4,10 @@
   margin-bottom: 15px;
   border-radius: 16px;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .stepper-contact-person-fields {
@@ -29,17 +27,14 @@
   border-radius: 10px;
   border: 1px solid #d1d5db;
   font-size: 14px;
-
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stepper-contact-person-fields input:focus {
   outline: none;
   border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
 }
-
-/*right*/
 
 .stepper-contact-person-container-right {
   background-color: #ffffff;
@@ -47,12 +42,10 @@
   margin-bottom: 15px;
   border-radius: 16px;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .stepper-contact-person-date-fields {
@@ -72,12 +65,11 @@
   border-radius: 10px;
   border: 1px solid #d1d5db;
   font-size: 14px;
-
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stepper-contact-person-date-fields input:focus {
   outline: none;
   border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
 }

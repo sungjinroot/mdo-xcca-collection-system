@@ -4,12 +4,10 @@
   margin-bottom: 15px;
   border-radius: 16px;
   padding: 20px;
-
   display: flex;
   flex-direction: column;
   gap: 15px;
-
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .stepper-physical-description-fields {
@@ -34,7 +32,7 @@
 .stepper-physical-description-fields input:focus {
   outline: none;
   border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
 }
 
 .stepper-physical-description-container h3 {
@@ -56,28 +54,22 @@
   flex-direction: column;
 }
 
-
-
-/*right*/
-
 .stepper-physical-description-paragraph-container {
   display: flex;
   flex-direction: column;
   gap: 3px;
-
   background-color: #f9fafb; 
   padding: 5px;
   border-radius: 12px;
-
   border: 1px solid #e5e7eb;
   margin-bottom: 12px;
-
   transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.25);
 }
 
 .stepper-physical-description-paragraph-container:hover {
   border-color: #d1d5db;
-  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
 }
 
 .stepper-physical-description-paragraph-container label {
@@ -94,14 +86,12 @@
   font-family: inherit;
   resize: vertical;
   min-height: 90px;
-
   background-color: #ffffff;
-
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stepper-physical-description-paragraph-container textarea:focus {
   outline: none;
   border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.15);
+  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
 }

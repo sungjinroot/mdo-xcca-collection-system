@@ -2,6 +2,15 @@ import '../Layout.css';
 import './ImagesPage.css';
 
 function ImagesPage({prevStep, setShow}){
+    
+
+    function autoUpload(){
+        const file = document.getElementById("imageUpload").files;
+        
+        alert("Uploaded " + file.length + " files");
+
+    }
+
     return (
     
         <div className="stepper-container">
@@ -12,8 +21,7 @@ function ImagesPage({prevStep, setShow}){
                             <div className="upload-box">
                                 Click or Drag & Drop to Upload
                             </div>
-                        
-                            <input type="file" id="imageUpload" accept="image/*" className="image-upload-input"/>
+                            <input type="file" id="imageUpload" accept="image/*" className="image-upload-input" multiple onChange={autoUpload}/>
                         </label>
                     </div>
                 </div>
@@ -29,13 +37,15 @@ function ImagesPage({prevStep, setShow}){
 
                 <div className="stepper-right">
                     {/* content for right box */}
-                    Right Box
+                    <button onClick={autoUpload}>
+                        test
+                    </button>
                 </div>
             </div>
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => nextStep()}> Submit </div> 
+                <div className="stepper-navigation-right" onClick={() => (alert("5"))}> Submit </div> 
             </div>
         </div>
     

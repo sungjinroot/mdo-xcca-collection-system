@@ -7,7 +7,7 @@ function Artifact(){
     return (
         <div className="card-container">
             <div className="card-img">
-                <img src="https://cdn.shopify.com/s/files/1/0503/1097/1553/files/3_c3675d9b-6444-4645-82a4-357440f48c0a.jpg?v=1699431573"/>
+                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVanEv08EZAlQAiKwAYTWcw7Xd3prb4tGwVg&s"/>
                 
 
                 <button className="delete-button">
