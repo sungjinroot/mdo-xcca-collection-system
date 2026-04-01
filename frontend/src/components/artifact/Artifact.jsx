@@ -7,7 +7,7 @@ function Artifact(){
     return (
         <div className="card-container">
             <div className="card-img">
-                <img src="https://wearecolor.us/resources/ruby-article-new2-195480.png"/>
+                <img src="https://cdn.shopify.com/s/files/1/0503/1097/1553/files/3_c3675d9b-6444-4645-82a4-357440f48c0a.jpg?v=1699431573"/>
                 
 
                 <button className="delete-button">
@@ -20,11 +20,11 @@ function Artifact(){
             <div className="card-info">
                 <div className="basic-info">
             
-                    <ArtifactData style={"artifact-display-data"} englishName={"Shrek Buddha"} vernacularName={"Shrek na buddha"} dateReceived={"1945/12/12"} />
+                    <ArtifactData style={"artifact-display-data"} englishName={"Pyrite Ore"} vernacularName={"Batong Pyrite"} dateReceived={"1945/12/12"} />
                 </div>
 
                 <div className="basic-functions">
-                    <button className="card-functions"> Export </button>
+                    <button className="card-functions"> Download </button>
 
                     
                     <select className="card-functions">

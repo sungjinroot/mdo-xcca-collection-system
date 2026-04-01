@@ -8,7 +8,7 @@ import BasicInformation from './Pages/BasicInformation/BasicInformation.jsx';
 import Acquisition from './Pages/Acquisition/Acquisition.jsx';
 import ContactPersons from './Pages/ContactPersons/ContactPersons.jsx';
 import PhysicalDescription from './Pages/PhysicalDescription/PhysicalDescription.jsx';
-import ImagesPage from './Pages/ImagesPage.jsx';
+import ImagesPage from './Pages/ImagesPage/ImagesPage.jsx';
 
 function RenderStep(current,prevStep,nextStep, setShow){
 
@@ -58,9 +58,7 @@ function NewArtifact(props){
         }
     };
 
-    //Data here
-
-    
+    //Data here    
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">

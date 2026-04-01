@@ -1,7 +1,6 @@
 .card-container {
-  width: 350px;
+  width: 350px; 
   height: 300px;
-  
   
   border-radius: 16px;
   background: #fff;
@@ -14,8 +13,9 @@
   opacity: 0;
   transform: scale(0.8);
   animation: popIn 1s forwards;
-
 }
+
+
 
 @keyframes popIn {
   to {
@@ -24,7 +24,7 @@
   }
 }
 
-.card-img {
+.card-img{
   height: 100%;
   position: relative;
 }
@@ -70,9 +70,6 @@
   text-shadow: 0px 0px 5px #ffffff;
 }
 
-.artifact-display-data:hover {
-  font-size: 17px;
-}
 
 .basic-functions {
   display: flex;

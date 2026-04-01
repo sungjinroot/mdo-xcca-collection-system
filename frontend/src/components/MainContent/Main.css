@@ -36,6 +36,8 @@ html, body, #root {
     padding-right: 50px;
 }
 
+
+
 .artifacts-grid::-webkit-scrollbar {
     display: none; 
 }

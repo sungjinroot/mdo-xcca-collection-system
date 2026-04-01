@@ -8,28 +8,37 @@ function PhysicalDescription({ prevStep, nextStep }){
             <div className="stepper-content">
                 <div className="stepper-left">
                     <div className="stepper-physical-description-container">
-                        <h3>Dimensions (in cm)</h3>
+                        <h3>Dimensions (highest point) </h3>
                     
                         <div className="stepper-physical-description-fields">
                             <label> Diameter (for round artifact) </label>
                             <input type="number"/>
                         </div>
 
-                        <div className="stepper-physical-description-fields">
-                            <label> Height (for highest point) </label>
-                            <input type="number"/>
+                        <div className="stepper-physical-description-sizes">
+                            <div className="stepper-physical-description-fields">
+                                <label> Height (cm) </label>
+                                <input type="number"/>
+                            </div>
+
+                            <div className="stepper-physical-description-fields">
+                                <label> Length (cm) </label>
+                                <input type="number"/>
+                            </div>
+
+                            <div className="stepper-physical-description-fields">
+                                <label> Width (cm) </label>
+                                <input type="number"/>
+                            </div>
                         </div>
 
-                        <div className="stepper-physical-description-fields">
-                            <label> Length (longest point) </label>
-                            <input type="number"/>
-                        </div>
-
-                        <div className="stepper-physical-description-fields">
-                            <label> Width (widest point) </label>
-                            <input type="number"/>
-                        </div>
-
+                    </div>
+                    
+                    <div className="stepper-physical-description-paragraph-container">
+                        <label> Special Remarks </label>
+                        <textarea>
+                        
+                        </textarea>
                     </div>
 
                 </div>

@@ -15,7 +15,6 @@
 .stepper-physical-description-fields {
   display: flex;
   flex-direction: column;
-  gap: 6px;
 }
 
 .stepper-physical-description-fields label {
@@ -44,6 +43,20 @@
   color: #374151;
   margin-bottom: 8px;
 }
+
+.stepper-physical-description-sizes {
+  display: flex;
+  gap: 9px; 
+}
+
+.stepper-physical-description-sizes .stepper-physical-description-fields {
+  flex: 1;     
+  min-width: 0; 
+  display: flex;
+  flex-direction: column;
+}
+
+
 
 /*right*/
 

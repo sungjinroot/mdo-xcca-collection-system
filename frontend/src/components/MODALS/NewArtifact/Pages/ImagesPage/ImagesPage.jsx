@@ -1,4 +1,5 @@
-import './Layout.css';
+import '../Layout.css';
+import './ImagesPage.css';
 
 function ImagesPage({prevStep, setShow}){
     return (
@@ -6,7 +7,15 @@ function ImagesPage({prevStep, setShow}){
         <div className="stepper-container">
             <div className="stepper-content">
                 <div className="stepper-left">
-                    Left Box
+                    <div className="stepper-upload">
+                        <label htmlFor="imageUpload" className="image-upload-label">
+                            <div className="upload-box">
+                                Click or Drag & Drop to Upload
+                            </div>
+                        
+                            <input type="file" id="imageUpload" accept="image/*" className="image-upload-input"/>
+                        </label>
+                    </div>
                 </div>
 
 
