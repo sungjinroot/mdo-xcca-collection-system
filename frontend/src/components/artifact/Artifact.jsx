@@ -7,7 +7,7 @@ function Artifact(){
     return (
         <div className="card-container">
             <div className="card-img">
-                <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQVanEv08EZAlQAiKwAYTWcw7Xd3prb4tGwVg&s"/>
+                <img src="https://preview.redd.it/could-it-be-possible-to-replicate-the-omnitrix-in-real-life-v0-p6psffthgxsc1.jpeg?auto=webp&s=993078905b87843f6d799ab2ecef9a53ca40d47b"/>
                 
 
                 <button className="delete-button">
@@ -20,7 +20,7 @@ function Artifact(){
             <div className="card-info">
                 <div className="basic-info">
             
-                    <ArtifactData style={"artifact-display-data"} englishName={"Pyrite Ore"} vernacularName={"Batong Pyrite"} dateReceived={"1945/12/12"} />
+                    <ArtifactData style={"artifact-display-data"} englishName={"Omnitrix"} vernacularName={"Omni nga matrix"} dateReceived={"1945/12/12"} />
                 </div>
 
                 <div className="basic-functions">

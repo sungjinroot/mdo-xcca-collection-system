@@ -52,7 +52,7 @@
   display: flex;
   flex-direction: column;
   
-  background: rgba(40, 57, 113, 0.6);
+  background: rgba(40, 57, 113, 0);
 }
 
 .card-container:hover .card-info {
@@ -68,6 +68,11 @@
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
+  color: #F2F2F2;
+  font-size: 18px;
+  text-shadow: 0 0 3px rgba(255, 255, 255, 0.7),
+               0 0 8px rgba(255, 255, 255, 0.5);
+  
 }
 
 
