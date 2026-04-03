@@ -1,11 +1,10 @@
 .card-container {
-  width: 350px; 
-  height: 300px;
+  width: 350px; /*250 for smaller devices*/
+  height: 300px; /*200 for smaller devices*/
   
   border-radius: 16px;
   background: #fff;
   margin-top: 25px;
-  margin-bottom: 15px;
   cursor: pointer;
   position: relative;
   overflow: hidden;

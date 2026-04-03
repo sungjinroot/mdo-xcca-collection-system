@@ -13,42 +13,29 @@ function MainContent(){
             <div className="gnome-container"> 
                 
                
-                
-
-                <div className="artifacts-grid"> 
-                    <Artifact/> 
-                    <Artifact/> 
-                    <Artifact/> 
-                    <Artifact/> 
-                    <Artifact/> 
-                    <Artifact/> 
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-                    <Artifact/>
-
-                </div>
-                
+                    <div className="artifacts-grid"> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                        <Artifact/> 
+                    </div>
                
                 
             </div> 
-      
+
+
         </div>
         
         
