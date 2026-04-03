@@ -1,4 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
+
 import { useState } from 'react';
 
 function InspectArtifact(props){
@@ -13,8 +14,15 @@ function InspectArtifact(props){
             </Modal.Header>
             
             <Modal.Body> 
+                <div className="artifact-info-container">
+                    <div className="artifact-info-left">
+                        LEFT
+                    </div>
 
-                Lorem ipsum dolor sit amet consectetur, adipisicing elit. Architecto similique reprehenderit sed corrupti, culpa est totam nostrum delectus molestiae quis omnis minima ipsam, maiores ex repudiandae porro dolorum? Officiis, voluptates.
+                    <div className="artifact-info-right">
+                        RIGHT
+                    </div>
+                </div>
 
             </Modal.Body>
         </Modal>

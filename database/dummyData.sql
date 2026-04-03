@@ -99,8 +99,8 @@ INSERT INTO PhysicalDescription (artifactID, artifactDetails, artifactFunction, 
 
 -- Acquisition (1:1)
 INSERT INTO Acquisition (artifactID, collectionType, price) VALUES
-(1, 'E', 0),
-(2, 'D', 0),
-(3, 'P', 1500),
-(4, 'F', 0),
-(5, 'L', 0);
+(1, 'A', 0),
+(2, 'C', 0),
+(3, 'E', 1500),
+(4, 'D', 0),
+(5, 'B', 0);
