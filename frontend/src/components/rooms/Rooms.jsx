@@ -29,21 +29,21 @@ function Rooms(){
       </Carousel.Item>
 
       <Carousel.Item>
-        <img className="d-block w-100" src="https://eu-images.contentstack.com/v3/assets/blt740a130ae3c5d529/blt7cf50ad6e093d4fa/65bd183462eebe040a132e1c/Backrooms_model.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+        <img className="d-block w-100" src="https://t4.ftcdn.net/jpg/01/28/98/53/360_F_128985367_mNdX0b56w6OcgiyUDnZwukpK1bkpfWwI.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
         <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
         <button className="button-utils-right utils" onClick={() => alert(5)}> New Room </button>
 
         <Carousel.Caption>
           <h2 style={{color: 'white'}}>
-             <span className="highlight"> The Collection in it's entirety </span> 
+             <span className="highlight"> The Vastness of Space </span> 
           </h2>
           
           <h3 style={{color: 'white'}}>
-            <span className="highlight"> Museo De Oro </span>
+            <span className="highlight"> Outer Space </span>
           </h3>
           
           <p style={{color: 'white'}}>
-            <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
+            <span className="highlight"> Outer space is an infinite canvas of velvet black, sprinkled with silver fire, where stars whisper ancient secrets and galaxies drift like dreams across the cosmos. </span>
           </p>
         </Carousel.Caption>
       </Carousel.Item>
@@ -55,15 +55,15 @@ function Rooms(){
 
         <Carousel.Caption>
           <h2 style={{color: 'white'}}>
-             <span className="highlight"> The Collection in it's entirety </span> 
+             <span className="highlight"> The World Of Cyberspace </span> 
           </h2>
           
           <h3 style={{color: 'white'}}>
-            <span className="highlight"> Museo De Oro </span>
+            <span className="highlight"> Minecraft </span>
           </h3>
           
           <p style={{color: 'white'}}>
-            <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
+            <span className="highlight"> The boundless world of blocks where imagination is your only limit, and every sunrise over a pixelated landscape feels like the start of a new adventure. </span>
           </p>
         </Carousel.Caption>
       </Carousel.Item>

@@ -1,0 +1,36 @@
+
+.artifact-info-container{
+    display: flex;
+    height: 100%;
+}
+
+.artifact-info-left{
+    flex: 1;
+    background-color: orange;
+    color: white;
+    
+}
+
+.artifact-info-right{
+    flex: 1;
+    color: white;
+}
+
+.tab-options {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 6px;
+
+    padding: 6px;
+    border-radius: 999px;
+
+    background: rgba(255, 255, 255, 0.08);
+    backdrop-filter: blur(10px);
+
+    border: 1px solid rgba(255, 255, 255, 0.15);
+
+    box-shadow:
+        inset 0 0 10px rgba(255,255,255,0.05),
+        0 4px 20px rgba(0,0,0,0.25);
+}

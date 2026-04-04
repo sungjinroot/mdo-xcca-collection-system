@@ -24,6 +24,7 @@ function MainContent(){
                         <Artifact/> 
                         <Artifact/> 
                         <Artifact/> 
+
                         <Artifact/> 
                         <Artifact/> 
                         <Artifact/> 
@@ -34,16 +35,10 @@ function MainContent(){
                         <Artifact/> 
                         <Artifact/> 
                         <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
+                        
+                        
+
+                        
 
                         
                         

@@ -1,8 +1,16 @@
 import Modal from 'react-bootstrap/Modal';
+import './InspectArtifact.css';
+import { Tabs, Tab } from "@mui/material";
 
 import { useState } from 'react';
 
 function InspectArtifact(props){
+
+    const [value, setValue] = useState(0);
+
+    const handleChange = (event, newValue) => {
+        setValue(newValue);
+    };
 
 
     return (
@@ -20,8 +28,19 @@ function InspectArtifact(props){
                     </div>
 
                     <div className="artifact-info-right">
-                        RIGHT
+
+                        <div className="tab-options">
+                            <Tabs value={value} onChange={handleChange}>
+                                <Tab label="Physical"  value={0} />
+                                <Tab label="Contacts" value={1} />
+                                <Tab label="Acquisition" value={2} />
+                                <Tab label="Categories" value={3} />
+                            </Tabs>
+                        </div>
                     </div>
+
+                    {/*Render Tab here */}
+
                 </div>
 
             </Modal.Body>
