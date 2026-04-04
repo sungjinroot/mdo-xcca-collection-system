@@ -38,6 +38,17 @@ html, body, #root {
     background-color:#E3EAF0; 
 }
 
+@media (min-width: 1300px) {
+  .artifacts-grid {
+    grid-template-columns: repeat(4,1fr);
+  }
+}
+
+@media (min-width: 1800px) {
+  .artifacts-grid{
+    grid-template-columns: repeat(5,1fr);
+  }
+}
 
 
 .artifacts-grid::-webkit-scrollbar {

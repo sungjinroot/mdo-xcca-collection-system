@@ -33,12 +33,12 @@ INSERT INTO Collection (collectionType, collectionName) VALUES
 ('E', 'Purchased');
 
 -- Artifacts
-INSERT INTO Artifacts (accessionNo, catalogueNo, roomID) VALUES
-('ACC001', 'A1', 1),
-('ACC002', 'A2', 2),
-('ACC003', 'A3', 3),
-('ACC004', 'A4', 1),
-('ACC005', 'A5', 2);
+INSERT INTO Artifacts (accessionNo, catalogueNo, roomID, storageLocation) VALUES
+('ACC001', 'A1', 1, 'Shelf A1'),
+('ACC002', 'A2', 2, 'Cabinet B2'),
+('ACC003', 'A3', 3, 'Rack C1'),
+('ACC004', 'A4', 1, 'Shelf A3'),
+('ACC005', 'A5', 2, 'Drawer B1');
 
 -- ArtifactCategories (many-to-many)
 INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES

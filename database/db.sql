@@ -22,6 +22,7 @@ CREATE TABLE IF NOT EXISTS Artifacts ( /*Passed Manual Test*/
     accessionNo varchar(255) UNIQUE,
     catalogueNo varchar(5) NOT NULL,
     roomID INT NOT NULL,
+    storageLocation varchar(255),
 
     CONSTRAINT fk_catalogue FOREIGN KEY (catalogueNo) REFERENCES Catalogue(catalogueNo), /*1 Artifact REQUIRES 1 Catalogue*/
     CONSTRAINT fk_room FOREIGN KEY (roomID) REFERENCES Rooms(roomID) /*1 Artifact REQUIRES 1 ROOM*/

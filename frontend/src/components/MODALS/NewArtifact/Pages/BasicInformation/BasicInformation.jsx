@@ -35,10 +35,6 @@ function BasicInformation({ nextStep }) {
                             </div>
                         </div>
                     </div>
-
-
-
-                   
                 </div>
 
 
@@ -103,6 +99,28 @@ function BasicInformation({ nextStep }) {
                             <label> Fourth </label>
                         </div>
                     </div> 
+
+                    <div className="stepper-artifact-identifiers-container">
+                        <div className="stepper-artifact-identifier-fields">
+                            
+                            <div className="stepper-identififier-labels">
+                                <label> Storage Location </label>
+                                <label> Room </label>
+                            </div>
+
+                            <div className="stepper-artifact-identifier-form"> 
+                                <input type="text" className="identifier-form-size"/>
+                                <select className="identifier-form-size">
+                                    <option> No Room </option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
+
+                    
+
+                    
+
                 </div>
             </div>
 
