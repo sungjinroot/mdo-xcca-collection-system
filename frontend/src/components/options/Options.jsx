@@ -14,7 +14,7 @@ function Options() {
     <>
       <div className="options-container">
       
-        <SpeedDial ariaLabel="Simple SpeedDial" FabProps={{sx: {backgroundColor: "#283971", color: "#fff", "&:hover": {backgroundColor: "#3a52a3"}, width: '75px', height: '75px' }}} open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)} style={{ position: "absolute", bottom: 80, right: 50, zIndex: 1,}} icon={<span>+</span>}>
+        <SpeedDial ariaLabel="Simple SpeedDial" FabProps={{sx: {backgroundColor: "#283971", color: "#fff", "&:hover": {backgroundColor: "#3a52a3"}, width: '55px', height: '55px' }}} open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)} style={{ position: "absolute", bottom: 60, right: 50, zIndex: 1,}} icon={<span>+</span>}>
         
           <SpeedDialAction icon={<span>A</span>} tooltipTitle="New Artifact" onClick={() => setShow(true)}/>
         

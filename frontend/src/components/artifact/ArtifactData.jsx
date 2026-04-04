@@ -12,7 +12,8 @@ function ArtifactData({ style, englishName, vernacularName, dateReceived }){
                     {vernacularName} 
                 </i>
             </div>
-
+            
+            
             <div className={style}>
                 {dateReceived} 
             </div>

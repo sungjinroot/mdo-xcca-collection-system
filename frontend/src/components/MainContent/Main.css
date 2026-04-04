@@ -25,14 +25,16 @@ html, body, #root {
     flex: 1;
     display: grid;
     overflow: scroll;
-    grid-template-columns: repeat(auto-fit,300px); /*200 for smaller devices*/
-    grid-column-gap: 35px;
-    justify-content: space-evenly; /*change to 'start' soon*/
+    grid-template-columns: repeat(5,1fr); /*200 for smaller devices*/
+    grid-column-gap: 10px;
+    justify-content: start; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
-    padding-bottom: 100px;    
-    padding-right: 50px;
+    padding-bottom: 100px;
+    padding-left: 10px;
+    padding-right: 10px;
+
     background-color:#E3EAF0; 
 }
 

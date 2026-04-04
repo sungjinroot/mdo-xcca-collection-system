@@ -1,10 +1,10 @@
 .card-container {
-  width: 350px; /*250 for smaller devices*/
+  width: 100%; /*250 for smaller devices*/ /*originally 350*/
   height: 300px; /*200 for smaller devices*/
   
   border-radius: 16px;
   background: #fff;
-  margin-top: 25px;
+  margin-top: 10px;
   cursor: pointer;
   position: relative;
   overflow: hidden;
@@ -13,6 +13,19 @@
   transform: scale(0.8);
   animation: popIn 1s forwards;
 }
+
+@media (min-width: 1300px) {
+  .card-container {
+    height: 220px;
+  }
+}
+
+@media (min-width: 1800px) {
+  .card-container {
+    height: 300px;
+  }
+}
+
 
 
 
