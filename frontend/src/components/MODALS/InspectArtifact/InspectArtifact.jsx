@@ -3,6 +3,32 @@ import './InspectArtifact.css';
 import { Tabs, Tab } from "@mui/material";
 
 import { useState } from 'react';
+import InspectContainer from './Pages/InspectContainer.jsx';
+
+function renderTab(current){
+    switch (current){
+        case 0: 
+            return (
+                <InspectContainer/>
+            )
+            
+        case 1:
+            return (
+                <InspectContainer/>
+            )
+        
+        case 2:
+            return (
+                <InspectContainer/>
+            )
+
+        case 3:
+            return (
+                <InspectContainer/>
+            )
+    }
+}
+
 
 function InspectArtifact(props){
 
@@ -37,11 +63,14 @@ function InspectArtifact(props){
                                 <Tab label="Categories" value={3} />
                             </Tabs>
                         </div>
+
+                        {renderTab(value)}
+
                     </div>
-
-                    {/*Render Tab here */}
-
+                    
                 </div>
+
+
 
             </Modal.Body>
         </Modal>
