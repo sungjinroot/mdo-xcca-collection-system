@@ -9,22 +9,30 @@ function renderTab(current){
     switch (current){
         case 0: 
             return (
-                <InspectContainer/>
+                <InspectContainer>
+                    First
+                </InspectContainer>
             )
             
         case 1:
             return (
-                <InspectContainer/>
+                <InspectContainer>
+                    Second
+                </InspectContainer>
             )
         
         case 2:
             return (
-                <InspectContainer/>
+                <InspectContainer>
+                    Third
+                </InspectContainer>
             )
 
         case 3:
             return (
-                <InspectContainer/>
+                <InspectContainer>
+                    Fourth
+                </InspectContainer>
             )
     }
 }

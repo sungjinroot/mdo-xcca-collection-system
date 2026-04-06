@@ -7,6 +7,16 @@
     height: 80px;
 }
 
+.nav-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.nav-left img {
+    height: 65px; 
+}
+
 .search {
     border-radius: 50px;
     width: 70%;

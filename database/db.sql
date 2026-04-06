@@ -113,3 +113,12 @@ CREATE TABLE IF NOT EXISTS Acquisition( /*Passed Manual Test*/
 
 
 /**/
+
+CREATE TABLE IF NOT EXISTS Users (
+    userID SERIAL PRIMARY KEY,
+    userName varchar(255),
+    bcryptPassword varchar(255),
+    canDelete BOOLEAN DEFAULT FALSE,
+    canEdit BOOLEAN DEFAULT FALSE,
+    canDelete BOOLEAN DEFAULT FALSE
+);

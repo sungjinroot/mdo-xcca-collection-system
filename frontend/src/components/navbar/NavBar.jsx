@@ -1,5 +1,4 @@
 import './NavBar.css'
-import Logo from './Logo.jsx';
 import { useState } from 'react';
 
 function NavBar(){
@@ -13,7 +12,12 @@ function NavBar(){
     return (
         <nav className="nav-container">
             
-            <Logo LogoSrc="src/assets/logo.png"/>
+            <div className="nav-left">
+                <img src="src/assets/logo.png" alt="centennial"/>
+                <img src="src/assets/centennial.png" alt="centennial"/>
+            </div>
+            
+
 
             <div className="nav-functions-container">
                 

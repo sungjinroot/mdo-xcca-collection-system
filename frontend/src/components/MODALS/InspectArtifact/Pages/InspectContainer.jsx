@@ -1,10 +1,10 @@
 import './InspectContainer.css';
 
-function InspectContainer(){
+function InspectContainer(props){
 
     return (
         <div className="tab-content-container">
-            test
+            {props.children}
         </div>
     )
 }
