@@ -5,9 +5,9 @@ function ImagesPage({prevStep, setShow}){
     
 
     function autoUpload(){
-        const file = document.getElementById("imageUpload").files[0];
+        const file = document.getElementById("imageUpload").files;
                 
-        alert(file.name);
+        alert(file.length);
 
     }
 
@@ -25,11 +25,6 @@ function ImagesPage({prevStep, setShow}){
                         </label>
                     </div>
                 </div>
-
-
-
-
-
 
 
 

@@ -120,5 +120,6 @@ CREATE TABLE IF NOT EXISTS Users (
     bcryptPassword varchar(255),
     canDelete BOOLEAN DEFAULT FALSE,
     canEdit BOOLEAN DEFAULT FALSE,
-    canDelete BOOLEAN DEFAULT FALSE
+    canDelete BOOLEAN DEFAULT FALSE,
+    canDownload BOOLEAN DEFAULT FALSE
 );

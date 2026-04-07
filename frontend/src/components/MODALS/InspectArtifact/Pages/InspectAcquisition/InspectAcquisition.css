@@ -1,0 +1,45 @@
+.inspect-acquisition-container {
+    height: 88%;
+    overflow: scroll;
+    display: flex;
+    flex-direction: column;
+}
+
+.inspect-acquisition-top {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    padding: 25px;
+}
+
+.inspect-acquisition-provenance {
+    background-color: gray;
+    height: 90%;
+    border-radius: 25px;
+    padding: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.inspect-acquisition-provenance-contents {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex: 1;
+}
+
+.inspect-acquisition-bottom {
+    flex: 1;
+    background-color: red;
+}
+
+
+
+
+/*bottom*/
+
+.inspect-aquisition-collection{
+    background-color: blue;
+    color: white;
+}

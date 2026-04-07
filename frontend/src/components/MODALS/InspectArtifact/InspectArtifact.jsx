@@ -3,36 +3,29 @@ import './InspectArtifact.css';
 import { Tabs, Tab } from "@mui/material";
 
 import { useState } from 'react';
-import InspectContainer from './Pages/InspectContainer.jsx';
+
+import InspectAcquisition from './Pages/InspectAcquisition/InspectAcquisition.jsx';
 
 function renderTab(current){
     switch (current){
         case 0: 
             return (
-                <InspectContainer>
-                    First
-                </InspectContainer>
+                <div> test </div>
             )
             
         case 1:
             return (
-                <InspectContainer>
-                    Second
-                </InspectContainer>
+                <div> test </div>
             )
         
         case 2:
             return (
-                <InspectContainer>
-                    Third
-                </InspectContainer>
+                <InspectAcquisition/>
             )
 
         case 3:
             return (
-                <InspectContainer>
-                    Fourth
-                </InspectContainer>
+              <div> test </div>
             )
     }
 }
