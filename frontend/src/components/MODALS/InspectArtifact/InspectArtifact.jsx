@@ -6,12 +6,13 @@ import { useState } from 'react';
 
 import InspectAcquisition from './Pages/InspectAcquisition/InspectAcquisition.jsx';
 import InspectContacts from './Pages/InspectContacts/InspectContacts.jsx';
+import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 
 function renderTab(current){
     switch (current){
         case 0: 
             return (
-                <div> test </div>
+                <InspectPhysical/>
             )
             
         case 1:

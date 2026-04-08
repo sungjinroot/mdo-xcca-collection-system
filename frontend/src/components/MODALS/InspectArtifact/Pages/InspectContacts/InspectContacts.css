@@ -1,23 +1,42 @@
-
-.inspect-contacts-container{
-    height: 88%;
+.inspect-contacts-container {
     display: flex;
-    flex-direction: row;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+    overflow: auto;
+    height: 88%;
 }
 
-.inspect-contacts-left-container{
+.inspect-contacts-box {
+    background-color: gray; 
+    border-radius: 20px;
+    padding: 15px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.inspect-contacts-row {
+    display: flex;
+    gap: 20px; 
+}
+
+.inspect-contacts-row .inspect-contacts-fields {
     flex: 1;
     display: flex;
     flex-direction: column;
-    background-color: gray;
 }
 
-.inspect-left-field-container{
-    flex: 1;
+.inspect-contacts-fields {
+    display: flex;
+    flex-direction: column;
+    gap: 10px; 
 }
 
-.inspect-contacts-right-container{
-    flex: 1;
-    background-color: green;
-}
 
+.inspect-contacts-fields input {
+    padding: 12px;
+    border-radius: 8px;
+    border: 1px solid #999;
+    font-size: 1rem;
+}

@@ -6,7 +6,7 @@ function InspectAcquisition() {
             
             <div className="inspect-acquisition-top">
                 
-                <label>Provenance</label>
+                <label>Location History</label>
 
                 <div className="inspect-acquisition-provenance">
 
