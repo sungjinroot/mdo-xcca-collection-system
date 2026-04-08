@@ -39,3 +39,17 @@
     padding-left: 5px;
     padding-right: 5px;
 }
+
+.pan-image{
+    object-position: center top;
+    animation: panY 24s ease-in-out infinite alternate;
+}
+
+@keyframes panY {
+  0% {
+    object-position: center top;
+  }
+  100% {
+    object-position: center bottom;
+  }
+}

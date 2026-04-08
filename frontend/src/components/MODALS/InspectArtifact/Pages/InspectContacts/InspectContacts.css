@@ -1,0 +1,23 @@
+
+.inspect-contacts-container{
+    height: 88%;
+    display: flex;
+    flex-direction: row;
+}
+
+.inspect-contacts-left-container{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    background-color: gray;
+}
+
+.inspect-left-field-container{
+    flex: 1;
+}
+
+.inspect-contacts-right-container{
+    flex: 1;
+    background-color: green;
+}
+

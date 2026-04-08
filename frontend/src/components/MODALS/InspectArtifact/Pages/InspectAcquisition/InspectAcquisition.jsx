@@ -29,8 +29,39 @@ function InspectAcquisition() {
             </div>
 
             <div className="inspect-acquisition-bottom">
-                <div className="inspect-aquisition-collection">
-                    test
+                
+                <label>How Artifact Was Collected</label>
+
+                <div className="inspect-acquisition-collection">
+                    <div className="inspect-acquisition-collection-options">
+                        <div className="acquisition-option">
+                            <label> Donated </label>
+                            <input type="radio" name="acquisition-radio"/>
+                        </div>
+
+                        <div className="acquisition-option">
+                            <label> On Loan </label>
+                            <input type="radio" name="acquisition-radio"/>
+                        </div>
+
+                        <div className="acquisition-option">
+                            <label> Found </label>
+                            <input type="radio" name="acquisition-radio"/>
+
+                        </div>
+
+                        <div className="acquisition-option">
+                            <label> Excavated </label>
+                            <input type="radio" name="acquisition-radio"/>
+                        </div>
+                    </div>
+
+                    <div className="inspect-acquisition-collection-options-special">
+                        <div className="acquisition-option">
+                            <label> Purchased </label>
+                            <input type="radio" name="acquisition-radio"/>
+                        </div>
+                    </div>
                 </div>
             </div>
 

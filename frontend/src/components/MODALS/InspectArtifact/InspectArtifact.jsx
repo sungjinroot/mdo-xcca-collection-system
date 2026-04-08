@@ -5,6 +5,7 @@ import { Tabs, Tab } from "@mui/material";
 import { useState } from 'react';
 
 import InspectAcquisition from './Pages/InspectAcquisition/InspectAcquisition.jsx';
+import InspectContacts from './Pages/InspectContacts/InspectContacts.jsx';
 
 function renderTab(current){
     switch (current){
@@ -15,7 +16,7 @@ function renderTab(current){
             
         case 1:
             return (
-                <div> test </div>
+                <InspectContacts/>
             )
         
         case 2:
