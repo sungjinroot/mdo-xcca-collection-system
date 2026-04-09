@@ -42,7 +42,7 @@
 
 .pan-image{
     object-position: center top;
-    animation: panY 24s ease-in-out infinite alternate;
+    animation: panY 13s ease-in-out infinite alternate;
 }
 
 @keyframes panY {

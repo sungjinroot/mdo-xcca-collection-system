@@ -6,8 +6,6 @@ function InspectAcquisition() {
             
             <div className="inspect-acquisition-top">
                 
-                <label>Location History</label>
-
                 <div className="inspect-acquisition-provenance">
 
                     <div className="inspect-acquisition-provenance-contents">
@@ -30,8 +28,6 @@ function InspectAcquisition() {
 
             <div className="inspect-acquisition-bottom">
                 
-                <label>How Artifact Was Collected</label>
-
                 <div className="inspect-acquisition-collection">
                     <div className="inspect-acquisition-collection-options">
                         <div className="acquisition-option">

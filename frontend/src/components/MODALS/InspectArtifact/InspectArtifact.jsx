@@ -24,11 +24,6 @@ function renderTab(current){
             return (
                 <InspectAcquisition/>
             )
-
-        case 3:
-            return (
-              <div> test </div>
-            )
     }
 }
 
@@ -63,7 +58,6 @@ function InspectArtifact(props){
                                 <Tab label="Physical"  value={0} />
                                 <Tab label="Contacts" value={1} />
                                 <Tab label="Acquisition" value={2} />
-                                <Tab label="Categories" value={3} />
                             </Tabs>
                         </div>
 
