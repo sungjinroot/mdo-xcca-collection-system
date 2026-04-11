@@ -8,6 +8,8 @@ import InspectAcquisition from './Pages/InspectAcquisition/InspectAcquisition.js
 import InspectContacts from './Pages/InspectContacts/InspectContacts.jsx';
 import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 
+import PrimaryView from './PrimaryView/PrimaryView.jsx';
+
 function renderTab(current){
     switch (current){
         case 0: 
@@ -48,7 +50,7 @@ function InspectArtifact(props){
             <Modal.Body> 
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
-                        LEFT
+                        <PrimaryView/>
                     </div>
 
                     <div className="artifact-info-right">

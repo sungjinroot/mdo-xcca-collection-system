@@ -59,7 +59,6 @@
 .card-container:hover .card-info {
   background-color: transparent;
   transform: translateY(0);
-  backdrop-filter: blur(10px);  
   background: rgba(40, 57, 113, 0);
 }
 

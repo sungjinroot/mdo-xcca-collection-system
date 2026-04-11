@@ -8,7 +8,9 @@ function Options() {
   const [open, setOpen] = useState(false);
 
   //This is for modal
-  const [show,setShow] = useState(false)
+  const [show,setShow] = useState(false);
+
+  //Create separate set show for head count
 
   return (
     <>

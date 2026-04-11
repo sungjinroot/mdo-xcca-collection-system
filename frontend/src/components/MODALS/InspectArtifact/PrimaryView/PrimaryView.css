@@ -1,0 +1,13 @@
+
+.primary-view-container{
+    height: 100%;
+    width: 100%;
+    max-height: 533px;
+
+    overflow: scroll;
+}
+
+.artifact-carousel {
+  border-radius: 24px;   
+  overflow: hidden;      
+}

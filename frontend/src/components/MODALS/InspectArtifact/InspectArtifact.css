@@ -1,4 +1,11 @@
 
+
+
+
+
+
+
+
 .artifact-info-container{
     display: flex;
     height: 100%;
@@ -6,9 +13,6 @@
 
 .artifact-info-left{
     flex: 1;
-    background-color: orange;
-    color: white;
-    
 }
 
 .artifact-info-right{
