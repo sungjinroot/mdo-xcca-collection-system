@@ -34,9 +34,9 @@ function PrimaryView() {
 
                 <div className="primary-view-identifier-fields">
                     <label> Vernacular Name </label>
-                    <select>
-                        <input type="text"/>
-                    </select>
+                    
+                    <input type="text"/>
+                
                 </div>
             </div>
 

@@ -2,7 +2,7 @@
 .primary-view-container{
     height: 100%;
     width: 100%;
-    max-height: 533px;
+    max-height: 633px;
 
     overflow: scroll;
 
@@ -32,7 +32,7 @@
     display: flex;
     flex-direction: column;
 
-    background-color: #ffffff;
+    background-color: #3a52a3;
     padding: 12px 14px;
     border-radius: 10px;
     border: 1px solid #ddd;
@@ -49,7 +49,7 @@
 .primary-view-identifier-fields label {
     font-size: 12px;
     font-weight: 600;
-    color: #555;
+    color: white;
     margin-bottom: 6px;
 }
 
@@ -60,8 +60,10 @@
     font-size: 14px;
     padding: 6px 0;
     background: transparent;
-    border-bottom: 1px solid #ccc;
+    border-bottom: 1px solid #b99430;
     transition: 0.2s;
+
+    color: white;
 }
 
 .primary-view-identifier-fields input:focus,
