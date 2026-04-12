@@ -8,12 +8,16 @@
 }
 
 .inspect-contacts-box {
-    background-color: gray; 
+    background-color: #3a52a3; 
     border-radius: 20px;
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+}
+
+.inspect-contacts-box label{
+    color: white;
 }
 
 .inspect-contacts-row {

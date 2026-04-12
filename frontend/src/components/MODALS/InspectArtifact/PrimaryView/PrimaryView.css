@@ -5,9 +5,73 @@
     max-height: 533px;
 
     overflow: scroll;
+
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+}
+
+.primary-view-container::-webkit-scrollbar {
+    display: none;
 }
 
 .artifact-carousel {
-  border-radius: 24px;   
+  border-radius: 32px;
   overflow: hidden;      
 }
+
+/**/
+
+.primary-view-identifier {
+    margin-top: 15px;
+    display: flex;
+    gap: 16px;
+}
+
+.primary-view-identifier-fields {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+
+    background-color: #ffffff;
+    padding: 12px 14px;
+    border-radius: 10px;
+    border: 1px solid #ddd;
+
+    box-shadow: 0 2px 6px rgba(0,0,0,0.05);
+    transition: 0.2s ease;
+}
+
+.primary-view-identifier-fields:hover {
+    border-color: #3a52a3;
+    box-shadow: 0 4px 10px rgba(0,0,0,0.08);
+}
+
+.primary-view-identifier-fields label {
+    font-size: 12px;
+    font-weight: 600;
+    color: #555;
+    margin-bottom: 6px;
+}
+
+.primary-view-identifier-fields input,
+.primary-view-identifier-fields select {
+    border: none;
+    outline: none;
+    font-size: 14px;
+    padding: 6px 0;
+    background: transparent;
+    border-bottom: 1px solid #ccc;
+    transition: 0.2s;
+}
+
+.primary-view-identifier-fields input:focus,
+.primary-view-identifier-fields select:focus {
+    border-bottom: 1px solid #3a52a3;
+}
+
+.primary-view-identifier-fields select {
+    appearance: none;
+    cursor: pointer;
+}
+
+/**/
