@@ -39,6 +39,23 @@ function InspectPhysical(){
                 </textarea>
             </div>
 
+            <div className="inspect-physical-description-categories-container">
+                <label> Categorization </label>
+                
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+                <p>test</p>
+
+                
+
+            </div>
+
             <div className="stepper-physical-description-paragraph-container">
                 <label> Details </label>
                 <textarea>

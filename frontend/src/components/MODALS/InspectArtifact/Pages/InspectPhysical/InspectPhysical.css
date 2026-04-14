@@ -72,3 +72,17 @@
         flex-direction: column;
     }
 }
+
+
+
+
+
+
+/*Categorization*/
+
+.inspect-physical-description-categories-container{
+    background-color: red;
+    max-height: 100px;
+    overflow: scroll;
+}
+
