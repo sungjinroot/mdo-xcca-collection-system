@@ -108,12 +108,12 @@ INSERT INTO Acquisition (artifactID, collectionType, price) VALUES
 
 /*users*/
 
-INSERT INTO Users (userName, bcryptPassword, canAdd, canEdit, canDelete)
+INSERT INTO Users (userName, bcryptPassword, canAdd, canEdit, canDelete,canDownload)
 VALUES
-('admin_user', '$2b$10$abcdefghijklmnopqrstuv', TRUE, TRUE, TRUE),
-('editor_user', '$2b$10$uvwxyzabcdefghijklmnop', TRUE, TRUE, FALSE),
-('viewer_user', '$2b$10$mnopqrstuvwxyabcdefghijkl', FALSE, FALSE, FALSE),
-('contributor1', '$2b$10$qrstuvwxyzabcdefghijklmno', TRUE, FALSE, FALSE),
-('manager_user', '$2b$10$nopqrstuvwxyzabcdefghijk', TRUE, TRUE, TRUE),
-('staff_user', '$2b$10$abcdefghijkmnopqrstuvwxy', FALSE, TRUE, FALSE),
-('guest_user', '$2b$10$lmnopqrstuvwxyzabcdefghi', FALSE, FALSE, FALSE);
+('admin_user', '$2b$10$abcdefghijklmnopqrstuv', TRUE, TRUE, TRUE,FALSE),
+('editor_user', '$2b$10$uvwxyzabcdefghijklmnop', TRUE, TRUE, FALSE,FALSE),
+('viewer_user', '$2b$10$mnopqrstuvwxyabcdefghijkl', FALSE, FALSE, FALSE,FALSE),
+('contributor1', '$2b$10$qrstuvwxyzabcdefghijklmno', TRUE, FALSE, FALSE,FALSE),
+('manager_user', '$2b$10$nopqrstuvwxyzabcdefghijk', TRUE, TRUE, TRUE,FALSE),
+('staff_user', '$2b$10$abcdefghijkmnopqrstuvwxy', FALSE, TRUE, FALSE,FALSE),
+('guest_user', '$2b$10$lmnopqrstuvwxyzabcdefghi', FALSE, FALSE, FALSE,TRUE);
