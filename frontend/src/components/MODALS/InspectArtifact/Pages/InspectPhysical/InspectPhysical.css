@@ -78,11 +78,57 @@
 
 
 
-/*Categorization*/
+/* Categorization */
+.inspect-physical-description-categories-container {
+    background-color: #3a52a3; 
+    border-radius: 15px;
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
 
-.inspect-physical-description-categories-container{
-    background-color: red;
-    max-height: 100px;
-    overflow: scroll;
+    height: 400px;
+    overflow-y: auto;
+    flex-shrink: 0;
+
+    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
 }
 
+.inspect-physical-description-categories-container > label {
+    font-weight: 600;
+    color: white;
+}
+
+.inspect-physical-categories-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: 12px;
+}
+
+.inspect-physical-category-item {
+    background-color: white;
+    border-radius: 10px;
+    padding: 10px 12px;
+
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    font-size: 14px;
+    cursor: pointer;
+
+    transition: 0.2s ease;
+}
+
+.inspect-physical-category-item:hover {
+    background-color: #f0f3ff;
+}
+
+.inspect-physical-category-item input {
+    accent-color: #3a52a3;
+    cursor: pointer;
+}
+
+.inspect-physical-category-item label {
+    cursor: pointer;
+}

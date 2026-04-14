@@ -42,16 +42,23 @@ function InspectPhysical(){
             <div className="inspect-physical-description-categories-container">
                 <label> Categorization </label>
                 
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
-                <p>test</p>
+                <div className="inspect-physical-categories-grid">
+                    <div className="inspect-physical-category-item">
+                        <input type="checkbox"/>
+                        <label htmlFor="cat1">First</label>
+                    </div>
 
+                    <div className="inspect-physical-category-item">
+                        <input type="checkbox"/>
+                        <label htmlFor="cat2">Second</label>
+                    </div>
+
+                    <div className="inspect-physical-category-item">
+                        <input type="checkbox" id="cat3" />
+                        <label htmlFor="cat3">Third</label>
+                    </div>
+                </div>
+                
                 
 
             </div>
