@@ -2,7 +2,7 @@
 CREATE TABLE IF NOT EXISTS Categories ( /*Passed Manual Test*/
     categoryID SERIAL PRIMARY KEY,
     categoryName varchar(255)
-);
+);  
 
 CREATE TABLE IF NOT EXISTS Catalogue ( /*has default values A1 A2 A3 A4 A5 and so on...*/ /*Passed Manual Test*/
     catalogueNo varchar(5) PRIMARY KEY,
@@ -22,7 +22,7 @@ CREATE TABLE IF NOT EXISTS Artifacts ( /*Passed Manual Test*/
     accessionNo varchar(255) UNIQUE,
     catalogueNo varchar(5) NOT NULL,
     roomID INT NOT NULL,
-    storageLocation varchar(255),
+    storageLocation varchar(225),
 
     CONSTRAINT fk_catalogue FOREIGN KEY (catalogueNo) REFERENCES Catalogue(catalogueNo), /*1 Artifact REQUIRES 1 Catalogue*/
     CONSTRAINT fk_room FOREIGN KEY (roomID) REFERENCES Rooms(roomID) /*1 Artifact REQUIRES 1 ROOM*/
@@ -113,13 +113,3 @@ CREATE TABLE IF NOT EXISTS Acquisition( /*Passed Manual Test*/
 
 
 /**/
-
-CREATE TABLE IF NOT EXISTS Users (
-    userID SERIAL PRIMARY KEY,
-    userName varchar(255) UNIQUE,
-    bcryptPassword varchar(255),
-    canAdd BOOLEAN DEFAULT FALSE,
-    canEdit BOOLEAN DEFAULT FALSE,
-    canDelete BOOLEAN DEFAULT FALSE,
-    canDownload BOOLEAN DEFAULT FALSE
-);
