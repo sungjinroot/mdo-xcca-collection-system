@@ -13,8 +13,8 @@ app.use('/api/v1/image', imageEndpoint);
 app.get("/test-db", async (req, res) => {
     try {
 
-        const result = await pool.query("SELECT NOW()");
-        res.json(result.rows);
+        const result = await pool.query("SELECT 1");
+        res.json({message: "Database is running"});
         
     }catch (err){
         console.error(err);
