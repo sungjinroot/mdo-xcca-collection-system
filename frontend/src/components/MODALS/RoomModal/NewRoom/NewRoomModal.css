@@ -1,0 +1,121 @@
+
+.room-modal-body {
+    padding: 24px 26px;
+    background: #ffffff;
+}
+
+
+.room-field {
+    display: flex;
+    flex-direction: column;
+    margin-bottom: 16px;
+    padding: 14px;
+    border-radius: 14px;
+    background: #f8fafc;
+    border: 1px solid #eef2f7;
+}
+
+
+.room-field label {
+    font-size: 16px;
+    font-weight: 700;
+    color: #1f2f5a;
+    margin-bottom: 8px;
+    letter-spacing: 0.3px;
+}
+
+
+.room-field input[type="text"] {
+    width: 100%;
+    padding: 12px 14px;
+
+    background-color: #eef2ff;
+    border: 2px solid #c7d2fe;
+    border-radius: 12px;
+
+    font-size: 14px;
+    color: #111827;
+
+    outline: none;
+    transition: all 0.2s ease;
+}
+
+.room-field input[type="text"]:hover {
+    background-color: #e7ecff;
+    border-color: #93a4ff;
+}
+
+.room-field input[type="text"]:focus {
+    background-color: #ffffff;
+    border-color: #4f46e5;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.25);
+}
+
+
+.room-field-file .file-input-wrapper {
+    display: flex;
+    align-items: flex-end;
+    gap: 12px;
+}
+
+.file-input {
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+}
+
+.file-input input[type="file"] {
+    width: 100%;
+    padding: 12px;
+
+    background: #eef2ff;
+    border: 2px dashed #93a4ff;
+    border-radius: 12px;
+
+    font-size: 13px;
+    color: #1f2f5a;
+
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.file-input input[type="file"]:hover {
+    background: #e7ecff;
+    border-color: #4f46e5;
+}
+
+.file-input input[type="file"]:focus {
+    outline: none;
+    box-shadow: 0 0 0 4px rgba(79, 70, 229, 0.2);
+}
+
+
+.submit-btn {
+    padding: 12px 18px;
+    height: 46px;
+
+    background: #283971;
+    color: #ffffff;
+
+    border: none;
+    border-radius: 12px;
+
+    font-size: 14px;
+    font-weight: 700;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+
+    box-shadow: 0 6px 14px rgba(40, 57, 113, 0.25);
+}
+
+.submit-btn:hover {
+    background: #1f2c55;
+    transform: translateY(-1px);
+}
+
+.submit-btn:active {
+    transform: translateY(0px);
+    box-shadow: 0 3px 8px rgba(40, 57, 113, 0.2);
+}

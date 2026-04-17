@@ -52,7 +52,6 @@ function NavBar() {
 
                 <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{'aria-labelledby': 'basic-button',}}>
                     <MenuItem onClick={handleClose}>User Manual</MenuItem>
-                    <MenuItem onClick={handleClose}>Assistants</MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
 

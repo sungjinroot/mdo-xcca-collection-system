@@ -1,76 +1,90 @@
 import React from 'react';
 import Carousel from 'react-bootstrap/Carousel';
+import { useState } from 'react';
 import './Rooms.css';
+
+import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
+import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 
 function Rooms(){
 
+    const [showAdd,setShowAdd] = useState(false);
+    const [showEdit,setShowEdit] = useState(false);
 
 
     return (
-    <Carousel interval={null} indicators={false}> {/*No delete and edits in this room*/}
-      <Carousel.Item>
-        <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
-        <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
-        <button className="button-utils-right utils" onClick={() => alert(5)}> New Room </button>
+    <>
+      <Carousel interval={null} indicators={false}> {/*No delete and edits in this room*/}
+        <Carousel.Item>
+          <img className="d-block w-100 pan-image" onClick={() => setShowEdit(true)} src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+          <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
+          <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 
-        <Carousel.Caption onClick={() => alert("edited room")}>
+          <Carousel.Caption onClick={() => setShowEdit(true)}>
 
             <h2 style={{color: 'white'}}>
               <span className="highlight"> The Collection in it's entirety </span> 
             </h2>
                     
-          <h3 style={{color: 'white'}}>
-            <span className="highlight"> Museo De Oro </span>
-          </h3>
+            <h3 style={{color: 'white'}}>
+              <span className="highlight"> Museo De Oro </span>
+            </h3>
           
-          <p style={{color: 'white'}}>
-            <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
-          </p>
-        </Carousel.Caption>
+            <p style={{color: 'white'}}>
+              <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
+            </p>
+          </Carousel.Caption>
 
-      </Carousel.Item>
+        </Carousel.Item>
 
-      <Carousel.Item>
-        <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://cdn.wallpapersafari.com/79/64/M5Fbuy.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
-        <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
-        <button className="button-utils-right utils" onClick={() => alert(5)}> New Room </button>
+        <Carousel.Item>
+          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://cdn.wallpapersafari.com/79/64/M5Fbuy.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+          <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
+          <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 
-        <Carousel.Caption onClick={() => alert("edited room")}>
-          <h2 style={{color: 'white'}}>
-             <span className="highlight"> The Vastness of Space </span> 
-          </h2>
+          <Carousel.Caption onClick={() => alert("edited room")}>
+            <h2 style={{color: 'white'}}>
+              <span className="highlight"> The Vastness of Space </span> 
+            </h2>
           
-          <h3 style={{color: 'white'}}>
-            <span className="highlight"> Outer Space </span>
-          </h3>
+            <h3 style={{color: 'white'}}>
+              <span className="highlight"> Outer Space </span>
+            </h3>
           
-          <p style={{color: 'white'}}>
-            <span className="highlight"> Outer space is an infinite canvas of velvet black, sprinkled with silver fire, where stars whisper ancient secrets and galaxies drift like dreams across the cosmos. </span>
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
+            <p style={{color: 'white'}}>
+              <span className="highlight"> Outer space is an infinite canvas of velvet black, sprinkled with silver fire, where stars whisper ancient secrets and galaxies drift like dreams across the cosmos. </span>
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
 
-      <Carousel.Item>
-        <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://wallpapercave.com/wp/wp15079789.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
-        <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
-        <button className="button-utils-right utils" onClick={() => alert(5)}> New Room </button>
+        <Carousel.Item>
+          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://wallpapercave.com/wp/wp15079789.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+          <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
+          <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 
-        <Carousel.Caption onClick={() => alert("edited room")}>
-          <h2 style={{color: 'white'}}>
-             <span className="highlight"> The World Of Cyberspace </span> 
-          </h2>
+          <Carousel.Caption onClick={() => alert("edited room")}>
+            <h2 style={{color: 'white'}}>
+              <span className="highlight"> The World Of Cyberspace </span> 
+            </h2>
           
-          <h3 style={{color: 'white'}}>
-            <span className="highlight"> Minecraft </span>
-          </h3>
+            <h3 style={{color: 'white'}}>
+              <span className="highlight"> Minecraft </span>
+            </h3>
           
-          <p style={{color: 'white'}}>
-            <span className="highlight"> The boundless world of blocks where imagination is your only limit, and every sunrise over a pixelated landscape feels like the start of a new adventure. </span>
-          </p>
-        </Carousel.Caption>
-      </Carousel.Item>
+            <p style={{color: 'white'}}>
+              <span className="highlight"> The boundless world of blocks where imagination is your only limit, and every sunrise over a pixelated landscape feels like the start of a new adventure. </span>
+            </p>
+          </Carousel.Caption>
+        </Carousel.Item>
 
-    </Carousel>
+      </Carousel>
+
+      <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd}/>
+
+      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit}/>
+    
+    </>
+
     )
     
 }
