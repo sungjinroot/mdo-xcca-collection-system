@@ -1,4 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
+import Tooltip from '@mui/material/Tooltip';
 import './CategoriesModal.css';
 import { useState } from 'react';
 
@@ -16,6 +17,7 @@ function CategoriesModal({ showCategories, setShowCategories }){
             <Modal.Body> 
 
                 <div className="categories-container">
+
                     <div className="categories-input-field">
                         <input type="text" className="categories-input-form"/>
                         <button className="categories-input-form"> New category </button>
@@ -23,10 +25,15 @@ function CategoriesModal({ showCategories, setShowCategories }){
 
                     <ol className="category-list">
                         {categories.map((category, index) => (
-                            <li key={index}>
-                                <input type="text" value="category"/>
-                                <button> Delete </button>
-                            </li>
+                            <Tooltip title="Tap To Edit" placement="left" PopperProps={{ modifiers: [{ name: 'offset', options: { offset: [0, 10] } }] }}>
+                                <li key={index}>
+                                    <input type="text" value="category"/>
+
+                                    <div>
+                                        <button> Delete </button>
+                                    </div>
+                                </li>
+                            </Tooltip>
                         ))}
                     </ol>
 

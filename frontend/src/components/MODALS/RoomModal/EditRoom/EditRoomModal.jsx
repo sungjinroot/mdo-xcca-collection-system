@@ -1,6 +1,8 @@
 import { useState } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import './EditRoomModal.css';
+import Tooltip from '@mui/material/Tooltip';
+
 
 function EditRoomModal({ showEdit, setShowEdit }){
 
@@ -21,17 +23,27 @@ function EditRoomModal({ showEdit, setShowEdit }){
                 <div className="room-modal-body">
                     <div className="room-field">
                         <label> Modify Title </label>
-                        <input type="text" placeholder="edit text"/>
+                        <Tooltip title="Change To Edit" placement='left'>
+                            <input type="text" placeholder="edit text"/>
+                        </Tooltip>
                     </div>
 
                     <div className="room-field">
                         <label> Modify Room Location </label>
-                        <input type="text" placeholder="edit text"/>
+                        
+                        <Tooltip title="Change To Edit" placement='left'>
+                            <input type="text" placeholder="edit text"/>
+                        </Tooltip>
+
                     </div>
 
                     <div className="room-field">
                         <label> Modify Caption </label>
-                        <input type="text" placeholder="edit text"/>
+
+                        <Tooltip title="Change To Edit" placement='left'>
+                            <input type="text" placeholder="edit text"/>
+                        </Tooltip>
+                        
                     </div>
 
                     <div className="room-field room-field-file">
