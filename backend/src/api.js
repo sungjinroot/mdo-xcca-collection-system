@@ -6,9 +6,11 @@ app.use(express.json());
 
 const artifactEndpoint = require('./endpoints/artifacts')
 const imageEndpoint = require('./endpoints/images')/*Delete later */
+const roomEndpoint = require('./endpoints/rooms')
 
 app.use('/api/v1/artifacts',artifactEndpoint);
 app.use('/api/v1/image', imageEndpoint);
+app.use('/api/rooms', roomEndpoint)
 
 app.get("/test-db", async (req, res) => {
     try {
@@ -24,7 +26,5 @@ app.get("/test-db", async (req, res) => {
 });
 
 
-app.listen(3000, () => {
-    console.log("API is up and running")
-}); //Use .env soon (testing only for now)
+module.exports = app;
 
