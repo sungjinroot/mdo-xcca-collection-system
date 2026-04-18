@@ -14,7 +14,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://preview.redd.it/could-it-be-possible-to-replicate-the-omnitrix-in-real-life-v0-p6psffthgxsc1.jpeg?auto=webp&s=993078905b87843f6d799ab2ecef9a53ca40d47b" onClick={() => setShow(true)}/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB42YFTSGUN5N7Iszp6u-RzvWnFjQ9G_a6jQ&s" onClick={() => setShow(true)}/>
                 
                     <button className="delete-button">
                         <img src="src/assets/delete.png"/>
@@ -26,7 +26,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"Omnitrix"} vernacularName={"Omni nga matrix"} dateReceived={"1945/12/12"} />
+                        <ArtifactData style={"artifact-display-data"} englishName={"The Mask"} vernacularName={"Ang Maskara"} dateReceived={"1945/12/12"} />
                     </div>
 
                     <div className="basic-functions">

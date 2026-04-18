@@ -6,10 +6,14 @@ import './Rooms.css';
 import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
 import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 
+import CategoriesModal from '../MODALS/Categories/CategoriesModal.jsx';
+
 function Rooms(){
 
     const [showAdd,setShowAdd] = useState(false);
     const [showEdit,setShowEdit] = useState(false);
+
+    const [showCategories,setShowCategories] = useState(false);
 
 
     return (
@@ -17,7 +21,7 @@ function Rooms(){
       <Carousel interval={null} indicators={false}> {/*No delete and edits in this room*/}
         <Carousel.Item>
           <img className="d-block w-100 pan-image" onClick={() => setShowEdit(true)} src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
-          <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
+          <button className="button-utils-left utils" onClick={() => setShowCategories(true)}> Categories </button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 
           <Carousel.Caption onClick={() => setShowEdit(true)}>
@@ -82,6 +86,9 @@ function Rooms(){
       <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd}/>
 
       <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit}/>
+      
+      <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories}/>
+
     
     </>
 

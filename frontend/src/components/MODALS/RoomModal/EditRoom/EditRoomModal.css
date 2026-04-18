@@ -121,3 +121,29 @@
 }
 
 
+.delete-room-button {
+    color: white;
+    background-color: #ec282a;
+    padding: 10px;
+
+    margin-left: 30px;
+    width: 150px;
+
+    border-radius: 100px;
+
+    cursor: pointer;
+
+    transition: all 0.2s ease;
+}
+
+.delete-room-button:hover {
+    background-color: #ff3b3d; 
+    transform: translateY(-2px); 
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+}
+
+.delete-room-button:active {
+    transform: translateY(1px);
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.2);
+    background-color: #c81f21; 
+}

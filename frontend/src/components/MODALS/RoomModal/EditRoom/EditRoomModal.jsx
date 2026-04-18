@@ -8,6 +8,13 @@ function EditRoomModal({ showEdit, setShowEdit }){
         <Modal show={showEdit} onHide={() => setShowEdit(false)} aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center justify-content-between">
                 <img src="src/assets/logo.png"/>
+
+                <div className="delete-room-button">
+                    <center>
+                        Remove Room
+                    </center>
+                </div>
+
             </Modal.Header>
             
             <Modal.Body>
@@ -35,7 +42,7 @@ function EditRoomModal({ showEdit, setShowEdit }){
                             </div>
 
                             <button className="submit-btn">
-                                Submit
+                                Change Photo 
                             </button>
                         </div>
                     </div>
