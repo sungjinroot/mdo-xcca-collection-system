@@ -4,21 +4,24 @@ const pool = require('../db')
 
 
 
-endpoint.get("/:id", async (req, res) => {
+
+// GET ALL ROOM
+endpoint.get("/", async (req, res) => {
     try {
-        const { id } = req.params;
 
         const result = await pool.query(
-            "SELECT * FROM Rooms WHERE roomID = $1",
-            [id]
+            "SELECT * FROM Rooms ",
         );
 
-        res.json(result.rows[0]);
+        res.json(result.rows);
+
     } catch (err) {
         console.error(err);
         res.status(500).json({error: "Room does not exists"})
     }
 });
+
+
 
 
 module.exports = endpoint;
