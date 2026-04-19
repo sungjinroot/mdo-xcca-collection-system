@@ -5,7 +5,7 @@ const pool = require('../db')
 // GET ALL ROOM
 endpoint.get("/", async (req, res) => {
     try {
-
+        console.log()
         const result = await pool.query(
             "SELECT * FROM Rooms ",
         );
