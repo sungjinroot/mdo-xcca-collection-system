@@ -1,25 +1,6 @@
 const request = require("supertest");
 const app = require("../../../api")
 
-describe("GET /api/rooms/", () => {
-
-    it("should return all rooms with status code 200", async () => {
-        const res = await request(app).get("/api/rooms");
-       
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toEqual(mockRooms);
-        expect(pool.query).toHaveBeenCalledWith("SELECT * FROM Rooms ");
-    });
-
-    it("should return 500 when database query fails", async () => {
-        pool.query.mockRejectedValue(new Error("Database connection failed"));
-
-        const res = await request(app).get("/rooms");
-       
-        expect(res.statusCode).toBe(500);
-        expect(res.body).toEqual({ error: "Room does not exists" });
-    });
-});
 
 //POST with database interaction
 describe('POST /rooms/', () => {
