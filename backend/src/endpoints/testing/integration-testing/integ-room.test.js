@@ -1,37 +1,10 @@
 const request = require("supertest");
-const express = require("express");
-const endpoint = require("../../rooms");
-const pool = require("../../../db"); 
+const app = require("../../../api")
 
-jest.mock("../../../db", () => ({
-    query: jest.fn(),
-}));
-
-const app = express();
-app.use(express.json());
-app.use("/rooms", endpoint);
-
-describe("GET /rooms/", () => {
-    beforeEach(() => {
-        jest.clearAllMocks();
-    });
-
-    const mockRooms = [
-        { 
-            roomid: 1, 
-            roomname: "HALL A",
-            galleryname: "Ancient Galley",
-            description: 'galleryName',
-            image: 'roomA.jpg'
-        },
-    ];
+describe("GET /api/rooms/", () => {
 
     it("should return all rooms with status code 200", async () => {
-        pool.query.mockResolvedValue({
-            rows: mockRooms
-        });
-
-        const res = await request(app).get("/rooms");
+        const res = await request(app).get("/api/rooms");
        
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual(mockRooms);
@@ -48,21 +21,10 @@ describe("GET /rooms/", () => {
     });
 });
 
-
-describe('mock POST /rooms/', () => {
-
+//POST with database interaction
+describe('POST /rooms/', () => {
   it('should create a room and return 201', async () => {
-
-    pool.query.mockResolvedValueOnce({
-      rows: [{ 
-        roomid: 1, 
-        roomname: 'Hall A', 
-        title: 'Ancient Artifacts', 
-        caption: 'Early period items', 
-        roompictureurl: 'https://example.com/hall-a.jpg' 
-      }]
-    })
-    
+  
     const newRoom = {
       roomName: 'Hall A',
       title: 'Ancient Artifacts',
@@ -71,7 +33,7 @@ describe('mock POST /rooms/', () => {
     }
 
     const res = await request(app)
-      .post('/rooms/')
+      .post('/api/rooms')
       .send(newRoom)
 
     expect(res.statusCode).toBe(201)
@@ -81,7 +43,7 @@ describe('mock POST /rooms/', () => {
 
   it('should return 400 if roomName is missing', async () => {
     const res = await request(app)
-      .post('/rooms/')
+      .post('/api/rooms')
       .send({ title: 'Ancient Artifacts' })
 
     expect(res.statusCode).toBe(400)
@@ -90,7 +52,7 @@ describe('mock POST /rooms/', () => {
 
   it('should return 400 if title is missing', async () => {
     const res = await request(app)
-      .post('/rooms/')
+      .post('/api/rooms')
       .send({ roomName: 'Hall A' })
 
     expect(res.statusCode).toBe(400)
