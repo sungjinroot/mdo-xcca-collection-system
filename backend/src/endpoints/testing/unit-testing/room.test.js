@@ -47,3 +47,4 @@ describe("GET /rooms/", () => {
         expect(res.body).toEqual({ error: "Room does not exists" });
     });
 });
+

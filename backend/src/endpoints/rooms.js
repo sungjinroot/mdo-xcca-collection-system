@@ -5,7 +5,7 @@ const pool = require('../db')
 
 
 
-// GET ALL ROOM
+// GET ALL ROOM API
 endpoint.get("/", async (req, res) => {
     try {
 
