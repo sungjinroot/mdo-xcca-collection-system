@@ -1,6 +1,33 @@
 const request = require("supertest");
 const app = require("../../../api")
 
+//GET with database interaction
+
+describe("GET /api/rooms", () =>{
+  it("should return status 200", async () => {
+    const res = await request(app).get("/api/rooms");
+    expect(res.statusCode).toBe(200);
+  })
+
+  it("should return an array", async ()=> {
+    const res = await request (app).get("/api/rooms");
+    expect(Array.isArray(res.body)).toBe(true);
+  })
+
+
+  it("should return room with the correct fields", async () => {
+    const res = await request(app).get("/api/rooms");
+    console.log(res.body)
+    const room = res.body[0];
+
+    expect(room).toHaveProperty("roomid");
+    expect(room).toHaveProperty("roomname");
+    expect(room).toHaveProperty("title");
+    expect(room).toHaveProperty("caption");
+    expect(room).toHaveProperty("roompictureurl");
+  });
+
+});
 
 //POST with database interaction
 describe('POST /rooms/', () => {
@@ -40,3 +67,4 @@ describe('POST /rooms/', () => {
     expect(res.body).toHaveProperty('error')
   })
 })
+
