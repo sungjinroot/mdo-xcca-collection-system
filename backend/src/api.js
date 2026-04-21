@@ -7,7 +7,7 @@ app.use(express.json());
 const artifactEndpoint = require('./endpoints/artifacts')
 const imageEndpoint = require('./endpoints/images')/*Delete later */
 const roomEndpoint = require('./endpoints/rooms')
-const categoriesEndpoint = require('./endpoints/catergories')
+const categoriesEndpoint = require('./endpoints/categories')
 
 app.use(express.json())
 app.use('/api/v1/artifacts',artifactEndpoint);
