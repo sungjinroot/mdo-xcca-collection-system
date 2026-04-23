@@ -35,86 +35,97 @@ function InspectPhysical(){
                 
             </div>
 
-            <Accordion>
-                <AccordionSummary>
-                    Special remarks
-                </AccordionSummary>
+            <div>
 
-                <AccordionDetails>
-                    <textarea>
-                        
-                    </textarea>
-                </AccordionDetails>
-            </Accordion>
+                <Accordion>
+                    <AccordionSummary>
+                        Special remarks
+                    </AccordionSummary>
 
-            <Accordion>
-                <AccordionSummary>
-                    Artifact Categorization
-                </AccordionSummary>
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
 
-                <AccordionDetails>
-                    <div className="inspect-physical-description-categories-container">
-                        <label> Categorization </label>
+                <Accordion>
+                    <AccordionSummary>
+                        Artifact Categorization
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="inspect-physical-description-categories-container">
+                            <label> Categorization </label>
                 
-                        <div className="inspect-physical-categories-grid">
-                            <div className="inspect-physical-category-item">
-                                <input type="checkbox"/>
-                                <label htmlFor="cat1">First</label>
-                            </div>
+                            <div className="inspect-physical-categories-grid">
+                                <div className="inspect-physical-category-item">
+                                    <input type="checkbox"/>
+                                    <label htmlFor="cat1">First</label>
+                                </div>
 
-                            <div className="inspect-physical-category-item">
-                                <input type="checkbox"/>
-                                <label htmlFor="cat2">Second</label>
-                            </div>
+                                <div className="inspect-physical-category-item">
+                                    <input type="checkbox"/>
+                                    <label htmlFor="cat2">Second</label>
+                                </div>
 
-                            <div className="inspect-physical-category-item">
-                                <input type="checkbox" id="cat3" />
-                                <label htmlFor="cat3">Third</label>
+                                <div className="inspect-physical-category-item">
+                                    <input type="checkbox" id="cat3" />
+                                    <label htmlFor="cat3">Third</label>
+                            </div>
                         </div>
                     </div>
-                </div>
 
-                </AccordionDetails>
-            </Accordion>
-
-
-            <Accordion>
-                <AccordionSummary>
-                    Details
-                </AccordionSummary>
-
-                <AccordionDetails>
-                    <textarea>
-                        
-                    </textarea>
-                </AccordionDetails>
-            </Accordion>
-
-            <Accordion>
-                <AccordionSummary>
-                    Function
-                </AccordionSummary>
-
-                <AccordionDetails>
-                    <textarea>
-                            
-                    </textarea>
-                </AccordionDetails>
-            </Accordion>
+                    </AccordionDetails>
+                </Accordion>
 
 
-            <Accordion>
-                <AccordionSummary>
-                    Condition of the artifact upon receipt
-                </AccordionSummary>
+                <Accordion>
+                    <AccordionSummary>
+                        Details
+                    </AccordionSummary>
 
-                <AccordionDetails>
-                    <textarea>
-                            
-                    </textarea>
-                </AccordionDetails>
-            </Accordion>
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion>
+                    <AccordionSummary>
+                        Function
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+
+
+                <Accordion>
+                    <AccordionSummary>
+                        Condition of the artifact upon receipt
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
             
+            </div>
 
             
 
