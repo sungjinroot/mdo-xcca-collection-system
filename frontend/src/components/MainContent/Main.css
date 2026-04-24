@@ -29,7 +29,7 @@ html, body, #root {
 
 
 .artifacts-grid{
-    zoom: 80%; /*zoomed*/
+    zoom: 70%; /*zoomed*/
     flex: 1;
     display: grid;
     overflow: scroll;

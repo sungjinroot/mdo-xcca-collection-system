@@ -1,4 +1,5 @@
 import Modal from 'react-bootstrap/Modal';
+import Assistants from './Assistants/Assistants.jsx';
 import './AssistantsModalHeight.css';
 import './AssistantsModalWidth.css';
 import './AssistantsModal.css';
@@ -27,7 +28,19 @@ function AssistantsModal({showAssistants, setShowAssistants}){
                         </div>
                     </div>
 
-                    <div> second </div>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+                    <Assistants/>
+
+
                 </div>
             </Modal.Body>
         </Modal>

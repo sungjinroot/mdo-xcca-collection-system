@@ -14,7 +14,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://cdn.thecollector.com/wp-content/uploads/2023/03/aztec-skull-mask.jpg?width=1073&quality=100&dpr=2" onClick={() => setShow(true)}/>
+                    <img src="https://images.stockcake.com/public/c/9/c/c9c7da77-9bf0-4468-aed8-2d988a4a13f3_large/ancient-warrior-helmet-stockcake.jpg" onClick={() => setShow(true)}/>
                 
                     <button className="delete-button">
                         <img src="src/assets/delete.png"/>
