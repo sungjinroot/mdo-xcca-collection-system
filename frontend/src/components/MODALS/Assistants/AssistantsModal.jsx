@@ -14,13 +14,13 @@ function AssistantsModal({showAssistants, setShowAssistants}){
             <Modal.Body className="p-0">
                 <div className="assistants-grid">
                     <div className="add-assistants">
-                        <label> New Assistant </label>
+                        <label> Create User </label>
 
                         <div className="new-assistant-form">
                             <input type="text" placeholder='Username'/>
                             <input type="text" placeholder='Password'/>
                             <div className="assistant-priv">
-                                <label> Can Encode? </label>
+                                <label> Is Assistant? </label>
                                 <input type="checkbox"/>
                                 <button> Create Assistant </button>
                             </div>

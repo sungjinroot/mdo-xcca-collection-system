@@ -14,13 +14,13 @@
 
 @media (min-width: 1300px) {
   .card-container {
-    height: 280px;
+    height: 350px;
   }
 }
 
 @media (min-width: 1800px) {
   .card-container {
-    height: 300px;
+    height: 400px;
   }
 }
 
