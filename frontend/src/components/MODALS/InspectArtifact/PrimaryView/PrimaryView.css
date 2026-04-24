@@ -1,7 +1,6 @@
 
 .primary-view-container{
     height: 55vh;
-    background-color: red;
 }
 
 .artifact-carousel,
@@ -10,8 +9,21 @@
     height: 100%;
 }
 
-.pan-image {
-    height: 100%;
-    width: 100%;
-    object-fit: cover;
+.pan-image-view{
+    object-position: center top;
+    animation: panY 3s ease-in-out infinite alternate;
+}
+
+.artifact-carousel {
+  border-radius: 8px;
+  overflow: hidden;      
+}
+
+@keyframes panY {
+  0% {
+    object-position: center top;
+  }
+  100% {
+    object-position: center bottom;
+  }
 }
