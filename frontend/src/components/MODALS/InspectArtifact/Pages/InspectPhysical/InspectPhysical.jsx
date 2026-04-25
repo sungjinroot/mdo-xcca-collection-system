@@ -1,5 +1,8 @@
 import './InspectPhysical.css';
 import '../../../NewArtifact/Pages/PhysicalDescription/PhysicalDescription.css';
+import Accordion from '@mui/material/Accordion';
+import AccordionSummary from '@mui/material/AccordionSummary';
+import AccordionDetails from '@mui/material/AccordionDetails';
 
 function InspectPhysical(){
     
@@ -32,58 +35,100 @@ function InspectPhysical(){
                 
             </div>
 
-            <div className="stepper-physical-description-paragraph-container">
-                <label> Special Remarks </label>
-                <textarea>
-                        
-                </textarea>
-            </div>
+            <div>
 
-            <div className="inspect-physical-description-categories-container">
-                <label> Categorization </label>
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                    <AccordionSummary>
+                        Special remarks
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                    <AccordionSummary>
+                        Artifact Categorization
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="inspect-physical-description-categories-container">
+                            <label> Categorization </label>
                 
-                <div className="inspect-physical-categories-grid">
-                    <div className="inspect-physical-category-item">
-                        <input type="checkbox"/>
-                        <label htmlFor="cat1">First</label>
+                            <div className="inspect-physical-categories-grid">
+                                <div className="inspect-physical-category-item">
+                                    <input type="checkbox"/>
+                                    <label htmlFor="cat1">First</label>
+                                </div>
+
+                                <div className="inspect-physical-category-item">
+                                    <input type="checkbox"/>
+                                    <label htmlFor="cat2">Second</label>
+                                </div>
+
+                                <div className="inspect-physical-category-item">
+                                    <input type="checkbox" id="cat3" />
+                                    <label htmlFor="cat3">Third</label>
+                            </div>
+                        </div>
                     </div>
 
-                    <div className="inspect-physical-category-item">
-                        <input type="checkbox"/>
-                        <label htmlFor="cat2">Second</label>
-                    </div>
+                    </AccordionDetails>
+                </Accordion>
 
-                    <div className="inspect-physical-category-item">
-                        <input type="checkbox" id="cat3" />
-                        <label htmlFor="cat3">Third</label>
-                    </div>
-                </div>
-                
-                
 
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                    <AccordionSummary>
+                        Details
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                    <AccordionSummary>
+                        Function
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+
+
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                    <AccordionSummary>
+                        Condition of the artifact upon receipt
+                    </AccordionSummary>
+
+                    <AccordionDetails>
+                        <div className="accordion-text">
+                            <textarea>
+                                
+                            </textarea>
+                        </div>
+                    </AccordionDetails>
+                </Accordion>
+            
             </div>
 
-            <div className="stepper-physical-description-paragraph-container">
-                <label> Details </label>
-                <textarea>
-                        
-                </textarea>
-                
-            </div>
+            
 
-            <div className="stepper-physical-description-paragraph-container">
-                <label> Function </label>
-                <textarea>
-                            
-                </textarea>
-            </div>
-
-            <div className="stepper-physical-description-paragraph-container">
-                <label> Condition of the artifact upon receipt </label>
-                <textarea>
-                            
-                </textarea>
-            </div>
 
         </div>
     )

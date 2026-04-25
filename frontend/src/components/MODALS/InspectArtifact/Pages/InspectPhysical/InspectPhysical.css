@@ -4,10 +4,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+    zoom: 93%;
 
     min-height: 0;
     min-width: 0;
-    max-height: 560px;
 
     overflow: scroll;
 }
@@ -131,4 +131,12 @@
 
 .inspect-physical-category-item label {
     cursor: pointer;
+}
+
+
+/*accordion designs*/
+
+.accordion-text textarea{
+    width: 100%;
+    height: 250px;
 }

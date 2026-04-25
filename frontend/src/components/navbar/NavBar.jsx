@@ -1,6 +1,7 @@
 import './NavBar.css';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
+import AssistantsModal from '../MODALS/Assistants/AssistantsModal.jsx';
 import { useState } from 'react';
 
 function NavBar() {
@@ -21,7 +22,15 @@ function NavBar() {
         setCategory(event.target.value);
     };
 
+    const [showAssistants,setShowAssistants] = useState(false);
+
+    function handleOpen(){
+        handleClose();
+        setShowAssistants(true);
+    }
+
     return (
+        
         <nav className="nav-container">
 
             <div className="nav-left">
@@ -52,11 +61,14 @@ function NavBar() {
 
                 <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{'aria-labelledby': 'basic-button',}}>
                     <MenuItem onClick={handleClose}>User Manual</MenuItem>
-                    <MenuItem onClick={handleClose}>Assistants</MenuItem>
+                    <MenuItem onClick={() => handleOpen()}>Users</MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
 
             </div>
+
+            <AssistantsModal showAssistants={showAssistants} setShowAssistants={setShowAssistants}/>
+
         </nav>
     );
 }
