@@ -14,7 +14,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://images.stockcake.com/public/c/9/c/c9c7da77-9bf0-4468-aed8-2d988a4a13f3_large/ancient-warrior-helmet-stockcake.jpg" onClick={() => setShow(true)}/>
+                    <img src="https://imgix.starlanka.com/static/kunzite-rough.jpg" onClick={() => setShow(true)}/>
                 
                     <button className="delete-button">
                         <img src="src/assets/delete.png"/>

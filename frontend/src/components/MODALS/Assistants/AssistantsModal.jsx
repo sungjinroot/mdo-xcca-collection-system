@@ -23,7 +23,7 @@ function AssistantsModal({showAssistants, setShowAssistants}){
                             <div className="assistant-priv">
                                 <label> Is Assistant? </label>
                                 <input type="checkbox"/>
-                                <button> Create Assistant </button>
+                                <button> New User </button>
                             </div>
                         </div>
                     </div>

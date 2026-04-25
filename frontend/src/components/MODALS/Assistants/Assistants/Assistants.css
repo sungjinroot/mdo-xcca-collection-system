@@ -1,8 +1,6 @@
-
 .assistants-container{
     background-color: #283971;
     border-radius: 8px;
-
     display: flex;
     flex-direction: column;
     width: 250px;
@@ -21,13 +19,24 @@
     width: 30px;         
     height: 30px;
     cursor: pointer;
-    transition: transform 0.15s ease, opacity 0.15s ease;
+    opacity: 0;
+    transform: scale(0.95);
+    transition: transform 0.3s ease, opacity 0.4s ease;
 }
 
+.assistants-container:hover .assistant-header img {
+    opacity: 1;
+    transform: scale(1);
+}
 
+.assistant-header:hover img {
+    opacity: 1;
+    transform: scale(1.15);
+}
 
 .assistant-header img:hover {
-    transform: scale(1.15);
+    opacity: 1;
+    transform: scale(1.2);
 }
 
 .assistant-header img:active {
@@ -38,11 +47,9 @@
 .assistant-creds{
     height: 100%;
     padding: 15px 10px;
-
     display: flex;
     flex-direction: column;
     gap: 10px;
-
     color: white;
 }
 
@@ -51,16 +58,13 @@
     font-size: 18px;
 }
 
-
 .assistant-creds h4 {
     background-color: #b99430;
     padding: 8px 12px;
     border-radius: 6px;
-
     max-width: 95%;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
-
-    transition: transform 0.2s ease, background 0.2s ease;
+    transition: transform 0.3s ease, background 0.3s ease;
 }
