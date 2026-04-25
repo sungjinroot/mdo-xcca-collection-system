@@ -1,6 +1,8 @@
 
 .primary-view-container{
-    height: 55vh;
+    height: 58vh;
+    display: flex;
+    flex-direction: column;
 }
 
 .artifact-carousel,
@@ -9,21 +11,23 @@
     height: 100%;
 }
 
+
+
+
 .pan-image-view{
-    object-position: center top;
-    animation: panY 3s ease-in-out infinite alternate;
+    animation: zoomOutHold 15s ease-in-out infinite;
+    object-fit: cover;
 }
 
-.artifact-carousel {
-  border-radius: 8px;
-  overflow: hidden;      
-}
-
-@keyframes panY {
+@keyframes zoomOutHold {
   0% {
-    object-position: center top;
+    transform: scale(1.2);
+  }
+  20% {
+    transform: scale(1);   
   }
   100% {
-    object-position: center bottom;
+    transform: scale(1);   
   }
 }
+
