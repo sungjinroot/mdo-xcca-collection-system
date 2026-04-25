@@ -28,6 +28,7 @@
 
 .artifact-info-right{
     flex: 1;
+    zoom: 85%;
 }
 
 .tab-options {
