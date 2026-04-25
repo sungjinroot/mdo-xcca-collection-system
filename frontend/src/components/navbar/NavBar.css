@@ -5,6 +5,7 @@
     justify-content: space-between;
     overflow: visible;
     height: 70px;
+    zoom: 90%;
 }
 
 .nav-left {

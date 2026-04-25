@@ -6,10 +6,17 @@
 
 html, body, #root {
     height: 100vh; 
+    font-size: 95%;
 }
 
+/*
+#root{
+    zoom: 90%;
+}
+*/
+
 .main-content{
-    height: calc(100vh - 70px - 200px);
+    height: calc(100vh - (70px * 0.9) - (200px * 0.9));
     display: flex;
     flex-direction: column;
 }
@@ -22,6 +29,7 @@ html, body, #root {
 
 
 .artifacts-grid{
+    zoom: 70%; /*zoomed*/
     flex: 1;
     display: grid;
     overflow: scroll;
