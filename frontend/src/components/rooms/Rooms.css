@@ -1,20 +1,21 @@
 
 .button-utils-left{
     position: absolute;
-    top: 45px;
+    top: 35px;
     left: 250px;
     z-index: 10;
 }
 
 .button-utils-right{
     position: absolute;
-    top: 45px;
+    top: 35px;
     right: 250px;
     z-index: 10;
 }
 
 .utils{
     padding: 10px;
+    font-size: 17px;
     width: 150px;
     border: none;
     border-radius: 80px;

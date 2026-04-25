@@ -38,6 +38,48 @@ describe("GET /rooms/", () => {
         expect(pool.query).toHaveBeenCalledWith("SELECT * FROM Rooms ");
     });
 
+    
+    it("shoduld return JSON content type", async() => {
+      pool.query.mockResolvedValue({ rows: mockRooms})
+
+
+      const res = await request(app).get("/rooms");
+
+      expect(res.headers["content-type"]).toMatch(/application\/json/);   
+
+
+  });
+    
+    it("should retrn an empty array when no rooms exists", async () => {
+      pool.query.mockResolvedValue({rows: []});
+
+      const res = await request(app).get("/rooms");
+      expect(res.statusCode).toBe(200);
+      expect(res.body).toEqual([]);
+
+    });
+
+
+
+    
+    it("should return categories with expected fields", async () => {
+      pool.query.mockResolvedValue({ rows: mockRooms });
+
+       const res = await request(app).get("/rooms");
+
+      expect(res.statusCode).toBe(200);
+      expect(Array.isArray(res.body)).toBe(true);
+
+               const category = res.body[0];
+          expect(category).toHaveProperty("roomid");
+          expect(category).toHaveProperty("roomname");
+          expect(category).toHaveProperty("galleryname");
+          expect(category).toHaveProperty("description");
+          expect(category).toHaveProperty("image");
+  });
+  
+
+
     it("should return 500 when database query fails", async () => {
         pool.query.mockRejectedValue(new Error("Database connection failed"));
 
@@ -97,3 +139,4 @@ describe('mock POST /rooms/', () => {
     expect(res.body).toHaveProperty('error')
   })
 })
+

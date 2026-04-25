@@ -40,9 +40,9 @@ function InspectArtifact(props){
 
 
     return (
-        <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
+        <Modal show={props.show} onHide={() => props.setShow(false)} dialogClassName='ModalSizeWidth' contentClassName='ModalSizeHeight'  aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <img src="src/assets/logo.png"/>
+                <img src="src/assets/logo.png" style={{ height: '40px' }}/>
                 
             
             </Modal.Header>
@@ -51,6 +51,10 @@ function InspectArtifact(props){
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
                         <PrimaryView/>
+
+                        <div className="artifact-info-bottom">
+                            f
+                        </div>
                     </div>
 
                     <div className="artifact-info-right">
@@ -58,7 +62,7 @@ function InspectArtifact(props){
                         <div className="tab-options">
                             <Tabs value={value} onChange={handleChange}>
                                 <Tab label="Physical"  value={0} />
-                                <Tab label="Contacts" value={1} />
+                                <Tab label="Contact Persons" value={1} />
                                 <Tab label="Acquisition" value={2} />
                             </Tabs>
                         </div>

@@ -14,7 +14,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB42YFTSGUN5N7Iszp6u-RzvWnFjQ9G_a6jQ&s" onClick={() => setShow(true)}/>
+                    <img src="https://imgix.starlanka.com/static/kunzite-rough.jpg" onClick={() => setShow(true)}/>
                 
                     <button className="delete-button">
                         <img src="src/assets/delete.png"/>
@@ -26,7 +26,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"The Mask"} vernacularName={"Ang Maskara"} dateReceived={"1945/12/12"} />
+                        <ArtifactData style={"artifact-display-data"} englishName={"Random Artifact"} vernacularName={"Ambot lang artifact"} dateReceived={"1945/12/12"} />
                     </div>
 
                     <div className="basic-functions">

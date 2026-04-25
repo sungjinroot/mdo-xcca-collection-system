@@ -1,11 +1,25 @@
-const express = require('express')
-const pool = require('../db.js')
+const express = require ("express");
+const endpoint = express.Router();
+const pool = require('../db');
 
-const router = express.Router()
+//GET ALL CATEGORIES
 
+endpoint.get("/", async (req, res) => {
+    try {
+        const result = await pool.query(
+            "SELECT * FROM categories ",
+        );
+
+        res.json(result.rows);
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({error: "Category does not exists"})
+    }
+});
 
 // POST Category
-router.post('/', async (req, res) => {
+endpoint.post('/', async (req, res) => {
   const {categoryname} = req.body || {}
 
   if (!categoryname) {
@@ -25,7 +39,7 @@ router.post('/', async (req, res) => {
 })
 
 //DELETE Category
-router.delete('/:id', async (req, res) => {
+endpoint.delete('/:id', async (req, res) => {
   console.log('req.body:', req.body)  
   const {categoryid} = req.body
 
@@ -45,4 +59,4 @@ router.delete('/:id', async (req, res) => {
     res.status(404).json({ error: err.message })
   }
 })
-module.exports = router
+module.exports = endpoint;

@@ -4,7 +4,8 @@
     display: flex;
     justify-content: space-between;
     overflow: visible;
-    height: 80px;
+    height: 70px;
+    zoom: 90%;
 }
 
 .nav-left {
@@ -14,7 +15,7 @@
 }
 
 .nav-left img {
-    height: 65px; 
+    height: 55px; 
 }
 
 .search {

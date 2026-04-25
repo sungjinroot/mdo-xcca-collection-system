@@ -12,8 +12,8 @@ const categoriesEndpoint = require('./endpoints/categories')
 app.use(express.json())
 app.use('/api/v1/artifacts',artifactEndpoint);
 app.use('/api/v1/image', imageEndpoint);
-app.use('/api/v1/rooms', roomEndpoint)
-app.use('/api/v1/categories', categoriesEndpoint)
+app.use('/api/rooms', roomEndpoint)
+app.use('/api/categories', categoriesEndpoint)
 
 app.get("/test-db", async (req, res) => {
     try {
