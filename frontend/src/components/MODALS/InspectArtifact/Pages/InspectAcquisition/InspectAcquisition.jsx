@@ -5,7 +5,7 @@ function InspectAcquisition() {
         <div className="inspect-acquisition-container"> 
             <div className="inspect-acquisition-origins">
                 <div className="inspect-acquisition-origins-card">
-                    <label> Provenance </label>
+                    <label> Ethnic Group </label>
                     <input type="text"/>
                 </div>
 
@@ -48,7 +48,7 @@ function InspectAcquisition() {
                 <div className="inspect-acquisition-collection-options-special">
                     <div className="inspect-options-card-special">
                         <div className="inspect-options-card-special-found">
-                            <label> Found </label>
+                            <label> Purchased </label>
                             <input type="checkbox"/>
                         </div>
                         

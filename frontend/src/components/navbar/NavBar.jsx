@@ -22,12 +22,8 @@ function NavBar() {
         setCategory(event.target.value);
     };
 
-    const [showAssistants,setShowAssistants] = useState(false);
 
-    function handleOpen(){
-        handleClose();
-        setShowAssistants(true);
-    }
+    
 
     return (
         
@@ -39,8 +35,8 @@ function NavBar() {
             </div>
 
             <div className="nav-stats">
-                <h5> Artifacts Collected: 10 </h5>
-                <h5> Artifacts in this room: 15 </h5>
+                <h5> Artifacts Collected: 234 </h5>
+                <h5> Artifacts in this room: 157 </h5>
             </div>
 
             <div className="nav-functions-container">
@@ -66,14 +62,10 @@ function NavBar() {
 
                 <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{'aria-labelledby': 'basic-button',}}>
                     <MenuItem onClick={handleClose}>User Manual</MenuItem>
-                    <MenuItem onClick={() => handleOpen()}>Users</MenuItem>
                     <MenuItem onClick={handleClose}>Logout</MenuItem>
                 </Menu>
 
             </div>
-
-            <AssistantsModal showAssistants={showAssistants} setShowAssistants={setShowAssistants}/>
-
         </nav>
     );
 }

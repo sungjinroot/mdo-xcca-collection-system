@@ -33,7 +33,7 @@ function InspectContacts() {
                     </div>
 
                     <div className="inspect-contacts-fields">
-                        <label>Date when the artifact was received by the receipient</label>
+                        <label>Date when the artifact was received</label>
                         <input type="date" />
                     </div>
                 </div>
