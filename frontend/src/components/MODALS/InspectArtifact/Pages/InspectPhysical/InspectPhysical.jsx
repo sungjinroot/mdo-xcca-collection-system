@@ -37,7 +37,7 @@ function InspectPhysical(){
 
             <div>
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
                     <AccordionSummary>
                         Special remarks
                     </AccordionSummary>
@@ -51,7 +51,7 @@ function InspectPhysical(){
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
                     <AccordionSummary>
                         Artifact Categorization
                     </AccordionSummary>
@@ -82,7 +82,7 @@ function InspectPhysical(){
                 </Accordion>
 
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
                     <AccordionSummary>
                         Details
                     </AccordionSummary>
@@ -96,7 +96,7 @@ function InspectPhysical(){
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
                     <AccordionSummary>
                         Function
                     </AccordionSummary>
@@ -111,7 +111,7 @@ function InspectPhysical(){
                 </Accordion>
 
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#3a52a3'}}>
+                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
                     <AccordionSummary>
                         Condition of the artifact upon receipt
                     </AccordionSummary>

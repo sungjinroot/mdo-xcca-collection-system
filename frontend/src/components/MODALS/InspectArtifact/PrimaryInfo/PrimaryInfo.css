@@ -6,6 +6,10 @@
 }
 
 .artifact-info-first-line{
-    background-color: red;
+    
 }
 
+.artifact-info-identifier-fields{
+    display: flex;
+    flex-direction: column;
+}

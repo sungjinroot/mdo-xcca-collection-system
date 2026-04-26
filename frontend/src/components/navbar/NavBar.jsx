@@ -38,6 +38,11 @@ function NavBar() {
                 <img src="src/assets/centennial.png" alt="centennial" />
             </div>
 
+            <div className="nav-stats">
+                <h5> Artifacts Collected: 10 </h5>
+                <h5> Artifacts in this room: 15 </h5>
+            </div>
+
             <div className="nav-functions-container">
 
                 <div className="search">
