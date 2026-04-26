@@ -9,6 +9,7 @@ import InspectContacts from './Pages/InspectContacts/InspectContacts.jsx';
 import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 
 import PrimaryView from './PrimaryView/PrimaryView.jsx';
+import PrimaryInfo from './PrimaryInfo/PrimaryInfo.jsx';
 
 function renderTab(current){
     switch (current){
@@ -51,10 +52,7 @@ function InspectArtifact(props){
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
                         <PrimaryView/>
-
-                        <div className="artifact-info-bottom">
-                            f
-                        </div>
+                        <PrimaryInfo/>
                     </div>
 
                     <div className="artifact-info-right">

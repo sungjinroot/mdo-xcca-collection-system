@@ -1,71 +1,106 @@
-.inspect-acquisition-container {
+
+.inspect-acquisition-container{
+    display: flex;
+    flex-direction: column;
+    padding: 20px;
+    gap: 10px;
+
     height: 88%;
-    overflow: scroll;
-    display: flex;
-    flex-direction: column;
-}
-
-.inspect-acquisition-top {
-    flex: 1;
-    display: flex;
-    flex-direction: column;
-    padding: 20px;
-}
-
-.inspect-acquisition-provenance {
-    background-color: gray;
-    height: 90%;
-    border-radius: 25px;
-    padding: 25px;
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
-}
-
-.inspect-acquisition-provenance-contents {
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    flex: 1;
-}
-
-.inspect-acquisition-bottom {
-    flex: 1;
-
-    padding: 20px;
-    display: flex;
-    flex-direction: column;
+    min-height: 0px;
     overflow: scroll;
 }
 
+.inspect-acquisition-origins{
+    display: flex;
+    padding: 20px;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: start;
+    background-color: #283971;
+    gap: 10px;
+    border-radius: 20px;
+}
 
-
-
-/*bottom*/
-
-.inspect-acquisition-collection {
-    background-color: gray;
-    height: 90%;
-    border-radius: 25px;
-    padding: 18px;
+.inspect-acquisition-origins-card{
     display: flex;
     flex-direction: column;
+    background-color: #3a52a3;
+    color: white;
+    padding: 15px;
+     flex: 1;             
+    min-width: 200px; 
+    border-radius: 8px;
+}
+
+.inspect-acquisition-origins-card input{
+    padding: 8px;
+    border-radius: 12px;
+    border: none;
+}
+
+.inspect-acquisition-collection{
+    background-color: #283971;
+    padding: 20px;
+    border-radius: 20px;    
+
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+}
+
+.inspect-acquisition-collection label{
+    color: white;   
+}
+
+.inspect-acquisition-collection-options{
+    display: grid;
+    grid-template-columns: repeat(4,1fr);
     gap: 10px;
 }
 
-
-
-.inspect-acquisition-collection-options {
+.inspect-options-card{
     display: flex;
-    gap: 20px; 
     align-items: center;
+    justify-content: space-evenly;
+    background-color: #3a52a3;
+    color: white;
+    padding: 10px;
+    font-weight: bold;
+    border-radius: 8px;
 }
 
-.acquisition-option {
+.inspect-acquisition-collection-options-special{
+    display: flex;
+    flex-direction: start;
+}
+
+.inspect-options-card-special{
+    background-color: #3a52a3;
+    padding: 10px;
+    display: flex;
+    justify-content: space-around;
+    gap: 15px;
+    font-weight: bold;
+    flex: 1;
+    border-radius: 8px;
+
+}
+
+.inspect-options-card-special-found{
     display: flex;
     align-items: center;
-    gap: 9px; 
-    background-color: white;
-    padding: 7px;
-    border-radius: 25px;
+    gap: 15px;
+}
+
+.inspect-options-card-special-price{
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 15px;
+}
+
+.inspect-options-card-special-price input{
+    padding: 4px;
+    border-radius: 8px;
+    border: none;
 }

@@ -1,0 +1,11 @@
+
+.artifact-info-bottom{
+    padding-top: 13px;
+    font-size: 21px;
+    flex: 1;
+}
+
+.artifact-info-first-line{
+    background-color: red;
+}
+
