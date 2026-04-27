@@ -20,18 +20,72 @@ endpoint.get("/", async (req, res) => {
 
 // POST Category
 endpoint.post('/', async (req, res) => {
-  const {categoryname} = req.body || {}
+ const {
+    accessionNo, catalogueNo, roomID,
+    englishName, vernacularName,
+    ethnicGroup, locality, placeOfOrigin,
+    contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy,
+    artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks,
+    collectionType, price,
+    artifactLength, artifactWidth, artifactHeight, artifactDiameter,
+    categoryID,
+    angleName, pictureFilePath, isProfilePicture
+  } = req.body
 
-  if (!categoryname) {
-    return res.status(400).json({ error: 'categoryname is required' })
+  if (!accessionNo || !catalogueNo || !roomID) {
+    return res.status(400).json({ error: 'accessionNo, catalogueNo, and roomID are required' })
   }
 
   try {
-    const result = await pool.query(
-      'INSERT INTO categories (categoryname) VALUES ($1) RETURNING *',
-      [categoryname]
+
+    const artifactResult = await pool.query(
+      'INSERT INTO Artifacts (accessionNo, catalogueNo, roomID) VALUES ($1, $2, $3) RETURNING artifactID',
+      [accessionNo, catalogueNo, roomID]
     )
-    res.status(201).json(result.rows[0])
+    const artifactID = artifactResult.rows[0].artifactid
+
+    await pool.query(
+      'INSERT INTO ArtifactNames (artifactID, englishName, vernacularName) VALUES ($1, $2, $3)',
+      [artifactID, englishName, vernacularName]
+    )
+
+    await pool.query(
+      'INSERT INTO ArtifactProvenance (artifactID, ethnicGroup, locality, placeOfOrigin) VALUES ($1, $2, $3, $4)',
+      [artifactID, ethnicGroup, locality, placeOfOrigin]
+    )
+
+    await pool.query(
+      'INSERT INTO ContactPersons (artifactID, contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy) VALUES ($1, $2, $3, $4, $5, $6)',
+      [artifactID, contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy]
+    )
+
+    await pool.query(
+      'INSERT INTO PhysicalDescription (artifactID, artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks) VALUES ($1, $2, $3, $4, $5)',
+      [artifactID, artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks]
+    )
+
+    await pool.query(
+      'INSERT INTO Acquisition (artifactID, collectionType, price) VALUES ($1, $2, $3)',
+      [artifactID, collectionType, price]
+    )
+
+    await pool.query(
+      'INSERT INTO Dimensions (artifactID, artifactLength, artifactWidth, artifactHeight, artifactDiameter) VALUES ($1, $2, $3, $4, $5)',
+      [artifactID, artifactLength, artifactWidth, artifactHeight, artifactDiameter]
+    )
+
+    await pool.query(
+      'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+      [artifactID, categoryID]
+    )
+
+    await pool.query(
+      'INSERT INTO Pictures (artifactID, angleName, pictureFilePath, isProfilePicture) VALUES ($1, $2, $3, $4)',
+      [artifactID, angleName, pictureFilePath, isProfilePicture]
+    )
+
+    res.status(201).json({ message: 'Artifact created successfully', artifactID })
+
   } catch (err) {
     console.error('DB ERROR:', err)
     res.status(500).json({ error: err.message })
