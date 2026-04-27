@@ -28,7 +28,7 @@ function InspectContacts() {
             <div className="inspect-contacts-box">
                 <div className="inspect-contacts-row">
                     <div className="inspect-contacts-fields">
-                        <label>Date when the artifact was given</label>
+                        <label>Date when the artifact was given to the musuem </label>
                         <input type="date" />
                     </div>
 

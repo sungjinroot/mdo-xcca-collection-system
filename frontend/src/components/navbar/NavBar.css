@@ -56,3 +56,14 @@
     border-left: 1px solid gray;
 
 }
+
+.nav-stats{
+    color: #b99430;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    justify-content: space-around;
+    font-weight: bold;
+
+}
+

@@ -3,14 +3,16 @@ import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 
 import NewArtifact from "../MODALS/NewArtifact/NewArtifact";
-import HeadCount from "../MODALS/HeadCount/HeadCount.jsx";
+
+import AssistantsModal from "../MODALS/Assistants/AssistantsModal.jsx";
 
 function Options() {
   const [open, setOpen] = useState(false);
 
   //This is for modal
   const [show,setShow] = useState(false);
-  const [showHeadCount,setShowHeadCount] = useState(false);
+  const [showAssistants,setShowAssistants] = useState(false);
+
 
   //Create separate set show for head count
 
@@ -22,13 +24,13 @@ function Options() {
         
           <SpeedDialAction icon={<span>A</span>} tooltipTitle="New Artifact" onClick={() => setShow(true)}/>
         
-          <SpeedDialAction icon={<span>B</span>} tooltipTitle="Head Count" onClick={() => setShowHeadCount(true)}/>
+          <SpeedDialAction icon={<span>B</span>} tooltipTitle="New User" onClick={() => setShowAssistants(true)}/>
         
         </SpeedDial>
       </div>
 
       <NewArtifact show={show} setShow={setShow}/>
-      <HeadCount showHeadCount={showHeadCount} setShowHeadCount={setShowHeadCount}/>
+      <AssistantsModal showAssistants={showAssistants} setShowAssistants={setShowAssistants}/>
     </>
   );
 }

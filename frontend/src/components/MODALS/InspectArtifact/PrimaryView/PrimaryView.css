@@ -1,18 +1,23 @@
-
 .primary-view-container{
-    height: 58vh;
+    flex: 1;
     display: flex;
     flex-direction: column;
+
+    min-height: 100px;
+    max-height: 800px;
 }
 
 .artifact-carousel,
 .artifact-carousel .carousel-inner,
 .artifact-carousel .carousel-item {
     height: 100%;
+    border-radius: 8px;
 }
 
-
-
+.artifact-carousel .carousel-item {
+    position: relative;
+    overflow: hidden;
+}
 
 .pan-image-view{
     animation: zoomOutHold 15s ease-in-out infinite;
@@ -20,14 +25,77 @@
 }
 
 @keyframes zoomOutHold {
-  0% {
-    transform: scale(1.2);
-  }
-  20% {
-    transform: scale(1);   
-  }
-  100% {
-    transform: scale(1);   
-  }
+  0% { transform: scale(1.2); }
+  20% { transform: scale(1); }
+  100% { transform: scale(1); }
 }
 
+.images-options{
+  padding: 20px;
+  font-size: 18px;
+  border-radius: 900px;
+  width: 200px;
+  z-index: 999;
+  cursor: pointer;
+  font-weight: bold;
+
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(20px) scale(0.95);
+
+  transition: 
+    opacity 0.6s ease,
+    transform 0.6s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.25s ease,
+    filter 0.25s ease,
+    visibility 0s linear 0.6s; 
+}
+
+.artifact-carousel .carousel-item:hover .images-options{
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0) scale(1);
+
+  transition-delay: 0s;
+}
+
+.images-options:hover{
+  transform: translateY(-4px) scale(1.03);
+  filter: brightness(1.1);
+  box-shadow: 0 10px 25px rgba(0,0,0,0.25);
+}
+
+.images-options:active{
+  transform: translateY(2px) scale(0.96);
+  box-shadow: 0 2px 6px rgba(0,0,0,0.2);
+  filter: brightness(0.95);
+  transition: all 0.08s ease;
+}
+
+.images-options-left{
+  position: absolute;
+  bottom: 30px;
+  left: 100px;
+
+  background-color: #ec282a;
+  color: white;
+  border: none;
+}
+
+.images-options-left:hover{
+  background-color: #ff3b3d;
+}
+
+.images-options-right{
+  position: absolute;
+  bottom: 30px;
+  right: 100px;
+
+  background-color: #283971;
+  color: white;
+  border: none;
+}
+
+.images-options-right:hover{
+  background-color: #3a4fb0;
+}
