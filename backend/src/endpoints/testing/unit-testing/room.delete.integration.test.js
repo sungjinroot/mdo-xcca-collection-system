@@ -1,7 +1,7 @@
 const request = require("supertest");
 const express = require("express");
-const endpoint = require("../src/endpoints/rooms");
-const pool = require("../src/db");
+const endpoint = require("../../rooms");
+const pool = require("../../../db");
 
 require("dotenv").config();
 
@@ -27,7 +27,7 @@ describe("DELETE /rooms/:id - Integration", () => {
              VALUES ('Test', 'Test Room', 'Test', 'test.jpg') 
              RETURNING roomID`
         );
-        const roomID = insert.rows[0].roomid;
+        const roomID = insert.rows[0].roomid || insert.rows[0].roomID;
 
         const res = await request(app).delete(`/rooms/${roomID}`);
         expect(res.status).toBe(200);
