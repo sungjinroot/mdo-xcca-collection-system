@@ -15,7 +15,17 @@ function Artifact(){
             <div className="card-container">
                 <div className="card-img">
                     <img src="https://t4.ftcdn.net/jpg/16/76/36/85/360_F_1676368530_8f4lKDMCczIN9TNJIW0cdGhCmIJvyiGC.jpg" onClick={() => setShow(true)}/>
-                
+
+                    <div className="thumbnail-chooser">
+                        <select>
+                            <option> Front </option>
+                            <option> Back </option>
+                            <option> Left </option>
+                            <option> Right </option>
+                        </select>
+                    </div>
+                    
+
                     <button className="delete-button">
                         <img src="src/assets/delete.png"/>
                     </button>
@@ -26,7 +36,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"Random Artifact"} vernacularName={"Ambot lang artifact"} dateReceived={"1945/12/12"} />
+                        <ArtifactData style={"artifact-display-data"} englishName={"Random Artifact"} vernacularName={"Ambot lang artifact"}/>
                     </div>
 
                     <div className="basic-functions">
