@@ -210,8 +210,11 @@ endpoint.get('/:id', async (req, res) => {
 });
 
 
+// ADD
 
-
+endpoint.get('/new',(request,response) => {
+    response.send("Adding")
+});
 
 // DELETE ARTIFACT
 endpoint.delete("/:id", async (req, res) => {
