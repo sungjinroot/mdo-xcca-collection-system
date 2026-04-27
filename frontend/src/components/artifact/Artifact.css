@@ -12,7 +12,7 @@
   will-change: transform, opacity;
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1000px) {
   .card-container {
     height: 350px;
   }
@@ -52,7 +52,7 @@
   left: 0;
   width: 100%;
   color: white;
-  transform: translateY(55%);
+  transform: translateY(43%);
   transition: transform 0.8s ease, background-color 0.3s ease, backdrop-filter 0.35s ease;
   border-radius: 0 0 16px 16px;
   display: flex;
@@ -121,8 +121,8 @@
   position: absolute;
   right: 8px;
   top: 8px;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -149,3 +149,24 @@
 .delete-button img:active {
   transform: scale(0.95);
 }
+
+.thumbnail-chooser {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+}
+
+.card-container:hover .thumbnail-chooser {
+  opacity: 1; 
+}
+
+.thumbnail-chooser select{
+  background-color: #283971;
+  color: white;
+  width: 180px;
+  font-size: 21px;
+  padding: 8px;
+}
+

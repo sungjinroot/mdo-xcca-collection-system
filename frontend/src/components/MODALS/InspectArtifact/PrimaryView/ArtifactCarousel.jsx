@@ -11,7 +11,6 @@ function ArtifactCarousel(){
         <button className="images-options-left images-options"> Remove Photo </button>
         <button className="images-options-right images-options"> Insert Photo </button>
 
-
         <Carousel.Caption onClick={() => alert("edited room")}>
                     
           <h1 style={{color: 'white'}}>
