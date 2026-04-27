@@ -140,3 +140,35 @@ describe('mock POST /rooms/', () => {
   })
 })
 
+describe("DELETE /rooms/:id", () => {
+  afterEach(() => {
+    jest.clearAllMocks();
+  });
+
+  test("returns 200 when room is successfully deleted", async () => {
+    pool.query.mockResolvedValueOnce({ rowCount: 1 });
+
+    const res = await request(app).delete("/rooms/1");
+
+    expect(res.status).toBe(200);
+    expect(res.body.message).toBe("Room deleted");
+  });
+
+  test("returns 400 when room has artifacts or does not exist", async () => {
+    pool.query.mockResolvedValueOnce({ rowCount: 0 });
+
+    const res = await request(app).delete("/rooms/1");
+
+    expect(res.status).toBe(400);
+    expect(res.body.message).toBe("Room cannot be deleted");
+  });
+
+  test("returns 500 on database error", async () => {
+    pool.query.mockRejectedValueOnce(new Error("DB failure"));
+
+    const res = await request(app).delete("/rooms/1");
+
+    expect(res.status).toBe(500);
+    expect(res.body.error).toBe("DB failure");
+  });
+});
