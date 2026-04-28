@@ -9,6 +9,11 @@ const pool = require('../db');
 
 endpoint.get('/', async (req, res) => {
     try {
+
+
+        query.skip(10).limit(10)
+
+        
        const result = await pool.query(artifactQueries.all);
   
        res.status(200).json(result.rows); 
