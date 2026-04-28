@@ -62,7 +62,7 @@ function Rooms(){
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://wallpapercave.com/wp/wp15079789.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
+          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://wallpapercave.com/wp/wp10486449.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
           <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 

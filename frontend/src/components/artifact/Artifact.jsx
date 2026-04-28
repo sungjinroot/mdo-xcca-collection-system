@@ -36,7 +36,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"Random Artifact"} vernacularName={"Ambot lang artifact"}/>
+                        <ArtifactData style={"artifact-display-data"} englishName={"Uranium Ore"} vernacularName={"Uranium nga bato"}/>
                     </div>
 
                     <div className="basic-functions">
