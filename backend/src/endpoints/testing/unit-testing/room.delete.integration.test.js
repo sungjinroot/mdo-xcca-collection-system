@@ -1,7 +1,7 @@
 const request = require("supertest");
 const express = require("express");
-const endpoint = require("../src/endpoints/rooms");
-const pool = require("../src/db");
+const endpoint = require("../../rooms");
+const pool = require("../../../db");
 
 require("dotenv").config();
 
