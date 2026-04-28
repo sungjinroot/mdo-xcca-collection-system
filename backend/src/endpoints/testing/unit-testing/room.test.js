@@ -32,7 +32,8 @@ describe("GET /rooms/", () => {
         });
 
         const res = await request(app).get("/rooms");
-       
+        
+        expect(pool.query).toHaveBeenCalled();
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual(mockRooms);
         expect(pool.query).toHaveBeenCalledWith("SELECT * FROM Rooms ");
