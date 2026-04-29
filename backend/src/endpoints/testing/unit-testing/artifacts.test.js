@@ -47,16 +47,13 @@ describe("POST /artifacts", () => {
     });
 
     it("returns 201 when artifact is successfully created", async () => {
-        pool.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] }); // INSERT Artifacts
-        pool.query.mockResolvedValueOnce({});                             // INSERT ArtifactNames
-        pool.query.mockResolvedValueOnce({});                             // INSERT ArtifactProvenance
-        pool.query.mockResolvedValueOnce({});                             // INSERT ContactPersons
-        pool.query.mockResolvedValueOnce({});                             // INSERT PhysicalDescription
-        pool.query.mockResolvedValueOnce({});                             // INSERT Acquisition
-        pool.query.mockResolvedValueOnce({});                             // INSERT Dimensions
-        pool.query.mockResolvedValueOnce({});                             // INSERT ArtifactCategories
-        pool.query.mockResolvedValueOnce({});                             // INSERT Pictures
 
+        pool.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
+
+        for(let i = 0; i < 8; i++){
+            pool.query.mockResolvedValueOnce({});
+        }
+ 
         const res = await request(app).post("/artifacts").send(validPostBody);
 
         expect(res.status).toBe(201);
@@ -76,10 +73,9 @@ describe("POST /artifacts", () => {
 
     it("returns 500 on database error", async () => {
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
-
-    
+ 
         const res = await request(app).post("/artifacts").send(validPostBody);
-
+ 
         expect(res.status).toBe(500);
         expect(res.body.error).toBe("DB failure");
     });
@@ -122,18 +118,12 @@ describe("PUT /artifacts/:id", () => {
     });
 
     it("returns 200 when artifact is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE Artifacts
-        pool.query.mockResolvedValueOnce({});              // UPDATE ArtifactNames
-        pool.query.mockResolvedValueOnce({});              // UPDATE ArtifactProvenance
-        pool.query.mockResolvedValueOnce({});              // UPDATE ContactPersons
-        pool.query.mockResolvedValueOnce({});              // UPDATE PhysicalDescription
-        pool.query.mockResolvedValueOnce({});              // UPDATE Acquisition
-        pool.query.mockResolvedValueOnce({});              // UPDATE Dimensions
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // UPDATE Pictures
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
 
+         for(let i = 0; i < 10; i++){
+            pool.query.mockResolvedValueOnce({});
+        }
+ 
         const res = await request(app).put("/artifacts/1").send(validPutBody);
 
         expect(res.status).toBe(200);

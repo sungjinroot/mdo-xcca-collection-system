@@ -92,6 +92,33 @@ endpoint.post('/', async (req, res) => {
   }
 })
 
+endpoint.put('/:id', async (req, res) => {
+  const {categoryID} = req.body
+
+  if (!categoryID) {
+    return res.status(400).json({ error: 'categoryID is required' })
+  }
+  try {
+    const result = await pool.query(
+      'DELETE FROM categories WHERE categoryid=$1 RETURNING *',
+      [categoryID]
+    )
+
+    if (result.rows.length === 0) {
+      return res.status(404).json({ error: 'Category not found' })
+    }
+
+
+    
+    res.status(201).json({message: "category deleted"})
+  }
+  catch (err) {
+    console.error("DB ERROR:", err)
+    res.status(500).json({ error: err.message })
+  }
+})
+
+
 //DELETE Category
 endpoint.delete('/:id', async (req, res) => {
   console.log('req.body:', req.body)  
