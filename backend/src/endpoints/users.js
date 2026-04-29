@@ -17,18 +17,14 @@ endpoint.get("/", async (req, res) => {
 endpoint.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
-
         const result = await pool.query(
             "DELETE FROM users WHERE userID = $1",
             [id]
         );
-
         if (result.rowCount === 0) {
-            return res.status(400).json({ message: "User cannot be deleted" });
+            return res.status(404).json({ message: "User not found" });
         }
-
         res.status(200).json({ message: "User deleted" });
-
     } catch (err) {
         console.error(err);
         res.status(500).json({ error: err.message });
