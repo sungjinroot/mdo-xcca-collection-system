@@ -1,4 +1,3 @@
-
 .inspect-acquisition-container{
     display: flex;
     flex-direction: column;
@@ -27,16 +26,35 @@
     background-color: #3a52a3;
     color: white;
     padding: 15px;
-     flex: 1;             
+    flex: 1;             
     min-width: 200px; 
     border-radius: 8px;
 }
 
 .inspect-acquisition-origins-card input{
-    padding: 8px;
-    border-radius: 12px;
+    padding: 8px 0;
     border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0;
+    background: transparent;
+    color: white;
+    outline: none;
 }
+
+.inspect-acquisition-origins-card input[type="number"]::-webkit-outer-spin-button,
+.inspect-acquisition-origins-card input[type="number"]::-webkit-inner-spin-button,
+.inspect-options-card-special-price input[type="number"]::-webkit-outer-spin-button,
+.inspect-options-card-special-price input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inspect-acquisition-origins-card input[type="number"],
+.inspect-options-card-special-price input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
 
 .inspect-acquisition-collection{
     background-color: #283971;
@@ -83,7 +101,6 @@
     font-weight: bold;
     flex: 1;
     border-radius: 8px;
-
 }
 
 .inspect-options-card-special-found{
@@ -100,7 +117,25 @@
 }
 
 .inspect-options-card-special-price input{
-    padding: 4px;
-    border-radius: 8px;
+    padding: 4px 0;
     border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0;
+    background: transparent;
+    color: white;
+    outline: none;
+}
+
+.inspect-options-card-special-price input:focus{
+    border-bottom: 2px solid #ffffff;
+}
+
+.inspect-options-card-special-price input[type="number"]::-webkit-outer-spin-button,
+.inspect-options-card-special-price input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inspect-options-card-special-price input[type="number"]{
+    -moz-appearance: textfield;
 }
