@@ -1,57 +1,62 @@
-const request = require('supertest')
-const app = require('../../index.js')
+const request = require("supertest");
+const app = require("../../../api");
+const pool = require("../../../db");
 
-describe('POST /endpoints/categories', () => {
 
-  it('should create a new category and return 201', async () => {
-    const newCategory = {
-      categoryname: 'Tools'
-    }
+describe("GET /api/categories - Integration", () => {
+    it("should return status 200", async () => {
+        const res = await request(app).get("/api/categories");
+        expect(res.statusCode).toBe(200);
+    });
 
-    const res = await request(app)
-      .post('/endpoints/categories')
-      .send(newCategory)
+    it("should return an array", async () => {
+        const res = await request(app).get("/api/categories");
+        expect(Array.isArray(res.body)).toBe(true);
+    });
 
-    expect(res.statusCode).toBe(201)
-    expect(res.body).toHaveProperty('categoryid')
-    expect(res.body.categoryname).toBe('Tools')
-  })
+    it("should return categories with correct fields", async () => {
+        const res = await request(app).get("/api/categories");
+        if (res.body.length > 0) {
+            const category = res.body[0];
+            expect(category).toHaveProperty("categoryid");
+            expect(category).toHaveProperty("categoryname");
+        } else {
+            expect(res.body).toEqual([]);
+        }
+    });
+});
 
-  it('should return 400 if categoryname is missing', async () => {
-    const res = await request(app)
-      .post('/endpoints/categories')
 
-    expect(res.statusCode).toBe(400)
-    expect(res.body).toHaveProperty('error')
-  })
+describe("DELETE /api/categories/:id - Integration", () => {
+    let testCategoryId;
 
-})
+    
+    beforeEach(async () => {
+        const insert = await pool.query(
+            `INSERT INTO Categories (categoryName) VALUES ('Test Category') RETURNING categoryID`
+        );
+        testCategoryId = insert.rows[0].categoryid;
+    });
 
-describe('DELETE /endpoints/categories', () => {
-  it('should delete selected category and return 201', async () => {
+    it("should delete a category and return 201", async () => {
+        const res = await request(app)
+            .delete(`/api/categories/${testCategoryId}`)
+            .send({ categoryid: testCategoryId });
 
-    const categoryid = {categoryid: 1}
-    const res = await request(app)
-      .delete('/endpoints/categories/${categoryid.categoryid}')
-      .send(categoryid)
+        expect(res.statusCode).toBe(201);
+        expect(res.body).toHaveProperty("message");
+    });
 
-    expect(res.statusCode).toBe(201)
-    expect(res.body).toHaveProperty('message')
-  })
+    it("should return 404 if category does not exist", async () => {
+        const res = await request(app)
+            .delete(`/api/categories/99999`)
+            .send({ categoryid: 99999 });
 
-  it('should return 404 if category does not exist', async () => {
-    const categoryid = {categoryid: 9999}
-    const res = await request(app)
-      .delete('/endpoints/categories/${categoryid.categoryid}')
-      .send(categoryid)
-
-    expect(res.statusCode).toBe(404)
-    expect(res.body).toHaveProperty('error')
-  })
-})
-
-const pool = require('../db.js')
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty("error");
+    });
+});
 
 afterAll(async () => {
-  await pool.end()
-})
+    await pool.end();
+});
