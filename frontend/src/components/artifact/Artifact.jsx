@@ -4,11 +4,14 @@ import { useState } from 'react';
 import ArtifactData from './ArtifactData';
 
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
+import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
 function Artifact(){
 
     //This is for modal
     const [show,setShow] = useState(false)
+
+    const [showWarning,setShowWarning] = useState(false);
 
     return (
         <>
@@ -26,7 +29,7 @@ function Artifact(){
                     </div>
                     
 
-                    <button className="delete-button">
+                    <button className="delete-button" onClick={() => setShowWarning(true)}>
                         <img src="src/assets/delete.png"/>
                     </button>
 
@@ -59,6 +62,8 @@ function Artifact(){
             </div>
 
             <InspectArtifact show={show} setShow={setShow}/>
+
+            <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning}/>
         </>
     );
 }
