@@ -68,3 +68,28 @@ describe('POST /rooms/', () => {
   })
 })
 
+//DELETE with database interaction
+describe("DELETE /rooms/:id - Integration", () => {
+    const pool = require("../../../db");
+
+    test("returns 400 when room has artifacts", async () => {
+        // Room 1 has artifacts in the DB so it should be blocked
+        const res = await request(app).delete("/api/rooms/1");
+        expect(res.status).toBe(400);
+        expect(res.body.message).toBe("Room cannot be deleted");
+    });
+
+    test("returns 200 when room has no artifacts", async () => {
+        // Insert a test room first
+        const insert = await pool.query(
+            `INSERT INTO Rooms (title, roomName, caption, roomPictureURL) 
+             VALUES ('Test', 'Test Room', 'Test', 'test.jpg') 
+             RETURNING roomID`
+        );
+        const roomID = insert.rows[0].roomid;
+
+        const res = await request(app).delete(`/api/rooms/${roomID}`);
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("Room deleted");
+    });
+});
