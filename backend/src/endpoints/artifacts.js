@@ -224,7 +224,6 @@ endpoint.post('/', async (req, res) => {
         categoryID,
         angleName, pictureFilePath, isProfilePicture
     } = req.body;
- // must be in json
     if (
         !accessionNo || !catalogueNo || !roomID ||
         !contactPersonFullName || !dateCollectedByContactPerson ||

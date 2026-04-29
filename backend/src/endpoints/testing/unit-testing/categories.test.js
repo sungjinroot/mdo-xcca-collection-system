@@ -3,6 +3,14 @@ const express = require("express");
 const endpoint = require("../../categories");
 const pool = require("../../../db");
 
+beforeAll(() => {
+  jest.spyOn(console, 'error').mockImplementation(() => {})
+})
+
+afterAll(() => {
+  console.error.mockRestore()
+})
+
 jest.mock("../../../db", () => ({
     query: jest.fn(),
 }));
@@ -32,7 +40,7 @@ describe("GET /categories/", () => {
 
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual(mockCategories);
-        expect(pool.query).toHaveBeenCalledWith("SELECT * FROM categories ");
+        expect(pool.query).toHaveBeenCalledWith("SELECT * FROM Categories ");
     });
 
     it("should return JSON content type", async () => {
@@ -74,7 +82,96 @@ describe("GET /categories/", () => {
     });
 });
 
+describe("POST /categories/", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
 
+    it("should create a new category and return 201", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [{ categoryid: 1, categoryname: 'Tools' }]
+        });
+
+        const res = await request(app)
+            .post("/categories")
+            .send({ categoryName: "Tools" });
+
+        expect(res.statusCode).toBe(201);
+        expect(res.body).toHaveProperty("categoryid");
+        expect(res.body.categoryname).toBe("Tools");
+    });
+
+    it("should return 400 if categoryName is missing", async () => {
+        const res = await request(app)
+            .post("/categories")
+            .send({});
+
+        expect(res.statusCode).toBe(400);
+        expect(res.body).toHaveProperty("error");
+    });
+
+    it("should return 500 on database error", async () => {
+        pool.query.mockRejectedValueOnce(new Error("DB failure"));
+
+        const res = await request(app)
+            .post("/categories")
+            .send({ categoryName: "Tools" });
+
+        expect(res.statusCode).toBe(500);
+        expect(res.body).toHaveProperty("error");
+    });
+});
+
+describe("PUT /categories/:id", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("should update a category and return 200", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [{ categoryid: 1, categoryname: 'Updated Tools' }]
+        });
+
+        const res = await request(app)
+            .put("/categories/1")
+            .send({ categoryName: "Updated Tools" });
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toHaveProperty("categoryid");
+        expect(res.body.categoryname).toBe("Updated Tools");
+    });
+
+    it("should return 400 if categoryName is missing", async () => {
+        const res = await request(app)
+            .put("/categories/1")
+            .send({});
+
+        expect(res.statusCode).toBe(400);
+        expect(res.body).toHaveProperty("error");
+    });
+
+    it("should return 404 if category does not exist", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [] });
+
+        const res = await request(app)
+            .put("/categories/9999")
+            .send({ categoryName: "Updated Tools" });
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty("error");
+    });
+
+    it("should return 500 on database error", async () => {
+        pool.query.mockRejectedValueOnce(new Error("DB failure"));
+
+        const res = await request(app)
+            .put("/categories/1")
+            .send({ categoryName: "Updated Tools" });
+
+        expect(res.statusCode).toBe(500);
+        expect(res.body).toHaveProperty("error");
+    });
+});
 
 describe("DELETE /categories/:id", () => {
     afterEach(() => {
