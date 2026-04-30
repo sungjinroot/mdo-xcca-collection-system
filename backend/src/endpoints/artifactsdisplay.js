@@ -5,18 +5,31 @@ const pool = require('../db');
 
 
 
-//GET ALL ARTIFACT ( This is for main page)
+//GET ALL ARTIFACT ( This is for main page), Pagination with Search
 
 endpoint.get('/', async (req, res) => {
     try {
+        const limit = Math.max(parseInt(req.query.limit, 10) || 30, 1);
+        const lastID = parseInt(req.query.lastID, 10) || 0;
+        const search = req.query.search || '';
 
+        const result = await pool.query(
+            `SELECT * FROM Artifacts
+             WHERE artifactID > $1
+             ORDER BY artifactID
+             LIMIT $2`,
+            [lastID, limit]
+        );
 
-        query.skip(10).limit(10)
+        const rows = result.rows;
+        const nextCursor = rows.length > 0
+            ? rows[rows.length - 1].artifactID
+            : null;
 
-        
-       const result = await pool.query(artifactQueries.all);
-  
-       res.status(200).json(result.rows); 
+        res.status(200).json({
+            data: rows,
+            nextCursor: nextCursor
+        });
   
     } catch (err) {
         console.error(err);
@@ -24,21 +37,6 @@ endpoint.get('/', async (req, res) => {
     }
   });
 
-// DELETE ARTIFACT
-endpoint.delete("/:id", async (req, res) => {
-    try {
-        const { id } = req.params;
-        const result = await pool.query(
-            "DELETE FROM Artifacts WHERE artifactID = $1",
-            [id]
-        );
-        if (result.rowCount === 0) {
-            return res.status(404).json({ message: "Artifact not found" });
-        }
-        res.status(200).json({ message: "Artifact deleted" });
-    } catch (err) {
-        res.status(500).json({ error: err.message });
-    }
-});
+
 
   module.exports = endpoint;
