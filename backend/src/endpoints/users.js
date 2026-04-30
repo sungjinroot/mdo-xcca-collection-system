@@ -13,6 +13,11 @@ endpoint.get("/", async (req, res) => {
     }
 });
 
+
+// POST USERS
+
+
+
 // DELETE USER
 endpoint.delete("/:id", async (req, res) => {
     try {
