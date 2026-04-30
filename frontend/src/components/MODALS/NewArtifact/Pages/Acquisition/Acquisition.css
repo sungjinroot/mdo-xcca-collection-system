@@ -94,6 +94,8 @@
   flex-direction: row;
   align-items: center;
   gap: 10px;
+  display: flex;
+  justify-content: space-around;
 }
 
 .stepper-acquisition-collection-means-container-special label {
@@ -105,4 +107,28 @@
 .stepper-acquisition-collection-means-container-special input {
   accent-color: #6366f1;
   transform: scale(1.15);
+}
+
+.stepper-acquisition-purchased-option{
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  gap: 10px;
+  width: 30%;
+  padding: 12px 14px;
+  border-radius: 10px;
+  border: 1px solid #d1d5db;
+}
+
+.stepper-acquisition-price-input{
+  display: flex;
+  flex-direction: column;
+  justify-content: start;
+}
+
+.stepper-acquisition-price-input input{
+  padding: 6px;
+  border-radius: 8px;
+  border: 1px solid #d1d5db;
+
 }

@@ -9,7 +9,8 @@ function EditRoomModal({ showEdit, setShowEdit }){
     return (
         <Modal show={showEdit} onHide={() => setShowEdit(false)} aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center justify-content-between">
-                <img src="src/assets/logo.png"/>
+
+                <h3 style={{'color': 'white'}}> Modify Room </h3>
 
                 <div className="delete-room-button">
                     <center>
@@ -17,9 +18,11 @@ function EditRoomModal({ showEdit, setShowEdit }){
                     </center>
                 </div>
 
+                
             </Modal.Header>
             
             <Modal.Body>
+                
                 <div className="room-modal-body">
                     <div className="room-field">
                         <label> Modify Title </label>
@@ -58,6 +61,8 @@ function EditRoomModal({ showEdit, setShowEdit }){
                             </button>
                         </div>
                     </div>
+                    
+
 
                 </div>
             </Modal.Body>

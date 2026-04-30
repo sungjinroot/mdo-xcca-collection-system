@@ -43,8 +43,9 @@ function InspectArtifact(props){
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} dialogClassName='ModalSizeWidth' contentClassName='ModalSizeHeight'  aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <img src="src/assets/logo.png" style={{ height: '40px' }}/>
-                
+
+                <h3 className="mx-auto text-white">Museo De Oro</h3>
+                 
             
             </Modal.Header>
             

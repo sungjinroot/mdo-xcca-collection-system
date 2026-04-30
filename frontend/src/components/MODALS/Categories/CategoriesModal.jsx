@@ -10,8 +10,7 @@ function CategoriesModal({ showCategories, setShowCategories }){
     return (
         <Modal show={showCategories} onHide={() => setShowCategories(false)} aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <img src="src/assets/logo.png"/>
-
+                <h3 style={{'color': 'white'}}> Categories </h3>
             </Modal.Header>
             
             <Modal.Body> 

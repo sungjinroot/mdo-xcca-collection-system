@@ -69,8 +69,15 @@ function Acquisition({ nextStep,prevStep }){
                     </div>
 
                     <div className="stepper-acquisition-collection-means-container-special">
-                        <label> Purchased </label>
-                        <input type="radio" name="collection"/>
+                        <div className="stepper-acquisition-purchased-option">
+                            <label> Purchased </label>
+                            <input type="radio" name="collection"/>
+                        </div>
+                        
+
+                        <div className="stepper-acquisition-price-input">
+                            <input type="number" placeholder='Price...'/>
+                        </div>
                     </div>
 
                    
