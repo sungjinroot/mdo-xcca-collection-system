@@ -43,7 +43,7 @@
 
 .pan-image{
     object-position: center top;
-    animation: panY 13s ease-in-out infinite alternate;
+    animation: panY 30s ease-in-out infinite alternate;
 }
 
 @keyframes panY {
@@ -53,4 +53,8 @@
   100% {
     object-position: center bottom;
   }
+}
+
+.carousel-item {
+  transition: transform 0.3s ease-in-out; /* default is ~0.6s */
 }

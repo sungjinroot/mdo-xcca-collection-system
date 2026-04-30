@@ -53,7 +53,7 @@ function NavBar() {
 
                 <div className="profile">
                     <img
-                        src="src/assets/profile.png"
+                        src="src/assets/mdo.jpg"
                         alt="profile"
                         onClick={handleMenuOpen}
                         style={{ cursor: 'pointer' }}
