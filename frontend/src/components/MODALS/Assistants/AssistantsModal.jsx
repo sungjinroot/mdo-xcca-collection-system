@@ -9,7 +9,7 @@ function AssistantsModal({showAssistants, setShowAssistants}){
     return (
         <Modal show={showAssistants} onHide={() => setShowAssistants(false)} aria-labelledby="example-custom-modal-styling-title" contentClassName="AssistantsModalHeight" dialogClassName="AssistantsModalWidth" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <h3 style={{'color': 'white'}}> Assistants </h3>
+                <h3 style={{'color': 'white'}}> Users </h3>
             </Modal.Header>
             
             <Modal.Body className="p-0">

@@ -11,13 +11,6 @@ function EditRoomModal({ showEdit, setShowEdit }){
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center justify-content-between">
 
                 <h3 style={{'color': 'white'}}> Modify Room </h3>
-
-                <div className="delete-room-button">
-                    <center>
-                        Remove Room
-                    </center>
-                </div>
-
                 
             </Modal.Header>
             
@@ -61,6 +54,19 @@ function EditRoomModal({ showEdit, setShowEdit }){
                             </button>
                         </div>
                     </div>
+
+                    <div className="room-delete-option">
+
+                        <label> Dont want this room anymore? </label>
+
+                        <div className="delete-room-button">
+                            <center>
+                                Remove Room
+                            </center>
+                        </div>
+                    </div>
+
+                    
                     
 
 

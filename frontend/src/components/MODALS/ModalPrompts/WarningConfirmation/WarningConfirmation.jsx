@@ -23,11 +23,7 @@ function WarningConfirmation(props){
                     padding: '12px 16px'
                 }}
             >
-                <img 
-                    src="src/assets/logo.png" 
-                    alt="logo" 
-                    style={{ height: '28px' }}
-                />
+            
             </Modal.Header>
             
             <Modal.Body 
