@@ -4,7 +4,7 @@
     flex-direction: column;
 
     min-height: 100px;
-    max-height: 800px;
+    max-height: 450px;
 }
 
 .artifact-carousel,
@@ -31,10 +31,10 @@
 }
 
 .images-options{
-  padding: 20px;
-  font-size: 18px;
+  padding: 8px;
+  font-size: 12px;
   border-radius: 900px;
-  width: 200px;
+  width: 100px;
   z-index: 999;
   cursor: pointer;
   font-weight: bold;
