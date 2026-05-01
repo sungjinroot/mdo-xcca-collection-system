@@ -40,3 +40,8 @@
 .stepper-upload .image-upload-input {
   display: none; 
 }
+
+.uploaded-images-preview-grid{
+  display: grid;
+  height: 100%;
+}

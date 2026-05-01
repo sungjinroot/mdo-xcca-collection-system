@@ -1,0 +1,27 @@
+
+.uploaded-images-preview-grid{
+    grid-template-columns: repeat(3,200px);
+    column-gap: 10px;   
+    row-gap: 20px; 
+    justify-content: center;
+}
+
+.preview-image-card{
+    display: flex;
+    flex-direction: column;
+    height: 150px;
+}
+
+.preview-image-card img{
+    height: 100%;
+    object-fit: cover;
+}
+
+
+.preview-image-card input{
+    background-color: #3a52a3;
+    border: none;
+    color: white;
+    padding: 10px;
+}
+

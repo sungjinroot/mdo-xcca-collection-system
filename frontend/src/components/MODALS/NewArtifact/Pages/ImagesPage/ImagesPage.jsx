@@ -1,14 +1,21 @@
 import '../Layout.css';
 import './ImagesPage.css';
+import PreviewImage from './PreviewImage/PreviewImage.jsx';
+import { useState } from 'react';
 
 function ImagesPage({prevStep, setShow}){
-    
 
-    function autoUpload(){
-        const file = document.getElementById("imageUpload").files;
-                
-        alert(file.length);
+    const [images, setImages] = useState([]);
 
+    function autoUpload(e){
+        const files = Array.from(e.target.files);
+
+        const imageUrls = files.map(file => ({
+            file,
+            url: URL.createObjectURL(file)
+        }));
+
+        setImages(prev => [...prev, ...imageUrls]);
     }
 
     return (
@@ -31,10 +38,11 @@ function ImagesPage({prevStep, setShow}){
 
 
                 <div className="stepper-right">
-                    {/* content for right box */}
-                    <button onClick={autoUpload}>
-                        test
-                    </button>
+                    <div className="uploaded-images-preview-grid">
+                        {images.map((img, index) => (
+                            <PreviewImage key={index} src={img.url} />
+                        ))}
+                    </div>
                 </div>
             </div>
 
