@@ -3,12 +3,14 @@
     padding: 30px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 40px;
 
     min-height: 0;
     min-width: 0;
 
     overflow: scroll;
+    zoom: 90%;
+
 }
 
 .inspect-physical-dimensions {
@@ -18,7 +20,10 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+
+    box-shadow: 
+        0 10px 25px rgba(0, 0, 0, 0.4),
+        0 4px 10px rgba(0, 0, 0, 0.3);
 }
 
 .inspect-physical-top-fields {

@@ -2,9 +2,10 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 10px;
+    gap: 20px;
     overflow: auto;
     height: 90%;
+    zoom: 90%;
 }
 
 .inspect-contacts-box {
@@ -14,6 +15,11 @@
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    box-shadow: 
+        0 8px 20px rgba(0, 0, 0, 0.3),
+        0 2px 6px rgba(0, 0, 0, 0.2),
+        inset 0 1px 0 rgba(255, 255, 255, 0.06);
 }
 
 .inspect-contacts-box label {
