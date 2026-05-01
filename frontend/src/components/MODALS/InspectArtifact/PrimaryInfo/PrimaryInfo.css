@@ -6,29 +6,29 @@
     flex-direction: column;
     gap: 0.5em;
     zoom: 86%;
+    background-color: #283971;
 }
 
 .artifact-info-first-line {
-    background-color: #283971;
     color: white;
     border-radius: 1em;
 }
 
 .artifact-info-first-identifier {
     display: flex;
-    padding: 1em;
     gap: 0.5em;
     align-items: center;
 }
 
 .artifact-info-identifier-fields {
+    background-color: #283971;
     display: flex;
     flex: 1;
     flex-direction: column;
-    background-color: #3a52a3;
     padding: 0.6em;
     border-radius: 1em;
     height: 100%;
+    font-size: 19px;
 }
 
 .artifact-info-identifier-fields input,

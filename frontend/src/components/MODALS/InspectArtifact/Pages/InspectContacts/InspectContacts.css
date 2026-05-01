@@ -36,12 +36,10 @@
     flex-direction: column;
     gap: 10px; 
 
-    background-color: #3a52a3;
     padding: 8px;
     border-radius: 8px;
 }
 
-/* Updated input style: white underline */
 .inspect-contacts-fields input {
     padding: 12px 0;
     border: none;
@@ -52,7 +50,6 @@
     outline: none;
 }
 
-/* Optional: focus effect */
 .inspect-contacts-fields input:focus {
     border-bottom: 2px solid #ffffff;
 }
