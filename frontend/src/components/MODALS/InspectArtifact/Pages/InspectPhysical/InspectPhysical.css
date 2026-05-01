@@ -22,8 +22,8 @@
     gap: 20px;
 
     box-shadow: 
-        0 10px 25px rgba(0, 0, 0, 0.4),
-        0 4px 10px rgba(0, 0, 0, 0.3);
+        0 14px 35px rgba(0, 0, 0, 0.55),
+        0 6px 15px rgba(0, 0, 0, 0.45);
 }
 
 .inspect-physical-top-fields {
