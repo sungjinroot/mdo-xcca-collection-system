@@ -1,0 +1,62 @@
+.artifact-info-bottom {
+    padding-top: 0.6em;
+    font-size: 1em; 
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    gap: 0.5em;
+    zoom: 86%;
+    background-color: #283971;
+
+    border-bottom-left-radius: 8px;
+    border-bottom-right-radius: 8px;
+}
+
+.artifact-info-first-line {
+    color: white;
+    border-radius: 1em;
+}
+
+.artifact-info-first-identifier {
+    display: flex;
+    gap: 0.5em;
+    align-items: center;
+}
+
+.artifact-info-identifier-fields {
+    background-color: #283971;
+    display: flex;
+    flex: 1;
+    flex-direction: column;
+    padding: 0.6em;
+    border-radius: 1em;
+    height: 100%;
+    font-size: 19px;
+}
+
+.artifact-info-identifier-fields input,
+.artifact-info-identifier-fields select {
+    padding: 0.2em;
+    border: none;
+    border-bottom: 0.1em solid white;
+    height: 2em;
+    border-radius: 0;
+    background: transparent;
+    color: white;
+    outline: none;
+    font-size: 16px;
+}
+
+.artifact-info-identifier-fields input::placeholder {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.artifact-info-identifier-fields input:focus,
+.artifact-info-identifier-fields select:focus {
+    border-bottom: 0.1em solid #ffffff;
+}
+
+.artifact-info-identifier-fields label {
+    margin-bottom: 0.3em;
+    font-size: 1em;
+}

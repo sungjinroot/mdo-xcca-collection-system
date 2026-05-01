@@ -9,6 +9,7 @@ import InspectContacts from './Pages/InspectContacts/InspectContacts.jsx';
 import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 
 import PrimaryView from './PrimaryView/PrimaryView.jsx';
+import PrimaryInfo from './PrimaryInfo/PrimaryInfo.jsx';
 
 function renderTab(current){
     switch (current){
@@ -40,10 +41,12 @@ function InspectArtifact(props){
 
 
     return (
-        <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
+        <Modal show={props.show} onHide={() => props.setShow(false)} dialogClassName='ModalSizeWidth' contentClassName='ModalSizeHeight'  aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <img src="src/assets/logo.png"/>
-                
+
+                <div className="mdo-header">
+                    <h3> Museo De Oro </h3>
+                </div>                 
             
             </Modal.Header>
             
@@ -51,6 +54,7 @@ function InspectArtifact(props){
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
                         <PrimaryView/>
+                        <PrimaryInfo/>
                     </div>
 
                     <div className="artifact-info-right">

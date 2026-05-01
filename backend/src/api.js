@@ -5,12 +5,19 @@ const app = express();
 app.use(express.json());
 
 const artifactEndpoint = require('./endpoints/artifacts')
+const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay')
 const imageEndpoint = require('./endpoints/images')/*Delete later */
 const roomEndpoint = require('./endpoints/rooms')
+const categoriesEndpoint = require('./endpoints/categories')
+const usersEndpoint = require('./endpoints/users')
 
+app.use(express.json())
 app.use('/api/v1/artifacts',artifactEndpoint);
+app.use('/api/v1/artifactsdisplay', artifactDisplayEndpoint);
 app.use('/api/v1/image', imageEndpoint);
 app.use('/api/rooms', roomEndpoint)
+app.use('/api/categories', categoriesEndpoint)
+app.use('/api/users', usersEndpoint)
 
 app.get("/test-db", async (req, res) => {
     try {

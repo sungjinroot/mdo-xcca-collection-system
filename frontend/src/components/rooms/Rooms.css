@@ -1,20 +1,21 @@
 
 .button-utils-left{
     position: absolute;
-    top: 45px;
+    top: 35px;
     left: 250px;
     z-index: 10;
 }
 
 .button-utils-right{
     position: absolute;
-    top: 45px;
+    top: 35px;
     right: 250px;
     z-index: 10;
 }
 
 .utils{
     padding: 10px;
+    font-size: 17px;
     width: 150px;
     border: none;
     border-radius: 80px;
@@ -42,7 +43,7 @@
 
 .pan-image{
     object-position: center top;
-    animation: panY 13s ease-in-out infinite alternate;
+    animation: panY 30s ease-in-out infinite alternate;
 }
 
 @keyframes panY {
@@ -52,4 +53,8 @@
   100% {
     object-position: center bottom;
   }
+}
+
+.carousel-item {
+    transition: transform 0.8s cubic-bezier(0.25, 1, 0.5, 1);
 }

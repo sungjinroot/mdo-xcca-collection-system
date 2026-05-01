@@ -2,7 +2,7 @@
   display: flex;
   justify-content: center;
   align-items: center;
-  height: 400px; 
+  height: 100%; 
   border: 2px dashed #ccc;
   border-radius: 12px;
   background-color: #f9f9f9;

@@ -1,23 +1,18 @@
 
-function ArtifactData({ style, englishName, vernacularName, dateReceived }){
+function ArtifactData({ style, englishName, vernacularName}){
     
     return (
         <>
             <div className={style}>
-                {englishName} 
+                <span> {englishName} </span> 
             </div>
 
             <div className={style}>
                 <i> 
-                    {vernacularName} 
+                    <span> {vernacularName} </span> 
                 </i>
             </div>
-            
-            
-            <div className={style}>
-                Collected on {dateReceived} 
-            </div>
-
+        
         </>
     )
     

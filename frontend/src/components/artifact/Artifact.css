@@ -12,15 +12,15 @@
   will-change: transform, opacity;
 }
 
-@media (min-width: 1300px) {
+@media (min-width: 1000px) {
   .card-container {
-    height: 280px;
+    height: 350px;
   }
 }
 
 @media (min-width: 1800px) {
   .card-container {
-    height: 300px;
+    height: 400px;
   }
 }
 
@@ -41,7 +41,10 @@
   width: 100%;
   object-fit: cover;
   border-radius: 16px;
+
 }
+
+
 
 .card-info {
   position: absolute;
@@ -49,8 +52,8 @@
   left: 0;
   width: 100%;
   color: white;
-  transform: translateY(55%);
-  transition: transform 0.35s ease, background-color 0.3s ease, backdrop-filter 0.35s ease;
+  transform: translateY(43%);
+  transition: transform 0.8s ease, background-color 0.3s ease, backdrop-filter 0.35s ease;
   border-radius: 0 0 16px 16px;
   display: flex;
   flex-direction: column;
@@ -69,9 +72,14 @@
   overflow: hidden;
   text-overflow: ellipsis;
   color: #FFFFF0;
-  font-size: 18px;
-  text-shadow: 0 1px 2px rgba(255, 255, 255, 0.8),
-               0 0 6px rgba(255, 255, 255, 0.5);
+  font-size: 23px;
+  
+}
+
+.artifact-display-data span{
+  background-color: #283971;
+  padding: 8px;
+  border-radius: 8px;
 }
 
 .basic-functions {
@@ -82,6 +90,8 @@
   opacity: 0.9;
   padding: 6px 8px;
   border-top: 1px solid rgba(255,255,255,0.2);
+
+  font-size: 20px;
 }
 
 .card-functions {
@@ -111,8 +121,8 @@
   position: absolute;
   right: 8px;
   top: 8px;
-  height: 35px;
-  width: 35px;
+  height: 45px;
+  width: 45px;
   background-color: transparent;
   border: none;
   cursor: pointer;
@@ -139,3 +149,26 @@
 .delete-button img:active {
   transform: scale(0.95);
 }
+
+.thumbnail-chooser {
+  position: absolute;
+  top: 8px;
+  left: 10px;
+  opacity: 0; 
+  transition: opacity 0.3s ease;
+}
+
+.card-container:hover .thumbnail-chooser {
+  opacity: 1; 
+}
+
+.thumbnail-chooser select{
+  background-color: #283971;
+  color: white;
+  width: 180px;
+  font-size: 22px;
+  padding: 8px;
+  border: none;
+  border-radius: 8px;
+}
+

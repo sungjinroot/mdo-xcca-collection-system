@@ -2,21 +2,27 @@
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 10px;
+    gap: 20px;
     overflow: auto;
-    height: 88%;
+    height: 90%;
+    zoom: 90%;
 }
 
 .inspect-contacts-box {
-    background-color: #3a52a3; 
+    background-color: #283971; 
     border-radius: 20px;
     padding: 15px;
     display: flex;
     flex-direction: column;
     gap: 20px;
+
+    box-shadow: 
+        0 12px 30px rgba(0, 0, 0, 0.5),
+        0 6px 12px rgba(0, 0, 0, 0.4),
+        inset 0 1px 2px rgba(255, 255, 255, 0.08);
 }
 
-.inspect-contacts-box label{
+.inspect-contacts-box label {
     color: white;
 }
 
@@ -35,12 +41,21 @@
     display: flex;
     flex-direction: column;
     gap: 10px; 
+
+    padding: 8px;
+    border-radius: 8px;
 }
 
-
 .inspect-contacts-fields input {
-    padding: 12px;
-    border-radius: 8px;
-    border: 1px solid #999;
+    padding: 12px 0;
+    border: none;
+    border-bottom: 1px solid #ffffff;
+    background: transparent;
     font-size: 1rem;
+    color: white;
+    outline: none;
+}
+
+.inspect-contacts-fields input:focus {
+    border-bottom: 2px solid #ffffff;
 }

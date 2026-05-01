@@ -2,6 +2,7 @@ import Modal from 'react-bootstrap/Modal';
 import { useState } from 'react';
 import './ModalSizeHeight.css';
 import './ModalSizeWidth.css';
+import './NewArtifact.css';
 import { StepLabel,Stepper,Step } from '@mui/material';
 
 import BasicInformation from './Pages/BasicInformation/BasicInformation.jsx';
@@ -62,10 +63,11 @@ function NewArtifact(props){
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <img src="src/assets/logo.png"/>
 
-                <h3 className="mx-auto text-white">New Artifact Entry</h3>
                 
+                <div className="mdo-header">
+                    <h3> Museo De Oro </h3>
+                </div>
             
             </Modal.Header>
             
