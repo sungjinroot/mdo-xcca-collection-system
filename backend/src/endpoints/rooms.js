@@ -21,7 +21,44 @@ endpoint.get("/", async (req, res) => {
     }
 });
 
+// Edit a room
+endpoint.put("/:id", async (req, res) => {
+    const roomId = req.params.id;
+    const { roomName, roomPictureUrl, title, caption } = req.body;
 
+    // Check if room exists first
+    try {
+        const checkRoom = await pool.query(
+            "SELECT * FROM Rooms WHERE roomID = $1",
+            [roomId]
+        );
+
+        if (checkRoom.rows.length === 0) {
+            return res.status(404).json({ error: "Room not found" });
+        }
+
+        // Update the room
+        const updateRoom = await pool.query(
+            `UPDATE Rooms 
+             SET roomName = $1, 
+                 roomPictureUrl = $2, 
+                 title = $3, 
+                 caption = $4 
+             WHERE roomID = $5 
+             RETURNING *`,
+            [roomName, roomPictureUrl, title, caption, roomId]
+        );
+
+        res.json({
+            message: "Room updated",
+            room: updateRoom.rows[0]
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to update room" });
+    }
+});
 
 
 module.exports = endpoint;
