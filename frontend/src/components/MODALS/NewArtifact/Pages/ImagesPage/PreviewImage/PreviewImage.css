@@ -10,7 +10,11 @@
     display: flex;
     flex-direction: column;
     height: 150px;
+
+    position: relative;
 }
+
+
 
 .preview-image-card img{
     height: 100%;
@@ -25,3 +29,52 @@
     padding: 10px;
 }
 
+.preview-image-remove{
+    position: absolute;
+    top: 5px;
+    right: 5px;
+}
+
+.preview-image-remove button{
+    padding: 8px;
+    border: none;
+    background-color: #ec282a;
+    color: white;
+    border-radius: 8px;
+}
+
+.preview-image-remove button {
+    padding: 8px;
+    border: none;
+    background-color: #ec282a;
+    color: white;
+    border-radius: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.preview-image-remove button:hover {
+    background-color: #c81f21;
+    transform: scale(1.05);
+}
+
+
+.preview-image-remove button:active {
+    transform: scale(0.95);
+    background-color: #a8181a;
+}
+
+
+.preview-image-remove {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    opacity: 0;
+    pointer-events: none;
+    transition: opacity 0.2s ease;
+}
+
+.preview-image-card:hover .preview-image-remove {
+    opacity: 1;
+    pointer-events: auto;
+}

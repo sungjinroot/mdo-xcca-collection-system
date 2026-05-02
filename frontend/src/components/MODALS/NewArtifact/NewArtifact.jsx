@@ -43,7 +43,7 @@ function RenderStep(current,prevStep,nextStep, setShow){
 
 function NewArtifact(props){
 
-    const steps = ['Basic Information','Acquisition','Physical Description','Contact Persons','Images']
+    const steps = ['Basic Information','Provenance','Physical Description','Contact Persons','Images']
 
     const [currentStep, setCurrentStep] = useState(0);
 

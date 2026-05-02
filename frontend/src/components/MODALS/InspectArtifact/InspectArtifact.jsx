@@ -63,7 +63,7 @@ function InspectArtifact(props){
                             <Tabs value={value} onChange={handleChange}>
                                 <Tab label="Physical"  value={0} />
                                 <Tab label="Contacts" value={1} />
-                                <Tab label="Acquisition" value={2} />
+                                <Tab label="Provenance" value={2} />
                             </Tabs>
                         </div>
 

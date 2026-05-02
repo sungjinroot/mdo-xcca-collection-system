@@ -18,6 +18,14 @@ function ImagesPage({prevStep, setShow}){
         setImages(prev => [...prev, ...imageUrls]);
     }
 
+    function removeImage(indexToRemove) {
+        setImages(prev => {
+            const updated = [...prev];
+            URL.revokeObjectURL(updated[indexToRemove].url);
+            return updated.filter((_, index) => index !== indexToRemove);
+        });
+    }
+
     return (
     
         <div className="stepper-container">
@@ -40,7 +48,7 @@ function ImagesPage({prevStep, setShow}){
                 <div className="stepper-right">
                     <div className="uploaded-images-preview-grid">
                         {images.map((img, index) => (
-                            <PreviewImage key={index} src={img.url} />
+                            <PreviewImage key={index} src={img.url} onRemove={() => removeImage(index)}/>
                         ))}
                     </div>
                 </div>
