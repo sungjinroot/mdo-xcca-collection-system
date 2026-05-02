@@ -1,7 +1,25 @@
 import './ContactPersons.css';
 import '../Layout.css';
 
-function ContactPersons({ prevStep, nextStep }){
+function ContactPersons({ prevStep, nextStep, collectionType }){
+
+    const roleLabelMap = {
+        "Donated": "donor",
+        "On Loan": "lender",
+        "Found": "finder",
+        "Excavated": "archaeologist",
+        "Purchased": "buyer"
+    };
+
+    const promptMap = {
+        "Donated": "donated",
+        "On Loan": "loaned",
+        "Found": "turned over",
+        "Excavated": "turned over",
+        "Purchased": "sold"
+    };
+
+    const role = roleLabelMap[collectionType];
 
     return (
     
@@ -10,7 +28,7 @@ function ContactPersons({ prevStep, nextStep }){
                 <div className="stepper-left">
                     <div className="stepper-contact-person-container-left">
                         <div className="stepper-contact-person-fields">
-                            <label>Full name of donor/loaner/vendor</label>
+                            <label>Full name of the {role}</label>
                             <input type="text"/>
                         </div>
 
@@ -41,12 +59,12 @@ function ContactPersons({ prevStep, nextStep }){
                 <div className="stepper-right">
                     <div className="stepper-contact-person-container-right">
                         <div className="stepper-contact-person-date-fields">
-                            <label>Date of when the artifact was collected by the Donor/Loaner/Vendor</label>
+                            <label>Date of when the artifact was collected by the {role}</label>
                             <input type="date"/>
                         </div>
 
                         <div className="stepper-contact-person-date-fields">
-                            <label>Date of when the artifact was Donated/Sold/Loaned to the Musuem</label>
+                            <label>Date of when the artifact was {promptMap[collectionType]} to the Musuem</label>
                             <input type="date"/>
                         </div>
                     </div>

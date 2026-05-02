@@ -111,5 +111,11 @@ CREATE TABLE IF NOT EXISTS Acquisition( /*Passed Manual Test*/
     CONSTRAINT fk_acquisitionCollection FOREIGN KEY (collectionType) REFERENCES Collection(CollectionType)
 );
 
+CREATE TABLE IF NOT EXISTS Users (
+    userID SERIAL PRIMARY KEY,
+    username VARCHAR(55) UNIQUE NOT NULL,
+    bcryptPassword VARCHAR(255) NOT NULL,
+    canAdd BOOLEAN DEFAULT FALSE
+);
 
 /**/

@@ -17,8 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://t4.ftcdn.net/jpg/16/76/36/85/360_F_1676368530_8f4lKDMCczIN9TNJIW0cdGhCmIJvyiGC.jpg" onClick={() => setShow(true)}/>
-
+                    <img src="https://lh3.googleusercontent.com/ci/AL18g_QK-2o3ih9I38PPhCO9vCrtqPTRg_6DZ4_SZf7CP8F9whJxeicBzaBPU3M3qcc9mH3QuSK09hqT=s1200" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>

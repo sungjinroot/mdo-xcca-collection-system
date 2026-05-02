@@ -11,7 +11,7 @@ import ContactPersons from './Pages/ContactPersons/ContactPersons.jsx';
 import PhysicalDescription from './Pages/PhysicalDescription/PhysicalDescription.jsx';
 import ImagesPage from './Pages/ImagesPage/ImagesPage.jsx';
 
-function RenderStep(current,prevStep,nextStep, setShow){
+function RenderStep(current,prevStep,nextStep, setShow,collectionType,setCollectionType){
 
     switch (current){
         case 0: 
@@ -21,7 +21,7 @@ function RenderStep(current,prevStep,nextStep, setShow){
 
         case 1:
             return (
-                <Acquisition prevStep={prevStep} nextStep={nextStep}/>
+                <Acquisition prevStep={prevStep} nextStep={nextStep} collectionType={collectionType} setCollectionType={setCollectionType}/>
             )
 
         case 2:
@@ -31,7 +31,7 @@ function RenderStep(current,prevStep,nextStep, setShow){
         
         case 3:
             return (
-                <ContactPersons prevStep={prevStep} nextStep={nextStep}/>
+                <ContactPersons prevStep={prevStep} nextStep={nextStep} collectionType={collectionType}/>
             )
         
         case 4:
@@ -46,6 +46,9 @@ function NewArtifact(props){
     const steps = ['Basic Information','Provenance','Physical Description','Contact Persons','Images']
 
     const [currentStep, setCurrentStep] = useState(0);
+
+    //Collection
+    const [collectionType, setCollectionType] = useState("");
 
     const nextStep = () => {
         if (currentStep < steps.length - 1) {
@@ -81,7 +84,7 @@ function NewArtifact(props){
                     ))}
                 </Stepper>
                 
-                {RenderStep(currentStep,prevStep,nextStep,props.setShow)}
+                {RenderStep(currentStep,prevStep,nextStep,props.setShow,collectionType,setCollectionType)}
 
             </Modal.Body>
         </Modal>
