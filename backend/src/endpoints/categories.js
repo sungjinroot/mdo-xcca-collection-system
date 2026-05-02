@@ -14,7 +14,7 @@ endpoint.get("/", async (req, res) => {
 
     } catch (err) {
         console.error(err);
-        res.status(500).json({error: "Category does not exists"})
+        res.status(500).json({error: "Database error"}) // can be changed into a better message
     }
 });
 
@@ -49,13 +49,13 @@ endpoint.put('/:id', async (req, res) => {
 
   try {
     const result = await pool.query(
-      'UPDATE Categories SET categoryName = $1 WHERE categoryID = $2 RETURNING *',
+      'UPDATE Categories SET categoryName = $1 WHERE categoryID = $2 RETURNING *', // refactor: check if category exists first
       [categoryName, id]
     )
 
     if (result.rows.length === 0) {
-      return res.status(404).json({ error: 'Category not found' })
-    }
+          return res.status(404).json({ error: 'Category not found' })
+        }
 
     res.status(200).json(result.rows[0])
   } catch (err) {
@@ -66,13 +66,13 @@ endpoint.put('/:id', async (req, res) => {
 
 
 //DELETE Category
-endpoint.delete('/:id', async (req, res) => {
+endpoint.delete('/:id', async (req, res) => { 
   console.log('req.body:', req.body)  
   const {categoryID} = req.body
 
   try {
     const result = await pool.query(
-      'DELETE FROM Categories WHERE categoryID=$1 RETURNING *',
+      'DELETE FROM Categories WHERE categoryID=$1 RETURNING *', // refactor: check if category exists first
       [categoryID]
     )
 

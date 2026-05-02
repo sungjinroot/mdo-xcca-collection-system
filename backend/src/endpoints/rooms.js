@@ -8,16 +8,16 @@ endpoint.get("/", async (req, res) => {
         const result = await pool.query("SELECT * FROM Rooms ");
         res.json(result.rows);
     } catch (err) {
-        console.error(err);
-        res.status(500).json({error: "Room does not exists"})
+        console.error('DB ERROR:', err);
+        res.status(500).json({error: "Database error"}) // pwede i change into a better phrase
     }
 });
 
 // POST ROOM
 endpoint.post('/', async (req, res) => {
     const {roomName, roomPictureURL, title, caption} = req.body
-    if (!roomName || !title) {
-        return res.status(400).json({ error: 'roomName and title are required' })
+    if (!roomName || !title || !roomPictureURL) {
+        return res.status(400).json({ error: 'roomName, title, roomPictureURL are required' })
     }
     try {
         const result = await pool.query(
