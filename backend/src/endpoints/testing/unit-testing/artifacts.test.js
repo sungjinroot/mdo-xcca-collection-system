@@ -11,6 +11,117 @@ const app = express();
 app.use(express.json());
 app.use("/artifacts", endpoint);
 
+
+describe("GET /artifacts", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("returns 200 and array of artifacts with default filter", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [
+                { artifactid: 1, accessionno: 'ACC-001', englishname: 'Ceremonial Jar' }
+            ]
+        })
+
+        const res = await request(app).get("/artifacts")
+
+        expect(res.status).toBe(200)
+        expect(Array.isArray(res.body)).toBe(true)
+        expect(res.body[0]).toHaveProperty('artifactid')
+    })
+
+    it("returns 200 with names filter", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [
+                { artifactid: 1, accessionno: 'ACC-001', englishname: 'Ceremonial Jar', vernacularname: 'Banga' }
+            ]
+        })
+
+        const res = await request(app).get("/artifacts?filter=names")
+
+        expect(res.status).toBe(200)
+        expect(res.body[0]).toHaveProperty('englishname')
+        expect(res.body[0]).toHaveProperty('vernacularname')
+    })
+
+    it("returns 400 for invalid filter", async () => {
+        const res = await request(app).get("/artifacts?filter=invalidfilter")
+
+        expect(res.status).toBe(400)
+        expect(res.body).toHaveProperty('error')
+    })
+
+    it("returns 500 on database error", async () => {
+        pool.query.mockRejectedValueOnce(new Error("DB failure"))
+
+        const res = await request(app).get("/artifacts")
+
+        expect(res.status).toBe(500)
+        expect(res.body).toHaveProperty('error')
+    })
+})
+
+describe("GET /artifacts/:id", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("returns 200 and the artifact when found", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [
+                { artifactid: 1, accessionno: 'ACC-001', englishname: 'Ceremonial Jar' }
+            ]
+        })
+
+        const res = await request(app).get("/artifacts/1")
+
+        expect(res.status).toBe(200)
+        expect(res.body).toHaveProperty('artifactid')
+        expect(res.body.artifactid).toBe(1)
+    })
+
+    it("returns 404 when artifact is not found", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [] })
+
+        const res = await request(app).get("/artifacts/9999")
+
+        expect(res.status).toBe(404)
+        expect(res.body).toHaveProperty('error')
+    })
+
+    it("returns 200 with physical filter", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [
+                { artifactid: 1, artifactlength: 20.5, artifactwidth: 15.0 }
+            ]
+        })
+
+        const res = await request(app).get("/artifacts/1?filter=physical")
+
+        expect(res.status).toBe(200)
+        expect(res.body).toHaveProperty('artifactlength')
+    })
+
+    it("returns 400 for invalid filter", async () => {
+        const res = await request(app).get("/artifacts/1?filter=invalidfilter")
+
+        expect(res.status).toBe(400)
+        expect(res.body).toHaveProperty('error')
+    })
+
+    it("returns 500 on database error", async () => {
+        pool.query.mockRejectedValueOnce(new Error("DB failure"))
+
+        const res = await request(app).get("/artifacts/1")
+
+        expect(res.status).toBe(500)
+        expect(res.body).toHaveProperty('error')
+    })
+})
+
+
+
 const validPostBody = {
     accessionNo: "ACC-001",
     catalogueNo: "A1",

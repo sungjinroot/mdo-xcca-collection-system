@@ -153,11 +153,44 @@ const artifactQueries = {
   `
 };
 
+endpoint.get('/', async (req, res) => {  // this one gets all artifacts with or without filters
+    const filter = req.query.filter || 'all'
 
-// GET INDIVIDUAL ARTIFACT ( Artifacts Primary)
+    if (!artifactQueries[filter]) {
+        return res.status(400).json({ error: `Invalid filter. Valid filters are: ${Object.keys(artifactQueries).join(', ')}` })
+    }
 
+    try {
+        const result = await pool.query(artifactQueries[filter])
+        res.status(200).json(result.rows)
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: 'Failed to fetch artifacts' })
+    }
+    
+})
 
-//
+endpoint.get('/:id', async (req, res) => { // this one gets individual artifacts with or without filters
+    const {id} = req.params
+    const filter = req.query.filter || 'all'
+
+    if (!artifactQueries[filter]) {
+        return res.status(400).json({ error: `Invalid filter. Valid filters are: ${Object.keys(artifactQueries).join(', ')}` })
+    }
+
+    try {
+        const result = await pool.query(artifactQueries[filter] + ' WHERE a.artifactID = $1', [id])
+
+        if (result.rows.length === 0) {
+            return res.status(404).json({ error: 'Artifact not found' })
+        }
+
+        res.status(200).json(result.rows[0])
+    } catch (err) {
+        console.error(err)
+        res.status(500).json({ error: 'Failed to fetch artifact' })
+    }
+})
 
 
 endpoint.post('/', async (req, res) => {
