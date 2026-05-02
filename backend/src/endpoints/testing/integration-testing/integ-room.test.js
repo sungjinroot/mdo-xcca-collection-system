@@ -3,20 +3,20 @@ const app = require("../../../api")
 
 //GET with database interaction
 
-describe("GET /api/rooms", () =>{
+describe("GET /api/v1/rooms", () =>{
   it("should return status 200", async () => {
-    const res = await request(app).get("/api/rooms");
+    const res = await request(app).get("/api/v1/rooms");
     expect(res.statusCode).toBe(200);
   })
 
   it("should return an array", async ()=> {
-    const res = await request (app).get("/api/rooms");
+    const res = await request (app).get("/api/v1/rooms");
     expect(Array.isArray(res.body)).toBe(true);
   })
 
 
   it("should return room with the correct fields", async () => {
-    const res = await request(app).get("/api/rooms");
+    const res = await request(app).get("/api/v1/rooms");
     console.log(res.body)
     const room = res.body[0];
 
@@ -41,7 +41,7 @@ describe('POST /rooms/', () => {
     }
 
     const res = await request(app)
-      .post('/api/rooms')
+      .post('/api/v1/rooms')
       .send(newRoom)
 
     expect(res.statusCode).toBe(201)
@@ -51,7 +51,7 @@ describe('POST /rooms/', () => {
 
   it('should return 400 if roomName is missing', async () => {
     const res = await request(app)
-      .post('/api/rooms')
+      .post('/api/v1/rooms')
       .send({ title: 'Ancient Artifacts' })
 
     expect(res.statusCode).toBe(400)
@@ -60,7 +60,7 @@ describe('POST /rooms/', () => {
 
   it('should return 400 if title is missing', async () => {
     const res = await request(app)
-      .post('/api/rooms')
+      .post('/api/v1/rooms')
       .send({ roomName: 'Hall A' })
 
     expect(res.statusCode).toBe(400)
@@ -74,7 +74,7 @@ describe("DELETE /rooms/:id - Integration", () => {
 
     test("returns 400 when room has artifacts", async () => {
         // Room 1 has artifacts in the DB so it should be blocked
-        const res = await request(app).delete("/api/rooms/1");
+        const res = await request(app).delete("/api/v1/rooms/1");
         expect(res.status).toBe(400);
         expect(res.body.message).toBe("Room cannot be deleted");
     });
@@ -88,7 +88,7 @@ describe("DELETE /rooms/:id - Integration", () => {
         );
         const roomID = insert.rows[0].roomid;
 
-        const res = await request(app).delete(`/api/rooms/${roomID}`);
+        const res = await request(app).delete(`/api/v1/rooms/${roomID}`);
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("Room deleted");
     });

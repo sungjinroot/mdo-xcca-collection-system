@@ -1,6 +1,7 @@
 const express = require('express');
 const endpoint = express.Router();
 const pool = require('../db');
+const { parseRoomId, roomExists } = require('../utils/roomValidation');
 
 //ARTIFACTS SQL FOR GET API
 
@@ -157,7 +158,7 @@ const artifactQueries = {
 // GET INDIVIDUAL ARTIFACT ( Artifacts Primary)
 
 
-//
+// POST ARTIFACT
 
 
 endpoint.post('/', async (req, res) => {
@@ -173,18 +174,27 @@ endpoint.post('/', async (req, res) => {
         angleName, pictureFilePath, isProfilePicture
     } = req.body;
     if (
-        !accessionNo || !catalogueNo || !roomID ||
+        !accessionNo || !catalogueNo || roomID == null || roomID === '' ||
         !contactPersonFullName || !dateCollectedByContactPerson ||
         !receiverFullName || !receivedByReceiverDate || !recordedBy ||
         !collectionType || !categoryID
     ) {
         return res.status(400).json({ error: 'Missing required fields' });
     }
- 
+
+    const resolvedRoomId = parseRoomId(roomID);
+    if (resolvedRoomId === null) {
+        return res.status(400).json({ error: 'roomID must be a positive integer' });
+    }
+
     try {
+        if (!(await roomExists(pool, resolvedRoomId))) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
+
         const artifactResult = await pool.query(
             'INSERT INTO Artifacts (accessionNo, catalogueNo, roomID) VALUES ($1, $2, $3) RETURNING artifactID',
-            [accessionNo, catalogueNo, roomID]
+            [accessionNo, catalogueNo, resolvedRoomId]
         );
         const artifactID = artifactResult.rows[0].artifactid;
  
@@ -258,10 +268,21 @@ endpoint.put('/:id', async (req, res) => {
         if (check.rowCount === 0) {
             return res.status(404).json({ error: 'Artifact not found' });
         }
+
+        if (roomID == null || roomID === '') {
+            return res.status(400).json({ error: 'roomID is required' });
+        }
+        const resolvedRoomId = parseRoomId(roomID);
+        if (resolvedRoomId === null) {
+            return res.status(400).json({ error: 'roomID must be a positive integer' });
+        }
+        if (!(await roomExists(pool, resolvedRoomId))) {
+            return res.status(404).json({ error: 'Room not found' });
+        }
  
         await pool.query(
             'UPDATE Artifacts SET accessionNo = $1, catalogueNo = $2, roomID = $3 WHERE artifactID = $4',
-            [accessionNo, catalogueNo, roomID, id]
+            [accessionNo, catalogueNo, resolvedRoomId, id]
         );
  
         await pool.query(

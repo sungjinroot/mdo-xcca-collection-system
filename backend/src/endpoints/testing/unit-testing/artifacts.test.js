@@ -48,6 +48,7 @@ describe("POST /artifacts", () => {
 
     it("returns 201 when artifact is successfully created", async () => {
 
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
         pool.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
 
         for(let i = 0; i < 8; i++){
@@ -118,6 +119,7 @@ describe("PUT /artifacts/:id", () => {
     });
 
     it("returns 200 when artifact is successfully updated", async () => {
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
         pool.query.mockResolvedValueOnce({ rowCount: 1 });
 
          for(let i = 0; i < 10; i++){
