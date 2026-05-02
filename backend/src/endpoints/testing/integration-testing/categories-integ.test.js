@@ -26,11 +26,78 @@ describe("GET /api/categories - Integration", () => {
     });
 });
 
+describe("POST /categories/", () => {
+    it("should create a new category and return 201", async () => {
+        const res = await request(app)
+            .post("/api/categories")
+            .send({ categoryName: "Tools" });
+
+        expect(res.statusCode).toBe(201);
+        expect(res.body).toHaveProperty("categoryid");
+        expect(res.body.categoryname).toBe("Tools");
+    });
+
+    it("should return 400 if categoryName is missing", async () => {
+        const res = await request(app)
+            .post("/api/categories")
+            .send({});
+
+        expect(res.statusCode).toBe(400);
+        expect(res.body).toHaveProperty("error");
+    });
+
+    it("should return 500 on database error", async () => {
+        const res = await request(app)
+            .post("/api/categories")
+            .send({ categoryName: "Tools" });
+
+        expect(res.statusCode).toBe(500);
+        expect(res.body).toHaveProperty("error");
+    });
+});
+
+describe("PUT /categories/:id", () => {
+    it("should update a category and return 200", async () => {
+        const res = await request(app)
+            .put("/api/categories/1")
+            .send({ categoryName: "Updated Tools" });
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body).toHaveProperty("categoryid");
+        expect(res.body.categoryname).toBe("Updated Tools");
+    });
+
+    it("should return 400 if categoryName is missing", async () => {
+        const res = await request(app)
+            .put("/api/categories/1")
+            .send({});
+
+        expect(res.statusCode).toBe(400);
+        expect(res.body).toHaveProperty("error");
+    });
+
+    it("should return 404 if category does not exist", async () => {
+        const res = await request(app)
+            .put("/api/categories/9999")
+            .send({ categoryName: "Updated Tools" });
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body).toHaveProperty("error");
+    });
+
+    it("should return 500 on database error", async () => {
+        const res = await request(app)
+            .put("/api/categories/1")
+            .send({ categoryName: "Updated Tools" });
+
+        expect(res.statusCode).toBe(500);
+        expect(res.body).toHaveProperty("error");
+    });
+});
 
 describe("DELETE /api/categories/:id - Integration", () => {
     let testCategoryId;
 
-    
     beforeEach(async () => {
         const insert = await pool.query(
             `INSERT INTO Categories (categoryName) VALUES ('Test Category') RETURNING categoryID`

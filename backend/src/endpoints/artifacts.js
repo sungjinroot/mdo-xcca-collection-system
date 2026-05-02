@@ -37,7 +37,7 @@ const artifactQueries = {
       pd.conditionUponReceipt,
       pd.specialRemarks,
 
-      ac.collectionType,
+      ac.collectionName,
       ac.price
 
     FROM Artifacts a
@@ -140,7 +140,7 @@ const artifactQueries = {
       ap.locality,
       ap.placeOfOrigin,
 
-      ac.collectionType,
+      ac.collectionName,
       ac.price
 
     FROM Artifacts a
