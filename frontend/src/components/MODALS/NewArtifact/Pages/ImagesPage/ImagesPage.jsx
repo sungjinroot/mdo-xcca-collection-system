@@ -12,7 +12,8 @@ function ImagesPage({prevStep, setShow}){
 
         const imageUrls = files.map(file => ({
             file,
-            url: URL.createObjectURL(file)
+            url: URL.createObjectURL(file),
+            pictureName: ""
         }));
 
         setImages(prev => [...prev, ...imageUrls]);
@@ -23,6 +24,14 @@ function ImagesPage({prevStep, setShow}){
             const updated = [...prev];
             URL.revokeObjectURL(updated[indexToRemove].url);
             return updated.filter((_, index) => index !== indexToRemove);
+        });
+    }
+
+    function updatePictureName(index, newName) {
+        setImages(prev => {
+            const updated = [...prev];
+            updated[index].pictureName = newName;
+            return updated;
         });
     }
 
@@ -48,7 +57,13 @@ function ImagesPage({prevStep, setShow}){
                 <div className="stepper-right">
                     <div className="uploaded-images-preview-grid">
                         {images.map((img, index) => (
-                            <PreviewImage key={index} src={img.url} onRemove={() => removeImage(index)}/>
+                            <PreviewImage
+                            key={index}
+                            src={img.url}
+                            pictureName={img.pictureName}
+                            onRemove={() => removeImage(index)}
+                            onPictureNameChange={(value) => updatePictureName(index, value)}
+                        />
                         ))}
                     </div>
                 </div>

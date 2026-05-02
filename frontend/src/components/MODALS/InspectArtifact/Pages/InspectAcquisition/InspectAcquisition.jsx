@@ -1,67 +1,75 @@
 import './InspectAcquisition.css';
 
-function InspectAcquisition() {
+function InspectAcquisition(props) {
     return (
         <div className="inspect-acquisition-container"> 
+
             <div className="inspect-acquisition-origins">
+
                 <div className="inspect-acquisition-origins-card">
                     <label> Ethnic Group </label>
-                    <input type="text"/>
+                    <input type="text" />
                 </div>
 
                 <div className="inspect-acquisition-origins-card">
                     <label> Place Of Origin </label>
-                    <input type="text"/>
+                    <input type="text" />
                 </div>
 
                 <div className="inspect-acquisition-origins-card">
                     <label> Locality </label>
-                    <input type="text"/>
+                    <input type="text" />
                 </div>
+
             </div>
 
             <div className="inspect-acquisition-collection">
-                <label> How artifact was collected </label>
+
+                <label>How artifact was collected</label>
+
                 <div className="inspect-acquisition-collection-options">
 
-                    <div className="inspect-options-card">
-                        <label> Donated </label>
-                        <input type="checkbox"/>
-                    </div>
+                    <label className="inspect-options-card">
+                        Donated
+                        <input type="radio" name="acquisition-radio"  checked={props.collectionType === "Donated"} onChange={() => props.setCollectionType("Donated")}/>
+                    </label>
 
-                    <div className="inspect-options-card">
-                        <label> On Loan </label>
-                        <input type="checkbox"/>
-                    </div>
+                    <label className="inspect-options-card">
+                        On Loan
+                        <input type="radio" name="acquisition-radio" checked={props.collectionType === "On Loan"} onChange={() => props.setCollectionType("On Loan")}/>
+                    </label>
 
-                    <div className="inspect-options-card">
-                        <label> Found </label>
-                        <input type="checkbox"/>
-                    </div>
+                    <label className="inspect-options-card">
+                        Found
+                        <input type="radio" name="acquisition-radio" checked={props.collectionType === "Found"} onChange={() => props.setCollectionType("Found")}/>
+                    </label>
 
-                    <div className="inspect-options-card">
-                        <label> Excavated </label>
-                        <input type="checkbox"/>
-                    </div>
+                    <label className="inspect-options-card">
+                        Excavated
+                        <input type="radio" name="acquisition-radio" checked={props.collectionType === "Excavated"} onChange={() => props.setCollectionType("Excavated")}/>
+                    </label>
+
                 </div>
 
                 <div className="inspect-acquisition-collection-options-special">
+
                     <div className="inspect-options-card-special">
-                        <div className="inspect-options-card-special-found">
-                            <label> Purchased </label>
-                            <input type="checkbox"/>
+
+                        <label className="inspect-options-card-special-found">
+                            Purchased
+                            <input type="radio" name="acquisition-radio" checked={props.collectionType === "Purchased"} onChange={() => props.setCollectionType("Purchased")}/>
+                        </label>
+
+                        <div className="inspect-options-card-special-price" style={{visibility: props.collectionType === "Purchased" ? "visible" : "hidden"}}>
+                            <label>Price</label>
+                            <input type="number" />
                         </div>
-                        
-                        <div className="inspect-options-card-special-price">
-                            <label> Price </label>
-                            <input type="number"/>
-                        </div>
+
                     </div>
+
                 </div>
 
-                
             </div>
-               
 
         </div>
     );

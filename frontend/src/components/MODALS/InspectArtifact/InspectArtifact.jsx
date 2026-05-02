@@ -11,7 +11,7 @@ import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 import PrimaryView from './PrimaryView/PrimaryView.jsx';
 import PrimaryInfo from './PrimaryInfo/PrimaryInfo.jsx';
 
-function renderTab(current){
+function renderTab(current,collectionType,setCollectionType, priceVisible, setPriceVisible){
     switch (current){
         case 0: 
             return (
@@ -20,12 +20,12 @@ function renderTab(current){
             
         case 1:
             return (
-                <InspectContacts/>
+                <InspectContacts collectionType={collectionType}/>
             )
         
         case 2:
             return (
-                <InspectAcquisition/>
+                <InspectAcquisition collectionType={collectionType} setCollectionType={setCollectionType}/>
             )
     }
 }
@@ -39,6 +39,7 @@ function InspectArtifact(props){
         setValue(newValue);
     };
 
+    const [collectionType, setCollectionType] = useState("");
 
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} dialogClassName='ModalSizeWidth' contentClassName='ModalSizeHeight'  aria-labelledby="example-custom-modal-styling-title" centered>
@@ -67,7 +68,7 @@ function InspectArtifact(props){
                             </Tabs>
                         </div>
 
-                        {renderTab(value)}
+                        {renderTab(value,collectionType,setCollectionType)}
 
                     </div>
                     

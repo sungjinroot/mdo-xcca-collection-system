@@ -1,6 +1,6 @@
 import './PreviewImage.css';
 
-function PreviewImage({ src, onRemove }) {
+function PreviewImage({ src, onRemove, pictureName, onPictureNameChange }) {
     return (
         <div className="preview-image-card">
             <img src={src} className="preview-image" alt="preview" />
@@ -9,7 +9,7 @@ function PreviewImage({ src, onRemove }) {
                 <button onClick={onRemove}> Remove </button>
             </div>
             
-            <input type="text" placeholder="Input Image Angle" />
+            <input type="text" placeholder="Input Image Angle" value={pictureName} onChange={(e) => onPictureNameChange(e.target.value)}/>
         </div>
     );
 }

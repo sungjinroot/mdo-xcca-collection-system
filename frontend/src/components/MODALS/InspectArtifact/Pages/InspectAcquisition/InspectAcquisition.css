@@ -149,3 +149,48 @@
 .inspect-options-card-special-price input[type="number"]{
     -moz-appearance: textfield;
 }
+
+
+
+.inspect-options-card,
+.inspect-options-card-special-found {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.inspect-options-card input[type="radio"],
+.inspect-options-card-special-found input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 22px;
+    height: 22px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.inspect-options-card input[type="radio"]:hover,
+.inspect-options-card-special-found input[type="radio"]:hover {
+    border-color: #283971;
+}
+
+.inspect-options-card input[type="radio"]:checked,
+.inspect-options-card-special-found input[type="radio"]:checked {
+    border-color: #283971;
+    background-color: #283971;
+}
+
+.inspect-options-card input[type="radio"]:focus,
+.inspect-options-card-special-found input[type="radio"]:focus {
+    outline: 3px solid rgba(40, 57, 113, 0.3);
+    outline-offset: 2px;
+}
