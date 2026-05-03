@@ -36,7 +36,7 @@ describe("GET /rooms/", () => {
         expect(pool.query).toHaveBeenCalled();
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual(mockRooms);
-        expect(pool.query).toHaveBeenCalledWith("SELECT * FROM Rooms ");
+        expect(pool.query).toHaveBeenCalledWith("SELECT * FROM Rooms ORDER BY roomID");
     });
 
     it("should return JSON content type", async () => {
@@ -78,7 +78,40 @@ describe("GET /rooms/", () => {
         const res = await request(app).get("/rooms");
 
         expect(res.statusCode).toBe(500);
-        expect(res.body).toEqual({ error: "Room does not exists" });
+        expect(res.body).toEqual({ error: "Database error" });
+    });
+});
+
+describe("GET /rooms/:id", () => {
+    afterEach(() => {
+        jest.clearAllMocks();
+    });
+
+    it("returns 200 with artifact_count when room exists", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [
+                {
+                    roomid: 1,
+                    artifact_count: 3,
+                    roomname: "Ancient Gallery",
+                },
+            ],
+        });
+
+        const res = await request(app).get("/rooms/1");
+
+        expect(res.statusCode).toBe(200);
+        expect(res.body.roomid).toBe(1);
+        expect(res.body).toHaveProperty("artifact_count", 3);
+    });
+
+    it("returns 404 when room is missing", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [] });
+
+        const res = await request(app).get("/rooms/999");
+
+        expect(res.statusCode).toBe(404);
+        expect(res.body.error).toBe("Room not found");
     });
 });
 
@@ -115,7 +148,7 @@ describe("mock POST /rooms/", () => {
     it("should return 400 if roomName is missing", async () => {
         const res = await request(app)
             .post("/rooms/")
-            .send({ title: "Ancient Artifacts" });
+            .send({ title: "Ancient Artifacts", roomPictureURL: "https://example.com/a.jpg" });
 
         expect(res.statusCode).toBe(400);
         expect(res.body).toHaveProperty("error");
@@ -124,7 +157,7 @@ describe("mock POST /rooms/", () => {
     it("should return 400 if title is missing", async () => {
         const res = await request(app)
             .post("/rooms/")
-            .send({ roomName: "Hall A" });
+            .send({ roomName: "Hall A", roomPictureURL: "https://example.com/a.jpg" });
 
         expect(res.statusCode).toBe(400);
         expect(res.body).toHaveProperty("error");
@@ -135,7 +168,8 @@ describe("mock POST /rooms/", () => {
 
         const res = await request(app).post("/rooms/").send({
             roomName: "Hall A",
-            title: "Ancient Artifacts"
+            title: "Ancient Artifacts",
+            roomPictureURL: "https://example.com/a.jpg",
         });
 
         expect(res.statusCode).toBe(500);
@@ -199,6 +233,7 @@ describe("DELETE /rooms/:id", () => {
     });
 
     test("returns 200 when room is successfully deleted", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [] }); // no artifacts occupying room
         pool.query.mockResolvedValueOnce({ rowCount: 1 });
 
         const res = await request(app).delete("/rooms/1");
@@ -207,13 +242,23 @@ describe("DELETE /rooms/:id", () => {
         expect(res.body.message).toBe("Room deleted");
     });
 
-    test("returns 400 when room has artifacts or does not exist", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 0 });
+    test("returns 409 when room has artifacts", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
 
         const res = await request(app).delete("/rooms/1");
 
-        expect(res.status).toBe(400);
-        expect(res.body.message).toBe("Room cannot be deleted");
+        expect(res.status).toBe(409);
+        expect(res.body.error).toMatch(/cannot be deleted/);
+    });
+
+    test("returns 404 when room does not exist (empty delete)", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [] });
+        pool.query.mockResolvedValueOnce({ rowCount: 0 });
+
+        const res = await request(app).delete("/rooms/999");
+
+        expect(res.status).toBe(404);
+        expect(res.body.error).toBe("Room not found");
     });
 
     test("returns 500 on database error", async () => {

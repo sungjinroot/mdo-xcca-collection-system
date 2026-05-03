@@ -72,11 +72,11 @@ describe('POST /rooms/', () => {
 describe("DELETE /rooms/:id - Integration", () => {
     const pool = require("../../../db");
 
-    test("returns 400 when room has artifacts", async () => {
+    test("returns 409 when room has artifacts", async () => {
         // Room 1 has artifacts in the DB so it should be blocked
         const res = await request(app).delete("/api/rooms/1");
-        expect(res.status).toBe(400);
-        expect(res.body.message).toBe("Room cannot be deleted");
+        expect(res.status).toBe(409);
+        expect(res.body.error).toMatch(/cannot be deleted/i);
     });
 
     test("returns 200 when room has no artifacts", async () => {

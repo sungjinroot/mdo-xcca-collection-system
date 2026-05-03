@@ -78,7 +78,7 @@ describe("GET /categories/", () => {
         const res = await request(app).get("/categories");
 
         expect(res.statusCode).toBe(500);
-        expect(res.body).toEqual({ error: "Category does not exists" });
+        expect(res.body).toEqual({ error: "Database error" });
     });
 });
 
