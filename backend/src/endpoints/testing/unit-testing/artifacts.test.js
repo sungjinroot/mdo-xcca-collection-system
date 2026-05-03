@@ -60,6 +60,26 @@ describe("GET /artifacts", () => {
         expect(res.status).toBe(500)
         expect(res.body).toHaveProperty('error')
     })
+
+    it("returns paginated payload when limit is passed", async () => {
+        pool.query.mockResolvedValueOnce({
+            rows: [{ artifactid: 10, roomid: 2, englishname: "Test" }]
+        })
+
+        const res = await request(app).get("/artifacts?limit=5")
+
+        expect(res.status).toBe(200)
+        expect(Array.isArray(res.body.data)).toBe(true)
+        expect(res.body.data[0]).toHaveProperty("artifactid")
+        expect(res.body).toHaveProperty("nextCursor", 10)
+    })
+
+    it("returns 400 for invalid roomID when paginating", async () => {
+        const res = await request(app).get("/artifacts?roomID=xyz")
+
+        expect(res.status).toBe(400)
+        expect(res.body.error).toContain("roomID")
+    })
 })
 
 describe("GET /artifacts/:id", () => {
@@ -88,6 +108,22 @@ describe("GET /artifacts/:id", () => {
 
         expect(res.status).toBe(404)
         expect(res.body).toHaveProperty('error')
+    })
+
+    it("returns 404 when roomID filter does not match artifact room", async () => {
+        pool.query.mockResolvedValueOnce({ rows: [] })
+
+        const res = await request(app).get("/artifacts/1?roomID=99")
+
+        expect(res.status).toBe(404)
+        expect(res.body.error).toBe("Artifact not found")
+    })
+
+    it("returns 400 for invalid roomID on detail", async () => {
+        const res = await request(app).get("/artifacts/1?roomID=nope")
+
+        expect(res.status).toBe(400)
+        expect(res.body.error).toBe("Invalid roomID")
     })
 
     it("returns 200 with physical filter", async () => {
@@ -159,6 +195,7 @@ describe("POST /artifacts", () => {
 
     it("returns 201 when artifact is successfully created", async () => {
 
+        pool.query.mockResolvedValueOnce({ rowCount: 1, rows: [{ "?": 1 }] });
         pool.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
 
         for(let i = 0; i < 8; i++){
@@ -170,6 +207,15 @@ describe("POST /artifacts", () => {
         expect(res.status).toBe(201);
         expect(res.body.message).toBe("Artifact created successfully");
         expect(res.body.artifactID).toBe(1);
+    });
+
+    it("returns 400 when roomID does not exist", async () => {
+        pool.query.mockResolvedValueOnce({ rowCount: 0, rows: [] });
+
+        const res = await request(app).post("/artifacts").send(validPostBody);
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("Room not found");
     });
 
     it("returns 400 when required fields are missing", async () => {
@@ -230,6 +276,7 @@ describe("PUT /artifacts/:id", () => {
 
     it("returns 200 when artifact is successfully updated", async () => {
         pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({ rowCount: 1, rows: [{ "?": 1 }] });
 
          for(let i = 0; i < 10; i++){
             pool.query.mockResolvedValueOnce({});
