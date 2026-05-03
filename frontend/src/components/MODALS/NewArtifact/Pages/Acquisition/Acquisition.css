@@ -122,8 +122,10 @@
 
 .stepper-acquisition-price-input{
   display: flex;
-  flex-direction: column;
-  justify-content: start;
+  flex-direction: row;
+  justify-content: space-around;
+  align-items: center;
+  width: 40%;
 }
 
 .stepper-acquisition-price-input input{
@@ -138,4 +140,10 @@
   justify-content: center;
   width: 100%;
   gap: 15px;
+}
+
+.stepper-navigation-right.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
 }

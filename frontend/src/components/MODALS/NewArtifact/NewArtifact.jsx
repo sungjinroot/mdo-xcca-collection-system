@@ -38,7 +38,7 @@ function NewArtifact(props) {
     const [artifactIdentifiers, setArtifactIdentifiers] = useState({
         accessionNo: '',
         catalogueNo: '',
-        roomID: null,
+        roomID: '',
         storageLocation: ''
     });
 
@@ -50,8 +50,8 @@ function NewArtifact(props) {
         locality: '',
     });
 
-    const [collectionType, setCollectionType] = useState("");
-    const [price, setPrice] = useState(0);
+    const [collectionType, setCollectionType] = useState('');
+    const [price, setPrice] = useState('');
 
     const [artifactMeasurements, setArtifactMeasurements] = useState({
         diameter: "",
@@ -98,7 +98,7 @@ function NewArtifact(props) {
                 )}
 
                 {currentStep === 1 && (
-                    <Acquisition prevStep={prevStep} nextStep={nextStep} collectionType={collectionType} setCollectionType={setCollectionType} artifactProvenance={artifactProvenance} setArtifactProvenance={setArtifactProvenance}/>
+                    <Acquisition prevStep={prevStep} nextStep={nextStep} collectionType={collectionType} setCollectionType={setCollectionType} artifactProvenance={artifactProvenance} setArtifactProvenance={setArtifactProvenance} price={price} setPrice={setPrice}/>
                 )}
 
                 {currentStep === 2 && (

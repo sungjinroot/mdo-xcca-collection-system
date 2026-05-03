@@ -23,6 +23,8 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
         }));
     };
 
+    const isFormValid = artifactNames.englishName.trim() !== "" && artifactIdentifiers.accessionNo.trim() !== "" && artifactIdentifiers.catalogueNo !== "" && artifactIdentifiers.roomID !== "";
+
     return (
         <div className="stepper-container">
             <div className="stepper-content">
@@ -116,8 +118,8 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
                 </div>
             </div>
 
-            <div className="stepper-navigation-single" onClick={() => nextStep()}>
-                Continue 
+            <div className={`stepper-navigation-single ${!isFormValid ? "disabled" : ""}`} onClick={() => {if (isFormValid) nextStep();}}>
+                    Continue
             </div>
         </div>
     );
