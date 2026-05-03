@@ -3,7 +3,7 @@ import { useState } from 'react';
 import './ModalSizeHeight.css';
 import './ModalSizeWidth.css';
 import './NewArtifact.css';
-import { StepLabel,Stepper,Step } from '@mui/material';
+import { StepLabel, Stepper, Step } from '@mui/material';
 
 import BasicInformation from './Pages/BasicInformation/BasicInformation.jsx';
 import Acquisition from './Pages/Acquisition/Acquisition.jsx';
@@ -11,44 +11,11 @@ import ContactPersons from './Pages/ContactPersons/ContactPersons.jsx';
 import PhysicalDescription from './Pages/PhysicalDescription/PhysicalDescription.jsx';
 import ImagesPage from './Pages/ImagesPage/ImagesPage.jsx';
 
-function RenderStep(current,prevStep,nextStep, setShow,collectionType,setCollectionType){
+function NewArtifact(props) {
 
-    switch (current){
-        case 0: 
-            return (         
-                <BasicInformation nextStep={nextStep}/>
-            )
-
-        case 1:
-            return (
-                <Acquisition prevStep={prevStep} nextStep={nextStep} collectionType={collectionType} setCollectionType={setCollectionType}/>
-            )
-
-        case 2:
-            return (
-                <PhysicalDescription prevStep={prevStep} nextStep={nextStep}/>
-            )
-        
-        case 3:
-            return (
-                <ContactPersons prevStep={prevStep} nextStep={nextStep} collectionType={collectionType}/>
-            )
-        
-        case 4:
-            return (
-                <ImagesPage prevStep={prevStep} setShow={setShow}/>
-            )
-    }
-}
-
-function NewArtifact(props){
-
-    const steps = ['Basic Information','Provenance','Physical Description','Contact Persons','Images']
+    const steps = ['Basic Information','Provenance','Physical Description','Contact Persons','Images'];
 
     const [currentStep, setCurrentStep] = useState(0);
-
-    //Collection
-    const [collectionType, setCollectionType] = useState("");
 
     const nextStep = () => {
         if (currentStep < steps.length - 1) {
@@ -62,16 +29,58 @@ function NewArtifact(props){
         }
     };
 
-    //Data here    
+    // Data
+    const [artifactNames, setArtifactNames] = useState({
+        englishName: '',
+        vernacularName: ''
+    });
+
+    const [artifactIdentifiers, setArtifactIdentifiers] = useState({
+        accessionNo: '',
+        catalogueNo: '',
+        roomID: null,
+        storageLocation: ''
+    });
+
+    const [artifactCategories, setArtifactCategories] = useState([]);
+
+    const [artifactProvenance, setArtifactProvenance] = useState({
+        ethnicGroup: '',
+        placeOfOrigin: '',
+        locality: '',
+    });
+
+    const [collectionType, setCollectionType] = useState("");
+    const [price, setPrice] = useState(0);
+
+    const [artifactMeasurements, setArtifactMeasurements] = useState({
+        diameter: "",
+        height: "",
+        length: "",
+        width: ""
+    });
+
+    const [artifactDescriptions,setArtifactDescriptions] = useState({
+        'details': '',
+        'function': '',
+        'conditionUponReceipt': '',
+        'specialRemarks': ''
+    });
+
+    const [artifactContacts, setArtifactContacts] = useState({
+        contactPersonFullName: '',
+        dateCollectedByContactPerson: '',
+        receiverFullName: '',
+        receivedByReceiverDate: '',
+        recordedBy: ''
+    });
+
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-
-                
                 <div className="mdo-header">
-                    <h3> Museo De Oro </h3>
+                    <h3>Museo De Oro</h3>
                 </div>
-            
             </Modal.Header>
             
             <Modal.Body> 
@@ -83,13 +92,30 @@ function NewArtifact(props){
                         </Step>
                     ))}
                 </Stepper>
-                
-                {RenderStep(currentStep,prevStep,nextStep,props.setShow,collectionType,setCollectionType)}
+
+                {currentStep === 0 && (
+                    <BasicInformation nextStep={nextStep} artifactNames={artifactNames} setArtifactNames={setArtifactNames} artifactIdentifiers={artifactIdentifiers} setArtifactIdentifiers={setArtifactIdentifiers}/>
+                )}
+
+                {currentStep === 1 && (
+                    <Acquisition prevStep={prevStep} nextStep={nextStep} collectionType={collectionType} setCollectionType={setCollectionType} artifactProvenance={artifactProvenance} setArtifactProvenance={setArtifactProvenance}/>
+                )}
+
+                {currentStep === 2 && (
+                    <PhysicalDescription prevStep={prevStep} nextStep={nextStep} artifactMeasurements={artifactMeasurements} setArtifactMeasurements={setArtifactMeasurements} artifactDescriptions={artifactDescriptions} setArtifactDescriptions={setArtifactDescriptions}/>
+                )}
+
+                {currentStep === 3 && (
+                    <ContactPersons prevStep={prevStep} nextStep={nextStep} collectionType={collectionType}/>
+                )}
+
+                {currentStep === 4 && (
+                    <ImagesPage prevStep={prevStep} setShow={props.setShow}/>
+                )}
 
             </Modal.Body>
         </Modal>
-  );
+    );
 }
-
 
 export default NewArtifact;

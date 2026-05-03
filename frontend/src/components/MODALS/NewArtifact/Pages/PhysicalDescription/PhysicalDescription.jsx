@@ -1,34 +1,50 @@
 import '../Layout.css';
 import './PhysicalDescription.css'
+import '../../NewArtifact.css';
 
-function PhysicalDescription({ prevStep, nextStep }){
+
+function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArtifactMeasurements, artifactDescriptions, setArtifactDescriptions }){
+
+    const handleMeasurementChange = (field, value) => {
+        const regex = /^\d*\.?\d*$/; // allows unlimited decimal places
+
+        if (value === "" || regex.test(value)) {
+            setArtifactMeasurements(prev => ({
+                ...prev,
+                [field]: value
+            }));
+        }
+    };
+
     return (
     
         <div className="stepper-container">
             <div className="stepper-content">
                 <div className="stepper-left">
                     <div className="stepper-physical-description-container">
-                        <h3>Dimensions (highest point) </h3>
+                        <h3>
+                            Dimensions (highest point) <span className="required">*</span> 
+                        </h3>
                     
                         <div className="stepper-physical-description-fields">
                             <label> Diameter (for round artifact) </label>
-                            <input type="number"/>
+                            <input type="text" value={artifactMeasurements.diameter} onChange={(e) => handleMeasurementChange('diameter', e.target.value)}/>
                         </div>
 
                         <div className="stepper-physical-description-sizes">
                             <div className="stepper-physical-description-fields">
                                 <label> Height (cm) </label>
-                                <input type="number"/>
+                                <input type="text" value={artifactMeasurements.height} onChange={(e) => handleMeasurementChange('height', e.target.value)}/>
                             </div>
 
                             <div className="stepper-physical-description-fields">
                                 <label> Length (cm) </label>
-                                <input type="number"/>
+                                <input type="text" value={artifactMeasurements.length} onChange={(e) => handleMeasurementChange('length', e.target.value)}/>
                             </div>
 
                             <div className="stepper-physical-description-fields">
                                 <label> Width (cm) </label>
-                                <input type="number"/>
+                                <input type="text" value={artifactMeasurements.width} onChange={(e) => handleMeasurementChange('width', e.target.value)}/>
                             </div>
                         </div>
 

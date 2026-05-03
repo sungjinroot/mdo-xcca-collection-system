@@ -42,7 +42,7 @@ function Rooms(){
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://cdn.wallpapersafari.com/79/64/M5Fbuy.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
+          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://getwallpapers.com/wallpaper/full/d/d/6/295104.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
           <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 

@@ -1,7 +1,16 @@
 import '../Layout.css';
 import './Acquisition.css';
+import '../../NewArtifact.css';
 
-function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) {
+
+function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, artifactProvenance, setArtifactProvenance }) {
+
+     const handleProvenanceChange = (field, value) => {
+        setArtifactProvenance(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
 
     return (
         <div className="stepper-container">
@@ -13,17 +22,17 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) 
 
                         <div className="stepper-acquisition-provenance-fields">
                             <label>Ethnic Group</label>
-                            <input type="text" />
+                            <input type="text" value={artifactProvenance.ethnicGroup} onChange={(e) => handleProvenanceChange('ethnicGroup', e.target.value)}/>
                         </div>
 
                         <div className="stepper-acquisition-provenance-fields">
                             <label>Place Of Origin</label>
-                            <input type="text" />
+                            <input type="text" value={artifactProvenance.placeOfOrigin} onChange={(e) => handleProvenanceChange('placeOfOrigin', e.target.value)}/>
                         </div>
 
                         <div className="stepper-acquisition-provenance-fields">
                             <label>Locality</label>
-                            <input type="text" />
+                            <input type="text" value={artifactProvenance.locality} onChange={(e) => handleProvenanceChange('locality', e.target.value)}/>
                         </div>
                     </div>
                 </div>
@@ -31,7 +40,9 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) 
                 <div className="stepper-right">
 
                     <div className="stepper-acquisition-collection-means-container-usual">
-                        <h3>How artifact was collected</h3>
+                        <h3>
+                            How artifact was collected <span className="required">*</span>
+                        </h3>
 
                         <div className="stepper-acquisition-collection-means-fields">
 

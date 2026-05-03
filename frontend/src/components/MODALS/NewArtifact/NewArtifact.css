@@ -6,3 +6,8 @@
     align-items: center;
     justify-content: center;
 }
+
+.required {
+  color: red;
+  margin-left: 4px;
+}

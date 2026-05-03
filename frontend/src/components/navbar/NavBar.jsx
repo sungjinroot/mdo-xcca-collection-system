@@ -2,7 +2,7 @@ import './NavBar.css';
 import Menu from '@mui/material/Menu';
 import MenuItem from '@mui/material/MenuItem';
 import AssistantsModal from '../MODALS/Assistants/AssistantsModal.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function NavBar() {
     const [category, setCategory] = useState('');
@@ -18,12 +18,11 @@ function NavBar() {
         setAnchorEl(null);
     };
 
+   
+
     const handleChange = (event) => {
         setCategory(event.target.value);
     };
-
-
-    
 
     return (
         
@@ -32,6 +31,8 @@ function NavBar() {
             <div className="nav-left">
                 <img src="src/assets/logo.png" alt="centennial" />
                 <img src="src/assets/centennial.png" alt="centennial" />
+                <img src="src/assets/omm.jpg"/>
+                <img src="src/assets/mdo.jpg"/>
             </div>
 
             <div className="nav-stats">
@@ -52,12 +53,7 @@ function NavBar() {
                 </div>
 
                 <div className="profile">
-                    <img
-                        src="src/assets/mdo.jpg"
-                        alt="profile"
-                        onClick={handleMenuOpen}
-                        style={{ cursor: 'pointer' }}
-                    />
+                    <img src="src/assets/xcca.png"  alt="profile" onClick={handleMenuOpen} style={{ cursor: 'pointer' }}/>
                 </div>
 
                 <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{'aria-labelledby': 'basic-button',}}>

@@ -1,5 +1,6 @@
 import './ContactPersons.css';
 import '../Layout.css';
+import '../../NewArtifact.css';
 
 function ContactPersons({ prevStep, nextStep, collectionType }){
 
@@ -28,17 +29,23 @@ function ContactPersons({ prevStep, nextStep, collectionType }){
                 <div className="stepper-left">
                     <div className="stepper-contact-person-container-left">
                         <div className="stepper-contact-person-fields">
-                            <label>Full name of the {role}</label>
+                            <label>
+                                Full name of the {role} <span className="required">*</span> 
+                            </label>
                             <input type="text"/>
                         </div>
 
                         <div className="stepper-contact-person-fields">
-                            <label>Name of the receiver of the artifact</label>
+                            <label>
+                                Full name of the receiver <span className="required">*</span> 
+                            </label>
                             <input type="text"/>
                         </div>
 
                         <div className="stepper-contact-person-fields">
-                            <label>Recorded By</label>
+                            <label>
+                                Recorded By <span className="required">*</span> 
+                            </label>
                             <input type="text"/>
                         </div>
                     </div>
@@ -59,12 +66,16 @@ function ContactPersons({ prevStep, nextStep, collectionType }){
                 <div className="stepper-right">
                     <div className="stepper-contact-person-container-right">
                         <div className="stepper-contact-person-date-fields">
-                            <label>Date of when the artifact was collected by the {role}</label>
+                            <label>
+                                Date of when the artifact was collected by the {role} <span className="required">*</span> 
+                            </label>
                             <input type="date"/>
                         </div>
 
                         <div className="stepper-contact-person-date-fields">
-                            <label>Date of when the artifact was {promptMap[collectionType]} to the Musuem</label>
+                            <label>
+                                Date of when the artifact was {promptMap[collectionType]} to the Musuem <span className="required">*</span> 
+                            </label>
                             <input type="date"/>
                         </div>
                     </div>
