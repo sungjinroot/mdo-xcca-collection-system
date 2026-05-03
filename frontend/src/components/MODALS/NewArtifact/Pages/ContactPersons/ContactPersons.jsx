@@ -2,7 +2,7 @@ import './ContactPersons.css';
 import '../Layout.css';
 import '../../NewArtifact.css';
 
-function ContactPersons({ prevStep, nextStep, collectionType }){
+function ContactPersons({ prevStep, nextStep, collectionType,artifactContacts,setArtifactContacts }){
 
     const roleLabelMap = {
         "Donated": "donor",
@@ -22,6 +22,14 @@ function ContactPersons({ prevStep, nextStep, collectionType }){
 
     const role = roleLabelMap[collectionType];
 
+    const handleContactsChange = (e) => {
+        const { name, value } = e.target;
+        setArtifactContacts({
+            ...artifactContacts,
+            [name]: value
+        });
+    };
+
     return (
     
         <div className="stepper-container">
@@ -32,21 +40,21 @@ function ContactPersons({ prevStep, nextStep, collectionType }){
                             <label>
                                 Full name of the {role} <span className="required">*</span> 
                             </label>
-                            <input type="text"/>
+                            <input type="text" name="contactPersonFullName" value={artifactContacts.contactPersonFullName} onChange={handleContactsChange}/>
                         </div>
 
                         <div className="stepper-contact-person-fields">
                             <label>
                                 Full name of the receiver <span className="required">*</span> 
                             </label>
-                            <input type="text"/>
+                            <input type="text" name="receiverFullName" value={artifactContacts.receiverFullName} onChange={handleContactsChange}/>
                         </div>
 
                         <div className="stepper-contact-person-fields">
                             <label>
                                 Recorded By <span className="required">*</span> 
                             </label>
-                            <input type="text"/>
+                            <input type="text" name="recordedBy" value={artifactContacts.recordedBy} onChange={handleContactsChange} />
                         </div>
                     </div>
                 </div>
@@ -69,14 +77,14 @@ function ContactPersons({ prevStep, nextStep, collectionType }){
                             <label>
                                 Date of when the artifact was collected by the {role} <span className="required">*</span> 
                             </label>
-                            <input type="date"/>
+                            <input type="date" name="dateCollectedByContactPerson" value={artifactContacts.dateCollectedByContactPerson} onChange={handleContactsChange}/>
                         </div>
 
                         <div className="stepper-contact-person-date-fields">
                             <label>
-                                Date of when the artifact was {promptMap[collectionType]} to the Musuem <span className="required">*</span> 
+                                Date of when the artifact was {promptMap[collectionType]} to the musuem <span className="required">*</span> 
                             </label>
-                            <input type="date"/>
+                            <input type="date" name="receivedByReceiverDate" value={artifactContacts.receivedByReceiverDate} onChange={handleContactsChange} />
                         </div>
                     </div>
 

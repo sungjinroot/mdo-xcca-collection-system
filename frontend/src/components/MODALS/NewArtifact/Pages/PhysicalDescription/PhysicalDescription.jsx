@@ -16,6 +16,13 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
         }
     };
 
+    const handleDescriptionChange = (field, value) => {
+        setArtifactDescriptions(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
     return (
     
         <div className="stepper-container">
@@ -52,7 +59,7 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
                     
                     <div className="stepper-physical-description-paragraph-container">
                         <label> Special Remarks </label>
-                        <textarea>
+                        <textarea value={artifactDescriptions.specialRemarks} onChange={(e) => handleDescriptionChange('specialRemarks', e.target.value)}>
                         
                         </textarea>
                     </div>
@@ -74,21 +81,21 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
                 <div className="stepper-right">
                     <div className="stepper-physical-description-paragraph-container">
                         <label> Details </label>
-                        <textarea>
+                        <textarea value={artifactDescriptions.details} onChange={(e) => handleDescriptionChange('details', e.target.value)}>
                         
                         </textarea>
                     </div>
 
                     <div className="stepper-physical-description-paragraph-container">
                         <label> Function </label>
-                        <textarea>
+                        <textarea value={artifactDescriptions.function} onChange={(e) => handleDescriptionChange('function', e.target.value)}>
                             
                         </textarea>
                     </div>
 
                     <div className="stepper-physical-description-paragraph-container">
                         <label> Condition of the artifact upon receipt </label>
-                        <textarea>
+                        <textarea value={artifactDescriptions.conditionUponReceipt} onChange={(e) => handleDescriptionChange('conditionUponReceipt', e.target.value)}>
                             
                         </textarea>
                     </div>

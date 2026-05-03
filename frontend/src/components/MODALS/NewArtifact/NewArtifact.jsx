@@ -106,7 +106,7 @@ function NewArtifact(props) {
                 )}
 
                 {currentStep === 3 && (
-                    <ContactPersons prevStep={prevStep} nextStep={nextStep} collectionType={collectionType}/>
+                    <ContactPersons prevStep={prevStep} nextStep={nextStep} collectionType={collectionType} artifactContacts={artifactContacts} setArtifactContacts={setArtifactContacts}/>
                 )}
 
                 {currentStep === 4 && (
