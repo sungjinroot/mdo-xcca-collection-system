@@ -2,36 +2,40 @@ const express = require('express');
 const endpoint = express.Router();
 const pool = require('../db');
 
+endpoint.get('/:roomID?', async (req, res) => {
+    const roomID = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
 
-
-endpoint.get('/:roomID', async (req, res) => {
-    const { roomID } = req.params;
-
-    const roomArtifactsQuery = {
-        all: `
-            SELECT 
-                a.artifactID,
-                a.accessionNo,
-                an.englishName,
-                an.vernacularName
-            FROM Artifacts a
-            LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-            WHERE a.roomID = :roomID
-        `
-    };
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = 8;
+    const offset = (page - 1) * limit;
 
     try {
-        const result = await db.query(roomArtifactsQuery.all, { roomID });
-        
-        if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'No artifacts found in this room.' });
+        let result;
+
+        if (roomID !== null && !isNaN(roomID)) {
+            result = await pool.query(
+                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+                 FROM Artifacts a
+                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+                 WHERE a.roomID = $1,
+                 ORDER BY a.artifactID
+                 LIMIT $2 OFFSET $3`,
+                [roomID, limit, offset]
+            );
+        } else {    
+            result = await pool.query(
+                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+                 FROM Artifacts a
+                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+                 ORDER BY a.artifactID
+                 LIMIT $1 OFFSET $2`,
+                [limit, offset]
+            );
         }
 
-        res.status(200).json(result.rows);
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error.' });
+        res.json(result.rows);
+
+    } catch (err) {
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
-
-module.exports = endpoint;
