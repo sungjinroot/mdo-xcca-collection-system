@@ -4,12 +4,11 @@
     align-items: center;
     height: 7%;
     position: fixed;
-    bottom: 0;
+    bottom: 0px;
     width: 100%;
-
-    background-color:#E3EAF0;
+    background: rgba(40, 57, 113, 0);
     pointer-events: none;
-
+    
 
 
 }

@@ -39,19 +39,15 @@ html, body, #root {
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
-<<<<<<< HEAD
     /*padding-bottom: 150px;*/
+    overflow: scroll;
     padding-left: 10px;
     padding-right: 10px;
-
-    background-color:#E3EAF0;
-=======
     padding-bottom: 150px;
     padding-left: 25px;
     padding-right: 25px;
 
     background-color: white; 
->>>>>>> bfc9273 (More changes)
 }
 
 @media (min-width: 1300px) {
