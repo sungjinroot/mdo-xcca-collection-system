@@ -30,19 +30,28 @@ html, body, #root {
 
 .artifacts-grid{
     zoom: 70%; /*zoomed*/
+    padding-top: 20px;
     flex: 1;
     display: grid;
     grid-template-columns: repeat(5,1fr); /*200 for smaller devices*/
-    grid-column-gap: 10px;
+    gap: 60px;
     justify-content: start; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
+<<<<<<< HEAD
     /*padding-bottom: 150px;*/
     padding-left: 10px;
     padding-right: 10px;
 
     background-color:#E3EAF0;
+=======
+    padding-bottom: 150px;
+    padding-left: 25px;
+    padding-right: 25px;
+
+    background-color: white; 
+>>>>>>> bfc9273 (More changes)
 }
 
 @media (min-width: 1300px) {

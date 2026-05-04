@@ -41,20 +41,21 @@
     padding-right: 5px;
 }
 
-.pan-image{
-    object-position: center top;
-    animation: panY 50s ease-in-out infinite alternate;
+.pan-image {
+  object-position: center 0%;
+  animation: microPan 15s ease-in-out infinite alternate;
 }
 
-@keyframes panY {
+@keyframes microPan {
   0% {
-    object-position: center top;
+    object-position: center 0%;
   }
   100% {
-    object-position: center bottom;
+    object-position: center 15%;
   }
 }
 
 .carousel-item {
-    transition: transform 0.5s ease-out, opacity 0.5s ease-in-out;
+    transition: all 80ms linear;
 }
+
