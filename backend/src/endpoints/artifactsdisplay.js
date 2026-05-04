@@ -3,54 +3,30 @@ const endpoint = express.Router();
 const pool = require('../db');
 
 endpoint.get('/:roomID?', async (req, res) => {
-    const { roomID } = req.params;
-
-    const roomArtifactsQuery = {
-        get_RoomID_Artifacts: `
-            SELECT 
-                a.artifactID,
-                a.accessionNo,
-                an.englishName,
-                an.vernacularName
-            FROM Artifacts a
-            LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-            WHERE a.roomID = $1
-        `,
-        get_all_Artifacts: `
-            SELECT 
-                a.artifactID,
-                a.accessionNo,
-                an.englishName,
-                an.vernacularName
-            FROM Artifacts a
-            LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-        `
-    };
+    const roomID = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
 
     try {
         let result;
 
-        if (roomID) {
+        if (roomID !== null && !isNaN(roomID)) {
             result = await pool.query(
-                roomArtifactsQuery.get_RoomID_Artifacts,
+                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+                 FROM Artifacts a
+                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+                 WHERE a.roomID = $1`,
                 [roomID]
             );
         } else {
             result = await pool.query(
-                roomArtifactsQuery.get_all_Artifacts
+                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+                 FROM Artifacts a
+                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID`
             );
         }
 
-        if (result.rows.length === 0) {
-            return res.status(404).json({ message: 'No artifacts found.' });
-        }
+        res.json(result.rows);
 
-        res.status(200).json(result.rows);
-
-    } catch (error) {
-        console.error(error);
-        res.status(500).json({ message: 'Internal server error.' });
+    } catch (err) {
+        res.status(500).json({ message: 'Internal server error' });
     }
 });
-
-module.exports = endpoint;
