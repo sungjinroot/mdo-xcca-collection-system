@@ -18,9 +18,9 @@ function Rooms(){
 
     return (
     <>
-      <Carousel interval={null} indicators={false}> {/*No delete and edits in this room*/}
+      <Carousel interval={null} indicators={false} style={{'zoom': '80%'}}> {/*No delete and edits in this room*/}
         <Carousel.Item>
-          <img className="d-block w-100 pan-image" onClick={() => setShowEdit(true)} src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
+          <img className="d-block w-100 pan-image" onClick={() => setShowEdit(true)} src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
           <button className="button-utils-left utils" onClick={() => setShowCategories(true)}> Categories </button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 
@@ -42,7 +42,7 @@ function Rooms(){
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://getwallpapers.com/wallpaper/full/d/d/6/295104.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
+          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://getwallpapers.com/wallpaper/full/d/d/6/295104.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover',}}/>
           <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 
@@ -62,7 +62,7 @@ function Rooms(){
         </Carousel.Item>
 
         <Carousel.Item>
-          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://wallpapercave.com/wp/wp10486449.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', zoom: '90%' }}/>
+          <img className="d-block w-100 pan-image" onClick={() => alert("edited room")} src="https://wallpapercave.com/wp/wp10486449.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover', }}/>
           <button className="button-utils-left utils" onClick={() => alert(5)}> Categories </button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}> New Room </button>
 

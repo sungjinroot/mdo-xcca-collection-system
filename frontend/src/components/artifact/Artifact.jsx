@@ -17,7 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://cdn.mos.cms.futurecdn.net/4Z4SDaqr7TbAjuc2mM4BHk.jpg" onClick={() => setShow(true)}/>
+                    <img src="https://trumanlibraryinstitute.org/wp-content/uploads/2016/01/IMG_1342.jpg" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
@@ -38,7 +38,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"Uranium Ore"} vernacularName={"Uranium nga bato"}/>
+                        <ArtifactData style={"artifact-display-data"} englishName={"World Peace Coin"} vernacularName={"Baryang World Peace"}/>
                     </div>
 
                     <div className="basic-functions">

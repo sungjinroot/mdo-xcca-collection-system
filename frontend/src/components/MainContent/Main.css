@@ -6,7 +6,7 @@
 
 html, body, #root {
     height: 100vh; 
-    font-size: 95%;
+    font-size: 97%;
 }
 
 /*
@@ -16,7 +16,7 @@ html, body, #root {
 */
 
 .main-content{
-    height: calc(100vh - (70px * 0.9) - (200px * 0.9));
+    height: calc(100vh - (70px * 0.85) - (200px * 0.8));
     display: flex;
     flex-direction: column;
 }
@@ -34,18 +34,15 @@ html, body, #root {
     flex: 1;
     display: grid;
     grid-template-columns: repeat(5,1fr); /*200 for smaller devices*/
-    gap: 60px;
+    gap: 55px;
     justify-content: start; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
-    /*padding-bottom: 150px;*/
     overflow: scroll;
-    padding-left: 10px;
-    padding-right: 10px;
     padding-bottom: 150px;
-    padding-left: 25px;
-    padding-right: 25px;
+    padding-left: 15px;
+    padding-right: 15px;
 
     background-color: white; 
 }
@@ -56,7 +53,7 @@ html, body, #root {
   }
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1700px) {
   .artifacts-grid{
     grid-template-columns: repeat(5,1fr);
   }
