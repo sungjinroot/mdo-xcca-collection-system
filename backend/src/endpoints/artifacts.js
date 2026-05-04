@@ -2,6 +2,8 @@ const express = require('express');
 const endpoint = express.Router();
 const pool = require('../db');
 
+//ARTIFACTS SQL FOR GET API
+
 const artifactQueries = {
 
   all: `
@@ -35,8 +37,8 @@ const artifactQueries = {
       pd.conditionUponReceipt,
       pd.specialRemarks,
 
-      col.collectionName,
-      aq.price
+      ac.collectionType,
+      ac.price
 
     FROM Artifacts a
 
@@ -55,17 +57,14 @@ const artifactQueries = {
     LEFT JOIN PhysicalDescription pd
       ON a.artifactID = pd.artifactID
 
-    LEFT JOIN Acquisition aq
-      ON a.artifactID = aq.artifactID
-    LEFT JOIN Collection col ON aq.collectionType = col.collectionType
+    LEFT JOIN Acquisition ac
+      ON a.artifactID = ac.artifactID
   `,
 
   physical: `
     SELECT 
       a.artifactID,
       a.accessionNo,
-      a.catalogueNo,
-      a.roomID,
 
       d.artifactLength,
       d.artifactWidth,
@@ -90,8 +89,6 @@ const artifactQueries = {
     SELECT 
       a.artifactID,
       a.accessionNo,
-      a.catalogueNo,
-      a.roomID,
 
       an.englishName,
       an.vernacularName
@@ -106,8 +103,6 @@ const artifactQueries = {
     SELECT 
       a.artifactID,
       a.accessionNo,
-      a.catalogueNo,
-      a.roomID,
 
       ap.ethnicGroup,
       ap.locality,
@@ -123,8 +118,6 @@ const artifactQueries = {
     SELECT
       a.artifactID,
       a.accessionNo,
-      a.catalogueNo,
-      a.roomID,
 
       cp.contactPersonFullName,
       cp.dateCollectedByContactPerson,
@@ -142,137 +135,51 @@ const artifactQueries = {
     SELECT
       a.artifactID,
       a.accessionNo,
-      a.catalogueNo,
-      a.roomID,
 
       ap.ethnicGroup,
       ap.locality,
       ap.placeOfOrigin,
 
-      col.collectionName,
-      aq.price
+      ac.collectionType,
+      ac.price
 
     FROM Artifacts a
 
     LEFT JOIN ArtifactProvenance ap
       ON a.artifactID = ap.artifactID
 
-    LEFT JOIN Acquisition aq
-      ON a.artifactID = aq.artifactID
-    LEFT JOIN Collection col ON aq.collectionType = col.collectionType
+    LEFT JOIN Acquisition ac
+      ON a.artifactID = ac.artifactID
   `
 };
 
-function parseRoomId(roomID) {
-  if (roomID === undefined || roomID === '') return undefined;
-  const n = parseInt(roomID, 10);
-  if (Number.isNaN(n)) return null;
-  return n;
-}
-
-async function ensureRoomExists(roomID, res) {
-  const chk = await pool.query('SELECT 1 FROM Rooms WHERE roomID = $1', [roomID]);
-  if (chk.rowCount === 0) {
-    res.status(400).json({ error: 'Room not found' });
-    return false;
-  }
-  return true;
-}
-
-endpoint.get('/', async (req, res) => {
+endpoint.get('/', async (req, res) => {  // this one gets all artifacts with or without filters
     const filter = req.query.filter || 'all'
 
     if (!artifactQueries[filter]) {
         return res.status(400).json({ error: `Invalid filter. Valid filters are: ${Object.keys(artifactQueries).join(', ')}` })
     }
 
-    const usePagination =
-        req.query.limit !== undefined ||
-        req.query.lastID !== undefined ||
-        (typeof req.query.search === 'string' && req.query.search.trim() !== '') ||
-        req.query.roomID !== undefined;
-
     try {
-        if (!usePagination) {
-            const result = await pool.query(artifactQueries[filter])
-            return res.status(200).json(result.rows)
-        }
-
-        const limit = Math.min(Math.max(parseInt(req.query.limit, 10) || 30, 1), 100)
-        const lastID = parseInt(req.query.lastID, 10) || 0
-        const search = (req.query.search || '').trim()
-        const parsedRoomId = parseRoomId(req.query.roomID)
-        if (parsedRoomId === null) {
-            return res.status(400).json({ error: 'Invalid roomID' })
-        }
-
-        const params = []
-        let p = 1
-        params.push(lastID)
-
-        let where = [`a.artifactID > $${p++}`]
-
-        if (parsedRoomId !== undefined) {
-            where.push(`a.roomID = $${p}`)
-            params.push(parsedRoomId)
-            p++
-        }
-
-        if (search) {
-            const searchParam = `%${search}%`
-            where.push(`(
-              EXISTS (
-                SELECT 1 FROM ArtifactNames an
-                WHERE an.artifactID = a.artifactID
-                  AND (an.englishName ILIKE $${p} OR an.vernacularName ILIKE $${p})
-              )
-              OR EXISTS (
-                SELECT 1 FROM ArtifactCategories acat
-                INNER JOIN Categories cat ON acat.categoryID = cat.categoryID
-                WHERE acat.artifactID = a.artifactID
-                  AND cat.categoryName ILIKE $${p}
-              )
-            )`)
-            params.push(searchParam)
-            p++
-        }
-
-        params.push(limit)
-        const sql = `${artifactQueries[filter]} WHERE ${where.join(' AND ')} ORDER BY a.artifactID LIMIT $${p}`
-
-        const result = await pool.query(sql, params)
-        const rows = result.rows
-        const nextCursor = rows.length > 0 ? rows[rows.length - 1].artifactid : null
-
-        return res.status(200).json({ data: rows, nextCursor })
+        const result = await pool.query(artifactQueries[filter])
+        res.status(200).json(result.rows)
     } catch (err) {
         console.error(err)
         res.status(500).json({ error: 'Failed to fetch artifacts' })
     }
+    
 })
 
-endpoint.get('/:id', async (req, res) => {
-    const { id } = req.params
+endpoint.get('/:id', async (req, res) => { // this one gets individual artifacts with or without filters
+    const {id} = req.params
     const filter = req.query.filter || 'all'
 
     if (!artifactQueries[filter]) {
         return res.status(400).json({ error: `Invalid filter. Valid filters are: ${Object.keys(artifactQueries).join(', ')}` })
     }
 
-    const parsedRoomId = parseRoomId(req.query.roomID)
-    if (parsedRoomId === null) {
-        return res.status(400).json({ error: 'Invalid roomID' })
-    }
-
     try {
-        let sql = artifactQueries[filter] + ' WHERE a.artifactID = $1'
-        const qp = [id]
-        if (parsedRoomId !== undefined) {
-            sql += ' AND a.roomID = $2'
-            qp.push(parsedRoomId)
-        }
-
-        const result = await pool.query(sql, qp)
+        const result = await pool.query(artifactQueries[filter] + ' WHERE a.artifactID = $1', [id])
 
         if (result.rows.length === 0) {
             return res.status(404).json({ error: 'Artifact not found' })
@@ -308,8 +215,6 @@ endpoint.post('/', async (req, res) => {
     }
  
     try {
-        if (!(await ensureRoomExists(roomID, res))) return;
-
         const artifactResult = await pool.query(
             'INSERT INTO Artifacts (accessionNo, catalogueNo, roomID) VALUES ($1, $2, $3) RETURNING artifactID',
             [accessionNo, catalogueNo, roomID]
@@ -386,8 +291,6 @@ endpoint.put('/:id', async (req, res) => {
         if (check.rowCount === 0) {
             return res.status(404).json({ error: 'Artifact not found' });
         }
-
-        if (roomID !== undefined && roomID !== null && !(await ensureRoomExists(roomID, res))) return;
  
         await pool.query(
             'UPDATE Artifacts SET accessionNo = $1, catalogueNo = $2, roomID = $3 WHERE artifactID = $4',
@@ -446,6 +349,7 @@ endpoint.put('/:id', async (req, res) => {
     }
 });
 
+// DELETE ARTIFACT
 endpoint.delete("/:id", async (req, res) => {
     try {
         const { id } = req.params;
