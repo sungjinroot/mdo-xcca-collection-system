@@ -17,7 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://jamesjchoi.com/images/jade-dragon-left.jpg" onClick={() => setShow(true)}/>
+                    <img src="https://cdn.mos.cms.futurecdn.net/4Z4SDaqr7TbAjuc2mM4BHk.jpg" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
