@@ -32,18 +32,17 @@ html, body, #root {
     zoom: 70%; /*zoomed*/
     flex: 1;
     display: grid;
-    overflow: scroll;
     grid-template-columns: repeat(5,1fr); /*200 for smaller devices*/
     grid-column-gap: 10px;
     justify-content: start; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
-    padding-bottom: 150px;
+    /*padding-bottom: 150px;*/
     padding-left: 10px;
     padding-right: 10px;
 
-    background-color:#E3EAF0; 
+    background-color:#E3EAF0;
 }
 
 @media (min-width: 1300px) {
