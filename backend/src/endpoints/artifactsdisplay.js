@@ -3,7 +3,9 @@ const endpoint = express.Router();
 const pool = require('../db');
 
 endpoint.get('/:roomID?', async (req, res) => {
+
     const roomID = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
+
 
     const page = parseInt(req.query.page, 10) || 1;
     const limit = 8;
@@ -14,7 +16,7 @@ endpoint.get('/:roomID?', async (req, res) => {
 
         if (roomID !== null && !isNaN(roomID)) {
             result = await pool.query(
-                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName,
                  FROM Artifacts a
                  LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
                  WHERE a.roomID = $1,
@@ -39,3 +41,5 @@ endpoint.get('/:roomID?', async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 });
+
+module.exports = endpoint;
