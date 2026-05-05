@@ -29,10 +29,24 @@ endpoint.post('/login', async (req, res) => {
             return res.status(401).json({ error: "Invalid credentials" });
         }
 
+        // Determine role based on permissions
+        let role = 'guest';
+        if (user.canadd) {
+            role = 'assistant';
+        }
+
         const token = jwt.sign(
-            { userID: user.userid, username: user.username },
+            { 
+                userID: user.userid, 
+                username: user.username,
+                role: role,
+                canAdd: user.canadd,
+                canEdit: user.canedit,
+                canDelete: user.candelete,
+                canDownload: user.candownload
+            },
             process.env.JWT_SECRET || "secretkey",
-            { expiresIn: "1h" }
+            { expiresIn: "120d" }
         );
 
         res.status(200).json({ token });

@@ -6,7 +6,7 @@ import '../../NewArtifact.css';
 function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArtifactMeasurements, artifactDescriptions, setArtifactDescriptions }){
 
     const handleMeasurementChange = (field, value) => {
-        const regex = /^\d*\.?\d*$/; // allows unlimited decimal places
+        const regex = /^\d*\.?\d*$/; 
 
         if (value === "" || regex.test(value)) {
             setArtifactMeasurements(prev => ({

@@ -23,29 +23,19 @@ function MainContent(){
                         <Artifact/> 
                         <Artifact/> 
                         <Artifact/> 
-                        <Artifact/> 
+                        <Artifact/>     
 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        
-                        
-
-                        
-
-                        
-                        
-                        
-
-
-                       
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                        <Artifact/>                                               
+                                          
                     </div>
                
                 
