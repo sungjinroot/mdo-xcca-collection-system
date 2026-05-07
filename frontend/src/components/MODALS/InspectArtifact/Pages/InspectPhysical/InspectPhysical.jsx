@@ -35,9 +35,9 @@ function InspectPhysical(){
                 
             </div>
 
-            <div>
+            <div className="accordion-container">
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
+                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
                     <AccordionSummary>
                         Special remarks
                     </AccordionSummary>
@@ -51,7 +51,7 @@ function InspectPhysical(){
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
+                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
                     <AccordionSummary>
                         Artifact Categorization
                     </AccordionSummary>
@@ -82,7 +82,7 @@ function InspectPhysical(){
                 </Accordion>
 
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
+                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
                     <AccordionSummary>
                         Details
                     </AccordionSummary>
@@ -96,7 +96,7 @@ function InspectPhysical(){
                     </AccordionDetails>
                 </Accordion>
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
+                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
                     <AccordionSummary>
                         Function
                     </AccordionSummary>
@@ -111,7 +111,7 @@ function InspectPhysical(){
                 </Accordion>
 
 
-                <Accordion sx={{'color': 'white', 'backgroundColor':'#283971'}}>
+                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
                     <AccordionSummary>
                         Condition of the artifact upon receipt
                     </AccordionSummary>

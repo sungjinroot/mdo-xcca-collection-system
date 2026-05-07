@@ -23,6 +23,8 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
         }));
     };
 
+    const isDimensionsComplete = artifactMeasurements.height && artifactMeasurements.length && artifactMeasurements.width;
+
     return (
     
         <div className="stepper-container">
@@ -30,7 +32,7 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
                 <div className="stepper-left">
                     <div className="stepper-physical-description-container">
                         <h3>
-                            Dimensions (highest point) <span className="required">*</span> 
+                            Dimensions (highest point) 
                         </h3>
                     
                         <div className="stepper-physical-description-fields">
@@ -40,17 +42,23 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
 
                         <div className="stepper-physical-description-sizes">
                             <div className="stepper-physical-description-fields">
-                                <label> Height (cm) </label>
+                                <label> 
+                                    Height (cm) <span className="required">*</span> 
+                                </label>
                                 <input type="text" value={artifactMeasurements.height} onChange={(e) => handleMeasurementChange('height', e.target.value)}/>
                             </div>
 
                             <div className="stepper-physical-description-fields">
-                                <label> Length (cm) </label>
+                                <label> 
+                                    Length (cm) <span className="required">*</span>  
+                                </label>
                                 <input type="text" value={artifactMeasurements.length} onChange={(e) => handleMeasurementChange('length', e.target.value)}/>
                             </div>
 
                             <div className="stepper-physical-description-fields">
-                                <label> Width (cm) </label>
+                                <label> 
+                                    Width (cm) <span className="required">*</span>  
+                                </label>
                                 <input type="text" value={artifactMeasurements.width} onChange={(e) => handleMeasurementChange('width', e.target.value)}/>
                             </div>
                         </div>
@@ -108,7 +116,9 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => nextStep()}> Continue </div> 
+                <div className={`stepper-navigation-right ${!isDimensionsComplete ? 'disabled' : ''}`} onClick={() => {if (isDimensionsComplete) nextStep();}}>
+                    Continue
+                </div>
             </div>
         </div>
     
