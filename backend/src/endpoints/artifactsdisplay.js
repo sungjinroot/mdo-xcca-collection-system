@@ -9,28 +9,50 @@ const getArtifactsDisplay = async (req, res) => {
     const page = parseInt(req.query.page, 10) || 1;
     const limit = 8;
     const offset = (page - 1) * limit;
+    const search = req.query.search || '';
+
 
     try {
         let result;
 
         if (roomID !== null && !isNaN(roomID)) {
             result = await pool.query(
-                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+                `SELECT
+                 a.artifactID, 
+                 a.accessionNo, 
+                 an.englishName,
+                 an.vernacularName
                  FROM Artifacts a
                  LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
                  WHERE a.roomID = $1
-                 ORDER BY a.artifactID
+                    AND (an.englishName ILIKE $4
+                        OR an.vernacularNAME ILIKE $4 OR
+                        a.accessionNo::text ILIKE $4
+                        )
+                ORDER BY an.englishName ASC
+                
                  LIMIT $2 OFFSET $3`,
-                [roomID, limit, offset]
+            
+                 
+                [roomID, limit, offset, `%${search}%`]
             );
         } else {    
             result = await pool.query(
-                `SELECT a.artifactID, a.accessionNo, an.englishName, an.vernacularName
+
+                `SELECT 
+                 a.artifactID, 
+                 a.accessionNo, 
+                 an.englishName, 
+                 an.vernacularName
                  FROM Artifacts a
                  LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-                 ORDER BY a.artifactID
+                 WHERE
+                 an.englishName ILIKE $3
+                 OR an.vernacularName ILIKE $3
+                 OR a.accessionNo::text ILIKE $3
+                 ORDER BY an.englishName ASC
                  LIMIT $1 OFFSET $2`,
-                [limit, offset]
+                [limit, offset, `%${search}%`]
             );
         }
 
