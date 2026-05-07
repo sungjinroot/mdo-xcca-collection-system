@@ -11,14 +11,16 @@ const roomEndpoint = require('./endpoints/rooms')
 const categoriesEndpoint = require('./endpoints/categories')
 const usersEndpoint = require('./endpoints/users')
 const authEndpoint = require('./endpoints/auth')
+const statisticsEndpoint = require('./endpoints/statistics')
 
-app.use(express.json())
 app.use('/api/v1/artifacts',artifactEndpoint);
 app.use('/api/v1/artifactsdisplay', artifactDisplayEndpoint);
 app.use('/api/v1/image', imageEndpoint);
-app.use('/api/rooms', roomEndpoint)
-app.use('/api/categories', categoriesEndpoint)
-app.use('/api/users', usersEndpoint)
+app.use('/api/v1/auth', authEndpoint);
+app.use('/api/v1/rooms', roomEndpoint);
+app.use('/api/v1/categories', categoriesEndpoint);
+app.use('/api/v1/users', usersEndpoint);
+app.use('/api/v1/statistics', statisticsEndpoint);
 
 app.get("/test-db", async (req, res) => {
     try {

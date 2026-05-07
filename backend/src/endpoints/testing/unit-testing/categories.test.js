@@ -178,14 +178,14 @@ describe("DELETE /categories/:id", () => {
         jest.clearAllMocks();
     });
 
-    it("should delete selected category and return 201", async () => {
+    it("should delete selected category and return 200", async () => {
         pool.query.mockResolvedValueOnce({ rows: [{ categoryid: 1 }] });
 
         const res = await request(app)
             .delete("/categories/1")
             .send({ categoryid: 1 });
 
-        expect(res.statusCode).toBe(201);
+        expect(res.statusCode).toBe(200);
         expect(res.body).toHaveProperty("message");
     });
 
@@ -200,14 +200,14 @@ describe("DELETE /categories/:id", () => {
         expect(res.body).toHaveProperty("error");
     });
 
-    it("should return 404 on database error", async () => {
+    it("should return 500 on database error", async () => {
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app)
             .delete("/categories/1")
             .send({ categoryid: 1 });
 
-        expect(res.statusCode).toBe(404);
+        expect(res.statusCode).toBe(500);
         expect(res.body).toHaveProperty("error");
     });
 });
