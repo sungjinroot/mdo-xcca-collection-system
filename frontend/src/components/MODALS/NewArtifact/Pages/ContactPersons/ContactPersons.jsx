@@ -30,6 +30,8 @@ function ContactPersons({ prevStep, nextStep, collectionType,artifactContacts,se
         });
     };
 
+    const isFormValid = artifactContacts.contactPersonFullName?.trim() && artifactContacts.receiverFullName?.trim() && artifactContacts.recordedBy?.trim() && artifactContacts.dateCollectedByContactPerson && artifactContacts.receivedByReceiverDate;
+
     return (
     
         <div className="stepper-container">
@@ -94,7 +96,9 @@ function ContactPersons({ prevStep, nextStep, collectionType,artifactContacts,se
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => nextStep()}> Continue </div> 
+                <div className={`stepper-navigation-right ${!isFormValid ? 'disabled' : ''}`} onClick={() => {if (isFormValid) nextStep();}}>
+                    Continue
+                </div>
             </div>
         </div>
     

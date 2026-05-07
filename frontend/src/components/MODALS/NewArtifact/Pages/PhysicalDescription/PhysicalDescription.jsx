@@ -23,6 +23,8 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
         }));
     };
 
+    const isDimensionsComplete = artifactMeasurements.height && artifactMeasurements.length && artifactMeasurements.width;
+
     return (
     
         <div className="stepper-container">
@@ -108,7 +110,9 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => nextStep()}> Continue </div> 
+                <div className={`stepper-navigation-right ${!isDimensionsComplete ? 'disabled' : ''}`} onClick={() => {if (isDimensionsComplete) nextStep();}}>
+                    Continue
+                </div>
             </div>
         </div>
     
