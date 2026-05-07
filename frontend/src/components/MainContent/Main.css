@@ -30,11 +30,11 @@ html, body, #root {
 
 .artifacts-grid{
     zoom: 70%; /*zoomed*/
-    padding-top: 20px;
+    padding-top: 10px;
     flex: 1;
     display: grid;
     grid-template-columns: repeat(5,1fr); /*200 for smaller devices*/
-    gap: 55px;
+    gap: 75px;
     justify-content: start; 
     scrollbar-width: none;
     -ms-overflow-style: none;

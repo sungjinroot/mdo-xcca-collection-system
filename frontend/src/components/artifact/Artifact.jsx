@@ -17,7 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://trumanlibraryinstitute.org/wp-content/uploads/2016/01/IMG_1342.jpg" onClick={() => setShow(true)}/>
+                    <img src="https://dcnanature.org/wp-content/uploads/2025/06/Green-Sea-Turtle-Casper-Douma.jpg" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
