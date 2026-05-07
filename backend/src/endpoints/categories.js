@@ -67,23 +67,22 @@ endpoint.put('/:id', async (req, res) => {
 
 //DELETE Category
 endpoint.delete('/:id', async (req, res) => { 
-  console.log('req.body:', req.body)  
-  const {categoryID} = req.body
+  const {id} = req.params
 
   try {
     const result = await pool.query(
       'DELETE FROM Categories WHERE categoryID=$1 RETURNING *', // refactor: check if category exists first
-      [categoryID]
+      [id]
     )
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Category not found' })
     }
     
-    res.status(201).json({message: "category deleted"})
+    res.status(200).json({message: "category deleted"})
   } catch (err) {
     console.error('DB ERROR:', err)
-    res.status(404).json({ error: err.message })
+    res.status(500).json({ error: err.message })
   }
 })
 module.exports = endpoint;

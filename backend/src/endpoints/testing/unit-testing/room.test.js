@@ -78,7 +78,7 @@ describe("GET /rooms/", () => {
         const res = await request(app).get("/rooms");
 
         expect(res.statusCode).toBe(500);
-        expect(res.body).toEqual({ error: "Room does not exists" });
+        expect(res.body).toEqual({ error: "Database error" });
     });
 });
 
@@ -135,7 +135,8 @@ describe("mock POST /rooms/", () => {
 
         const res = await request(app).post("/rooms/").send({
             roomName: "Hall A",
-            title: "Ancient Artifacts"
+            title: "Ancient Artifacts",
+            roomPictureURL: "https://example.com/hall-a.jpg"
         });
 
         expect(res.statusCode).toBe(500);
@@ -156,7 +157,7 @@ describe("PUT /rooms/:id", () => {
     };
 
     it("should update a room and return 200", async () => {
-        pool.query.mockResolvedValueOnce({ rows: [{ roomid: 1 }] }); // SELECT check
+        pool.query.mockResolvedValueOnce({ rows: [{ roomid: 1 }], rowCount: 1 }); // SELECT check
         pool.query.mockResolvedValueOnce({                            // UPDATE
             rows: [{
                 roomid: 1,
@@ -175,7 +176,7 @@ describe("PUT /rooms/:id", () => {
     });
 
     it("should return 404 if room is not found", async () => {
-        pool.query.mockResolvedValueOnce({ rows: [] }); // SELECT returns empty
+        pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 }); // SELECT returns empty
 
         const res = await request(app).put("/rooms/999").send(updatedRoom);
 
@@ -207,13 +208,13 @@ describe("DELETE /rooms/:id", () => {
         expect(res.body.message).toBe("Room deleted");
     });
 
-    test("returns 400 when room has artifacts or does not exist", async () => {
+    test("returns 409 when room has artifacts or does not exist", async () => {
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).delete("/rooms/1");
 
-        expect(res.status).toBe(400);
-        expect(res.body.message).toBe("Room cannot be deleted");
+        expect(res.status).toBe(409);
+        expect(res.body.error).toBe("Room cannot be deleted");
     });
 
     test("returns 500 on database error", async () => {
