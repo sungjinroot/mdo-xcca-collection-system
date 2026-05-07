@@ -90,31 +90,32 @@
 
 
 .submit-btn {
-    padding: 12px 18px;
-    height: 46px;
-
-    background: #283971;
-    color: #ffffff;
-
+    background-color: #283971;
+    color: white;
+    padding: 10px 16px;
     border: none;
-    border-radius: 12px;
-
-    font-size: 14px;
-    font-weight: 700;
-
+    border-radius: 6px;
     cursor: pointer;
-
-    transition: all 0.2s ease;
-
-    box-shadow: 0 6px 14px rgba(40, 57, 113, 0.25);
+    transition: all 0.2s ease-in-out;
 }
 
-.submit-btn:hover {
-    background: #1f2c55;
-    transform: translateY(-1px);
+.submit-btn:not(:disabled):hover {
+    transform: scale(1.05);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.25);
 }
 
-.submit-btn:active {
-    transform: translateY(0px);
-    box-shadow: 0 3px 8px rgba(40, 57, 113, 0.2);
+.submit-btn:disabled,
+.submit-btn.disabled-btn {
+    background-color: #6c757d;
+    color: #d6d6d6;
+    cursor: not-allowed;
+    opacity: 0.6;
+    transform: scale(0.98);
+    box-shadow: none;
+    filter: grayscale(40%);
+}
+
+.submit-btn:disabled:hover {
+    transform: scale(0.98);
+    box-shadow: none;
 }

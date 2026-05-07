@@ -11,7 +11,6 @@
     display: flex;
     gap: 10px;
     margin-bottom: 20px;
-
 }
 
 .categories-input-form {
@@ -61,17 +60,21 @@ button.categories-input-form:hover {
     padding: 10px;
     border-radius: 10px;
     border: 1px solid #e5e7eb;
+
+    transition: 0.2s ease;
+}
+
+.category-list li:hover {
+    background-color: #32488f;
 }
 
 .category-list li input {
     flex: 1;
     border: none;
     outline: none;
-    font-size: 14px;
     background: transparent;
 
     font-size: 18px;
-
     color: white;
 }
 
@@ -82,9 +85,20 @@ button.categories-input-form:hover {
     padding: 6px 12px;
     border-radius: 6px;
     cursor: pointer;
-    transition: 0.2s ease;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateX(10px);
+
+    transition: all 0.2s ease;
+}
+
+.category-list li:hover button {
+    opacity: 1;
+    visibility: visible;
+    transform: translateX(0);
 }
 
 .category-list li button:hover {
-    background-color: #ec282a;
+    background-color: #c91f21;
 }
