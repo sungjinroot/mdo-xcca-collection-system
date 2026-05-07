@@ -1,7 +1,7 @@
 const express = require('express');
 const endpoint = express.Router();
 const pool = require('../db');
-const bcrypt = require('bcrypt');
+//const bcrypt = require('bcrypt');
 
 // GET ALL USERS
 endpoint.get("/", async (req, res) => {
