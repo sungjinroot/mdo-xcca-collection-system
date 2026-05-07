@@ -13,7 +13,7 @@
     z-index: 10;
 }
 
-.utils{
+.utils {
     padding: 15px;
     font-size: 18px;
     width: 150px;
@@ -21,15 +21,26 @@
     border-radius: 80px;
     background-color: #283971;
     color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); 
+
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-.utils:hover{
+.carousel:hover .utils {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.utils:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 0 15px rgba(40, 57, 113, 0.6);
 }
 
-.utils:active{
+.utils:active {
     transform: scale(0.95);
 }
 
@@ -46,7 +57,7 @@
     height: 100%;
     object-fit: cover;             
     object-position: center 0%;
-    animation: microPan 50s ease-in-out infinite alternate;
+    animation: microPan 60s ease-in-out infinite alternate;
 }
 
 @keyframes microPan {

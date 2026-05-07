@@ -17,7 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://dcnanature.org/wp-content/uploads/2025/06/Green-Sea-Turtle-Casper-Douma.jpg" onClick={() => setShow(true)}/>
+                    <img src="https://naturalhistory.si.edu/sites/default/files/styles/resource_side/public/media/image/96-30000.jpg.webp?itok=sY7edL33" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>

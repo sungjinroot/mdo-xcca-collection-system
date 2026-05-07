@@ -32,7 +32,7 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
                 <div className="stepper-left">
                     <div className="stepper-physical-description-container">
                         <h3>
-                            Dimensions (highest point) <span className="required">*</span> 
+                            Dimensions (highest point) 
                         </h3>
                     
                         <div className="stepper-physical-description-fields">
@@ -42,17 +42,23 @@ function PhysicalDescription({ prevStep, nextStep, artifactMeasurements, setArti
 
                         <div className="stepper-physical-description-sizes">
                             <div className="stepper-physical-description-fields">
-                                <label> Height (cm) </label>
+                                <label> 
+                                    Height (cm) <span className="required">*</span> 
+                                </label>
                                 <input type="text" value={artifactMeasurements.height} onChange={(e) => handleMeasurementChange('height', e.target.value)}/>
                             </div>
 
                             <div className="stepper-physical-description-fields">
-                                <label> Length (cm) </label>
+                                <label> 
+                                    Length (cm) <span className="required">*</span>  
+                                </label>
                                 <input type="text" value={artifactMeasurements.length} onChange={(e) => handleMeasurementChange('length', e.target.value)}/>
                             </div>
 
                             <div className="stepper-physical-description-fields">
-                                <label> Width (cm) </label>
+                                <label> 
+                                    Width (cm) <span className="required">*</span>  
+                                </label>
                                 <input type="text" value={artifactMeasurements.width} onChange={(e) => handleMeasurementChange('width', e.target.value)}/>
                             </div>
                         </div>
