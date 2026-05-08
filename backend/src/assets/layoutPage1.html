@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <style>
+        @page {
+        size: A4;
+        margin: 0; /* Adjust margins as needed */
+        }
+        body { 
+            font-family: 'Helvetica', Arial, sans-serif;
+            padding: 40px;
+            color: #333;
+        }
+        .header {   
+            border-bottom: 2px solid #007bff;
+            padding-bottom: 10px;
+            margin-bottom: 30px;
+        }
+        .header h1 {
+            color: #0f1d2c;
+            text-align: center;
+            margin: 0;
+        }
+        .header img{
+                width: 100px;
+                height: 100px;
+        }
+        .logo img{
+            position: absolute;
+            top: 10px;
+            right: 100px;
+            width: 100px;
+            height: 100px;
+        }
+        .content {
+            line-height: 1.6;
+        }
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 20px 0;
+        }
+        th, td {
+            border: 1px solid #ddd;
+            padding: 8px;
+            text-align: left;
+        }
+        th {
+            background-color: #f2f2f2;
+        }
+        .footer {
+            position: fixed;
+            bottom: 0;
+            width: 100%;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+    </style>
+</head>
+<body>
+    <div class="header"> 
+        <h1>MUSEO DE ORO</h1>
+        <img src="images/omm.jpg">
+        <img src="images/xcca.png">
+        <img src="images/mdo.jpg">
+    </div>
+    <div class="logo">
+        <img src="images/logo.png">
+    </div>
+    <div class="content">
+        {{content}}
+    </div>
+    <div class="footer">
+        Page <span class="pageNumber"></span> of <span class="totalPages"></span>
+    </div>
+</body>
+</html>

@@ -4,6 +4,7 @@ const pool = require('../db');
 
 //ARTIFACTS SQL FOR GET API
 
+
 const artifactQueries = {
 
   all: `
@@ -153,24 +154,49 @@ const artifactQueries = {
   `
 };
 
-endpoint.get('/', async (req, res) => {  // this one gets all artifacts with or without filters
-    const filter = req.query.filter || 'all'
-
-    if (!artifactQueries[filter]) {
-        return res.status(400).json({ error: `Invalid filter. Valid filters are: ${Object.keys(artifactQueries).join(', ')}` })
+const formatArtifact = (row) => ({
+    artifacts: {
+        artifactID: row.artifactid,
+        accessionNo: row.accessionno,
+        catalogueNo: row.catalogueno,
+        roomID: row.roomid,
+        storageLocation: row.storagelocation
+    },
+    artifactnames: {
+        englishName: row.englishname,
+        vernacularName: row.vernacularname
+    },
+    artifactprovenance: {
+        ethnicGroup: row.ethnicgroup,
+        locality: row.locality,
+        placeOfOrigin: row.placeoforigin
+    },
+    contactpersons: {
+        contactPersonFullName: row.contactpersonfullname,
+        dateCollectedByContactPerson: row.datecollectedbycontactperson,
+        receiverFullName: row.receiverfullname,
+        receivedByReceiverDate: row.receivedbyreceiverdate,
+        recordedBy: row.recordedby
+    },
+    dimensions: {
+        artifactLength: row.artifactlength,
+        artifactWidth: row.artifactwidth,
+        artifactHeight: row.artifactheight,
+        artifactDiameter: row.artifactdiameter
+    },
+    physicaldescription: {
+        artifactDetails: row.artifactdetails,
+        artifactFunction: row.artifactfunction,
+        conditionUponReceipt: row.conditionuponreceipt,
+        specialRemarks: row.specialremarks
+    },
+    acquisition: {
+        collectionType: row.collectiontype,
+        price: row.price
     }
-
-    try {
-        const result = await pool.query(artifactQueries[filter])
-        res.status(200).json(result.rows)
-    } catch (err) {
-        console.error(err)
-        res.status(500).json({ error: 'Failed to fetch artifacts' })
-    }
-    
 })
 
-endpoint.get('/:id', async (req, res) => { // this one gets individual artifacts with or without filters
+endpoint.get('/:id', async (req, res) => {
     const {id} = req.params
     const filter = req.query.filter || 'all'
 
@@ -185,7 +211,8 @@ endpoint.get('/:id', async (req, res) => { // this one gets individual artifacts
             return res.status(404).json({ error: 'Artifact not found' })
         }
 
-        res.status(200).json(result.rows[0])
+        const formattedArtifact = formatArtifact(result.rows[0])
+        res.status(200).json(formattedArtifact)
     } catch (err) {
         console.error(err)
         res.status(500).json({ error: 'Failed to fetch artifact' })
