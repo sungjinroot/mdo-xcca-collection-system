@@ -61,7 +61,7 @@ const getArtifactsDisplay = async (req, res) => {
     }
 };
 
-
+/*
 const getRoomProfilePicture = async (req, res  ) => {
     const roomIDProfilepicture = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
 
@@ -87,6 +87,7 @@ const getRoomProfilePicture = async (req, res  ) => {
     }
   
 };
+*/
 
 endpoint.get('/', getArtifactsDisplay);
 endpoint.get('/:roomID', getArtifactsDisplay);
