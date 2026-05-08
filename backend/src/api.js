@@ -6,21 +6,28 @@ app.use(express.json());
 
 const artifactEndpoint = require('./endpoints/artifacts')
 const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay')
-const imageEndpoint = require('./endpoints/images')/*Delete later */
 const roomEndpoint = require('./endpoints/rooms')
 const categoriesEndpoint = require('./endpoints/categories')
 const usersEndpoint = require('./endpoints/users')
 const authEndpoint = require('./endpoints/auth')
 const statisticsEndpoint = require('./endpoints/statistics')
 
+
+
 app.use('/api/v1/artifacts',artifactEndpoint);
 app.use('/api/v1/artifactsdisplay', artifactDisplayEndpoint);
-app.use('/api/v1/image', imageEndpoint);
 app.use('/api/v1/auth', authEndpoint);
 app.use('/api/v1/rooms', roomEndpoint);
 app.use('/api/v1/categories', categoriesEndpoint);
 app.use('/api/v1/users', usersEndpoint);
 app.use('/api/v1/statistics', statisticsEndpoint);
+
+//AALV endpoints
+const uploadEndpoint = require('./endpoints/upload')
+
+//AALV endpoints
+app.use('/api/v1/upload/',uploadEndpoint);
+
 
 app.get("/test-db", async (req, res) => {
     try {
