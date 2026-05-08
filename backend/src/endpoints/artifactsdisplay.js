@@ -19,7 +19,6 @@ const getArtifactsDisplay = async (req, res) => {
             result = await pool.query(
                 `SELECT
                  a.artifactID, 
-                 a.accessionNo, 
                  an.englishName,
                  an.vernacularName
                  FROM Artifacts a
@@ -41,7 +40,6 @@ const getArtifactsDisplay = async (req, res) => {
 
                 `SELECT 
                  a.artifactID, 
-                 a.accessionNo, 
                  an.englishName, 
                  an.vernacularName
                  FROM Artifacts a
