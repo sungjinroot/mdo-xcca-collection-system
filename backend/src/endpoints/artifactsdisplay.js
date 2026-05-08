@@ -2,41 +2,94 @@ const express = require('express');
 const endpoint = express.Router();
 const pool = require('../db');
 
+const getArtifactsDisplay = async (req, res) => {
+    const roomID = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
 
 
+    const page = parseInt(req.query.page, 10) || 1;
+    const limit = 8;
+    const offset = (page - 1) * limit;
+    const search = req.query.search || '';
 
-//GET ALL ARTIFACT ( This is for main page), Pagination with Search
 
-endpoint.get('/', async (req, res) => {
     try {
-        const limit = Math.max(parseInt(req.query.limit, 10) || 30, 1);
-        const lastID = parseInt(req.query.lastID, 10) || 0;
-        const search = req.query.search || '';
+        let result;
 
-        const result = await pool.query(
-            `SELECT * FROM Artifacts
-             WHERE artifactID > $1
-             ORDER BY artifactID
-             LIMIT $2`,
-            [lastID, limit]
-        );
+        if (roomID !== null && !isNaN(roomID)) {
+            result = await pool.query(
+                `SELECT
+                 a.artifactID, 
+                 an.englishName,
+                 an.vernacularName
+                 FROM Artifacts a
+                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+                 WHERE a.roomID = $1
+                    AND (an.englishName ILIKE $4
+                        OR an.vernacularNAME ILIKE $4 OR
+                        a.accessionNo::text ILIKE $4
+                        )
+                ORDER BY an.englishName ASC
+                
+                 LIMIT $2 OFFSET $3`,
+            
+                 
+                [roomID, limit, offset, `%${search}%`]
+            );
+        } else {    
+            result = await pool.query(
 
-        const rows = result.rows;
-        const nextCursor = rows.length > 0
-            ? rows[rows.length - 1].artifactID
-            : null;
+                `SELECT 
+                 a.artifactID, 
+                 an.englishName, 
+                 an.vernacularName
+                 FROM Artifacts a
+                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+                 WHERE
+                 an.englishName ILIKE $3
+                 OR an.vernacularName ILIKE $3
+                 OR a.accessionNo::text ILIKE $3
+                 ORDER BY an.englishName ASC
+                 LIMIT $1 OFFSET $2`,
+                [limit, offset, `%${search}%`]
+            );
+        }
 
-        res.status(200).json({
-            data: rows,
-            nextCursor: nextCursor
-        });
-  
+        res.json(result.rows);
+
     } catch (err) {
-        console.error(err);
-        res.status(500).json({ error: "Failed to fetch artifacts" });
+        res.status(500).json({ message: 'Internal server error' });
     }
-  });
+};
+
+/*
+const getRoomProfilePicture = async (req, res  ) => {
+    const roomIDProfilepicture = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
 
 
+    try {
+        let result;
 
-  module.exports = endpoint;
+
+        if (roomID != null && !NaN(roomID)){
+            result = await.pool.query(
+                'SELECT 
+                pool.PictureID,
+                p.angleName,
+                p.pictureFilePath,
+                p.artifactID
+                FROM Picture p
+                JOIN Artifacts a ON p.artifactID = a'
+            )
+
+
+        }
+
+    }
+  
+};
+*/
+
+endpoint.get('/', getArtifactsDisplay);
+endpoint.get('/:roomID', getArtifactsDisplay);
+
+module.exports = endpoint;

@@ -18,6 +18,19 @@ endpoint.get("/", async (req, res) => {
     }
 });
 
+endpoint.get('/:id', async (req, res) => {
+  const { id } = req.params;
+  try {
+    const result = await pool.query('SELECT * FROM Categories WHERE categoryID = $1', [id]);
+    if (result.rows.length === 0)
+      return res.status(404).json({ error: 'Category not found' });
+    res.status(200).json(result.rows[0]);
+  } catch (err) {
+    console.error(err);
+    res.status(500).json({ error: 'Failed to fetch category' });
+  }
+});
+
 // POST Category
 endpoint.post('/', async (req, res) => {
   const {categoryName} = req.body || {}
@@ -67,23 +80,22 @@ endpoint.put('/:id', async (req, res) => {
 
 //DELETE Category
 endpoint.delete('/:id', async (req, res) => { 
-  console.log('req.body:', req.body)  
-  const {categoryID} = req.body
+  const {id} = req.params
 
   try {
     const result = await pool.query(
       'DELETE FROM Categories WHERE categoryID=$1 RETURNING *', // refactor: check if category exists first
-      [categoryID]
+      [id]
     )
 
     if (result.rows.length === 0) {
       return res.status(404).json({ error: 'Category not found' })
     }
     
-    res.status(201).json({message: "category deleted"})
+    res.status(200).json({message: "category deleted"})
   } catch (err) {
     console.error('DB ERROR:', err)
-    res.status(404).json({ error: err.message })
+    res.status(500).json({ error: err.message })
   }
 })
 module.exports = endpoint;

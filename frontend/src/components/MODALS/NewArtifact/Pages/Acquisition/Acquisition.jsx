@@ -1,7 +1,45 @@
 import '../Layout.css';
 import './Acquisition.css';
+import '../../NewArtifact.css';
+import { useEffect } from 'react';
 
-function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) {
+function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, artifactProvenance, setArtifactProvenance, price, setPrice }) {
+
+    useEffect(() => {
+        if (collectionType !== "Purchased") {
+            setPrice("");
+        }
+    }, [collectionType]);
+
+    const handleProvenanceChange = (field, value) => {
+        setArtifactProvenance(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handlePriceChange = (value) => {
+        if (value === "") {
+            setPrice(value);
+            return;
+        }
+
+        const regex = /^\d*\.?\d*$/;
+
+        if (regex.test(value)) {
+            setPrice(value);
+        }
+    };
+
+    const isValid = () => {
+        if (!collectionType) return false;
+
+        if (collectionType === "Purchased") {
+            const strictRegex = /^\d+(\.\d+)?$/;
+            return strictRegex.test(price);
+        }
+        return true;
+    };
 
     return (
         <div className="stepper-container">
@@ -13,17 +51,17 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) 
 
                         <div className="stepper-acquisition-provenance-fields">
                             <label>Ethnic Group</label>
-                            <input type="text" />
+                            <input type="text" value={artifactProvenance.ethnicGroup} onChange={(e) => handleProvenanceChange('ethnicGroup', e.target.value)}/>
                         </div>
 
                         <div className="stepper-acquisition-provenance-fields">
                             <label>Place Of Origin</label>
-                            <input type="text" />
+                            <input type="text" value={artifactProvenance.placeOfOrigin} onChange={(e) => handleProvenanceChange('placeOfOrigin', e.target.value)}/>
                         </div>
 
                         <div className="stepper-acquisition-provenance-fields">
                             <label>Locality</label>
-                            <input type="text" />
+                            <input type="text" value={artifactProvenance.locality} onChange={(e) => handleProvenanceChange('locality', e.target.value)}/>
                         </div>
                     </div>
                 </div>
@@ -31,7 +69,9 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) 
                 <div className="stepper-right">
 
                     <div className="stepper-acquisition-collection-means-container-usual">
-                        <h3>How artifact was collected</h3>
+                        <h3>
+                            How artifact was collected <span className="required">*</span>
+                        </h3>
 
                         <div className="stepper-acquisition-collection-means-fields">
 
@@ -81,7 +121,8 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) 
                         </div>
 
                         <div className="stepper-acquisition-price-input" style={{visibility: collectionType === "Purchased" ? "visible" : "hidden"}}>
-                            <input type="number" placeholder="Price..." />
+                            <span className="required">*</span>
+                            <input type="text" placeholder="Price..." value={price} onChange={(e) => handlePriceChange(e.target.value)}/>
                         </div>
 
                     </div>
@@ -90,17 +131,11 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType }) 
             </div>
 
             <div className="stepper-navigation-multi">
-                <div
-                    className="stepper-navigation-left"
-                    onClick={() => prevStep()}
-                >
+                <div className="stepper-navigation-left" onClick={() => prevStep()}>
                     Previous
                 </div>
 
-                <div
-                    className="stepper-navigation-right"
-                    onClick={() => nextStep()}
-                >
+                <div className={`stepper-navigation-right ${!isValid() ? "disabled" : ""}`} onClick={() => {if (isValid()) nextStep();}}>
                     Continue
                 </div>
             </div>

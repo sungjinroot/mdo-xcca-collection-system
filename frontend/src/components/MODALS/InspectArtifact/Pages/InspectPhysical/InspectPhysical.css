@@ -13,6 +13,13 @@
 
 }
 
+.accordion-container {
+    padding: 10px;
+    border-radius: 8px;
+    background-color: #283971; 
+    box-shadow: 0 4px 10px black, 0 8px 10px black; 
+}
+
 .inspect-physical-dimensions {
     background-color: #283971; 
     border-radius: 15px;

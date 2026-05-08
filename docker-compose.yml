@@ -12,6 +12,7 @@ services:
       DB_NAME: mydb
     volumes:
       - ./backend/src:/app/src  
+      - ./uploads:/app/uploads
       - /app/node_modules       
 
   frontend:
@@ -35,6 +36,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+      - ./database/db.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/dummyData.sql:/docker-entrypoint-initdb.d/02_data.sql
 volumes:
-  pgdata:
+  pgdata:  

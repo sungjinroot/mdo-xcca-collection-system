@@ -2,34 +2,45 @@
 .button-utils-left{
     position: absolute;
     top: 35px;
-    left: 250px;
+    left: 400px;
     z-index: 10;
 }
 
 .button-utils-right{
     position: absolute;
     top: 35px;
-    right: 250px;
+    right: 400px;
     z-index: 10;
 }
 
-.utils{
-    padding: 10px;
-    font-size: 17px;
+.utils {
+    padding: 15px;
+    font-size: 18px;
     width: 150px;
     border: none;
     border-radius: 80px;
     background-color: #283971;
     color: white;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    opacity: 0;
+    visibility: hidden;
+    transform: translateY(10px); 
+
+    transition: opacity 0.4s ease, transform 0.4s ease, visibility 0.4s;
 }
 
-.utils:hover{
+.carousel:hover .utils {
+    opacity: 1;
+    visibility: visible;
+    transform: translateY(0);
+}
+
+.utils:hover {
     transform: translateY(-5px) scale(1.05);
     box-shadow: 0 0 15px rgba(40, 57, 113, 0.6);
 }
 
-.utils:active{
+.utils:active {
     transform: scale(0.95);
 }
 
@@ -41,20 +52,23 @@
     padding-right: 5px;
 }
 
-.pan-image{
-    object-position: center top;
-    animation: panY 30s ease-in-out infinite alternate;
+.pan-image {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;             
+    object-position: center 0%;
+    animation: microPan 60s ease-in-out infinite alternate;
 }
 
-@keyframes panY {
-  0% {
-    object-position: center top;
-  }
-  100% {
-    object-position: center bottom;
-  }
+@keyframes microPan {
+    0% {
+        object-position: center 0%;
+    }
+    100% {
+        object-position: center 100%;
+    }
 }
 
 .carousel-item {
-    transition: transform 0.5s ease-out, opacity 0.5s ease-in-out;
+    transition: all 0.05s linear;    
 }

@@ -17,7 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://lh3.googleusercontent.com/ci/AL18g_QK-2o3ih9I38PPhCO9vCrtqPTRg_6DZ4_SZf7CP8F9whJxeicBzaBPU3M3qcc9mH3QuSK09hqT=s1200" onClick={() => setShow(true)}/>
+                    <img src="https://naturalhistory.si.edu/sites/default/files/styles/resource_side/public/media/image/96-30000.jpg.webp?itok=sY7edL33" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
@@ -38,7 +38,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"Uranium Ore"} vernacularName={"Uranium nga bato"}/>
+                        <ArtifactData style={"artifact-display-data"} englishName={"World Peace Coin"} vernacularName={"Baryang World Peace"}/>
                     </div>
 
                     <div className="basic-functions">

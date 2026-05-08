@@ -116,3 +116,8 @@ select.identifier-form-size option {
   margin: 0;
 }
 
+.stepper-navigation-single.disabled {
+    opacity: 0.5;
+    pointer-events: none;
+    cursor: not-allowed;
+}
