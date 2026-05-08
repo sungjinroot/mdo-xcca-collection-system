@@ -39,14 +39,6 @@ const uploadRoom = multer({ storage: roomStorage });
 const uploadArtifact = multer({ storage: artifactStorage });
 
 
-
-
-
-
-
-
-
-
 // Upload room photo
 endpoint.post("/room", uploadRoom.single('photo'), (req, res) => {
   console.log("File uploaded");

@@ -19,7 +19,6 @@ const getArtifactsDisplay = async (req, res) => {
             result = await pool.query(
                 `SELECT
                  a.artifactID, 
-                 a.accessionNo, 
                  an.englishName,
                  an.vernacularName
                  FROM Artifacts a
@@ -41,7 +40,6 @@ const getArtifactsDisplay = async (req, res) => {
 
                 `SELECT 
                  a.artifactID, 
-                 a.accessionNo, 
                  an.englishName, 
                  an.vernacularName
                  FROM Artifacts a
@@ -62,6 +60,34 @@ const getArtifactsDisplay = async (req, res) => {
         res.status(500).json({ message: 'Internal server error' });
     }
 };
+
+/*
+const getRoomProfilePicture = async (req, res  ) => {
+    const roomIDProfilepicture = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
+
+
+    try {
+        let result;
+
+
+        if (roomID != null && !NaN(roomID)){
+            result = await.pool.query(
+                'SELECT 
+                pool.PictureID,
+                p.angleName,
+                p.pictureFilePath,
+                p.artifactID
+                FROM Picture p
+                JOIN Artifacts a ON p.artifactID = a'
+            )
+
+
+        }
+
+    }
+  
+};
+*/
 
 endpoint.get('/', getArtifactsDisplay);
 endpoint.get('/:roomID', getArtifactsDisplay);

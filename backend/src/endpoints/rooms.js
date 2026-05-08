@@ -13,6 +13,21 @@ endpoint.get("/", async (req, res) => {
     }
 });
 
+
+// GET SINGLE ROOM BY ID 
+endpoint.get('/:id', async (req, res) => {
+    const { id } = req.params;
+    try {
+      const result = await pool.query('SELECT * FROM Rooms WHERE roomID = $1', [id]);
+      if (result.rows.length === 0)
+        return res.status(404).json({ error: 'Room not found' });
+      res.status(200).json(result.rows[0]);
+    } catch (err) {
+      console.error(err);
+      res.status(500).json({ error: 'Failed to fetch room' });
+    }
+  });
+
 // POST ROOM
 endpoint.post('/', async (req, res) => {
     const {roomName, roomPictureURL, title, caption} = req.body
@@ -70,7 +85,7 @@ endpoint.delete("/:id", async (req, res) => {
             [id]
         );
         if (result.rowCount === 0) {
-            return res.status(409).json({ error: "Room cannot be deleted" });
+            return res.status(409).json({ error: "Room cannot be deleted because it does not exist" });
         }
         res.status(200).json({ message: "Room deleted" });
     } catch (err) {
