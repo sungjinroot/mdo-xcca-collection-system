@@ -12,8 +12,8 @@ services:
       DB_NAME: mydb
     volumes:
       - ./backend/src:/app/src  
-      - ./uploads:/app/uploads
       - /app/node_modules       
+      - ./uploads:/app/uploads
 
   frontend:
     build: ./frontend
@@ -25,6 +25,7 @@ services:
       - ./frontend:/app
       - ./uploads:/app/uploads
       - /app/node_modules       
+
 
 
   db:

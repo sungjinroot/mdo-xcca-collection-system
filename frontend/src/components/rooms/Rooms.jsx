@@ -58,8 +58,8 @@ function Rooms() {
 
       </Carousel>
       <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} />
-      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} selectedRoom={selectedRoom} />
-      <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories} />
+      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} selectedRoom={selectedRoom}/>
+      <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories}/>
     </>
   );
 }
