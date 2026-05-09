@@ -71,3 +71,7 @@ endpoint.post("/artifact", uploadArtifact.array("photos"), (req, res) => {
 });
 
 module.exports = endpoint;
+
+//upload to directory
+// return filepath
+//rooms database
