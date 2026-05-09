@@ -23,7 +23,9 @@ services:
       - backend
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      - ./uploads:/app/uploads
+      - /app/node_modules       
+
 
   db:
     image: postgres:15
