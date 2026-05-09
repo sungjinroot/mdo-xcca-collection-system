@@ -6,10 +6,12 @@ function NewRoomModal({ showAdd, setShowAdd }) {
 
     const [roomData, setRoomData] = useState({
         title: '',
-        location: '',
+        roomName: '',
         caption: '',
-        photo: null
+        roomPictureURL: null
     });
+
+    const isFormValid = roomData.title.trim() && roomData.roomName.trim() && roomData.caption.trim() && roomData.roomPictureURL;
 
     const [fileKey, setFileKey] = useState(Date.now());
 
@@ -22,24 +24,55 @@ function NewRoomModal({ showAdd, setShowAdd }) {
         }));
     };
 
-    const handleSubmit = (e) => {
+    const handleSubmit = async (e) => {
         e.preventDefault();
 
-        console.log(roomData);
+        try {
 
-        setRoomData({
-            title: '',
-            location: '',
-            caption: '',
-            photo: null
-        });
+            const formData = new FormData();
+            formData.append('roomPicture', roomData.roomPictureURL);
 
-        setFileKey(Date.now());
+            const uploadResponse = await fetch('http://127.0.0.1:3000/api/v1/upload/room',{
+                method: 'POST', 
+                body: formData
+            });
 
-        setShowAdd(false);
+            const uploadData = await uploadResponse.json();
+
+            console.log(uploadData)
+
+            const payload = {
+                title: roomData.title,
+                roomName: roomData.roomName,
+                caption: roomData.caption,
+                roomPictureURL: uploadData.filename
+            };
+
+            const response = await fetch('http://127.0.0.1:3000/api/v1/rooms', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(payload)
+            });
+
+            const data = await response.json();
+            console.log(data);
+
+            setRoomData({
+                title: '',
+                roomName: '',
+                caption: '',
+                roomPictureURL: null
+            });
+
+            setFileKey(Date.now());
+            setShowAdd(false);
+
+        } catch (err) {
+            console.error(err);
+        }
     };
-
-    const isFormValid = roomData.title.trim() && roomData.location.trim() && roomData.caption.trim() && roomData.photo;
 
     return (
         <Modal show={showAdd} onHide={() => setShowAdd(false)} aria-labelledby="example-custom-modal-styling-title">
@@ -57,7 +90,7 @@ function NewRoomModal({ showAdd, setShowAdd }) {
 
                     <div className="room-field">
                         <label>Room Location</label>
-                        <input type="text" name="location" value={roomData.location} onChange={handleChange}/>
+                        <input type="text" name="roomName" value={roomData.roomName} onChange={handleChange}/>
                     </div>
 
                     <div className="room-field">
@@ -71,10 +104,10 @@ function NewRoomModal({ showAdd, setShowAdd }) {
                             <div className="file-input">
                                 <label>Room Photo</label>
 
-                                <input key={fileKey} type="file" name="photo" onChange={handleChange}/>
+                                <input key={fileKey} type="file" name="roomPictureURL" onChange={handleChange}/>
 
                                 <p className="selected-file" style={{ color: 'white' }}>
-                                    {roomData.photo ? `Selected: ${roomData.photo.name}` : 'No file selected yet'}
+                                    {roomData.roomPictureURL ? `Selected: ${roomData.roomPictureURL.name}` : 'No file selected yet'}
                                 </p>
                             </div>
 

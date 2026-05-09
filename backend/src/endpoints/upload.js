@@ -7,7 +7,7 @@ const path = require('path');
 // ROOM STORAGE
 const roomStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../../uploads/rooms');
+    cb(null, '/app/uploads/rooms');
   },
 
   filename: function (req, file, cb) {
@@ -22,7 +22,7 @@ const roomStorage = multer.diskStorage({
 // ARTIFACT STORAGE
 const artifactStorage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, '../../uploads/artifacts');
+    cb(null, '/app/uploads/artifacts');
   },
 
   filename: function (req, file, cb) {
@@ -40,14 +40,34 @@ const uploadArtifact = multer({ storage: artifactStorage });
 
 
 // Upload room photo
-endpoint.post("/room", uploadRoom.single('photo'), (req, res) => {
+endpoint.post("/room", uploadRoom.single('roomPicture'), (req, res) => {
+
+  if (!req.file) {
+    return res.status(400).json({
+      success: false,
+      message: "No file uploaded"
+    });
+  }
+
   console.log("File uploaded");
-  res.status(201).json(req.file.filename);
+
+  res.status(201).json({
+    success: true,
+    filename: req.file.path
+  });
 });
 
-// WIP: Upload artifact photo
-endpoint.post("/artifact", uploadArtifact.single('photo'), (req, res) => {
-  res.json(req.file);
+//Upload artifact photos
+endpoint.post("/artifact", uploadArtifact.array("photos"), (req, res) => {
+  const files = req.files.map((file) => ({
+    filename: file.filename,
+    path: file.path,
+  }));
+
+  res.json({
+    success: true,
+    files,
+  });
 });
 
 module.exports = endpoint;

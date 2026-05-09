@@ -1,8 +1,17 @@
 const express = require('express');
 const pool = require("./db");
 const app = express();
+const cors = require('cors');
 
 app.use(express.json()); 
+app.use(cors()); 
+
+app.use(cors({
+  origin: [
+    'http://localhost:3000',
+    'http://localhost:5173'
+  ]
+}));
 
 const artifactEndpoint = require('./endpoints/artifacts')
 const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay')
