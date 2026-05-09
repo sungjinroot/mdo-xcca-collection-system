@@ -4,7 +4,6 @@ const app = express();
 const cors = require('cors');
 
 app.use(express.json()); 
-app.use(cors()); 
 
 app.use(cors({
   origin: [
@@ -12,6 +11,9 @@ app.use(cors({
     'http://localhost:5173'
   ]
 }));
+
+//Routes to Upload Folder
+app.use('/uploads', express.static('/app/uploads'));
 
 const artifactEndpoint = require('./endpoints/artifacts')
 const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay')
