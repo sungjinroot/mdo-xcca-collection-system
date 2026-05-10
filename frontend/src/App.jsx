@@ -9,15 +9,16 @@ import Login from './components/login/Login.jsx';
 function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
-  const [roomIndex, setRoomIndex] = useState(0);
 
+  const [roomIndex, setRoomIndex] = useState(0);
+  const [roomId, setRoomId] = useState(null);
 
 
   return (
     <>
       
       <NavBar/> {/*Pass in searchQuery soon as props*/}
-      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex}/> {/*Pass in currentRoom, and all rooms soon as props */}
+      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId}/> {/*Pass in currentRoom, and all rooms soon as props */}
       <MainContent/>
       <Footer />
 

@@ -15,6 +15,7 @@ app.use(cors({
   ]
 }));
 
+
 //Routes to Upload Folder
 app.use('/uploads', express.static('/app/uploads'));
 
