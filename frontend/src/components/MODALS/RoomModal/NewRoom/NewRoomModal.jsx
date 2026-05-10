@@ -45,8 +45,10 @@ function NewRoomModal({ showAdd, setShowAdd }) {
                 title: roomData.title,
                 roomName: roomData.roomName,
                 caption: roomData.caption,
-                roomPictureURL: uploadData.filename
+                roomPictureURL: 'http://127.0.0.1:3000' + uploadData.filename.replace('/app', '')
             };
+
+            console.log(payload)
 
             const response = await fetch('http://127.0.0.1:3000/api/v1/rooms', {
                 method: 'POST',

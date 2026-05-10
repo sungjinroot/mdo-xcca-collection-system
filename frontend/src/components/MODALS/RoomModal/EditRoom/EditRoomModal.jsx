@@ -1,10 +1,15 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import './EditRoomModal.css';
 import Tooltip from '@mui/material/Tooltip';
 
 
-function EditRoomModal({ showEdit, setShowEdit }){
+function EditRoomModal({ showEdit, setShowEdit, roomId }){
+    
+    console.log(roomId);
+
+
+    
 
     return (
         <Modal show={showEdit} onHide={() => setShowEdit(false)} aria-labelledby="example-custom-modal-styling-title">
@@ -25,7 +30,7 @@ function EditRoomModal({ showEdit, setShowEdit }){
                     </div>
 
                     <div className="room-field">
-                        <label> Modify Room Location </label>
+                        <label> Modify Room Name </label>
                         
                         <Tooltip title="Change To Edit" placement='left'>
                             <input type="text" placeholder="edit text"/>

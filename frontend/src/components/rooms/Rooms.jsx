@@ -6,12 +6,12 @@ import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
 import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 import CategoriesModal from '../MODALS/Categories/CategoriesModal.jsx';
 
-function Rooms() {
+function Rooms( {roomIndex, setRoomIndex } ) {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
   const [rooms, setRooms] = useState([]);
-  const [selectedRoom, setSelectedRoom] = useState(null);
+
 
   useEffect(() => {
     const fetchData = async () => {
@@ -23,14 +23,37 @@ function Rooms() {
     fetchData();
   }, []);
 
+  //Note to self: this calls the api when the add room modal is closed / open
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
+      const result = await response.json();
+      setRooms(result);
+      console.log(result);
+    };
+    fetchData();
+  }, [showAdd]);
+
   const handleEditRoom = (room) => {
-    setSelectedRoom(room);
     setShowEdit(true);
+  };
+
+  const handleRoomSelect = (selectedIndex) => {
+    const index = selectedIndex - 1;
+
+    if (index >= 0) {
+      setRoomIndex(index);
+
+      console.log('Room index:', index, '| Room:', rooms[index]);
+    } else{
+      console.log('Room index:', index, '| Room:', rooms[index]);
+    }
+
   };
 
   return (
     <>
-      <Carousel interval={null} indicators={false} style={{ zoom: '80%' }}>
+      <Carousel interval={null} indicators={false} style={{ zoom: '80%' }} onSelect={handleRoomSelect}>
 
         <Carousel.Item>
           <img className="d-block w-100 pan-image" src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }} />
@@ -45,7 +68,7 @@ function Rooms() {
 
         {rooms.map((room) => (
           <Carousel.Item key={room.roomid}>
-            <img className="d-block w-100 pan-image" onClick={() => handleEditRoom(room)} src={`http://127.0.0.1:3000${room.roompictureurl}`} alt={room.roomname} style={{ height: '200px', width: '100%', objectFit: 'cover', cursor: 'pointer' }} />
+            <img className="d-block w-100 pan-image" onClick={() => handleEditRoom(room)} src={room.roompictureurl} alt={room.roomname} style={{ height: '200px', width: '100%', objectFit: 'cover', cursor: 'pointer' }} />
             <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
             <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
             <Carousel.Caption onClick={() => handleEditRoom(room)} style={{ cursor: 'pointer' }}>
@@ -57,8 +80,8 @@ function Rooms() {
         ))}
 
       </Carousel>
-      <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} />
-      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} selectedRoom={selectedRoom}/>
+      <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd}/>
+      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomData={rooms[roomIndex]}/> 
       <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories}/>
     </>
   );
