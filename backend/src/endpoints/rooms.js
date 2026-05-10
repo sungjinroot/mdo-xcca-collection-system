@@ -106,7 +106,7 @@ endpoint.delete("/:id", async (req, res) => {
                 return res.status(409).json({
                     status: "error",
                     code: "ROOM_HAS_ARTIFACTS",
-                    message: `Room with ID ${id} cannot be deleted because it still has associated artifacts. Please remove all artifacts first.`
+                    message: `Room with ID ${id} cannot be deleted because it still has artifacts. Please remove all artifacts first.`
                 });
             }
 
