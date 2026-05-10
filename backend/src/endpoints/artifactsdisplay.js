@@ -54,6 +54,19 @@ const getArtifactsDisplay = async (req, res) => {
             );
         }
 
+        const totalRows = parseInt(countResult.rows[0].count, 10);
+        const totalPages = Math.ceil(totalRows / 30);
+
+        res.json({
+            data: result.rows,
+            pagination: {
+                currentPage: page,
+                totalPages,
+                totalRows,
+                limit,
+            }
+        });
+
         res.json(result.rows);
 
     } catch (err) {
