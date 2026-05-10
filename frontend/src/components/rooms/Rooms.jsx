@@ -6,7 +6,7 @@ import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
 import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 import CategoriesModal from '../MODALS/Categories/CategoriesModal.jsx';
 
-function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId } ) {
+function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories } ) {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
@@ -81,7 +81,7 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId } ) {
       </Carousel>
       <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd}/>
       <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex}/> 
-      <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories}/>
+      <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories} categories={categories}/>
     </>
   );
 }

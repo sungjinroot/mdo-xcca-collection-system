@@ -8,17 +8,33 @@ import Login from './components/login/Login.jsx';
 
 function App() {
 
-  const [searchQuery, setSearchQuery] = useState("");
+  const [categories,setCategories] = useState(null);
+  const [categoryId,setCategoryId] = useState(null);
 
+  const [searchQuery, setSearchQuery] = useState("");
+  
   const [roomIndex, setRoomIndex] = useState(null);
   const [roomId, setRoomId] = useState(null);
 
+  useEffect(() => {
+    console.log(categoryId);
+  },[categoryId])
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/categories');
+      const result = await response.json();
+      setCategories(result)
+      console.log(result);
+    };
+    fetchData();
+  },[]);
 
   return (
     <>
       
-      <NavBar/> {/*Pass in searchQuery soon as props*/}
-      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId}/> {/*Pass in currentRoom, and all rooms soon as props */}
+      <NavBar categories={categories} setCategoryId={setCategoryId}/> {/*Pass in searchQuery soon as props*/}
+      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} categories={categories}/> {/*Pass in currentRoom, and all rooms soon as props */}
       <MainContent/>
       <Footer />
 

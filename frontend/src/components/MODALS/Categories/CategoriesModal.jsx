@@ -3,9 +3,9 @@ import Tooltip from '@mui/material/Tooltip';
 import './CategoriesModal.css';
 import { useState } from 'react';
 
-function CategoriesModal({ showCategories, setShowCategories }){
+function CategoriesModal({ showCategories, setShowCategories, categories }){
 
-    const [categories,setCategories] = useState(["First","Second","Third","Forth","Fifth","Sixth","Seventh","Eigth"]);
+    const [categoriez,setCategories] = useState(["First","Second","Third","Forth","Fifth","Sixth","Seventh","Eigth"]);
         
     return (
         <Modal show={showCategories} onHide={() => setShowCategories(false)} aria-labelledby="example-custom-modal-styling-title">
@@ -23,7 +23,7 @@ function CategoriesModal({ showCategories, setShowCategories }){
                     </div>
 
                     <ol className="category-list">
-                        {categories.map((category, index) => (
+                        {categoriez.map((category, index) => (
                             <Tooltip title="Tap To Edit" placement="left" PopperProps={{ modifiers: [{ name: 'offset', options: { offset: [0, 10] } }] }}>
                                 <li key={index}>
                                     <input type="text" value="category"/>

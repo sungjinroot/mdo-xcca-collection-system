@@ -4,7 +4,7 @@ import MenuItem from '@mui/material/MenuItem';
 import AssistantsModal from '../MODALS/Assistants/AssistantsModal.jsx';
 import { useState, useEffect } from 'react';
 
-function NavBar() {
+function NavBar({ categories,setCategoryId }) {
     const [category, setCategory] = useState('');
 
     const [anchorEl, setAnchorEl] = useState(null);
@@ -22,6 +22,7 @@ function NavBar() {
 
     const handleChange = (event) => {
         setCategory(event.target.value);
+        setCategoryId(event.target.value ? Number(event.target.value) : null);
     };
 
     return (
@@ -46,9 +47,12 @@ function NavBar() {
                     <input type="text" placeholder="Search by keyword..." />
 
                     <select value={category} onChange={handleChange}>
-                        <option value="">No Category</option>
-                        <option value="second">Second</option>
-                        <option value="third">Third</option>
+                        <option onClick={() => setCategoryId(null)}>No Category</option>
+                        {categories && categories.map((cat) => (
+                            <option key={cat.categoryid} value={cat.categoryid}>
+                                {cat.categoryname}
+                            </option>
+                        ))}
                     </select>
                 </div>
 
