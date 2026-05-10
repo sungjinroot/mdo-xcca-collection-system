@@ -17,6 +17,10 @@ function App() {
   const [roomId, setRoomId] = useState(null);
 
   useEffect(() => {
+    console.log(categoryId);
+  }),[categoryId];
+
+  useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://127.0.0.1:3000/api/v1/categories');
       const result = await response.json();
