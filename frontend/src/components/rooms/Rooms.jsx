@@ -28,7 +28,7 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCate
     const fetchData = async () => {
       const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
       const result = await response.json();
-      setRooms(result);
+      setRooms(result); //use () => prev notation
       console.log(result);
     };
     fetchData();
