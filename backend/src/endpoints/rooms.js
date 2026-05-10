@@ -84,30 +84,31 @@ endpoint.delete("/:id", async (req, res) => {
              )`,
             [id]
         );
-        if (result.rowCount === 0) {
-            
-            const checkifroomexists = await pool.query(
-                `SELECT EXISTS(SELECT 1 FROM rooms WHERE roomID = $1) AS room_exists`,
-                [id]
-            );
 
-            const { room_exists } = check.rows[0];
+            if (result.rowCount === 0) {
+                
+                const checkifroomexists = await pool.query(
+                    `SELECT EXISTS(SELECT 1 FROM rooms WHERE roomID = $1) AS room_exists`,
+                    [id]
+                );
 
-            if (!room_exists){
-                return res.status(404).json({
+                const { room_exists } = checkifroomexists .rows[0];
+
+                if (!room_exists){
+                    return res.status(404).json({
+                        status: "error",
+                        code: "ROOM_NOT_FOUND",
+                        message: `Room with ID ${id} does not exists`
+                    });
+                }
+                
+
+                return res.status(409).json({
                     status: "error",
-                    code: "ROOM_NOT_FOUND",
-                    message: 'Room with ID ${id} does not exists'
+                    code: "ROOM_HAS_ARTIFACTS",
+                    message: `Room with ID ${id} cannot be deleted because it still has associated artifacts. Please remove all artifacts first.`
                 });
             }
-            
-
-            return res.status(409).json({
-                status: "error",
-                code: "ROOM_HAS_ARTIFACTS",
-                message: `Room with ID ${id} cannot be deleted because it still has associated artifacts. Please remove all artifacts first.`
-            });
-        }
 
         res.status(200).json({
             status: "success",
@@ -117,9 +118,7 @@ endpoint.delete("/:id", async (req, res) => {
             
 
             
-            return res.status(409).json({ error: "Room cannot be deleted because it does not exist" });
-        }
-        res.status(200).json({ message: "Room deleted" });
+           
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
