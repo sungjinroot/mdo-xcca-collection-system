@@ -10,7 +10,7 @@ function App() {
 
   const [searchQuery, setSearchQuery] = useState("");
 
-  const [roomIndex, setRoomIndex] = useState(0);
+  const [roomIndex, setRoomIndex] = useState(null);
   const [roomId, setRoomId] = useState(null);
 
 

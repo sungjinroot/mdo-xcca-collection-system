@@ -80,7 +80,7 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId } ) {
 
       </Carousel>
       <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd}/>
-      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex}/> 
+      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex}/> 
       <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories}/>
     </>
   );

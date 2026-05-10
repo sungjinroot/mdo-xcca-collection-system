@@ -3,14 +3,41 @@ import Modal from 'react-bootstrap/Modal';
 import './EditRoomModal.css';
 import Tooltip from '@mui/material/Tooltip';
 
-function EditRoomModal({ showEdit, setShowEdit, roomId, roomIndex, setRoomIndex }) {
+function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, setRoomIndex }) {
 
-    // Debugging purposes 
+    const [title,setTitle] = useState("");
+    const [roomName,setRoomName] = useState("");
+    const [caption,setCaption] = useState("");
+
+    function setRoomData(title,roomName,caption){
+        setTitle(title);
+        setRoomName(roomName);
+        setCaption(caption);
+    }
+
+    //note to self - Set room data for POST
     useEffect(() => {
+        if (!roomId) return;
+
         console.log("Updated roomId:", roomId);
         console.log("Updated room Index:", roomIndex);
-    }, [roomId]);
+        
+        const fetchData = async () => {
+            try {
+                const response = await fetch(`http://127.0.0.1:3000/api/v1/rooms/${roomId}`);
+                const result = await response.json();
+                console.log(result);
+                setRoomData(result.title,result.roomname,result.caption);
+            }
 
+            catch (error) {
+            console.error("Fetch error:", error);
+        }
+        };
+        fetchData();
+    },[roomId,roomIndex]);
+
+    
     const handleDeleteRoom = async () => {
         try {
             const response = await fetch(`http://127.0.0.1:3000/api/v1/rooms/${roomId}`, {
@@ -26,7 +53,8 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, roomIndex, setRoomIndex 
 
         console.log(`Room ${roomId} deleted successfully`);
 
-        setRoomIndex(prev => Math.max(prev - 1, 0));
+        setRoomIndex(null);
+        setRoomId(null);
 
         setShowEdit(false);
         } catch (error) {
@@ -47,19 +75,19 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, roomIndex, setRoomIndex 
           <div className="room-field">
             <label> Modify Title </label>
             <Tooltip title="Change To Edit" placement='left'>
-              <input type="text" placeholder="edit text" />
+              <input type="text" placeholder="edit text" value={title}/>
             </Tooltip>
           </div>
           <div className="room-field">
             <label> Modify Room Name </label>
             <Tooltip title="Change To Edit" placement='left'>
-              <input type="text" placeholder="edit text" />
+              <input type="text" placeholder="edit text" value={roomName}/>
             </Tooltip>
           </div>
           <div className="room-field">
             <label> Modify Caption </label>
             <Tooltip title="Change To Edit" placement='left'>
-              <input type="text" placeholder="edit text" />
+              <input type="text" placeholder="edit text" value={caption}/>
             </Tooltip>
           </div>
           <div className="room-field room-field-file">
