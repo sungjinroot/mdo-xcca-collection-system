@@ -98,7 +98,7 @@ endpoint.delete("/:id", async (req, res) => {
                     return res.status(404).json({
                         status: "error",
                         code: "ROOM_NOT_FOUND",
-                        message: `Room with ID ${id} does not exists`
+                        message: `Room with ID ${id} does not exist`
                     });
                 }
                 
