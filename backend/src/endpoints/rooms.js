@@ -47,6 +47,7 @@ endpoint.post('/', async (req, res) => {
 })
 
 // PUT ROOM
+
 endpoint.put("/:id", async (req, res) => {
     const roomId = req.params.id;
     const { roomName, roomPictureUrl, roomPictureURL, title, caption } = req.body;
@@ -59,9 +60,24 @@ endpoint.put("/:id", async (req, res) => {
         if (checkRoom.rows.length === 0) {
             return res.status(404).json({ error: "Room not found" });
         }
+
+        const updates = [];
+        const values = [];
+
+        if (roomName !== undefined) updates.push(`roomName = $${updates.length + 1}`), values.push(roomName);
+        if (normalizedRoomPictureUrl !== undefined) updates.push(`roomPictureUrl = $${updates.length + 1}`), values.push(normalizedRoomPictureUrl);
+        if (title !== undefined) updates.push(`title = $${updates.length + 1}`), values.push(title);
+        if (caption !== undefined) updates.push(`caption = $${updates.length + 1}`), values.push(caption);
+
+
+        if (updates.length === 0) {
+            return res.status(400).json({ error: "No fields provided" });
+        }
+
+        values.push(roomId);
+
         const updateRoom = await pool.query(
-            'UPDATE Rooms SET roomName = $1, roomPictureUrl = $2, title = $3, caption = $4 WHERE roomID = $5 RETURNING *',
-            [roomName, normalizedRoomPictureUrl, title, caption, roomId]
+            `UPDATE Rooms SET ${updates.join(", ")} WHERE roomID = $${values.length} RETURNING *`, values
         );
         res.json({
             message: "Room updated",
@@ -84,10 +100,41 @@ endpoint.delete("/:id", async (req, res) => {
              )`,
             [id]
         );
-        if (result.rowCount === 0) {
-            return res.status(409).json({ error: "Room cannot be deleted because it does not exist" });
-        }
-        res.status(200).json({ message: "Room deleted" });
+
+            if (result.rowCount === 0) {
+                
+                const checkifroomexists = await pool.query(
+                    `SELECT EXISTS(SELECT 1 FROM rooms WHERE roomID = $1) AS room_exists`,
+                    [id]
+                );
+
+                const { room_exists } = checkifroomexists .rows[0];
+
+                if (!room_exists){
+                    return res.status(404).json({
+                        status: "error",
+                        code: "ROOM_NOT_FOUND",
+                        message: `Room with ID ${id} does not exist`
+                    });
+                }
+                
+
+                return res.status(409).json({
+                    status: "error",
+                    code: "ROOM_HAS_ARTIFACTS",
+                    message: `Room with ID ${id} cannot be deleted because it still has artifacts. Please remove all artifacts first.`
+                });
+            }
+
+        res.status(200).json({
+            status: "success",
+            code: "ROOM_DELETED",
+            message: `Room with ID ${id} has been successfully deleted.`
+        });
+            
+
+            
+           
     } catch (err) {
         res.status(500).json({ error: err.message });
     }
