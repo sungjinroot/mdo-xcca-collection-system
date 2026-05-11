@@ -94,7 +94,7 @@ function NewArtifact(props) {
                 </Stepper>
 
                 {currentStep === 0 && (
-                    <BasicInformation nextStep={nextStep} artifactNames={artifactNames} setArtifactNames={setArtifactNames} artifactIdentifiers={artifactIdentifiers} setArtifactIdentifiers={setArtifactIdentifiers} categories={props.categories}/>
+                    <BasicInformation nextStep={nextStep} artifactNames={artifactNames} setArtifactNames={setArtifactNames} artifactIdentifiers={artifactIdentifiers} setArtifactIdentifiers={setArtifactIdentifiers} categories={props.categories} rooms={props.rooms}/>
                 )}
 
                 {currentStep === 1 && (

@@ -2,7 +2,9 @@ import '../Layout.css';
 import './BasicInformation.css';
 import '../../NewArtifact.css';
 
-function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIdentifiers, setArtifactIdentifiers, categories }) {
+function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIdentifiers, setArtifactIdentifiers, categories, rooms }) {
+
+    console.log(rooms);
 
     const handleArtifactNameChange = (e) => {
         const { name, value } = e.target;
@@ -104,8 +106,11 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
                                 <input type="text" className="identifier-form-size" name="storageLocation" value={artifactIdentifiers.storageLocation} onChange={handleArtifactIdentifierChange}/>
                                 <select className="identifier-form-size" name="roomID" value={artifactIdentifiers.roomID || ""} onChange={handleArtifactIdentifierChange}>
                                     <option value="">Tap To Select Room</option>
-                                    <option value="1">Room 1</option>
-                                    <option value="2">Room 2</option>
+                                    {rooms && rooms.map((room) => (
+                                        <option key={room.roomid} value={room.roomid}>
+                                            {room.roomname}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>

@@ -11,16 +11,6 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCate
   const [showEdit, setShowEdit] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
-      const result = await response.json();
-      setRooms(result);
-      console.log(result);
-    };
-    fetchData();
-  }, []);
-
   //Note to self: this calls the api when the add room modal is closed / open
   useEffect(() => {
     const fetchData = async () => {

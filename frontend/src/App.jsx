@@ -28,6 +28,16 @@ function App() {
 
   useEffect(() => {
     const fetchData = async () => {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
+      const result = await response.json();
+      setRooms(result);
+      console.log(result);
+    };
+    fetchData();
+  }, []);
+
+  useEffect(() => {
+    const fetchData = async () => {
       const response = await fetch('http://127.0.0.1:3000/api/v1/categories');
       const result = await response.json();
       setCategories(result)
@@ -41,7 +51,7 @@ function App() {
     
       <NavBar categories={categories} setCategoryId={setCategoryId}/> {/*Pass in searchQuery soon as props*/}
       <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
-      <MainContent categories={categories}/>
+      <MainContent categories={categories} rooms={rooms}/>
       <Footer/>
 
       {/*<Login/>*/}
