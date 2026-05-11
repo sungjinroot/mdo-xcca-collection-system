@@ -3,7 +3,7 @@ import './ImagesPage.css';
 import PreviewImage from './PreviewImage/PreviewImage.jsx';
 import { useState } from 'react';
 
-function ImagesPage({prevStep, setShow}){
+function ImagesPage({ prevStep, setShow, submitArtifact }){
 
     const [images, setImages] = useState([]);
 
@@ -65,7 +65,7 @@ function ImagesPage({prevStep, setShow}){
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => (alert("5"))}> Submit </div> 
+                <div className="stepper-navigation-right" onClick={() => submitArtifact()}> Submit </div> 
             </div>
         </div>
     

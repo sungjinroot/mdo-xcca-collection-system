@@ -17,6 +17,10 @@ function NewArtifact(props) {
 
     const [currentStep, setCurrentStep] = useState(0);
 
+    const resetStep = () => {
+        setCurrentStep(0);
+    }
+
     const nextStep = () => {
         if (currentStep < steps.length - 1) {
             setCurrentStep(currentStep + 1);
@@ -93,6 +97,67 @@ function NewArtifact(props) {
         });
     }
 
+    async function submitArtifact() {
+        try {
+            const payload = {
+                accessionNo: artifactIdentifiers.accessionNo,
+                catalogueNo: artifactIdentifiers.catalogueNo,
+                roomID: artifactIdentifiers.roomID,
+                categories: artifactCategories,
+
+                englishName: artifactNames.englishName,
+                vernacularName: artifactNames.vernacularName,
+
+                ethnicGroup: artifactProvenance.ethnicGroup,
+                locality: artifactProvenance.locality,
+                placeOfOrigin: artifactProvenance.placeOfOrigin,
+
+                contactPersonFullName: artifactContacts.contactPersonFullName,
+                dateCollectedByContactPerson: artifactContacts.dateCollectedByContactPerson,
+                receiverFullName: artifactContacts.receiverFullName,
+                receivedByReceiverDate: artifactContacts.receivedByReceiverDate,
+                recordedBy: artifactContacts.recordedBy,
+
+                artifactDetails: artifactDescriptions.details,
+                artifactFunction: artifactDescriptions.function,
+                conditionUponReceipt: artifactDescriptions.conditionUponReceipt,
+                specialRemarks: artifactDescriptions.specialRemarks,
+
+                collectionType: collectionType,
+
+                artifactLength: artifactMeasurements.length,
+                artifactWidth: artifactMeasurements.width,
+                artifactHeight: artifactMeasurements.height,
+
+                // include price only if needed by backend
+                price: price ? Number(price) : null
+            };
+
+            const response = await fetch("http://127.0.0.1:3000/api/v1/artifacts", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(payload)
+            });
+
+            if (!response.ok) {
+                const errorData = await response.json();
+                throw new Error(errorData.message || "Failed to create artifact");
+            }
+
+            const data = await response.json();
+            console.log("Artifact created successfully:", data);
+
+            
+            resetAllForm();
+            resetStep();
+
+        } catch (error) {
+            console.error("Error submitting artifact:", error.message);
+        }
+    }
+
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
@@ -127,7 +192,7 @@ function NewArtifact(props) {
                 )}
 
                 {currentStep === 4 && (
-                    <ImagesPage prevStep={prevStep} setShow={props.setShow}/>
+                    <ImagesPage prevStep={prevStep} setShow={props.setShow} submitArtifact={submitArtifact}/>
                 )}
 
             </Modal.Body>

@@ -78,7 +78,7 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
                             <div className="stepper-acquisition-collection-means-forms">
                                 <label className="radio-card">
                                     <span>Donated</span>
-                                    <input type="radio" name="collection" value="Donated" checked={collectionType === "Donated"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                    <input type="radio" name="collection" value="A" checked={collectionType === "A"} onChange={(e) => setCollectionType(e.target.value)}/>
 
                                 </label>
                             </div>
@@ -86,7 +86,7 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
                             <div className="stepper-acquisition-collection-means-forms">
                                 <label className="radio-card">
                                     <span>Excavated</span>
-                                    <input type="radio" name="collection" value="Excavated" checked={collectionType === "Excavated"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                    <input type="radio" name="collection" value="C" checked={collectionType === "C"} onChange={(e) => setCollectionType(e.target.value)}/>
                                 </label>
                             </div>
 
@@ -97,14 +97,14 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
                             <div className="stepper-acquisition-collection-means-forms">
                                 <label className="radio-card">
                                     <span>On Loan</span>
-                                    <input type="radio" name="collection" value="On Loan" checked={collectionType === "On Loan"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                    <input type="radio" name="collection" value="B" checked={collectionType === "B"} onChange={(e) => setCollectionType(e.target.value)}/>
                                 </label>
                             </div>
 
                             <div className="stepper-acquisition-collection-means-forms">
                                 <label className="radio-card">
                                     <span>Found</span>
-                                    <input type="radio" name="collection" value="Found" checked={collectionType === "Found"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                    <input type="radio" name="collection" value="D" checked={collectionType === "D"} onChange={(e) => setCollectionType(e.target.value)}/>
                                 </label>
                             </div>
 
@@ -116,7 +116,7 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
                         <div className="stepper-acquisition-purchased-option">
                             <label className="radio-card">
                                 <span>Purchased</span>
-                                <input type="radio" name="collection" value="Purchased" checked={collectionType === "Purchased"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                <input type="radio" name="collection" value="F" checked={collectionType === "F"} onChange={(e) => setCollectionType(e.target.value)}/>
                             </label>
                         </div>
 
