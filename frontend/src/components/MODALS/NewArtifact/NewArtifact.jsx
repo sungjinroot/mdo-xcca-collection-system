@@ -75,6 +75,24 @@ function NewArtifact(props) {
         recordedBy: ''
     });
 
+    function resetAllForm() {
+        setArtifactNames({ englishName: '', vernacularName: '' });
+        setArtifactIdentifiers({ accessionNo: '', catalogueNo: '', roomID: '', storageLocation: '' });
+        setArtifactCategories([]);
+        setArtifactProvenance({ ethnicGroup: '', placeOfOrigin: '', locality: '' });
+        setCollectionType('');
+        setPrice('');
+        setArtifactMeasurements({ diameter: '', height: '', length: '', width: '' });
+        setArtifactDescriptions({ details: '', function: '', conditionUponReceipt: '', specialRemarks: '' });
+        setArtifactContacts({
+            contactPersonFullName: '',
+            dateCollectedByContactPerson: '',
+            receiverFullName: '',
+            receivedByReceiverDate: '',
+            recordedBy: ''
+        });
+    }
+
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} contentClassName="ModalSizeHeight" dialogClassName="ModalSizeWidth" aria-labelledby="example-custom-modal-styling-title">
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">

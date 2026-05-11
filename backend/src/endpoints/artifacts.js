@@ -230,7 +230,7 @@ endpoint.post('/', async (req, res) => {
         artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks,
         collectionType, price,
         artifactLength, artifactWidth, artifactHeight, artifactDiameter,
-        categories //Categories is looped.
+        categories 
     } = req.body;
     if (
         !accessionNo || !catalogueNo || !roomID ||
@@ -286,9 +286,9 @@ endpoint.post('/', async (req, res) => {
         );
 
         if (categories && categories.length > 0) {
-            const values = categories.map((_, i) => `($1, $${i + 2})`).join(', ');
-            const params = [artifactID, ...categories];
-            await pool.query(`INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ${values}`,params);
+            for (const categoryID of categories) {
+                await pool.query('INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',[artifactID, categoryID]);
+            }
         }
 
         res.status(201).json({ message: 'Artifact created successfully', artifactID });

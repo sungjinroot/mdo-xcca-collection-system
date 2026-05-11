@@ -57,13 +57,7 @@ function ImagesPage({prevStep, setShow}){
                 <div className="stepper-right">
                     <div className="uploaded-images-preview-grid">
                         {images.map((img, index) => (
-                            <PreviewImage
-                            key={index}
-                            src={img.url}
-                            pictureName={img.pictureName}
-                            onRemove={() => removeImage(index)}
-                            onPictureNameChange={(value) => updatePictureName(index, value)}
-                        />
+                            <PreviewImage key={index} src={img.url} pictureName={img.pictureName} onRemove={() => removeImage(index)} onPictureNameChange={(value) => updatePictureName(index, value)}/>
                         ))}
                     </div>
                 </div>
