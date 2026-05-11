@@ -47,6 +47,7 @@ endpoint.post('/', async (req, res) => {
 })
 
 // PUT ROOM
+
 endpoint.put("/:id", async (req, res) => {
     const roomId = req.params.id;
     const { roomName, roomPictureUrl, roomPictureURL, title, caption } = req.body;
@@ -59,9 +60,24 @@ endpoint.put("/:id", async (req, res) => {
         if (checkRoom.rows.length === 0) {
             return res.status(404).json({ error: "Room not found" });
         }
+
+        const updates = [];
+        const values = [];
+
+        if (roomName !== undefined) updates.push(`roomName = $${updates.length + 1}`), values.push(roomName);
+        if (normalizedRoomPictureUrl !== undefined) updates.push(`roomPictureUrl = $${updates.length + 1}`), values.push(normalizedRoomPictureUrl);
+        if (title !== undefined) updates.push(`title = $${updates.length + 1}`), values.push(title);
+        if (caption !== undefined) updates.push(`caption = $${updates.length + 1}`), values.push(caption);
+
+
+        if (updates.length === 0) {
+            return res.status(400).json({ error: "No fields provided" });
+        }
+
+        values.push(roomId);
+
         const updateRoom = await pool.query(
-            'UPDATE Rooms SET roomName = $1, roomPictureUrl = $2, title = $3, caption = $4 WHERE roomID = $5 RETURNING *',
-            [roomName, normalizedRoomPictureUrl, title, caption, roomId]
+            `UPDATE Rooms SET ${updates.join(", ")} WHERE roomID = $${values.length} RETURNING *`, values
         );
         res.json({
             message: "Room updated",
