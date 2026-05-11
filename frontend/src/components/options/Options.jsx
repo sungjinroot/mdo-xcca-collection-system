@@ -5,7 +5,7 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import NewArtifact from "../MODALS/NewArtifact/NewArtifact";
 import AssistantsModal from "../MODALS/Assistants/AssistantsModal.jsx";
 
-function Options() {
+function Options( { categories } ) {
   const [open, setOpen] = useState(false);
 
   const [show, setShow] = useState(false);
@@ -62,11 +62,8 @@ function Options() {
         </SpeedDial>
       </div>
 
-      <NewArtifact show={show} setShow={setShow} />
-      <AssistantsModal
-        showAssistants={showAssistants}
-        setShowAssistants={setShowAssistants}
-      />
+      <NewArtifact show={show} setShow={setShow} categories={categories}/>
+      <AssistantsModal showAssistants={showAssistants} setShowAssistants={setShowAssistants}/>
     </>
   );
 }

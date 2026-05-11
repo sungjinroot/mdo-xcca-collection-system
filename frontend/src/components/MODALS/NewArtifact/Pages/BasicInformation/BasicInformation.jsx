@@ -1,9 +1,8 @@
 import '../Layout.css';
 import './BasicInformation.css';
 import '../../NewArtifact.css';
-import CategoryInput from './CategoryInput/CategoryInput.jsx';
 
-function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIdentifiers, setArtifactIdentifiers }) {
+function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIdentifiers, setArtifactIdentifiers, categories }) {
 
     const handleArtifactNameChange = (e) => {
         const { name, value } = e.target;
@@ -79,11 +78,12 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
                     <div className="stepper-artifact-categories-container">
                         <h3> Categorize an artifact </h3>
 
-                        <CategoryInput/>
-                        <CategoryInput/>
-                        <CategoryInput/>
-                        <CategoryInput/>
-                        <CategoryInput/>
+                        {categories && categories.map((category) => (
+                            <label key={category.categoryid} className="stepper-artifact-category-fields">
+                                <input type="checkbox" name="categories" value={category.categoryid} />
+                                <span>{category.categoryname}</span>
+                            </label>
+                        ))}
                         
                     </div> 
 
