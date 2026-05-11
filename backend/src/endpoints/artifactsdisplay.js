@@ -4,73 +4,99 @@ const pool = require('../db');
 
 const getArtifactsDisplay = async (req, res) => {
     const roomID = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
-
+    const categoryID = req.query.categoryID ? parseInt(req.query.categoryID, 10) : null;
 
     const page = parseInt(req.query.page, 10) || 1;
-    const limit = 8;
+    const limit = 20;
     const offset = (page - 1) * limit;
-    const search = req.query.search || '';
-
+    const search = req.query.search ? `%${req.query.search}%` : '%';
 
     try {
-        let result;
+        let artifactQuery = `
+            SELECT 
+                a.artifactID,
+                an.englishName,
+                an.vernacularName,
+                a.roomID AS currentRoomID,
+                r.roomName AS currentRoomName
+            FROM Artifacts a
+            LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+            LEFT JOIN Rooms r ON a.roomID = r.roomID
+            WHERE (
+                an.englishName ILIKE $1
+                OR an.vernacularName ILIKE $1
+                OR a.accessionNo::text ILIKE $1
+            )
+        `;
+
+        const params = [search];
+
+        // category filter by PRIMARY KEY (not name)
+        if (categoryID !== null && !isNaN(categoryID)) {
+            artifactQuery += ` AND a.categoryID = $${params.length + 1}`;
+            params.push(categoryID);
+        }
+
+        artifactQuery += `
+            ORDER BY an.englishName ASC
+            LIMIT $${params.length + 1}
+            OFFSET $${params.length + 2}
+        `;
+
+        params.push(limit, offset);
+
+        const result = await pool.query(artifactQuery, params);
+
+        let roomsResult;
 
         if (roomID !== null && !isNaN(roomID)) {
-            result = await pool.query(
-                `SELECT
-                 a.artifactID, 
-                 an.englishName,
-                 an.vernacularName
-                 FROM Artifacts a
-                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-                 WHERE a.roomID = $1
-                    AND (an.englishName ILIKE $4
-                        OR an.vernacularNAME ILIKE $4 OR
-                        a.accessionNo::text ILIKE $4
-                        )
-                ORDER BY an.englishName ASC
-                
-                 LIMIT $2 OFFSET $3`,
-            
-                 
-                [roomID, limit, offset, `%${search}%`]
+            roomsResult = await pool.query(
+                `SELECT roomID, roomName
+                 FROM Rooms
+                 WHERE roomID != $1
+                 ORDER BY roomName ASC`,
+                [roomID]
             );
-        } else {    
-            result = await pool.query(
-
-                `SELECT 
-                 a.artifactID, 
-                 an.englishName, 
-                 an.vernacularName
-                 FROM Artifacts a
-                 LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-                 WHERE
-                 an.englishName ILIKE $3
-                 OR an.vernacularName ILIKE $3
-                 OR a.accessionNo::text ILIKE $3
-                 ORDER BY an.englishName ASC
-                 LIMIT $1 OFFSET $2`,
-                [limit, offset, `%${search}%`]
+        } else {
+            roomsResult = await pool.query(
+                `SELECT roomID, roomName
+                 FROM Rooms
+                 ORDER BY roomName ASC`
             );
         }
 
-        const totalRows = parseInt(countResult.rows[0].count, 10);
-        const totalPages = Math.ceil(totalRows / 30);
+        const countResult = await pool.query(
+            `
+            SELECT COUNT(*) 
+            FROM Artifacts a
+            LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
+            WHERE (
+                an.englishName ILIKE $1
+                OR an.vernacularName ILIKE $1
+                OR a.accessionNo::text ILIKE $1
+            )
+            ${categoryID ? "AND a.categoryID = $2" : ""}
+            `,
+            categoryID ? [search, categoryID] : [search]
+        );
 
-        res.json({
+        const totalRows = parseInt(countResult.rows[0].count, 10);
+        const totalPages = Math.ceil(totalRows / limit);
+
+        return res.json({
             data: result.rows,
+            rooms: roomsResult.rows, 
             pagination: {
                 currentPage: page,
                 totalPages,
                 totalRows,
-                limit,
+                limit
             }
         });
 
-        res.json(result.rows);
-
     } catch (err) {
-        res.status(500).json({ message: 'Internal server error' });
+        console.error(err);
+        return res.status(500).json({ message: "Internal server error" });
     }
 };
 
