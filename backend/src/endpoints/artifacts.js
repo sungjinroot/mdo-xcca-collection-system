@@ -219,6 +219,7 @@ endpoint.get('/:id', async (req, res) => {
     }
 })
 
+//add photo endpoint soon. separate angleName,pictureFilePath,artifactId,isProfilePicture.
 
 endpoint.post('/', async (req, res) => {
     const {
@@ -229,16 +230,22 @@ endpoint.post('/', async (req, res) => {
         artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks,
         collectionType, price,
         artifactLength, artifactWidth, artifactHeight, artifactDiameter,
-        categoryID,
-        angleName, pictureFilePath, isProfilePicture
+        categories //Categories is looped.
     } = req.body;
     if (
         !accessionNo || !catalogueNo || !roomID ||
         !contactPersonFullName || !dateCollectedByContactPerson ||
         !receiverFullName || !receivedByReceiverDate || !recordedBy ||
-        !collectionType || !categoryID
+        !collectionType 
     ) {
         return res.status(400).json({ error: 'Missing required fields' });
+    }
+
+    //check if categories is an array. if not an array return an error out.
+    if (categories) {
+        if (!Array.isArray(categories)) {
+            return res.status(400).json({ error: 'Categories must be an array' });
+        }
     }
  
     try {
@@ -277,18 +284,16 @@ endpoint.post('/', async (req, res) => {
             'INSERT INTO Dimensions (artifactID, artifactLength, artifactWidth, artifactHeight, artifactDiameter) VALUES ($1, $2, $3, $4, $5)',
             [artifactID, artifactLength, artifactWidth, artifactHeight, artifactDiameter]
         );
- 
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [artifactID, categoryID]
-        );
- 
-        await pool.query(
-            'INSERT INTO Pictures (artifactID, angleName, pictureFilePath, isProfilePicture) VALUES ($1, $2, $3, $4)',
-            [artifactID, angleName, pictureFilePath, isProfilePicture]
-        );
- 
+
+        if (categories && categories.length > 0) {
+            const values = categories.map((_, i) => `($1, $${i + 2})`).join(', ');
+            const params = [artifactID, ...categories];
+            await pool.query(`INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ${values}`,params);
+        }
+
         res.status(201).json({ message: 'Artifact created successfully', artifactID });
+        
+ 
  
     } catch (err) {
         console.error('DB ERROR:', err);
@@ -296,6 +301,8 @@ endpoint.post('/', async (req, res) => {
     }
 });
 
+
+//NEEDS SPECIFIER
 endpoint.put('/:id', async (req, res) => {
     const { id } = req.params;
     const {

@@ -17,7 +17,7 @@ function Artifact(){
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://naturalhistory.si.edu/sites/default/files/styles/resource_side/public/media/image/96-30000.jpg.webp?itok=sY7edL33" onClick={() => setShow(true)}/>
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB42YFTSGUN5N7Iszp6u-RzvWnFjQ9G_a6jQ&s" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
