@@ -9,12 +9,7 @@ function CategoryItem({ category, onNameChange, onDelete, deletingId, savingId }
   return (
     <Tooltip title="Tap To Edit" placement="left" PopperProps={{ modifiers: [{ name: 'offset', options: { offset: [0, 10] } }] }}>
       <li>
-        <input
-          ref={inputRef}
-          type="text"
-          value={category.categoryname}
-          onChange={(e) => onNameChange(category.categoryid, e.target.value, inputRef)}
-        />
+        <input ref={inputRef} type="text" value={category.categoryname} onChange={(e) => onNameChange(category.categoryid, e.target.value, inputRef)}/>
         <div style={{ display: 'flex', alignItems: 'center', gap: '6px' }}>
           {savingId === category.categoryid && (
             <span style={{ fontSize: '0.75rem', color: '#888' }}>Saving...</span>
