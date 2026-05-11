@@ -33,11 +33,11 @@ function App() {
 
   return (
     <>
-      
+    
       <NavBar categories={categories} setCategoryId={setCategoryId}/> {/*Pass in searchQuery soon as props*/}
       <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
       <MainContent categories={categories}/>
-      <Footer />
+      <Footer/>
 
       {/*<Login/>*/}
             
