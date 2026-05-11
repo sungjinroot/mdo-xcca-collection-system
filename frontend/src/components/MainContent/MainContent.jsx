@@ -3,13 +3,13 @@ import Artifact from "../artifact/Artifact.jsx";
 import './Main.css';
 
 
-function MainContent(){
+function MainContent({ categories, rooms }){
 
     return (
     <>
 
         <div className="main-content">
-            <Options/>
+            <Options categories={categories} rooms={rooms}/>
             <div className="gnome-container"> 
                 
                

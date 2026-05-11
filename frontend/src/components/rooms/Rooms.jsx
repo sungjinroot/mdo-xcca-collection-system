@@ -6,22 +6,10 @@ import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
 import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 import CategoriesModal from '../MODALS/Categories/CategoriesModal.jsx';
 
-function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCategories } ) {
+function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCategories, rooms, setRooms } ) {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
-  const [rooms, setRooms] = useState([]);
-
-
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
-      const result = await response.json();
-      setRooms(result);
-      console.log(result);
-    };
-    fetchData();
-  }, []);
 
   //Note to self: this calls the api when the add room modal is closed / open
   useEffect(() => {

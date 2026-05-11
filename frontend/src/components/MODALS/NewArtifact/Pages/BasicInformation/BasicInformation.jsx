@@ -1,9 +1,10 @@
 import '../Layout.css';
 import './BasicInformation.css';
 import '../../NewArtifact.css';
-import CategoryInput from './CategoryInput/CategoryInput.jsx';
 
-function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIdentifiers, setArtifactIdentifiers }) {
+function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIdentifiers, setArtifactIdentifiers, categories, rooms }) {
+
+    console.log(rooms);
 
     const handleArtifactNameChange = (e) => {
         const { name, value } = e.target;
@@ -61,11 +62,11 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
                                 <input type="text" className="identifier-form-size" name="accessionNo" value={artifactIdentifiers.accessionNo} onChange={handleArtifactIdentifierChange}/>
                                 <select className="identifier-form-size" name="catalogueNo" value={artifactIdentifiers.catalogueNo} onChange={handleArtifactIdentifierChange}>
                                     <option value="">Tap to select</option>
-                                    <option> A1 </option>
-                                    <option> A2 </option>
-                                    <option> A3 </option>
-                                    <option> A4 </option>
-                                    <option> A5 </option>
+                                    <option value="A1"> A1 (Historical) </option>
+                                    <option value="A2"> A2 (Heritage Heirloom) </option>
+                                    <option value="A3"> A3 (Ethnological) </option>
+                                    <option value="A4"> A4 (Archaelogical) </option>
+                                    <option value="A5"> A5 (Artworks) </option>
                                 </select>
                             </div>
                         </div>
@@ -79,11 +80,12 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
                     <div className="stepper-artifact-categories-container">
                         <h3> Categorize an artifact </h3>
 
-                        <CategoryInput/>
-                        <CategoryInput/>
-                        <CategoryInput/>
-                        <CategoryInput/>
-                        <CategoryInput/>
+                        {categories && categories.map((category) => (
+                            <label key={category.categoryid} className="stepper-artifact-category-fields">
+                                <input type="checkbox" name="categories" value={category.categoryid} />
+                                <span>{category.categoryname}</span>
+                            </label>
+                        ))}
                         
                     </div> 
 
@@ -104,8 +106,11 @@ function BasicInformation({ nextStep,artifactNames,setArtifactNames, artifactIde
                                 <input type="text" className="identifier-form-size" name="storageLocation" value={artifactIdentifiers.storageLocation} onChange={handleArtifactIdentifierChange}/>
                                 <select className="identifier-form-size" name="roomID" value={artifactIdentifiers.roomID || ""} onChange={handleArtifactIdentifierChange}>
                                     <option value="">Tap To Select Room</option>
-                                    <option value="1">Room 1</option>
-                                    <option value="2">Room 2</option>
+                                    {rooms && rooms.map((room) => (
+                                        <option key={room.roomid} value={room.roomid}>
+                                            {room.roomname}
+                                        </option>
+                                    ))}
                                 </select>
                             </div>
                         </div>

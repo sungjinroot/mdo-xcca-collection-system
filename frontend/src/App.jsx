@@ -8,6 +8,9 @@ import Login from './components/login/Login.jsx';
 
 function App() {
 
+  //too late to refactor using useContext :/
+  //Cant afford any regressions rn. 
+
   const [categories,setCategories] = useState(null);
   const [categoryId,setCategoryId] = useState(null);
 
@@ -15,10 +18,23 @@ function App() {
   
   const [roomIndex, setRoomIndex] = useState(null);
   const [roomId, setRoomId] = useState(null);
+  const [rooms, setRooms] = useState([]);
+  
 
+  //Debugging purposes
   useEffect(() => {
     console.log(categoryId);
   }),[categoryId];
+
+  useEffect(() => {
+    const fetchData = async () => {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
+      const result = await response.json();
+      setRooms(result);
+      console.log(result);
+    };
+    fetchData();
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -32,11 +48,11 @@ function App() {
 
   return (
     <>
-      
+    
       <NavBar categories={categories} setCategoryId={setCategoryId}/> {/*Pass in searchQuery soon as props*/}
-      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
-      <MainContent/>
-      <Footer />
+      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
+      <MainContent categories={categories} rooms={rooms}/>
+      <Footer/>
 
       {/*<Login/>*/}
             
