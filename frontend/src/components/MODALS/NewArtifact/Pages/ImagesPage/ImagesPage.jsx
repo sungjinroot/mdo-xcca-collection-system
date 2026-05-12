@@ -47,6 +47,34 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
 
         console.log("Here is the last inserted ID: " + lastInsertId);
 
+        if (images.length > 0) {
+            const formData = new FormData();
+            images.forEach((img) => {
+                formData.append("photos", img.file);
+            });
+
+            try {
+                const response = await fetch("http://127.0.0.1:3000/api/v1/upload/artifact", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                console.log(result)
+
+                if (!result.success) {
+                    console.error("Image upload failed");
+                    return;
+                }
+
+                console.log("Uploaded files:", result.files);
+            } catch (err) {
+                console.error("Error uploading images:", err);
+                return;
+            }
+        }
+
         setOpenSnackbar(true);
 
         setTimeout(() => {

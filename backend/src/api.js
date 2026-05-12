@@ -39,10 +39,12 @@ app.use('/api/v1/statistics', statisticsEndpoint);
 
 //AALV endpoints
 const uploadEndpoint = require('./endpoints/upload')
+const insertPhotoEndpoint = require('./endpoints/artifactImages')
+
 
 //AALV endpoints
 app.use('/api/v1/upload/',uploadEndpoint);
-
+app.use('/api/v1/images/', insertPhotoEndpoint);
 
 app.get("/test-db", async (req, res) => {
     try {
