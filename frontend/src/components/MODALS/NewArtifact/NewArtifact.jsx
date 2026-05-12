@@ -147,11 +147,13 @@ function NewArtifact(props) {
             }
 
             const data = await response.json();
-            console.log("Artifact created successfully:", data);
-
             
             resetAllForm();
             resetStep();
+
+            return data.artifactID;
+
+            
 
             //return artifactId here
 
@@ -194,7 +196,7 @@ function NewArtifact(props) {
                 )}
 
                 {currentStep === 4 && (
-                    <ImagesPage prevStep={prevStep} setShow={props.setShow} submitArtifact={submitArtifact}/>
+                    <ImagesPage prevStep={prevStep} setShow={props.setShow} submitArtifact={submitArtifact} resetAllForm={resetAllForm} resetStep={resetStep}/>
                 )}
 
             </Modal.Body>

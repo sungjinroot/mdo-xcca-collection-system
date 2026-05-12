@@ -1,5 +1,9 @@
 
 
+HOW TO RUN PROJECT:
+
+
+
 HOW TO ENTER THE BACKEND SHELL
 
 sudo docker exec -it mdo-xcca-collection-system-backend-1 bash

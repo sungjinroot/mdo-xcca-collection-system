@@ -1,17 +1,20 @@
 import '../Layout.css';
 import './ImagesPage.css';
+import Snackbar from '@mui/material/Snackbar';
+import Alert from '@mui/material/Alert';
 import PreviewImage from './PreviewImage/PreviewImage.jsx';
 import { useState, useEffect } from 'react';
 
-function ImagesPage({ prevStep, setShow, submitArtifact }){
+function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep }) {
 
     useEffect(() => {
         console.log(images);
     });
 
     const [images, setImages] = useState([]);
+    const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    function autoUpload(e){
+    function autoUpload(e) {
         const files = Array.from(e.target.files);
 
         const imageUrls = files.map(file => ({
@@ -39,14 +42,38 @@ function ImagesPage({ prevStep, setShow, submitArtifact }){
         });
     }
 
-    function handleSubmission(){
-        submitArtifact(); //note 2 self, handle artifact submission,
-        //handle photo submission then 
+    async function handleSubmission() {
+        const lastInsertId = await submitArtifact();
+
+        console.log("Here is the last inserted ID: " + lastInsertId);
+
+        setOpenSnackbar(true);
+
+        setTimeout(() => {
+            resetAllForm();
+            resetStep();
+        }, 1700);
+    }
+
+    function handleCloseSnackbar(event, reason) {
+        if (reason === 'clickaway') {
+            return;
+        }
+
+        setOpenSnackbar(false);
     }
 
     return (
-    
+
         <div className="stepper-container">
+
+            <Snackbar open={openSnackbar} autoHideDuration={3000} onClose={handleCloseSnackbar} anchorOrigin={{ vertical: 'top', horizontal: 'right' }}>
+                
+                <Alert onClose={handleCloseSnackbar} severity="success" variant="filled" sx={{ width: '100%' }}>
+                    Artifact was successfully recorded
+                </Alert>
+            </Snackbar>
+
             <div className="stepper-content">
                 <div className="stepper-left">
                     <div className="stepper-upload">
@@ -54,14 +81,11 @@ function ImagesPage({ prevStep, setShow, submitArtifact }){
                             <div className="upload-box">
                                 Click or Drag & Drop to Upload
                             </div>
+
                             <input type="file" id="imageUpload" accept="image/*" className="image-upload-input" multiple onChange={autoUpload}/>
                         </label>
                     </div>
                 </div>
-
-
-
-
 
                 <div className="stepper-right">
                     <div className="uploaded-images-preview-grid">
@@ -73,13 +97,17 @@ function ImagesPage({ prevStep, setShow, submitArtifact }){
             </div>
 
             <div className="stepper-navigation-multi">
-                <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => handleSubmission()}> Submit </div> 
+                <div className="stepper-navigation-left" onClick={() => prevStep()}>
+                    Previous
+                </div>
+
+                <div className="stepper-navigation-right" onClick={() => handleSubmission()}>
+                    Submit
+                </div>
             </div>
         </div>
-    
+
     )
 }
-
 
 export default ImagesPage;

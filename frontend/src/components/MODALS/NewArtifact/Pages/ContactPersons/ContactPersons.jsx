@@ -5,19 +5,19 @@ import '../../NewArtifact.css';
 function ContactPersons({ prevStep, nextStep, collectionType,artifactContacts,setArtifactContacts }){
 
     const roleLabelMap = {
-        "Donated": "donor",
-        "On Loan": "lender",
-        "Found": "finder",
-        "Excavated": "archaeologist",
-        "Purchased": "buyer"
+        "A": "donor",
+        "B": "lender",
+        "C": "archaeologist",
+        "D": "finder",
+        "E": "buyer"
     };
 
     const promptMap = {
-        "Donated": "donated",
-        "On Loan": "loaned",
-        "Found": "turned over",
-        "Excavated": "turned over",
-        "Purchased": "sold"
+        "A": "donated",
+        "B": "loaned",
+        "C": "turned over",
+        "D": "turned over",
+        "E": "sold"
     };
 
     const role = roleLabelMap[collectionType];
