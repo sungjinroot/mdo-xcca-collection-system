@@ -153,6 +153,8 @@ function NewArtifact(props) {
             resetAllForm();
             resetStep();
 
+            //return artifactId here
+
         } catch (error) {
             console.error("Error submitting artifact:", error.message);
         }

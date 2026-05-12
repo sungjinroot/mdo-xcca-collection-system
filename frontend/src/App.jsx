@@ -46,6 +46,21 @@ function App() {
     fetchData();
   },[]);
 
+  //Search
+  function searchArtifact(){
+    const fetchData = async () => {
+      const response = await fetch('http://127.0.0.1:3000/api/v1/artifactsdisplay');
+      const result = await response.json();
+      setCategories(result)
+      console.log(result);
+    };
+    fetchData();
+  }
+
+  useEffect(() => {
+
+  },[]) //if something changes. 
+
   return (
     <>
     

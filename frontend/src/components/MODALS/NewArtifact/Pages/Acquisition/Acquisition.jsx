@@ -34,7 +34,7 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
     const isValid = () => {
         if (!collectionType) return false;
 
-        if (collectionType === "Purchased") {
+        if (collectionType === "F") {
             const strictRegex = /^\d+(\.\d+)?$/;
             return strictRegex.test(price);
         }
@@ -120,7 +120,7 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
                             </label>
                         </div>
 
-                        <div className="stepper-acquisition-price-input" style={{visibility: collectionType === "Purchased" ? "visible" : "hidden"}}>
+                        <div className="stepper-acquisition-price-input" style={{visibility: collectionType === "F" ? "visible" : "hidden"}}>
                             <span className="required">*</span>
                             <input type="text" placeholder="Price..." value={price} onChange={(e) => handlePriceChange(e.target.value)}/>
                         </div>

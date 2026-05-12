@@ -35,6 +35,11 @@ function ImagesPage({ prevStep, setShow, submitArtifact }){
         });
     }
 
+    function handleSubmission(){
+        submitArtifact(); //note 2 self, handle artifact submission,
+        //handle photo submission then 
+    }
+
     return (
     
         <div className="stepper-container">
@@ -65,7 +70,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact }){
 
             <div className="stepper-navigation-multi">
                 <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => submitArtifact()}> Submit </div> 
+                <div className="stepper-navigation-right" onClick={() => handleSubmission()}> Submit </div> 
             </div>
         </div>
     

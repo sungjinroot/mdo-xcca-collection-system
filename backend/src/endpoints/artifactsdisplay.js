@@ -85,7 +85,6 @@ const getArtifactsDisplay = async (req, res) => {
 
         return res.json({
             data: result.rows,
-            rooms: roomsResult.rows, 
             pagination: {
                 currentPage: page,
                 totalPages,
