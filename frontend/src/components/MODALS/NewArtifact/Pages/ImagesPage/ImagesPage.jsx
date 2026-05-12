@@ -1,9 +1,13 @@
 import '../Layout.css';
 import './ImagesPage.css';
 import PreviewImage from './PreviewImage/PreviewImage.jsx';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 
 function ImagesPage({ prevStep, setShow, submitArtifact }){
+
+    useEffect(() => {
+        console.log(images);
+    });
 
     const [images, setImages] = useState([]);
 
