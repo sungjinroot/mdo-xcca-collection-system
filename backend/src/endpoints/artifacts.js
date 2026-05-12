@@ -162,29 +162,29 @@ const formatArtifact = (row) => ({
         roomID: row.roomid,
         storageLocation: row.storagelocation
     },
-    artifactnames: {
+    artifactnames: { //humana put
         englishName: row.englishname,
         vernacularName: row.vernacularname
     },
-    artifactprovenance: {
+    artifactprovenance: { //humana put
         ethnicGroup: row.ethnicgroup,
         locality: row.locality,
         placeOfOrigin: row.placeoforigin
     },
-    contactpersons: {
+    contactpersons: { //humana put
         contactPersonFullName: row.contactpersonfullname,
         dateCollectedByContactPerson: row.datecollectedbycontactperson,
         receiverFullName: row.receiverfullname,
         receivedByReceiverDate: row.receivedbyreceiverdate,
         recordedBy: row.recordedby
     },
-    dimensions: {
+    dimensions: { //humana put
         artifactLength: row.artifactlength,
         artifactWidth: row.artifactwidth,
         artifactHeight: row.artifactheight,
         artifactDiameter: row.artifactdiameter
     },
-    physicaldescription: {
+    physicaldescription: { //humana put
         artifactDetails: row.artifactdetails,
         artifactFunction: row.artifactfunction,
         conditionUponReceipt: row.conditionuponreceipt,
@@ -301,7 +301,7 @@ endpoint.post('/', async (req, res) => {
     }
 });
 
-
+/*
 //NEEDS SPECIFIER
 endpoint.put('/:id', async (req, res) => {
     const { id } = req.params;
@@ -376,6 +376,244 @@ endpoint.put('/:id', async (req, res) => {
         );
  
         res.status(200).json({ message: 'Artifact updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+*/
+endpoint.put('/:id/artifactDetails', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, accessionNo, catalogueNo, roomID  
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE Artifacts SET accessionNo = $1, catalogueNo = $2, roomID = $3 WHERE artifactID = $4',
+            [accessionNo, catalogueNo, roomID, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'artifactDetails updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+endpoint.put('/:id/artifactNames', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, englishName, vernacularName    
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE ArtifactNames SET englishName = $1, vernacularName = $2 WHERE artifactID = $3',
+            [englishName, vernacularName, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'artifactNames updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+endpoint.put('/:id/artifactProvenance', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, ethnicGroup, locality, placeOfOrigin  
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE ArtifactProvenance SET ethnicGroup = $1, locality = $2, placeOfOrigin = $3 WHERE artifactID = $4',
+            [ethnicGroup, locality, placeOfOrigin, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'artifactProvenance updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+endpoint.put('/:id/contactPersons', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy 
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE ContactPersons SET contactPersonFullName = $1, dateCollectedByContactPerson = $2, receiverFullName = $3, receivedByReceiverDate = $4, recordedBy = $5 WHERE artifactID = $6',
+            [contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'contactPersons updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+endpoint.put('/:id/dimensions', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, artifactLength, artifactWidth, artifactHeight, artifactDiameter
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE Dimensions SET artifactLength = $1, artifactWidth = $2, artifactHeight = $3, artifactDiameter = $4 WHERE artifactID = $5',
+            [artifactLength, artifactWidth, artifactHeight, artifactDiameter, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'dimensions updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+endpoint.put('/:id/physicalDescription', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE PhysicalDescription SET artifactDetails = $1, artifactFunction = $2, conditionUponReceipt = $3, specialRemarks = $4 WHERE artifactID = $5',
+            [artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'physicalDescription updated successfully' });
+ 
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({ error: err.message });
+    }
+});
+
+endpoint.put('/:id/acquisition', async (req, res) => {
+    const { id } = req.params;
+    const {
+        categoryID, collectionType, price
+    } = req.body;
+ 
+    try {
+        const check = await pool.query(
+            'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
+            [id]
+        );
+        if (check.rowCount === 0) {
+            return res.status(404).json({ error: 'Artifact not found' });
+        }
+        await pool.query(
+            'UPDATE Acquisition SET collectionType = $1, price = $2 WHERE artifactID = $3',
+            [collectionType, price, id]
+        );
+        await pool.query(
+            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
+            [id]
+        );
+        await pool.query(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [id, categoryID]
+        );
+        res.status(200).json({ message: 'acquisition updated successfully' });
  
     } catch (err) {
         console.error('DB ERROR:', err);
