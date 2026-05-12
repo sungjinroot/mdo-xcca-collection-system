@@ -32,8 +32,8 @@ const getArtifactsDisplay = async (req, res) => {
         const params = [search];
 
         // category filter by PRIMARY KEY (not name)
-        if (categoryID !== null && !isNaN(categoryID)) {
-            artifactQuery += ` AND a.categoryID = $${params.length + 1}`;
+        if (categoryID!== null && !isNaN(categoryID)) {
+            artifactQuery += `  AND a.categoryID = $${params.length + 1}`;
             params.push(categoryID);
         }
 
