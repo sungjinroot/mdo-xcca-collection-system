@@ -14,7 +14,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
     const [images, setImages] = useState([]);
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
-    const allNamed = images.length > 0 && images.every(img => img.pictureName.trim() !== "");
+    const allNamed = images.every(img => img.pictureName.trim() !== "");
 
     function autoUpload(e) {
         const files = Array.from(e.target.files);

@@ -70,16 +70,16 @@ endpoint.post("/artifact", uploadArtifact.array("photos"), async (req, res) => {
       : [];
 
     const files = req.files.map((file, index) => ({
-      name: pictureNames[index] || "",
+      name: pictureNames[index] || "No Name",
       filename: file.filename,
       path: file.path,
     }));
 
-    for (const photo of files) {
-      const angle = photo.name;
-      const imagePath = photo.path; //To do later
-      await pool.query('INSERT INTO pictures (angleName, pictureFilePath, artifactID, isProfilePicture) VALUES ($1, $2, $3, $4)',[angle, imagePath, artifactId, false]);
-    }
+  for (const photo of files) {
+    const angle = photo.name;
+    const imagePath = "http://127.0.0.1:3000" + photo.path.replace("/app", "");
+    await pool.query('INSERT INTO pictures (angleName, pictureFilePath, artifactID, isProfilePicture) VALUES ($1, $2, $3, $4)',[angle, imagePath, artifactId, photo === files[0]]);
+  }
 
     res.json({
       success: true,
