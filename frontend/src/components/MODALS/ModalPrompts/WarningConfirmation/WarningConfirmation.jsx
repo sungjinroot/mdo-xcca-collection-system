@@ -10,28 +10,12 @@ function WarningConfirmation(props){
     };
 
     return (
-        <Modal 
-            show={props.showWarning} 
-            onHide={handleClose} 
-            centered
-        >
-            <Modal.Header 
-                closeButton 
-                style={{ 
-                    backgroundColor: '#283971',
-                    borderBottom: 'none',
-                    padding: '12px 16px'
-                }}
-            >
+        <Modal show={props.showWarning} onHide={handleClose} centered>
+            <Modal.Header closeButton style={{backgroundColor: '#283971',borderBottom: 'none',padding: '12px 16px'}}>
             
             </Modal.Header>
             
-            <Modal.Body 
-                style={{ 
-                    textAlign: 'center',
-                    padding: '30px 25px'
-                }}
-            >
+            <Modal.Body style={{textAlign: 'center',padding: '30px 25px'}}>
                 
 
                 <h4 style={{ marginBottom: '10px', fontWeight: '600' }}>
@@ -44,39 +28,11 @@ function WarningConfirmation(props){
                 </p>
 
                 <div style={{ display: 'flex', justifyContent: 'center', gap: '12px' }}>
-                    <button 
-                        onClick={handleClose}
-                        style={{
-                            padding: '10px 18px',
-                            borderRadius: '6px',
-                            border: '1px solid #ccc',
-                            backgroundColor: '#f8f9fa',
-                            cursor: 'pointer',
-                            fontWeight: '500',
-                            transition: '0.2s'
-                        }}
-                        onMouseOver={e => e.target.style.backgroundColor = '#e9ecef'}
-                        onMouseOut={e => e.target.style.backgroundColor = '#f8f9fa'}
-                    >
+                    <button onClick={handleClose} style={{padding: '10px 18px', borderRadius: '6px', border: '1px solid #ccc', backgroundColor: '#f8f9fa', cursor: 'pointer', fontWeight: '500', transition: '0.2s'}} onMouseOver={e => e.target.style.backgroundColor = '#e9ecef'} onMouseOut={e => e.target.style.backgroundColor = '#f8f9fa'}>
                         Cancel
                     </button>
 
-                    <button 
-                        onClick={handleConfirm}
-                        style={{
-                            padding: '10px 18px',
-                            borderRadius: '6px',
-                            border: 'none',
-                            backgroundColor: '#dc3545',
-                            color: '#fff',
-                            cursor: 'pointer',
-                            fontWeight: '500',
-                            boxShadow: '0 2px 6px rgba(220,53,69,0.3)',
-                            transition: '0.2s'
-                        }}
-                        onMouseOver={e => e.target.style.backgroundColor = '#bb2d3b'}
-                        onMouseOut={e => e.target.style.backgroundColor = '#dc3545'}
-                    >
+                    <button onClick={handleConfirm} style={{padding: '10px 18px',borderRadius: '6px',border: 'none',backgroundColor: '#dc3545',color: '#fff',cursor: 'pointer',fontWeight: '500',boxShadow: '0 2px 6px rgba(220,53,69,0.3)',transition: '0.2s'}} onMouseOver={e => e.target.style.backgroundColor = '#bb2d3b'} onMouseOut={e => e.target.style.backgroundColor = '#dc3545'}>
                         Delete
                     </button>
                 </div>

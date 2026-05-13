@@ -6,6 +6,7 @@ import Rooms from './components/rooms/Rooms.jsx';
 import Footer from './components/footer/Footer.jsx';
 import MainContent from './components/MainContent/MainContent.jsx';
 import Login from './components/login/Login.jsx';
+import CategoriesModal from './components/MODALS/Categories/CategoriesModal.jsx';
 
 function App() {
   //too late to refactor using useContext :/
@@ -31,13 +32,19 @@ function App() {
   });
 
 
+  
 
   async function initiateArtifactSearch(){
-    if (searchQuery){
-      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}`);
+    if (roomId){
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&roomID=${roomId}`);
+      const result = await response.json();
+      setArtifacts(result.data); 
+    } else{
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}`);
       const result = await response.json();
       setArtifacts(result.data); 
     }
+    
   }
 
   useEffect(() =>{
@@ -112,7 +119,7 @@ function App() {
 
     return (
       <>
-        <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/> 
+        <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex}/> 
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
         <MainContent categories={categories} rooms={rooms} artifacts={artifacts}/>
         <Footer/>

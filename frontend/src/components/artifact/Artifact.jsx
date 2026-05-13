@@ -62,7 +62,7 @@ function Artifact({ artifactId, englishName, vernacularName }){
 
             <InspectArtifact show={show} setShow={setShow}/>
 
-            <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning}/>
+            <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId}/>
         </>
     );
 }
