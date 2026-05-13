@@ -59,15 +59,22 @@ endpoint.post("/room", uploadRoom.single('roomPicture'), (req, res) => {
 
 //Upload artifact photos
 endpoint.post("/artifact", uploadArtifact.array("photos"), (req, res) => {
-  const files = req.files.map((file) => ({
-    filename: file.filename,
-    path: file.path,
-  }));
+    const pictureNames = req.body.pictureNames
+        ? Array.isArray(req.body.pictureNames)
+            ? req.body.pictureNames
+            : [req.body.pictureNames] 
+        : [];
 
-  res.json({
-    success: true,
-    files,
-  });
+    const files = req.files.map((file, index) => ({
+        name: pictureNames[index] || "",
+        filename: file.filename,
+        path: file.path,
+    }));
+
+    res.json({
+        success: true,
+        files,
+    });
 });
 
 module.exports = endpoint;

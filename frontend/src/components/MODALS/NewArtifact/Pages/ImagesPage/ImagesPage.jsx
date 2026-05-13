@@ -45,12 +45,16 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
     async function handleSubmission() {
         const lastInsertId = await submitArtifact();
 
+        if (!lastInsertId) return null;
+
         console.log("Here is the last inserted ID: " + lastInsertId);
+
 
         if (images.length > 0) {
             const formData = new FormData();
             images.forEach((img) => {
                 formData.append("photos", img.file);
+                formData.append("pictureNames", img.pictureName);
             });
 
             try {
@@ -77,10 +81,11 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
 
         setOpenSnackbar(true);
 
+
         setTimeout(() => {
             resetAllForm();
             resetStep();
-        }, 1700);
+        }, 1500);
     }
 
     function handleCloseSnackbar(event, reason) {
