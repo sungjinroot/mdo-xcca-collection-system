@@ -77,6 +77,9 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
                 console.error("Error uploading images:", err);
                 return;
             }
+            
+            //Call api to send data to db
+
         }
 
         setOpenSnackbar(true);
