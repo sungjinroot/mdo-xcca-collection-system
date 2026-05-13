@@ -26,6 +26,7 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+
   const handleLoginSuccess = (userData) => {
     sessionStorage.setItem('user', JSON.stringify(userData));
     setUser(userData);
@@ -96,32 +97,33 @@ function App() {
   }, []); //if something changes.
 
   // Protected layout component
-  const ProtectedLayout = () => {
-    if (!user) return <Navigate to="/login" replace />;
+  
+  
+  //const ProtectedLayout = () => {
+    //if (!user) return <Navigate to="/login" replace />;
 
     return (
       <>
-      <NavBar categories={categories} setCategoryId={setCategoryId}/> {/*Pass in searchQuery soon as props*/}
-      <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
-      <MainContent categories={categories} rooms={rooms}/>
-      <Footer/>
+        <NavBar categories={categories} setCategoryId={setCategoryId}/> 
+        <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
+        <MainContent categories={categories} rooms={rooms}/>
+        <Footer/>
       </>
     );
   };
-
-  return (
-    <Routes>
-      <Route
-        path="/login"
-        element={
-          user
-            ? <Navigate to="/" replace />
-            : <Login onLoginSuccess={handleLoginSuccess} />
-        }
-      />
-      <Route path="/*" element={<ProtectedLayout />} />
-    </Routes>
-  );
-}
+  
+  //return (
+    //<Routes>
+      //<Route path="/login" element={
+          //user
+            //? <Navigate to="/" replace />
+            //: <Login onLoginSuccess={handleLoginSuccess} />
+        //}
+      ///>
+      //<Route path="/*" element={<ProtectedLayout />} />
+    //</Routes>
+  //);
+  
+//}
 
 export default App;
