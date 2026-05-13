@@ -14,6 +14,8 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
     const [images, setImages] = useState([]);
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
+    const allNamed = images.length > 0 && images.every(img => img.pictureName.trim() !== "");
+
     function autoUpload(e) {
         const files = Array.from(e.target.files);
 
@@ -52,6 +54,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
 
         if (images.length > 0) {
             const formData = new FormData();
+            formData.append("artifactId", lastInsertId);
             images.forEach((img) => {
                 formData.append("photos", img.file);
                 formData.append("pictureNames", img.pictureName);
@@ -137,7 +140,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
                     Previous
                 </div>
 
-                <div className="stepper-navigation-right" onClick={() => handleSubmission()}>
+                <div className={`stepper-navigation-right ${!allNamed ? 'disabled' : ''}`} onClick={() => allNamed && handleSubmission()} style={{ opacity: allNamed ? 1 : 0.4, cursor: allNamed ? 'pointer' : 'not-allowed' }}>
                     Submit
                 </div>
             </div>
