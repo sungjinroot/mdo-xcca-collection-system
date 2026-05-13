@@ -24,6 +24,5 @@ Thumbs.db
 *.swp
 
 nodemon.json
-
+    
 coverage/
-

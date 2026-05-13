@@ -5,6 +5,7 @@ const pool = require("../../../db");
 
 jest.mock("../../../db", () => ({
     query: jest.fn(),
+    connect: jest.fn(),
 }));
 
 const app = express();
@@ -141,18 +142,88 @@ describe("POST /artifacts", () => {
     });
 
     it("returns 201 when artifact is successfully created", async () => {
+        const mockClient = {
+            query: jest.fn(),
+            release: jest.fn(),
+        };
 
-        pool.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
+        pool.connect.mockResolvedValueOnce(mockClient);
 
-        for(let i = 0; i < 8; i++){
-            pool.query.mockResolvedValueOnce({});
+        mockClient.query.mockResolvedValueOnce({});
+        mockClient.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
+        
+        for (let i = 0; i < 7; i++) {
+            mockClient.query.mockResolvedValueOnce({});
         }
- 
+        
+        mockClient.query.mockResolvedValueOnce({});
+
         const res = await request(app).post("/artifacts").send(validPostBody);
 
         expect(res.status).toBe(201);
         expect(res.body.message).toBe("Artifact created successfully");
         expect(res.body.artifactID).toBe(1);
+        expect(mockClient.query).toHaveBeenCalledWith('BEGIN');
+        expect(mockClient.query).toHaveBeenCalledWith('COMMIT');
+        expect(mockClient.release).toHaveBeenCalled();
+    });
+
+    it("returns 201 when artifact with categories is successfully created", async () => {
+        const bodyWithCategories = {
+            ...validPostBody,
+            categories: [1, 2, 3]
+        };
+
+        const mockClient = {
+            query: jest.fn(),
+            release: jest.fn(),
+        };
+
+        pool.connect.mockResolvedValueOnce(mockClient);
+
+        mockClient.query.mockResolvedValueOnce({});
+        mockClient.query.mockResolvedValueOnce({ rows: [{ artifactid: 5 }] });
+        
+        for (let i = 0; i < 7; i++) {
+            mockClient.query.mockResolvedValueOnce({});
+        }
+        
+        for (let i = 0; i < 3; i++) {
+            mockClient.query.mockResolvedValueOnce({});
+        }
+        
+        mockClient.query.mockResolvedValueOnce({});
+
+        const res = await request(app).post("/artifacts").send(bodyWithCategories);
+
+        expect(res.status).toBe(201);
+        expect(res.body.message).toBe("Artifact created successfully");
+        expect(res.body.artifactID).toBe(5);
+        expect(mockClient.query).toHaveBeenCalledWith(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [5, 1]
+        );
+        expect(mockClient.query).toHaveBeenCalledWith(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [5, 2]
+        );
+        expect(mockClient.query).toHaveBeenCalledWith(
+            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
+            [5, 3]
+        );
+    });
+
+    it("returns 400 when categories is not an array", async () => {
+        const invalidBody = {
+            ...validPostBody,
+            categories: "not an array"
+        };
+
+        const res = await request(app).post("/artifacts").send(invalidBody);
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("Categories must be an array");
+        expect(pool.connect).not.toHaveBeenCalled();
     });
 
     it("returns 400 when required fields are missing", async () => {
@@ -162,16 +233,54 @@ describe("POST /artifacts", () => {
 
         expect(res.status).toBe(400);
         expect(res.body.error).toBe("Missing required fields");
-        expect(pool.query).not.toHaveBeenCalled();
+        expect(pool.connect).not.toHaveBeenCalled();
     });
 
-    it("returns 500 on database error", async () => {
-        pool.query.mockRejectedValueOnce(new Error("DB failure"));
- 
+    it("returns 500 on database error and rolls back", async () => {
+        const mockClient = {
+            query: jest.fn(),
+            release: jest.fn(),
+        };
+
+        pool.connect.mockResolvedValueOnce(mockClient);
+
+        mockClient.query.mockResolvedValueOnce({});
+        mockClient.query.mockResolvedValueOnce({ rows: [{ artifactid: 1 }] });
+        mockClient.query.mockResolvedValueOnce({});
+        mockClient.query.mockRejectedValueOnce(new Error("DB failure"));
+
         const res = await request(app).post("/artifacts").send(validPostBody);
- 
+
         expect(res.status).toBe(500);
         expect(res.body.error).toBe("DB failure");
+        expect(mockClient.query).toHaveBeenCalledWith('ROLLBACK');
+        expect(mockClient.query).not.toHaveBeenCalledWith('COMMIT');
+        expect(mockClient.release).toHaveBeenCalled();
+    });
+
+    it("returns 500 when database connection fails", async () => {
+    pool.connect.mockRejectedValueOnce(new Error("Connection failed"));
+
+    const res = await request(app).post("/artifacts").send(validPostBody);
+
+    expect(res.status).toBe(500);
+    expect(res.body).toBeDefined();
+});
+
+    it("ensures client is released even after error", async () => {
+        const mockClient = {
+            query: jest.fn(),
+            release: jest.fn(),
+        };
+
+        pool.connect.mockResolvedValueOnce(mockClient);
+
+        mockClient.query.mockResolvedValueOnce({});
+        mockClient.query.mockRejectedValueOnce(new Error("DB failure"));
+
+        await request(app).post("/artifacts").send(validPostBody);
+
+        expect(mockClient.release).toHaveBeenCalled();
     });
 });
 
