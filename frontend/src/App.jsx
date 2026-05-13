@@ -11,6 +11,8 @@ function App() {
   //too late to refactor using useContext :/
   //Cant afford any regressions rn. 
 
+  const [page,setPage] = useState(1); //NO FUNCTIONALITY YET
+
   const [categories,setCategories] = useState(null);
   const [categoryId,setCategoryId] = useState(null);
 
@@ -20,11 +22,28 @@ function App() {
   const [roomId, setRoomId] = useState(null);
   const [rooms, setRooms] = useState([]);
 
+  const [artifacts,setArtifacts] = useState([]);
+
   // Auth state — persist across refresh
   const [user, setUser] = useState(() => {
     const saved = sessionStorage.getItem('user');
     return saved ? JSON.parse(saved) : null;
   });
+
+
+
+  async function initiateArtifactSearch(){
+    if (searchQuery){
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}`);
+      const result = await response.json();
+      setArtifacts(result.data); 
+    }
+  }
+
+  useEffect(() =>{
+    initiateArtifactSearch();
+    console.log(artifacts);
+  },[page,roomId,categoryId,searchQuery])
 
 
   const handleLoginSuccess = (userData) => {
@@ -43,9 +62,7 @@ function App() {
   }, [categoryId]);
 
   useEffect(() => {
-    if (!user) return;
-
-    const fetchData = async () => {
+    const fetchDefaultRooms = async () => {
       try {
         const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
         const result = await response.json();
@@ -56,8 +73,20 @@ function App() {
       }
     };
 
-    fetchData();
-  }, [user]);
+    const fetchDefaultArtifacts = async () => {
+      try {
+        const response = await fetch('http://127.0.0.1:3000/api/v1/artifactsdisplay');
+        const result = await response.json();
+        setArtifacts(result.data);
+      } catch (error){
+        console.error('Failed to fetch artifact displays:', error);
+      }
+    }
+
+    fetchDefaultRooms();
+    fetchDefaultArtifacts();
+
+  }, []);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -74,26 +103,7 @@ function App() {
     fetchData();
   }, []);
 
-  // Search
-  function searchArtifact() {
-    const fetchData = async () => {
-      try {
-        const response = await fetch('http://127.0.0.1:3000/api/v1/artifactsdisplay');
-        const result = await response.json();
-        setCategories(result);
-        console.log(result);
-      } catch (error) {
-        console.error('Failed to search artifacts:', error);
-      }
-    };
-
-    fetchData();
-  }
-
-  useEffect(() => {
-
-  }, []); //if something changes.
-
+ 
   // Protected layout component
   
   
@@ -102,9 +112,9 @@ function App() {
 
     return (
       <>
-        <NavBar categories={categories} setCategoryId={setCategoryId}/> 
+        <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery}/> 
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
-        <MainContent categories={categories} rooms={rooms}/>
+        <MainContent categories={categories} rooms={rooms} artifacts={artifacts}/>
         <Footer/>
       </>
     );

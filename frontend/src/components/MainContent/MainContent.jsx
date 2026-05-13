@@ -3,7 +3,10 @@ import Artifact from "../artifact/Artifact.jsx";
 import './Main.css';
 
 
-function MainContent({ categories, rooms }){
+function MainContent({ categories, rooms, artifacts }){
+
+    console.log("I AM HERE");
+    console.log(artifacts);
 
     return (
     <>
@@ -11,31 +14,10 @@ function MainContent({ categories, rooms }){
         <div className="main-content">
             <Options categories={categories} rooms={rooms}/>
             <div className="gnome-container"> 
-                
-               
                     <div className="artifacts-grid"> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/>     
-
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                        <Artifact/>                                               
-                                          
+                        {artifacts.map((artifact) => (
+                            <Artifact key={artifact.artifactid} artifactId={artifact.artifactId} englishName={artifact.englishname} vernacularName={artifact.vernacularname}/>
+                        ))}                  
                     </div>
                
                 

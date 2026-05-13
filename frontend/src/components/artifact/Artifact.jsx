@@ -6,7 +6,7 @@ import ArtifactData from './ArtifactData';
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
 import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
-function Artifact(){
+function Artifact({ artifactId, englishName, vernacularName }){
 
     //This is for modal
     const [show,setShow] = useState(false)
@@ -38,7 +38,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"World Peace Coin"} vernacularName={"Baryang World Peace"}/>
+                        <ArtifactData style={"artifact-display-data"} englishName={englishName} vernacularName={vernacularName}/>
                     </div>
 
                     <div className="basic-functions">
