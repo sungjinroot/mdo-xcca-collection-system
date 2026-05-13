@@ -1,9 +1,15 @@
 const express = require('express');
-
 const endpoint = express.Router();
+const pool = require('../db');
 
-endpoint.get('/nigga', (request,response) => {
-    response.send("test")
+
+endpoint.put("/:artifactId/:pictureId", async (req,res) => {
+
 });
+
+
+
+
+
 
 module.exports = endpoint;

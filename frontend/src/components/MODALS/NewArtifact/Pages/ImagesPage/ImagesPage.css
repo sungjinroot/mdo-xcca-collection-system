@@ -40,3 +40,11 @@
 .stepper-upload .image-upload-input {
   display: none; 
 }
+
+.uploaded-images-preview-grid {
+  display: grid;
+  height: 100%;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  align-content: start; 
+  gap: 12px;
+}

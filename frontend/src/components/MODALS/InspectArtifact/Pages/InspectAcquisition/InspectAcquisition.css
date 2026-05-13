@@ -1,16 +1,17 @@
-
 .inspect-acquisition-container{
     display: flex;
     flex-direction: column;
     padding: 20px;
-    gap: 10px;
+    gap: 20px;
 
     height: 88%;
     min-height: 0px;
     overflow: scroll;
+
+    zoom: 90%;
 }
 
-.inspect-acquisition-origins{
+.inspect-acquisition-origins {
     display: flex;
     padding: 20px;
     flex-direction: row;
@@ -19,26 +20,49 @@
     background-color: #283971;
     gap: 10px;
     border-radius: 20px;
+
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.55),
+        0 6px 14px rgba(0, 0, 0, 0.45),
+        inset 0 2px 3px rgba(255, 255, 255, 0.08);
 }
 
 .inspect-acquisition-origins-card{
     display: flex;
     flex-direction: column;
-    background-color: #3a52a3;
     color: white;
     padding: 15px;
-     flex: 1;             
+    flex: 1;             
     min-width: 200px; 
     border-radius: 8px;
 }
 
 .inspect-acquisition-origins-card input{
-    padding: 8px;
-    border-radius: 12px;
+    padding: 8px 0;
     border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0;
+    background: transparent;
+    color: white;
+    outline: none;
 }
 
-.inspect-acquisition-collection{
+.inspect-acquisition-origins-card input[type="number"]::-webkit-outer-spin-button,
+.inspect-acquisition-origins-card input[type="number"]::-webkit-inner-spin-button,
+.inspect-options-card-special-price input[type="number"]::-webkit-outer-spin-button,
+.inspect-options-card-special-price input[type="number"]::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inspect-acquisition-origins-card input[type="number"],
+.inspect-options-card-special-price input[type="number"] {
+    -moz-appearance: textfield;
+}
+
+
+
+.inspect-acquisition-collection {
     background-color: #283971;
     padding: 20px;
     border-radius: 20px;    
@@ -46,8 +70,12 @@
     display: flex;
     flex-direction: column;
     gap: 15px;
-}
 
+    box-shadow: 
+        0 14px 35px rgba(0, 0, 0, 0.55),
+        0 6px 14px rgba(0, 0, 0, 0.45),
+        inset 0 2px 3px rgba(255, 255, 255, 0.08);
+}
 .inspect-acquisition-collection label{
     color: white;   
 }
@@ -83,7 +111,6 @@
     font-weight: bold;
     flex: 1;
     border-radius: 8px;
-
 }
 
 .inspect-options-card-special-found{
@@ -100,7 +127,70 @@
 }
 
 .inspect-options-card-special-price input{
-    padding: 4px;
-    border-radius: 8px;
+    padding: 4px 0;
     border: none;
+    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-radius: 0;
+    background: transparent;
+    color: white;
+    outline: none;
+}
+
+.inspect-options-card-special-price input:focus{
+    border-bottom: 2px solid #ffffff;
+}
+
+.inspect-options-card-special-price input[type="number"]::-webkit-outer-spin-button,
+.inspect-options-card-special-price input[type="number"]::-webkit-inner-spin-button{
+    -webkit-appearance: none;
+    margin: 0;
+}
+
+.inspect-options-card-special-price input[type="number"]{
+    -moz-appearance: textfield;
+}
+
+
+
+.inspect-options-card,
+.inspect-options-card-special-found {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    cursor: pointer;
+    font-size: 16px;
+}
+
+.inspect-options-card input[type="radio"],
+.inspect-options-card-special-found input[type="radio"] {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    width: 22px;
+    height: 22px;
+    border: 2px solid #555;
+    border-radius: 50%;
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    background-color: #fff;
+}
+
+.inspect-options-card input[type="radio"]:hover,
+.inspect-options-card-special-found input[type="radio"]:hover {
+    border-color: #283971;
+}
+
+.inspect-options-card input[type="radio"]:checked,
+.inspect-options-card-special-found input[type="radio"]:checked {
+    border-color: #283971;
+    background-color: #283971;
+}
+
+.inspect-options-card input[type="radio"]:focus,
+.inspect-options-card-special-found input[type="radio"]:focus {
+    outline: 3px solid rgba(40, 57, 113, 0.3);
+    outline-offset: 2px;
 }

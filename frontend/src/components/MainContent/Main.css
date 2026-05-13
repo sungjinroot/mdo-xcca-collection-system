@@ -5,9 +5,12 @@
 }
 
 html, body, #root {
-    height: 100vh; 
-    font-size: 95%;
+    height: 100%; 
+    font-size: 97%;
+    overflow: hidden;
 }
+
+
 
 /*
 #root{
@@ -16,9 +19,26 @@ html, body, #root {
 */
 
 .main-content{
-    height: calc(100vh - (70px * 0.9) - (200px * 0.9));
+    height: calc(100vh - (60px * 0.75) - (200px * 0.8));
     display: flex;
     flex-direction: column;
+    position: relative;
+}
+
+
+.options-container {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+    z-index: 999;
+    transition: opacity 0.4s ease, visibility 0s linear 0.4s;
+}
+
+.main-content:hover .options-container {
+    opacity: 1;
+    visibility: visible;
+    pointer-events: auto;
+    transition: opacity 0.4s ease, visibility 0s linear 0s;
 }
 
 .gnome-container{
@@ -30,20 +50,21 @@ html, body, #root {
 
 .artifacts-grid{
     zoom: 70%; /*zoomed*/
+    padding-top: 10px;
     flex: 1;
     display: grid;
-    overflow: scroll;
     grid-template-columns: repeat(5,1fr); /*200 for smaller devices*/
-    grid-column-gap: 10px;
+    gap: 75px;
     justify-content: start; 
     scrollbar-width: none;
     -ms-overflow-style: none;
     height: 100%;
-    padding-bottom: 100px;
-    padding-left: 10px;
-    padding-right: 10px;
+    overflow: scroll;
+    padding-bottom: 150px;
+    padding-left: 15px;
+    padding-right: 15px;
 
-    background-color:#E3EAF0; 
+    background-color: white; 
 }
 
 @media (min-width: 1300px) {
@@ -52,7 +73,7 @@ html, body, #root {
   }
 }
 
-@media (min-width: 1800px) {
+@media (min-width: 1700px) {
   .artifacts-grid{
     grid-template-columns: repeat(5,1fr);
   }

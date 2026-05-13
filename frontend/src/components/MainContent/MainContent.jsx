@@ -3,49 +3,21 @@ import Artifact from "../artifact/Artifact.jsx";
 import './Main.css';
 
 
-function MainContent(){
+function MainContent({ categories, rooms, artifacts }){
+
+    console.log("I AM HERE");
+    console.log(artifacts);
 
     return (
     <>
 
         <div className="main-content">
-            <Options/>
+            <Options categories={categories} rooms={rooms}/>
             <div className="gnome-container"> 
-                
-               
                     <div className="artifacts-grid"> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        <Artifact/> 
-                        
-                        
-
-                        
-
-                        
-                        
-                        
-
-
-                       
+                        {artifacts.map((artifact) => (
+                            <Artifact key={artifact.artifactid} artifactId={artifact.artifactId} englishName={artifact.englishname} vernacularName={artifact.vernacularname}/>
+                        ))}                  
                     </div>
                
                 

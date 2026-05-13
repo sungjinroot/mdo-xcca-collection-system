@@ -11,7 +11,7 @@ import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 import PrimaryView from './PrimaryView/PrimaryView.jsx';
 import PrimaryInfo from './PrimaryInfo/PrimaryInfo.jsx';
 
-function renderTab(current){
+function renderTab(current,collectionType,setCollectionType, priceVisible, setPriceVisible){
     switch (current){
         case 0: 
             return (
@@ -20,12 +20,12 @@ function renderTab(current){
             
         case 1:
             return (
-                <InspectContacts/>
+                <InspectContacts collectionType={collectionType}/>
             )
         
         case 2:
             return (
-                <InspectAcquisition/>
+                <InspectAcquisition collectionType={collectionType} setCollectionType={setCollectionType}/>
             )
     }
 }
@@ -39,12 +39,15 @@ function InspectArtifact(props){
         setValue(newValue);
     };
 
+    const [collectionType, setCollectionType] = useState("");
 
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} dialogClassName='ModalSizeWidth' contentClassName='ModalSizeHeight'  aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
-                <img src="src/assets/logo.png" style={{ height: '40px' }}/>
-                
+
+                <div className="mdo-header">
+                    <h3> Museo De Oro </h3>
+                </div>                 
             
             </Modal.Header>
             
@@ -61,11 +64,11 @@ function InspectArtifact(props){
                             <Tabs value={value} onChange={handleChange}>
                                 <Tab label="Physical"  value={0} />
                                 <Tab label="Contacts" value={1} />
-                                <Tab label="Acquisition" value={2} />
+                                <Tab label="Provenance" value={2} />
                             </Tabs>
                         </div>
 
-                        {renderTab(value)}
+                        {renderTab(value,collectionType,setCollectionType)}
 
                     </div>
                     

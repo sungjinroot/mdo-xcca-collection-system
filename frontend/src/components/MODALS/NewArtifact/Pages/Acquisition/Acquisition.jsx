@@ -1,93 +1,146 @@
 import '../Layout.css';
 import './Acquisition.css';
+import '../../NewArtifact.css';
+import { useEffect } from 'react';
 
-function Acquisition({ nextStep,prevStep }){
-    
-    
-    
+function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, artifactProvenance, setArtifactProvenance, price, setPrice }) {
+
+    useEffect(() => {
+        if (collectionType !== "Purchased") {
+            setPrice("");
+        }
+    }, [collectionType]);
+
+    const handleProvenanceChange = (field, value) => {
+        setArtifactProvenance(prev => ({
+            ...prev,
+            [field]: value
+        }));
+    };
+
+    const handlePriceChange = (value) => {
+        if (value === "") {
+            setPrice(value);
+            return;
+        }
+
+        const regex = /^\d*\.?\d*$/;
+
+        if (regex.test(value)) {
+            setPrice(value);
+        }
+    };
+
+    const isValid = () => {
+        if (!collectionType) return false;
+
+        if (collectionType === "F") {
+            const strictRegex = /^\d+(\.\d+)?$/;
+            return strictRegex.test(price);
+        }
+        return true;
+    };
+
     return (
         <div className="stepper-container">
             <div className="stepper-content">
+
                 <div className="stepper-left">
                     <div className="stepper-acquisition-provenance-container">
-                        <h3> Provenance </h3> 
+                        <h3>Provenance</h3>
 
                         <div className="stepper-acquisition-provenance-fields">
-                            <label> Ethnic Group </label>
-                            <input type="text"/>
+                            <label>Ethnic Group</label>
+                            <input type="text" value={artifactProvenance.ethnicGroup} onChange={(e) => handleProvenanceChange('ethnicGroup', e.target.value)}/>
                         </div>
 
                         <div className="stepper-acquisition-provenance-fields">
-                            <label> Place Of Origin </label>
-                            <input type="text"/>
+                            <label>Place Of Origin</label>
+                            <input type="text" value={artifactProvenance.placeOfOrigin} onChange={(e) => handleProvenanceChange('placeOfOrigin', e.target.value)}/>
                         </div>
 
                         <div className="stepper-acquisition-provenance-fields">
-                            <label> Locality </label>
-                            <input type="text"/>
+                            <label>Locality</label>
+                            <input type="text" value={artifactProvenance.locality} onChange={(e) => handleProvenanceChange('locality', e.target.value)}/>
                         </div>
                     </div>
                 </div>
 
-
-
-
-
                 <div className="stepper-right">
+
                     <div className="stepper-acquisition-collection-means-container-usual">
-                        <h3> How artifact was collected </h3>
+                        <h3>
+                            How artifact was collected <span className="required">*</span>
+                        </h3>
 
                         <div className="stepper-acquisition-collection-means-fields">
+
                             <div className="stepper-acquisition-collection-means-forms">
-                                <input type="radio" name="collection"/>
-                                <label> Donated </label>
+                                <label className="radio-card">
+                                    <span>Donated</span>
+                                    <input type="radio" name="collection" value="A" checked={collectionType === "A"} onChange={(e) => setCollectionType(e.target.value)}/>
+
+                                </label>
                             </div>
 
                             <div className="stepper-acquisition-collection-means-forms">
-                                <input type="radio" name="collection"/>
-                                <label> Excavated </label>
+                                <label className="radio-card">
+                                    <span>Excavated</span>
+                                    <input type="radio" name="collection" value="C" checked={collectionType === "C"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                </label>
                             </div>
 
                         </div>
 
                         <div className="stepper-acquisition-collection-means-fields">
-                            
-                            <div className="stepper-acquisition-collection-means-forms">
 
-                                <input type="radio" name="collection"/>
-                                <label> On Loan </label>
+                            <div className="stepper-acquisition-collection-means-forms">
+                                <label className="radio-card">
+                                    <span>On Loan</span>
+                                    <input type="radio" name="collection" value="B" checked={collectionType === "B"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                </label>
                             </div>
 
                             <div className="stepper-acquisition-collection-means-forms">
-
-                                <input type="radio" name="collection"/>
-                                <label> Found </label>
+                                <label className="radio-card">
+                                    <span>Found</span>
+                                    <input type="radio" name="collection" value="D" checked={collectionType === "D"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                </label>
                             </div>
 
                         </div>
-
                     </div>
 
                     <div className="stepper-acquisition-collection-means-container-special">
-                        <label> Purchased </label>
-                        <input type="radio" name="collection"/>
+
+                        <div className="stepper-acquisition-purchased-option">
+                            <label className="radio-card">
+                                <span>Purchased</span>
+                                <input type="radio" name="collection" value="F" checked={collectionType === "F"} onChange={(e) => setCollectionType(e.target.value)}/>
+                            </label>
+                        </div>
+
+                        <div className="stepper-acquisition-price-input" style={{visibility: collectionType === "F" ? "visible" : "hidden"}}>
+                            <span className="required">*</span>
+                            <input type="text" placeholder="Price..." value={price} onChange={(e) => handlePriceChange(e.target.value)}/>
+                        </div>
+
                     </div>
-
-                   
-                    
-
 
                 </div>
             </div>
 
             <div className="stepper-navigation-multi">
-                <div className="stepper-navigation-left" onClick={() => prevStep()}> Previous </div> 
-                <div className="stepper-navigation-right" onClick={() => nextStep()}> Continue </div> 
+                <div className="stepper-navigation-left" onClick={() => prevStep()}>
+                    Previous
+                </div>
+
+                <div className={`stepper-navigation-right ${!isValid() ? "disabled" : ""}`} onClick={() => {if (isValid()) nextStep();}}>
+                    Continue
+                </div>
             </div>
         </div>
-    
-    )
+    );
 }
-
 
 export default Acquisition;

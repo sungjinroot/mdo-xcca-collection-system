@@ -3,33 +3,66 @@ import SpeedDial from "@mui/material/SpeedDial";
 import SpeedDialAction from "@mui/material/SpeedDialAction";
 
 import NewArtifact from "../MODALS/NewArtifact/NewArtifact";
-
 import AssistantsModal from "../MODALS/Assistants/AssistantsModal.jsx";
 
-function Options() {
+function Options( { categories, rooms } ) {
   const [open, setOpen] = useState(false);
 
-  //This is for modal
-  const [show,setShow] = useState(false);
-  const [showAssistants,setShowAssistants] = useState(false);
-
-
-  //Create separate set show for head count
+  const [show, setShow] = useState(false);
+  const [showAssistants, setShowAssistants] = useState(false);
 
   return (
     <>
       <div className="options-container">
-      
-        <SpeedDial ariaLabel="Simple SpeedDial" FabProps={{sx: {backgroundColor: "#283971", color: "#fff", "&:hover": {backgroundColor: "#3a52a3"}, width: '55px', height: '55px' }}} open={open} onOpen={() => setOpen(true)} onClose={() => setOpen(false)} style={{ position: "absolute", bottom: 15, right: 50, zIndex: 1,}} icon={<span>+</span>}>
-        
-          <SpeedDialAction icon={<span>A</span>} tooltipTitle="New Artifact" onClick={() => setShow(true)}/>
-        
-          <SpeedDialAction icon={<span>B</span>} tooltipTitle="New User" onClick={() => setShowAssistants(true)}/>
-        
+        <SpeedDial
+          ariaLabel="Simple SpeedDial"
+          open={open}
+          onOpen={() => setOpen(true)}
+          onClose={() => setOpen(false)}
+          icon={<span style={{ fontSize: "28px" }}>+</span>}
+          FabProps={{
+            sx: {
+              backgroundColor: "#283971",
+              color: "#fff",
+              "&:hover": { backgroundColor: "#3a52a3" },
+              width: 80,
+              height: 80,
+            },
+          }}
+          sx={{
+            position: "absolute",
+            bottom: 25,
+            right: 60,
+            zIndex: 1,
+          }}
+        >
+          <SpeedDialAction
+            icon={<span style={{ fontSize: "20px" }}>A</span>}
+            tooltipTitle="New Artifact"
+            onClick={() => setShow(true)}
+            FabProps={{
+              sx: {
+                width: 65,
+                height: 65,
+              },
+            }}
+          />
+
+          <SpeedDialAction
+            icon={<span style={{ fontSize: "20px" }}>B</span>}
+            tooltipTitle="New User"
+            onClick={() => setShowAssistants(true)}
+            FabProps={{
+              sx: {
+                width: 65,
+                height: 65,
+              },
+            }}
+          />
         </SpeedDial>
       </div>
 
-      <NewArtifact show={show} setShow={setShow}/>
+      <NewArtifact show={show} setShow={setShow} categories={categories} rooms={rooms}/>
       <AssistantsModal showAssistants={showAssistants} setShowAssistants={setShowAssistants}/>
     </>
   );

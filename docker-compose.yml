@@ -13,6 +13,7 @@ services:
     volumes:
       - ./backend/src:/app/src  
       - /app/node_modules       
+      - ./uploads:/app/uploads
 
   frontend:
     build: ./frontend
@@ -22,7 +23,10 @@ services:
       - backend
     volumes:
       - ./frontend:/app
-      - /app/node_modules
+      - ./uploads:/app/uploads
+      - /app/node_modules       
+
+
 
   db:
     image: postgres:15
@@ -35,6 +39,7 @@ services:
       - "5432:5432"
     volumes:
       - pgdata:/var/lib/postgresql/data
-
+      - ./database/db.sql:/docker-entrypoint-initdb.d/01_schema.sql
+      - ./database/dummyData.sql:/docker-entrypoint-initdb.d/02_data.sql
 volumes:
-  pgdata:
+  pgdata:  

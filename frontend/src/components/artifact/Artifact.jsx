@@ -4,18 +4,20 @@ import { useState } from 'react';
 import ArtifactData from './ArtifactData';
 
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
+import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
-function Artifact(){
+function Artifact({ artifactId, englishName, vernacularName }){
 
     //This is for modal
     const [show,setShow] = useState(false)
+
+    const [showWarning,setShowWarning] = useState(false);
 
     return (
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://t4.ftcdn.net/jpg/16/76/36/85/360_F_1676368530_8f4lKDMCczIN9TNJIW0cdGhCmIJvyiGC.jpg" onClick={() => setShow(true)}/>
-
+                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB42YFTSGUN5N7Iszp6u-RzvWnFjQ9G_a6jQ&s" onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
@@ -26,7 +28,7 @@ function Artifact(){
                     </div>
                     
 
-                    <button className="delete-button">
+                    <button className="delete-button" onClick={() => setShowWarning(true)}>
                         <img src="src/assets/delete.png"/>
                     </button>
 
@@ -36,7 +38,7 @@ function Artifact(){
                 <div className="card-info">
                     <div className="basic-info" onClick={() => setShow(true)}>
             
-                        <ArtifactData style={"artifact-display-data"} englishName={"Random Artifact"} vernacularName={"Ambot lang artifact"}/>
+                        <ArtifactData style={"artifact-display-data"} englishName={englishName} vernacularName={vernacularName}/>
                     </div>
 
                     <div className="basic-functions">
@@ -59,6 +61,8 @@ function Artifact(){
             </div>
 
             <InspectArtifact show={show} setShow={setShow}/>
+
+            <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning}/>
         </>
     );
 }

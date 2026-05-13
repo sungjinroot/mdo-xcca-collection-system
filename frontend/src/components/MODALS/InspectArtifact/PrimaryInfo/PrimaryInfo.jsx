@@ -41,15 +41,6 @@ function PrimaryInfo(){
                         <label> Storage Location </label>
                         <input type="text"/>
                     </div>    
-
-                    <div className="artifact-info-identifier-fields">
-                        <label> Room </label>
-                        <select>
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
-                        </select>
-                    </div> 
                 </div>
            </div>
         </div>
