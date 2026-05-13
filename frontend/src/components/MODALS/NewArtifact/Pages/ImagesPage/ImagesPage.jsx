@@ -14,6 +14,8 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
     const [images, setImages] = useState([]);
     const [openSnackbar, setOpenSnackbar] = useState(false);
 
+    const allNamed = images.every(img => img.pictureName.trim() !== "");
+
     function autoUpload(e) {
         const files = Array.from(e.target.files);
 
@@ -45,14 +47,51 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
     async function handleSubmission() {
         const lastInsertId = await submitArtifact();
 
+        if (!lastInsertId) return null;
+
         console.log("Here is the last inserted ID: " + lastInsertId);
 
+
+        if (images.length > 0) {
+            const formData = new FormData();
+            formData.append("artifactId", lastInsertId);
+            images.forEach((img) => {
+                formData.append("photos", img.file);
+                formData.append("pictureNames", img.pictureName);
+            });
+
+            try {
+                const response = await fetch("http://127.0.0.1:3000/api/v1/upload/artifact", {
+                    method: "POST",
+                    body: formData,
+                });
+
+                const result = await response.json();
+
+                console.log(result)
+
+                if (!result.success) {
+                    console.error("Image upload failed");
+                    return;
+                }
+
+                console.log("Uploaded files:", result.files);
+            } catch (err) {
+                console.error("Error uploading images:", err);
+                return;
+            }
+            
+            //Call api to send data to db
+
+        }
+
         setOpenSnackbar(true);
+
 
         setTimeout(() => {
             resetAllForm();
             resetStep();
-        }, 1700);
+        }, 1500);
     }
 
     function handleCloseSnackbar(event, reason) {
@@ -101,7 +140,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
                     Previous
                 </div>
 
-                <div className="stepper-navigation-right" onClick={() => handleSubmission()}>
+                <div className={`stepper-navigation-right ${!allNamed ? 'disabled' : ''}`} onClick={() => allNamed && handleSubmission()} style={{ opacity: allNamed ? 1 : 0.4, cursor: allNamed ? 'pointer' : 'not-allowed' }}>
                     Submit
                 </div>
             </div>

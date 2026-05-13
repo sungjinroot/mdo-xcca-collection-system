@@ -143,7 +143,9 @@ function NewArtifact(props) {
 
             if (!response.ok) {
                 const errorData = await response.json();
-                throw new Error(errorData.message || "Failed to create artifact");
+                resetStep();
+                alert("Duplicate Accession Number");
+                return null; 
             }
 
             const data = await response.json();

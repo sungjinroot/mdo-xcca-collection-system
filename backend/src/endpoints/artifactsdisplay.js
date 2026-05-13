@@ -2,89 +2,76 @@ const express = require('express');
 const endpoint = express.Router();
 const pool = require('../db');
 
-const getArtifactsDisplay = async (req, res) => {
-    const roomID = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
-    const categoryID = req.query.categoryID ? parseInt(req.query.categoryID, 10) : null;
+endpoint.get('/', async (req, res) => {
 
+    // Pagination
     const page = parseInt(req.query.page, 10) || 1;
     const limit = 20;
     const offset = (page - 1) * limit;
-    const search = req.query.search ? `%${req.query.search}%` : '%';
-
+ 
+    // Search
+    const search = req.query.search ? `%${req.query.search}%` : null;
+ 
+    // Room filter
+    const roomID = req.query.roomID ? parseInt(req.query.roomID, 10) : null;
+ 
+    // Category Filter
+    const categoryID = req.query.categoryID ? parseInt(req.query.categoryID, 10) : null;
+ 
     try {
-        let artifactQuery = `
-            SELECT 
-                a.artifactID,
-                an.englishName,
-                an.vernacularName,
-                a.roomID AS currentRoomID,
-                r.roomName AS currentRoomName
+        const conditions = [];
+        const params = [];
+ 
+        // IF ?search
+        if (search) {
+            conditions.push(`(an.englishName ILIKE $${params.length + 1} OR an.vernacularName ILIKE $${params.length + 1} OR a.accessionNo ILIKE $${params.length + 1})`);
+            params.push(search);
+        }
+ 
+        // IF ?roomID
+        if (roomID) {
+            conditions.push(`a.roomID = $${params.length + 1}`);
+            params.push(roomID);
+        }
+ 
+        // IF ?categoryID
+        if (categoryID) {
+            conditions.push(`EXISTS (
+                SELECT 1 FROM ArtifactCategories ac
+                WHERE ac.artifactID = a.artifactID AND ac.categoryID = $${params.length + 1}
+            )`);
+            params.push(categoryID);
+        }
+ 
+        
+        const whereClause = conditions.length > 0 ? `WHERE ${conditions.join(' AND ')}` : '';
+ 
+        const baseQuery = `
             FROM Artifacts a
             LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
             LEFT JOIN Rooms r ON a.roomID = r.roomID
-            WHERE (
-                an.englishName ILIKE $1
-                OR an.vernacularName ILIKE $1
-                OR a.accessionNo::text ILIKE $1
-            )
+            ${whereClause}
         `;
-
-        const params = [search];
-
-        // category filter by PRIMARY KEY (not name)
-        if (categoryID !== null && !isNaN(categoryID)) {
-            artifactQuery += ` AND a.categoryID = $${params.length + 1}`;
-            params.push(categoryID);
-        }
-
-        artifactQuery += `
-            ORDER BY an.englishName ASC
-            LIMIT $${params.length + 1}
-            OFFSET $${params.length + 2}
-        `;
-
-        params.push(limit, offset);
-
-        const result = await pool.query(artifactQuery, params);
-
-        let roomsResult;
-
-        if (roomID !== null && !isNaN(roomID)) {
-            roomsResult = await pool.query(
-                `SELECT roomID, roomName
-                 FROM Rooms
-                 WHERE roomID != $1
-                 ORDER BY roomName ASC`,
-                [roomID]
-            );
-        } else {
-            roomsResult = await pool.query(
-                `SELECT roomID, roomName
-                 FROM Rooms
-                 ORDER BY roomName ASC`
-            );
-        }
-
-        const countResult = await pool.query(
-            `
-            SELECT COUNT(*) 
-            FROM Artifacts a
-            LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
-            WHERE (
-                an.englishName ILIKE $1
-                OR an.vernacularName ILIKE $1
-                OR a.accessionNo::text ILIKE $1
-            )
-            ${categoryID ? "AND a.categoryID = $2" : ""}
-            `,
-            categoryID ? [search, categoryID] : [search]
-        );
-
+ 
+        const countResult = await pool.query(`SELECT COUNT(DISTINCT a.artifactID) ${baseQuery}`, params);
         const totalRows = parseInt(countResult.rows[0].count, 10);
         const totalPages = Math.ceil(totalRows / limit);
-
-        return res.json({
-            data: result.rows,
+ 
+        const artifactResult = await pool.query(`
+            SELECT DISTINCT
+                a.artifactID,
+                a.accessionNo,
+                a.roomID,
+                r.roomName,
+                an.englishName,
+                an.vernacularName
+            ${baseQuery}
+            ORDER BY a.artifactID ASC
+            LIMIT $${params.length + 1} OFFSET $${params.length + 2}
+        `, [...params, limit, offset]);
+ 
+        res.status(200).json({
+            data: artifactResult.rows,
             pagination: {
                 currentPage: page,
                 totalPages,
@@ -92,12 +79,15 @@ const getArtifactsDisplay = async (req, res) => {
                 limit
             }
         });
-
+ 
     } catch (err) {
         console.error(err);
-        return res.status(500).json({ message: "Internal server error" });
+        res.status(500).json({ error: 'Internal server error' });
     }
-};
+});
+ 
+module.exports = endpoint;
+ 
 
 /*
 const getRoomProfilePicture = async (req, res  ) => {
@@ -126,8 +116,5 @@ const getRoomProfilePicture = async (req, res  ) => {
   
 };
 */
-
-endpoint.get('/', getArtifactsDisplay);
-endpoint.get('/:roomID', getArtifactsDisplay);
 
 module.exports = endpoint;
