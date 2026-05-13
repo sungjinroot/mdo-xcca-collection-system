@@ -44,8 +44,8 @@
     transform: scale(0.95);
 }
 
-.highlight:hover{
-    background-color: #b99430;
+.highlight{
+    background-color: #283971;
     padding: 2.4px;
     border-radius: 5px;
     padding-left: 5px;

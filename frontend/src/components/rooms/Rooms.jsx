@@ -6,7 +6,7 @@ import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
 import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 import CategoriesModal from '../MODALS/Categories/CategoriesModal.jsx';
 
-function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCategories, rooms, setRooms } ) {
+function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCategories, rooms, setRooms, setCurrentPage } ) {
   const [showAdd, setShowAdd] = useState(false);
   const [showEdit, setShowEdit] = useState(false);
   const [showCategories, setShowCategories] = useState(false);
@@ -35,6 +35,7 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCate
       setRoomIndex(index);
       setRoomId(rooms[index].roomid);
     }
+    setCurrentPage(1);
   };
 
 

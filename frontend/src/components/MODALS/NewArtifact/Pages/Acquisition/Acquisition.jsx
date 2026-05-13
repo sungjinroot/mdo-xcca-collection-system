@@ -34,7 +34,7 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
     const isValid = () => {
         if (!collectionType) return false;
 
-        if (collectionType === "F") {
+        if (collectionType === "E") {
             const strictRegex = /^\d+(\.\d+)?$/;
             return strictRegex.test(price);
         }
@@ -116,11 +116,11 @@ function Acquisition({ nextStep, prevStep, collectionType ,setCollectionType, ar
                         <div className="stepper-acquisition-purchased-option">
                             <label className="radio-card">
                                 <span>Purchased</span>
-                                <input type="radio" name="collection" value="F" checked={collectionType === "F"} onChange={(e) => setCollectionType(e.target.value)}/>
+                                <input type="radio" name="collection" value="E" checked={collectionType === "E"} onChange={(e) => setCollectionType(e.target.value)}/>
                             </label>
                         </div>
 
-                        <div className="stepper-acquisition-price-input" style={{visibility: collectionType === "F" ? "visible" : "hidden"}}>
+                        <div className="stepper-acquisition-price-input" style={{visibility: collectionType === "E" ? "visible" : "hidden"}}>
                             <span className="required">*</span>
                             <input type="text" placeholder="Price..." value={price} onChange={(e) => handlePriceChange(e.target.value)}/>
                         </div>

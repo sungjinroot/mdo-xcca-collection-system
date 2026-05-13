@@ -12,7 +12,13 @@ function App() {
   //too late to refactor using useContext :/
   //Cant afford any regressions rn. 
 
-  const [page,setPage] = useState(1); //NO FUNCTIONALITY YET
+  //TO DO - update everything once an artifact is added
+
+  //reminder - remove statistics api for counter...
+
+  const [currentPage,setCurrentPage] = useState(1); 
+  const [totalPages,setTotalPages] = useState(1);
+
 
   const [categories,setCategories] = useState(null);
   const [categoryId,setCategoryId] = useState(null);
@@ -36,12 +42,16 @@ function App() {
 
   async function initiateArtifactSearch(){
     if (roomId){
-      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&roomID=${roomId}`);
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&roomID=${roomId}&page=${currentPage}`);
       const result = await response.json();
+
+      setTotalPages(result.pagination.totalPages)
       setArtifacts(result.data); 
     } else{
-      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}`);
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&page=${currentPage}`);
       const result = await response.json();
+
+      setTotalPages(result.pagination.totalPages)
       setArtifacts(result.data); 
     }
     
@@ -50,7 +60,7 @@ function App() {
   useEffect(() =>{
     initiateArtifactSearch();
     console.log(artifacts);
-  },[page,roomId,categoryId,searchQuery])
+  },[currentPage,roomId,categoryId,searchQuery])
 
 
   const handleLoginSuccess = (userData) => {
@@ -120,9 +130,9 @@ function App() {
     return (
       <>
         <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex}/> 
-        <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories}/> {/*Pass in currentRoom, and all rooms soon as props */}
+        <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage}/> {/*Pass in currentRoom, and all rooms soon as props */}
         <MainContent categories={categories} rooms={rooms} artifacts={artifacts}/>
-        <Footer/>
+        <Footer totalPages={totalPages} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </>
     );
   };
