@@ -1,6 +1,6 @@
 import './Artifact.css';
 import './ArtifactData';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import ArtifactData from './ArtifactData';
 
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
@@ -13,11 +13,31 @@ function Artifact({ artifactId, englishName, vernacularName }){
 
     const [showWarning,setShowWarning] = useState(false);
 
+    const [currentPicture,setCurrentPicture] = useState("");
+    const [pictures,setPictures] = useState([]);
+
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch(`http://127.0.0.1:3000/api/v1/thumbnail/${artifactId}`);
+            const result = await response.json();
+            setPictures(result);
+            setCurrentPicture(result[0].picturefilepath);
+            console.log(result);
+
+        };
+        fetchData();
+
+        console.log(pictures)
+    },[]);
+
+
+
+
     return (
         <>
             <div className="card-container">
                 <div className="card-img">
-                    <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcQB42YFTSGUN5N7Iszp6u-RzvWnFjQ9G_a6jQ&s" onClick={() => setShow(true)}/>
+                    <img src={currentPicture} onClick={() => setShow(true)}/>
                     <div className="thumbnail-chooser">
                         <select>
                             <option> Front </option>
