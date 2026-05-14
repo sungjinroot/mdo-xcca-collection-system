@@ -20,9 +20,27 @@ endpoint.get("/:id", async (req,res) => {
     }
 });
 
-endpoint.put("/:artifactId/:pictureId", async (req,res) => {
-    const artifactId = req.params.artifactId;
-    const pictureId = req.params.artifactId;
+endpoint.put("/:artifactId/:pictureId", async (req, res) => {
+    try {
+        const artifactId = req.params.artifactId;
+        const pictureId = req.params.pictureId;
+
+        // Set all pictures for this artifact to false
+        await pool.query('UPDATE pictures SET isprofilepicture = false WHERE artifactId = $1',[artifactId]);
+
+        // Set selected picture to true
+        await pool.query('UPDATE pictures SET isprofilepicture = true WHERE pictureId = $1',[pictureId]);
+
+        res.status(200).json({
+            message: "Profile picture updated"
+        });
+
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({
+            error: "Server error"
+        });
+    }
 });
 
 

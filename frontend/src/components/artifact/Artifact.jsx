@@ -31,14 +31,28 @@ function Artifact({ artifactId, englishName, vernacularName }) {
     fetchData();
   }, []);
 
+  const handleThumbnailChange = async (e) => {
+    const selectedPicture = pictures.find(p => p.picturefilepath === e.target.value);
+    if (!selectedPicture) return;
 
+    setCurrentPicture(selectedPicture.picturefilepath);
 
-  if (loading){
+    try {
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/thumbnail/${artifactId}/${selectedPicture.pictureid}`, {
+        method: "PUT",
+      });
+
+      if (!response.ok) {
+        console.error("Failed to update profile picture");
+      }
+    } catch (error) {
+      console.error("Error updating profile picture:", error);
+    }
+  };
+
+  if (loading) {
     return <div className="card-container">Loading...</div>;
-  } 
-
-
-  
+  }
 
   return (
     <>
@@ -48,7 +62,7 @@ function Artifact({ artifactId, englishName, vernacularName }) {
           <div className="thumbnail-chooser">
             
             
-            <select onChange={(e) => setCurrentPicture(e.target.value)}>
+            <select onChange={handleThumbnailChange}>
               {pictures.map((picture) => (
                 <option key={picture.id} value={picture.picturefilepath}>
                   {picture.anglename}
@@ -58,20 +72,15 @@ function Artifact({ artifactId, englishName, vernacularName }) {
 
 
           </div>
-
-
           <button className="delete-button" onClick={() => setShowWarning(true)}>
             <img src="src/assets/delete.png" />
           </button>
-
-
         </div>
-
-
         <div className="card-info">
           <div className="basic-info" onClick={() => setShow(true)}>
             <ArtifactData style={"artifact-display-data"} englishName={englishName} vernacularName={vernacularName} />
           </div>
+          
           <div className="basic-functions">
             <button className="card-functions">Download</button>
             <select className="card-functions">
@@ -87,6 +96,8 @@ function Artifact({ artifactId, englishName, vernacularName }) {
           </div>
         </div>
       </div>
+
+      
       <InspectArtifact show={show} setShow={setShow} />
       <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} />
     </>
