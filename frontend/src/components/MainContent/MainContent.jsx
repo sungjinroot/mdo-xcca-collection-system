@@ -3,7 +3,7 @@ import Artifact from "../artifact/Artifact.jsx";
 import './Main.css';
 
 
-function MainContent({ categories, rooms, artifacts }){
+function MainContent({ categories, rooms, artifacts, searchQuery, categoryId, roomId, currentPage, initiateArtifactSearch }){
 
     console.log("I AM HERE");
     console.log(artifacts);
@@ -16,7 +16,7 @@ function MainContent({ categories, rooms, artifacts }){
             <div className="gnome-container"> 
                     <div className="artifacts-grid"> 
                         {artifacts.map((artifact) => (
-                            <Artifact key={artifact.artifactid} artifactId={artifact.artifactid} englishName={artifact.englishname} vernacularName={artifact.vernacularname}/>
+                            <Artifact key={artifact.artifactid} artifactId={artifact.artifactid} englishName={artifact.englishname} vernacularName={artifact.vernacularname} initiateArtifactSearch={initiateArtifactSearch}/>
                         ))}                  
                     </div>
                

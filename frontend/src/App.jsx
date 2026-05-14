@@ -1,5 +1,5 @@
 import React from 'react';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useCallback } from 'react';
 import { Routes, Route, Navigate } from 'react-router-dom';
 import NavBar from './components/navbar/NavBar.jsx';
 import Rooms from './components/rooms/Rooms.jsx';
@@ -38,24 +38,22 @@ function App() {
   });
 
 
-  
 
-  async function initiateArtifactSearch(){
-    if (roomId){
+
+
+  const initiateArtifactSearch = useCallback(async () => {
+    if (roomId) {
       const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&roomID=${roomId}&page=${currentPage}`);
       const result = await response.json();
-
-      setTotalPages(result.pagination.totalPages)
-      setArtifacts(result.data); 
-    } else{
+      setTotalPages(result.pagination.totalPages);
+      setArtifacts(result.data);
+    } else {
       const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&page=${currentPage}`);
       const result = await response.json();
-
-      setTotalPages(result.pagination.totalPages)
-      setArtifacts(result.data); 
+      setTotalPages(result.pagination.totalPages);
+      setArtifacts(result.data);
     }
-    
-  }
+  }, [searchQuery, categoryId, roomId, currentPage]);
 
   useEffect(() =>{
     initiateArtifactSearch();
@@ -131,7 +129,10 @@ function App() {
       <>
         <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex}/> 
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage}/> 
-        <MainContent categories={categories} rooms={rooms} artifacts={artifacts}/>
+        
+        {/*Pass searchQuery, categoryId, roomId, Page, initiateArtifactSearch*/}
+        <MainContent categories={categories} rooms={rooms} artifacts={artifacts} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch}/>
+
         <Footer totalPages={totalPages} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </>
     );

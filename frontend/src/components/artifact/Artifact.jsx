@@ -5,10 +5,10 @@ import ArtifactData from './ArtifactData';
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
 import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
-function Artifact({ artifactId, englishName, vernacularName }) {
+function Artifact({ artifactId, englishName, vernacularName, searchQuery, categoryId, roomId, currentPage, initiateArtifactSearch }) {
   const [show, setShow] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
-  const [currentPicture, setCurrentPicture] = useState("");
+  const [currentPicture, setCurrentPicture] = useState(null);
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(true);
 
@@ -97,9 +97,9 @@ function Artifact({ artifactId, englishName, vernacularName }) {
         </div>
       </div>
 
-      
+
       <InspectArtifact show={show} setShow={setShow} />
-      <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} />
+      <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch}/>
     </>
   );
 }
