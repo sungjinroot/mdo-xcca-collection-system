@@ -223,7 +223,7 @@ endpoint.get('/:id', async (req, res) => {
 
 endpoint.post('/', async (req, res) => {
     const {
-        accessionNo, catalogueNo, roomID,
+        accessionNo, catalogueNo, roomID, storageLocation,
         englishName, vernacularName,
         ethnicGroup, locality, placeOfOrigin,
         contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy,
@@ -253,10 +253,7 @@ endpoint.post('/', async (req, res) => {
     try {
         await client.query('BEGIN');
 
-        const artifactResult = await client.query(
-            'INSERT INTO Artifacts (accessionNo, catalogueNo, roomID) VALUES ($1, $2, $3) RETURNING artifactID',
-            [accessionNo, catalogueNo, roomID]
-        );
+        const artifactResult = await client.query(`INSERT INTO Artifacts (accessionNo, catalogueNo, roomID, storageLocation)  VALUES ($1, $2, $3, $4) RETURNING artifactID`,[accessionNo, catalogueNo, roomID, storageLocation]);
         const artifactID = artifactResult.rows[0].artifactid;
  
         await client.query(

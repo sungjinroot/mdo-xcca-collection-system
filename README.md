@@ -28,4 +28,6 @@ cd mdo-xcca-collection-system/database
 docker exec -i mdo-xcca-collection-system-db-1 psql -U postgres -d mydb < dummyData.sql
 
 
-
+Known Bugs that cannot seem to be fixed (?):
+1. uploads folder always spawns inside frontend directory (harmless)
+2. Storage Location not working...

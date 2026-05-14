@@ -104,6 +104,7 @@ function NewArtifact(props) {
                 catalogueNo: artifactIdentifiers.catalogueNo,
                 roomID: artifactIdentifiers.roomID,
                 categories: artifactCategories,
+                storageLocation: artifactIdentifiers.storageLocation,
 
                 englishName: artifactNames.englishName,
                 vernacularName: artifactNames.vernacularName,
