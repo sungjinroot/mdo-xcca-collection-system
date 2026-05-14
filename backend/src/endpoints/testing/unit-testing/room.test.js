@@ -213,16 +213,31 @@ describe("DELETE /rooms/:id", () => {
         const res = await request(app).delete("/rooms/1");
 
         expect(res.status).toBe(200);
-        expect(res.body.message).toBe("Room with ID 1 is deleted");
+        expect(res.body.message).toBe("Room ID 1 is deleted");
     });
+    
 
-    test("returns 409 when room has artifacts or does not exist", async () => {
+
+
+    test ("returns 404 when room does not exists"), async () => {
+        pool.query.mockResolvedValueOnce({ rowCount: 0});
+        pool.query.mockResolvedValueOnce({rows: [{room_exists: false}]});
+
+        const res = await request(app).delete("/rooms/999");
+
+        expect(res.stauts).toBe(404);
+        expect(res.body.message).toBe("Room ID 999 does not exists");
+    }
+
+    test("returns 409 when room has existing artifacts", async () => {
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
+
+        pool.query.mockResolvedValue({ rows: [{room_exists: true}]});
 
         const res = await request(app).delete("/rooms/1");
 
         expect(res.status).toBe(409);
-        expect(res.body.error).toBe("Room cannot be deleted");
+        expect(res.body.error).toBe("Room cannot be deleted since it still has artifacts inside");
     });
 
     test("returns 500 on database error", async () => {
