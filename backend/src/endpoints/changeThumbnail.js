@@ -21,7 +21,8 @@ endpoint.get("/:id", async (req,res) => {
 });
 
 endpoint.put("/:artifactId/:pictureId", async (req,res) => {
-
+    const artifactId = req.params.artifactId;
+    const pictureId = req.params.artifactId;
 });
 
 
