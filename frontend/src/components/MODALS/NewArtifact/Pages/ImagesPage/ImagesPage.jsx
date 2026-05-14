@@ -5,7 +5,7 @@ import Alert from '@mui/material/Alert';
 import PreviewImage from './PreviewImage/PreviewImage.jsx';
 import { useState, useEffect } from 'react';
 
-function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep }) {
+function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep, initiateArtifactSearch }) {
 
     useEffect(() => {
         console.log(images);
@@ -50,6 +50,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
         if (!lastInsertId) return null;
 
         console.log("Here is the last inserted ID: " + lastInsertId);
+        initiateArtifactSearch();
 
 
         if (images.length > 0) {

@@ -5,7 +5,7 @@ import ArtifactData from './ArtifactData';
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
 import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
-function Artifact({ artifactId, englishName, vernacularName, searchQuery, categoryId, roomId, currentPage, initiateArtifactSearch }) {
+function Artifact({ artifactId, englishName, vernacularName, initiateArtifactSearch }) {
   const [show, setShow] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
@@ -64,7 +64,7 @@ function Artifact({ artifactId, englishName, vernacularName, searchQuery, catego
             
             <select onChange={handleThumbnailChange}>
               {pictures.map((picture) => (
-                <option key={picture.id} value={picture.picturefilepath}>
+                <option key={picture.pictureid} value={picture.picturefilepath}>
                   {picture.anglename}
                 </option>
               ))}
@@ -99,7 +99,7 @@ function Artifact({ artifactId, englishName, vernacularName, searchQuery, catego
 
 
       <InspectArtifact show={show} setShow={setShow} />
-      <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch}/>
+      <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch}/>
     </>
   );
 }

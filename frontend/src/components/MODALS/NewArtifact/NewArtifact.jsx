@@ -198,7 +198,7 @@ function NewArtifact(props) {
                 )}
 
                 {currentStep === 4 && (
-                    <ImagesPage prevStep={prevStep} setShow={props.setShow} submitArtifact={submitArtifact} resetAllForm={resetAllForm} resetStep={resetStep}/>
+                    <ImagesPage prevStep={prevStep} setShow={props.setShow} submitArtifact={submitArtifact} resetAllForm={resetAllForm} resetStep={resetStep} initiateArtifactSearch={props.initiateArtifactSearch}/>
                 )}
 
             </Modal.Body>

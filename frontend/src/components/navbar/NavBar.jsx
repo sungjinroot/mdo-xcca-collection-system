@@ -36,8 +36,11 @@ function NavBar({ categories,setCategoryId, searchQuery, setSearchQuery, setRoom
             <div className="nav-left">
                 <img src="src/assets/logo.png" alt="centennial" />
                 <img src="src/assets/centennial.png" alt="centennial" />
+                
+                {/* temporarily disabled 
                 <img src="src/assets/omm.jpg"/>
                 <img src="src/assets/mdo.jpg"/>
+                */}
             </div>
 
             <div className="nav-stats">
