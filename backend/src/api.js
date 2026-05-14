@@ -38,14 +38,16 @@ app.use('/api/v1/users', usersEndpoint);
 app.use('/api/v1/statistics', statisticsEndpoint);
 
 //AALV endpoints
-const uploadEndpoint = require('./endpoints/upload')
-const insertPhotoEndpoint = require('./endpoints/artifactImages')
-const changeThumbnail = require('./endpoints/changeThumbnail')
+const uploadEndpoint = require('./endpoints/upload');
+const insertPhotoEndpoint = require('./endpoints/artifactImages');
+const changeThumbnail = require('./endpoints/changeThumbnail');
+const changeRoom = require('./endpoints/changeRoom');
 
 //AALV endpoints
 app.use('/api/v1/upload/',uploadEndpoint);
 app.use('/api/v1/images/', insertPhotoEndpoint);
 app.use('/api/v1/thumbnail', changeThumbnail);
+app.use('/api/v1/changeroom',changeRoom);
 
 app.get("/test-db", async (req, res) => {
     try {
