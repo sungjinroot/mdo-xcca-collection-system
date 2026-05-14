@@ -57,7 +57,7 @@
     height: 100%;
     object-fit: cover;             
     object-position: center 0%;
-    animation: microPan 60s ease-in-out infinite alternate;
+    animation: microPan 80s ease-in-out infinite alternate;
 }
 
 @keyframes microPan {

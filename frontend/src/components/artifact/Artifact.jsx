@@ -5,12 +5,19 @@ import ArtifactData from './ArtifactData';
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
 import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
-function Artifact({ artifactId, englishName, vernacularName, initiateArtifactSearch }) {
+function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArtifactSearch, currentRoomId, currentRoomName }) {
   const [show, setShow] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(true);
+
+  //CHANGE ROOMS NOT DONE
+
+  const [currentRoom,setCurrentRoom] = useState({
+    "roomId": currentRoomId,
+    "currentRoomName": currentRoomName 
+  });
 
   useEffect(() => {
     const fetchData = async () => {
@@ -84,14 +91,16 @@ function Artifact({ artifactId, englishName, vernacularName, initiateArtifactSea
           <div className="basic-functions">
             <button className="card-functions">Download</button>
             <select className="card-functions">
-              <option>Room 1</option>
-              <option>Room 2</option>
-              <option>Room 3</option>
-              <option>Room 4</option>
-              <option>Room 5</option>
-              <option>Room 6</option>
-              <option>Room 7</option>
-              <option>Room 8</option>
+              
+              <option>
+                {currentRoom.currentRoomName}
+              </option>
+
+              {rooms.filter(room => room.roomid !== currentRoomId).map((room) => (
+                <option key={room.roomid} value={room.roomid}>
+                  {room.roomname}
+                </option>
+              ))}
             </select>
           </div>
         </div>
