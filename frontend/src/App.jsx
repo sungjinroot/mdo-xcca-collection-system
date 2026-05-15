@@ -125,7 +125,7 @@ function App() {
   //const ProtectedLayout = () => {
     //if (!user) return <Navigate to="/login" replace />;
 
-    return (
+    const MainApp = (
       <>
         <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex}/> 
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage}/> 
@@ -135,20 +135,31 @@ function App() {
         <Footer totalPages={totalPages} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </>
     );
-  };
   
-  //return (
-    //<Routes>
-      //<Route path="/login" element={
-          //user
-            //? <Navigate to="/" replace />
-            //: <Login onLoginSuccess={handleLoginSuccess} />
-        //}
-      ///>
-      //<Route path="/*" element={<ProtectedLayout />} />
-    //</Routes>
-  //);
-  
-//}
+  return (
+    <Routes>
+      {/* Login route — redirect to home if already logged in */}
+      <Route
+        path="/login"
+        element={
+          user
+            ? <Navigate to="/" replace />
+            : <Login onLoginSuccess={handleLoginSuccess} />
+        }
+      />
+
+      {/* Main app route — redirect to login if not authenticated */}
+      <Route
+        path="/*"
+        element={
+          user
+            ? MainApp
+            : <Navigate to="/login" replace />
+        }
+      />
+    </Routes>
+  );
+}
+
 
 export default App;
