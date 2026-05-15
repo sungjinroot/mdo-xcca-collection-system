@@ -47,7 +47,7 @@ function Login({ onLoginSuccess }) {
       <div className="login-container">
         <div className="login-card">
           <img src="src/assets/xu-logo.png" className="card-logo" />
-          <img src="src/assets/xcca-logo.png" className="card-xcca-logo" />
+          <h1 className="login-title">Museo de Oro Collection Inventory Management System</h1>
           
 
           {error && (
