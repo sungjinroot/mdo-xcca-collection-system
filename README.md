@@ -30,4 +30,4 @@ docker exec -i mdo-xcca-collection-system-db-1 psql -U postgres -d mydb < dummyD
 
 Known Bugs that cannot seem to be fixed (?):
 1. uploads folder always spawns inside frontend directory (harmless)
-2. Storage Location not working...
+2. Artifacts display (frontend) when hovering a clicked rooms dropdown, it has a glitching effect. (Visual bug)
