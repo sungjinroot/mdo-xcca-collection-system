@@ -12,15 +12,21 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCate
   const [showCategories, setShowCategories] = useState(false);
 
   //Note to self: this calls the api when the add room modal is closed / open
+
+  const [changed,setChanged] = useState(0);
+  
   useEffect(() => {
     const fetchData = async () => {
       const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
       const result = await response.json();
-      setRooms(result); //use () => prev notation
-      console.log(result);
+      setRooms(() => [...result]);
+      console.log("UPDATED: " +  roomIndex + " " + roomId);
+
     };
     fetchData();
-  }, [showAdd,showEdit]);
+  }, [changed]);
+
+  
 
   const handleEditRoom = (room) => {
     setShowEdit(true);
@@ -68,8 +74,8 @@ function Rooms( {roomIndex, setRoomIndex, roomId, setRoomId, categories, setCate
         ))}
 
       </Carousel>
-      <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd}/>
-      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex}/> 
+      <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} setChanged={setChanged}/>
+      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex} setChanged={setChanged}/> 
       <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories} categories={categories} setCategories={setCategories}/>
     </>
   );

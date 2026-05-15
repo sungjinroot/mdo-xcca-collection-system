@@ -17,6 +17,8 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
     currentRoomName: currentRoomName
   });
 
+  const [currentArtifactData,setCurrentArtifactData] = useState(null); 
+
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -78,11 +80,24 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
     return <div className="card-container">Loading...</div>;
   }
 
+  //Todo later. when editing via debounce... call this api again
+
+  const getSpecificData = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/artifacts/${artifactId}`);
+      const result = await response.json();
+      setCurrentArtifactData(result);
+      setShow(true);                
+    } catch (error) {
+      console.error("Failed to fetch artifact data:", error);
+    }
+  };
+
   return (
     <>
       <div className="card-container">
         <div className="card-img">
-          <img src={currentPicture} onClick={() => setShow(true)} />
+          <img src={currentPicture} onClick={() => getSpecificData()} />
           <div className="thumbnail-chooser">
             <select onChange={handleThumbnailChange}>
               {pictures.map((picture) => (
@@ -97,7 +112,7 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
           </button>
         </div>
         <div className="card-info">
-          <div className="basic-info" onClick={() => setShow(true)}>
+          <div className="basic-info" onClick={() => getSpecificData()}>
             <ArtifactData style={"artifact-display-data"} englishName={englishName} vernacularName={vernacularName} />
           </div>
           <div className="basic-functions">
@@ -119,7 +134,8 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
           </div>
         </div>
       </div>
-      <InspectArtifact show={show} setShow={setShow} />
+
+      <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData}/>
       <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch} />
     </>
   );

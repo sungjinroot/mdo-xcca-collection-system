@@ -5,7 +5,7 @@ import Tooltip from '@mui/material/Tooltip';
 
 const DEBOUNCE_DELAY = 500; 
 
-function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, setRoomIndex }) {
+function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, setRoomIndex, setChanged }) {
   const [title, setTitle] = useState("");
   const [roomName, setRoomName] = useState("");
   const [caption, setCaption] = useState("");
@@ -55,7 +55,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
         });
 
         if (!response.ok) throw new Error(`PUT failed: ${response.status}`);
-
+        setChanged((c) => c + 1);
         console.log("Room updated:", await response.json());
         setSaveStatus("saved");
 
@@ -100,6 +100,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
       }
 
       console.log(`Room ${roomId} deleted successfully`);
+      setChanged((c) => c + 1);
       setRoomIndex(null);
       setRoomId(null);
       setShowEdit(false);

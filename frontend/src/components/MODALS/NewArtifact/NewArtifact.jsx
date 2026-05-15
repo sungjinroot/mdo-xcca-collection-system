@@ -126,6 +126,7 @@ function NewArtifact(props) {
 
                 collectionType: collectionType,
 
+                artifactDiameter: artifactMeasurements.diameter ? Number(artifactMeasurements.diameter) : null,
                 artifactLength: artifactMeasurements.length,
                 artifactWidth: artifactMeasurements.width,
                 artifactHeight: artifactMeasurements.height,
@@ -153,6 +154,8 @@ function NewArtifact(props) {
             
             resetAllForm();
             resetStep();
+
+            setChanged((c) => c + 1);
 
             return data.artifactID;
 

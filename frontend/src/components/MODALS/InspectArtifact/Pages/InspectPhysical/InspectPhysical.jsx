@@ -4,32 +4,32 @@ import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
 
-function InspectPhysical(){
+function InspectPhysical({ currentArtifactData }){
     
     return (
         <div className="inspect-physical-container">
             <div className="inspect-physical-dimensions">
                 <div className="inspect-physical-top-fields">
                     <label> Diameter (for round artifact) </label>
-                    <input type="number"/>
+                    <input type="number" value={currentArtifactData.dimensions.artifactDiameter}/>
                 </div>
 
                 
                 <div className="inspect-physical-lwh">
                     <div className="inspect-physical-top-lwh-fields">
                         <label> Length (cm) </label>
-                        <input type="number"/>
+                        <input type="number" value={currentArtifactData.dimensions.artifactLength}/>
                     </div>
 
                     <div className="inspect-physical-top-lwh-fields">
                         <label> Width (cm) </label>
-                        <input type="number"/>
+                        <input type="number" value={currentArtifactData.dimensions.artifactWidth}/>
 
                     </div>
 
                     <div className="inspect-physical-top-lwh-fields">
                         <label> Height (cm) </label>
-                        <input type="number"/>
+                        <input type="number" value={currentArtifactData.dimensions.artifactHeight}/>
                     </div>
                 </div>
                 
@@ -45,7 +45,7 @@ function InspectPhysical(){
                     <AccordionDetails>
                         <div className="accordion-text">
                             <textarea>
-                                
+                                {currentArtifactData.physicaldescription.specialRemarks}
                             </textarea>
                         </div>
                     </AccordionDetails>
@@ -90,7 +90,7 @@ function InspectPhysical(){
                     <AccordionDetails>
                         <div className="accordion-text">
                             <textarea>
-                                
+                                {currentArtifactData.physicaldescription.artifactDetails}
                             </textarea>
                         </div>
                     </AccordionDetails>
@@ -104,7 +104,7 @@ function InspectPhysical(){
                     <AccordionDetails>
                         <div className="accordion-text">
                             <textarea>
-                                
+                                {currentArtifactData.physicaldescription.artifactFunction}
                             </textarea>
                         </div>
                     </AccordionDetails>
@@ -119,7 +119,7 @@ function InspectPhysical(){
                     <AccordionDetails>
                         <div className="accordion-text">
                             <textarea>
-                                
+                                {currentArtifactData.physicaldescription.conditionUponReceipt}
                             </textarea>
                         </div>
                     </AccordionDetails>

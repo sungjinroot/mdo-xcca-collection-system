@@ -8,17 +8,17 @@ function InspectAcquisition(props) {
 
                 <div className="inspect-acquisition-origins-card">
                     <label> Ethnic Group </label>
-                    <input type="text" />
+                    <input type="text" value={props.currentArtifactData.artifactprovenance.ethnicGroup}/>
                 </div>
 
                 <div className="inspect-acquisition-origins-card">
                     <label> Place Of Origin </label>
-                    <input type="text" />
+                    <input type="text" value={props.currentArtifactData.artifactprovenance.placeOfOrigin}/>
                 </div>
 
                 <div className="inspect-acquisition-origins-card">
                     <label> Locality </label>
-                    <input type="text" />
+                    <input type="text" value={props.currentArtifactData.artifactprovenance.locality}/>
                 </div>
 
             </div>
