@@ -31,23 +31,25 @@ function InspectAcquisition(props) {
 
                     <label className="inspect-options-card">
                         Donated
-                        <input type="radio" name="acquisition-radio"  checked={props.collectionType === "Donated"} onChange={() => props.setCollectionType("Donated")}/>
+                        <input type="radio" name="acquisition-radio"  checked={props.currentArtifactData.acquisition.collectionType === "A"}/>
                     </label>
 
                     <label className="inspect-options-card">
                         On Loan
-                        <input type="radio" name="acquisition-radio" checked={props.collectionType === "On Loan"} onChange={() => props.setCollectionType("On Loan")}/>
-                    </label>
-
-                    <label className="inspect-options-card">
-                        Found
-                        <input type="radio" name="acquisition-radio" checked={props.collectionType === "Found"} onChange={() => props.setCollectionType("Found")}/>
+                        <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "B"}/>
                     </label>
 
                     <label className="inspect-options-card">
                         Excavated
-                        <input type="radio" name="acquisition-radio" checked={props.collectionType === "Excavated"} onChange={() => props.setCollectionType("Excavated")}/>
+                        <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "C"}/>
                     </label>
+
+                    <label className="inspect-options-card">
+                        Found
+                        <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "D"}/>
+                    </label>
+
+
 
                 </div>
 
@@ -57,10 +59,10 @@ function InspectAcquisition(props) {
 
                         <label className="inspect-options-card-special-found">
                             Purchased
-                            <input type="radio" name="acquisition-radio" checked={props.collectionType === "Purchased"} onChange={() => props.setCollectionType("Purchased")}/>
+                            <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "E"}/>
                         </label>
 
-                        <div className="inspect-options-card-special-price" style={{visibility: props.collectionType === "Purchased" ? "visible" : "hidden"}}>
+                        <div className="inspect-options-card-special-price" style={{visibility: props.collectionType === "E" ? "visible" : "hidden"}}>
                             <label>Price</label>
                             <input type="number" />
                         </div>

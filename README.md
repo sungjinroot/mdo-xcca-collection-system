@@ -2,6 +2,11 @@
 
 HOW TO RUN PROJECT:
 
+Step 1. Git clone the repository.
+
+Step 2: Go to frontend, then npm install. Go to backend, then npm install. Go to root directory then npm install
+
+Step 3: Dockerize it. 
 
 
 HOW TO ENTER THE BACKEND SHELL

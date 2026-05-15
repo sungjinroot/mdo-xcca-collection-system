@@ -155,7 +155,6 @@ function NewArtifact(props) {
             resetAllForm();
             resetStep();
 
-            setChanged((c) => c + 1);
 
             return data.artifactID;
 

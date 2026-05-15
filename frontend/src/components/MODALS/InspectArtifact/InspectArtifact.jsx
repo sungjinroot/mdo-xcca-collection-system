@@ -20,7 +20,7 @@ function renderTab(current,collectionType,setCollectionType, currentArtifactData
             
         case 1:
             return (
-                <InspectContacts collectionType={collectionType}/>
+                <InspectContacts collectionType={collectionType} currentArtifactData={currentArtifactData}/>
             )
         
         case 2:
@@ -45,7 +45,7 @@ function InspectArtifact(props){
         return null;
     } else{
         console.log(props.currentArtifactData.artifacts.artifactnames);        
-        alert(props.currentArtifactData.artifactnames.englishName);
+        //alert(props.currentArtifactData.artifactnames.englishName);
     }
 
     return (
@@ -62,7 +62,7 @@ function InspectArtifact(props){
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
                         <PrimaryView/>
-                        <PrimaryInfo/>
+                        <PrimaryInfo currentArtifactData={props.currentArtifactData}/>
                     </div>
 
                     <div className="artifact-info-right">
