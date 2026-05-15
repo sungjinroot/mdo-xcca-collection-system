@@ -21,7 +21,7 @@ describe("POST /auth/login", () => {
 
     test("returns 200 and token on successful login", async () => {
         pool.query.mockResolvedValueOnce({
-            rows: [{ userid: 1, username: "admin", bcryptpassword: "hashedpassword" }]
+            rows: [{ userid: 1, username: "admin", bcryptpassword: "hashedpassword", canadd: true }]
         });
         bcrypt.compare.mockResolvedValueOnce(true);
 
@@ -57,7 +57,7 @@ describe("POST /auth/login", () => {
 
     test("returns 401 when password is wrong", async () => {
         pool.query.mockResolvedValueOnce({
-            rows: [{ userid: 1, username: "admin", bcryptpassword: "hashedpassword" }]
+            rows: [{ userid: 1, username: "admin", bcryptpassword: "hashedpassword", canadd: false }]
         });
         bcrypt.compare.mockResolvedValueOnce(false);
 
