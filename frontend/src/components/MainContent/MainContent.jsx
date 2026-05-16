@@ -16,7 +16,7 @@ function MainContent({ categories, rooms, artifacts, initiateArtifactSearch }){
             <div className="gnome-container"> 
                     <div className="artifacts-grid"> 
                         {artifacts.map((artifact) => (
-                            <Artifact key={artifact.artifactid} artifactId={artifact.artifactid} englishName={artifact.englishname} vernacularName={artifact.vernacularname} initiateArtifactSearch={initiateArtifactSearch}/>
+                            <Artifact key={artifact.artifactid} rooms={rooms} currentRoomId={artifact.roomid} currentRoomName={artifact.roomname} artifactId={artifact.artifactid} englishName={artifact.englishname} vernacularName={artifact.vernacularname} initiateArtifactSearch={initiateArtifactSearch}/>
                         ))}                  
                     </div>
                

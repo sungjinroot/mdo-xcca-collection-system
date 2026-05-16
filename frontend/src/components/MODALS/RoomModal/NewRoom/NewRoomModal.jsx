@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './NewRoomModal.css';
 import Modal from 'react-bootstrap/Modal';
 
-function NewRoomModal({ showAdd, setShowAdd }) {
+function NewRoomModal({ showAdd, setShowAdd, setChanged }) {
 
     const [roomData, setRoomData] = useState({
         title: '',
@@ -67,7 +67,8 @@ function NewRoomModal({ showAdd, setShowAdd }) {
                 caption: '',
                 roomPictureURL: null
             });
-
+            
+            setChanged((c) => c + 1);
             setFileKey(Date.now());
             setShowAdd(false);
 

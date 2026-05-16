@@ -104,6 +104,7 @@ function NewArtifact(props) {
                 catalogueNo: artifactIdentifiers.catalogueNo,
                 roomID: artifactIdentifiers.roomID,
                 categories: artifactCategories,
+                storageLocation: artifactIdentifiers.storageLocation,
 
                 englishName: artifactNames.englishName,
                 vernacularName: artifactNames.vernacularName,
@@ -125,6 +126,7 @@ function NewArtifact(props) {
 
                 collectionType: collectionType,
 
+                artifactDiameter: artifactMeasurements.diameter ? Number(artifactMeasurements.diameter) : null,
                 artifactLength: artifactMeasurements.length,
                 artifactWidth: artifactMeasurements.width,
                 artifactHeight: artifactMeasurements.height,
@@ -152,6 +154,7 @@ function NewArtifact(props) {
             
             resetAllForm();
             resetStep();
+
 
             return data.artifactID;
 

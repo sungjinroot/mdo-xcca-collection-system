@@ -41,9 +41,6 @@ endpoint.post('/login', async (req, res) => {
                 username: user.username,
                 role: role,
                 canAdd: user.canadd,
-                canEdit: user.canedit,
-                canDelete: user.candelete,
-                canDownload: user.candownload
             },
             process.env.JWT_SECRET || "secretkey",
             { expiresIn: "120d" }

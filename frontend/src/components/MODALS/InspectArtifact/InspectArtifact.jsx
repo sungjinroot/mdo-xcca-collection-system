@@ -11,21 +11,21 @@ import InspectPhysical from './Pages/InspectPhysical/InspectPhysical.jsx';
 import PrimaryView from './PrimaryView/PrimaryView.jsx';
 import PrimaryInfo from './PrimaryInfo/PrimaryInfo.jsx';
 
-function renderTab(current,collectionType,setCollectionType, priceVisible, setPriceVisible){
+function renderTab(current,collectionType,setCollectionType, currentArtifactData){
     switch (current){
         case 0: 
             return (
-                <InspectPhysical/>
+                <InspectPhysical currentArtifactData={currentArtifactData}/>
             )
             
         case 1:
             return (
-                <InspectContacts collectionType={collectionType}/>
+                <InspectContacts collectionType={collectionType} currentArtifactData={currentArtifactData}/>
             )
         
         case 2:
             return (
-                <InspectAcquisition collectionType={collectionType} setCollectionType={setCollectionType}/>
+                <InspectAcquisition collectionType={collectionType} setCollectionType={setCollectionType} currentArtifactData={currentArtifactData}/>
             )
     }
 }
@@ -41,6 +41,13 @@ function InspectArtifact(props){
 
     const [collectionType, setCollectionType] = useState("");
 
+    if (!props.currentArtifactData) {
+        return null;
+    } else{
+        console.log(props.currentArtifactData.artifacts.artifactnames);        
+        //alert(props.currentArtifactData.artifactnames.englishName);
+    }
+
     return (
         <Modal show={props.show} onHide={() => props.setShow(false)} dialogClassName='ModalSizeWidth' contentClassName='ModalSizeHeight'  aria-labelledby="example-custom-modal-styling-title" centered>
             <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center">
@@ -54,8 +61,8 @@ function InspectArtifact(props){
             <Modal.Body> 
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
-                        <PrimaryView/>
-                        <PrimaryInfo/>
+                        <PrimaryView pictures={props.pictures} setPictures={props.setPictures}/>
+                        <PrimaryInfo currentArtifactData={props.currentArtifactData}/>
                     </div>
 
                     <div className="artifact-info-right">
@@ -68,7 +75,7 @@ function InspectArtifact(props){
                             </Tabs>
                         </div>
 
-                        {renderTab(value,collectionType,setCollectionType)}
+                        {renderTab(value,collectionType,setCollectionType,props.currentArtifactData)}
 
                     </div>
                     

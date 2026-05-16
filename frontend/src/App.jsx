@@ -125,31 +125,41 @@ function App() {
   //const ProtectedLayout = () => {
     //if (!user) return <Navigate to="/login" replace />;
 
-    return (
+    const MainApp = (
       <>
-        <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex}/> 
+        <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex} onLogout={handleLogout}/>
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage}/> 
-        
-        {/*Pass searchQuery, categoryId, roomId, Page, initiateArtifactSearch*/}
+
         <MainContent categories={categories} rooms={rooms} artifacts={artifacts} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch}/>
 
         <Footer totalPages={totalPages} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </>
     );
-  };
   
-  //return (
-    //<Routes>
-      //<Route path="/login" element={
-          //user
-            //? <Navigate to="/" replace />
-            //: <Login onLoginSuccess={handleLoginSuccess} />
-        //}
-      ///>
-      //<Route path="/*" element={<ProtectedLayout />} />
-    //</Routes>
-  //);
-  
-//}
+  return (
+    <Routes>
+      {/* Login route — redirect to home if already logged in */}
+      <Route
+        path="/login"
+        element={
+          user
+            ? <Navigate to="/" replace />
+            : <Login onLoginSuccess={handleLoginSuccess} />
+        }
+      />
+
+      {/* Main app route — redirect to login if not authenticated */}
+      <Route
+        path="/*"
+        element={
+          user
+            ? MainApp
+            : <Navigate to="/login" replace />
+        }
+      />
+    </Routes>
+  );
+}
+
 
 export default App;

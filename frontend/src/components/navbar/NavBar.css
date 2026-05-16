@@ -60,7 +60,7 @@
 }
 
 .nav-stats{
-    color: #b99430;
+    color: white;
     display: flex;
     align-items: center;
     flex: 1;
@@ -68,3 +68,26 @@
     font-weight: bold;
 }
 
+.profile-carousel {
+  overflow: hidden;
+  width: 50px;
+  height: 50px;
+}
+
+.profile-carousel img {
+  height: 50px;
+  width: 50px;
+  object-fit: cover;
+  cursor: pointer;
+  transition: transform 0.4s ease, opacity 0.4s ease;
+}
+
+.profile-carousel img.slide-in {
+  transform: translateX(0);
+  opacity: 1;
+}
+
+.profile-carousel img.slide-out {
+  transform: translateX(60px);
+  opacity: 0;
+}

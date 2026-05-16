@@ -62,36 +62,6 @@ endpoint.post('/', async (req, res) => {
 
 
 
-// UPDATE USER
-endpoint.put("/:id", async (req, res) => {
-    const { id } = req.params;
-    const { username, bcryptPassword } = req.body;
-
-    if (!username || !bcryptPassword) {
-        return res.status(400).json({ error: "username and bcryptPassword are required" });
-    }
-
-    try {
-        const result = await pool.query(
-            `UPDATE Users
-             SET username = $1, bcryptPassword = $2
-             WHERE userID = $3
-             RETURNING *`,
-            [username, bcryptPassword, id]
-        );
-
-        if (result.rowCount === 0) {
-            return res.status(404).json({ message: "User not found" });
-        }
-
-        res.status(200).json(result.rows[0]);
-    } catch (err) {
-        console.error("DB ERROR:", err);
-        res.status(500).json({ error: err.message });
-    }
-});
-
-
 // DELETE USER
 endpoint.delete("/:id", async (req, res) => {
     try {

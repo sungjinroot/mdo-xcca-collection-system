@@ -4,40 +4,40 @@
     display: flex;
     flex-direction: column;
     gap: 40px;
-
     min-height: 0;
     min-width: 0;
-
     overflow: scroll;
     zoom: 90%;
-
 }
 
 .accordion-container {
     padding: 10px;
-    border-radius: 8px;
-    background-color: #283971; 
-    box-shadow: 0 4px 10px black, 0 8px 10px black; 
+    border-radius: 12px;
+    background: linear-gradient(145deg, #2d3f7a, #243268);
+    box-shadow: 
+        0 4px 12px rgba(0, 0, 0, 0.5),
+        0 8px 20px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
 .inspect-physical-dimensions {
-    background-color: #283971; 
+    background: linear-gradient(160deg, #2d3f7a, #223070);
     border-radius: 15px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 20px;
-
+    border: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow: 
         0 14px 35px rgba(0, 0, 0, 0.55),
-        0 6px 15px rgba(0, 0, 0, 0.45);
+        0 6px 15px rgba(0, 0, 0, 0.45),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .inspect-physical-top-fields {
     display: flex;
     flex-direction: column;
     gap: 10px;
-    
     border-radius: 8px;
     padding: 10px;
 }
@@ -45,18 +45,22 @@
 .inspect-physical-top-fields label {
     font-weight: 600;
     margin-bottom: 5px;
-    color: white;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .inspect-physical-top-fields input {
     padding: 10px 0;
     border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     font-size: 14px;
     background: transparent;
     outline: none;
     color: white;
+    transition: border-color 0.2s ease;
 }
 
 .inspect-physical-top-fields input[type="number"]::-webkit-outer-spin-button,
@@ -83,33 +87,35 @@
     display: flex;
     flex-direction: column;
     gap: 5px;
-
     padding: 10px;
     border-radius: 8px;
-
     color: white;
 }
 
 .inspect-physical-top-lwh-fields label {
     font-weight: 600;
-    color: white;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 12px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
 }
 
 .inspect-physical-top-lwh-fields input {
     padding: 10px 0;
     border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     font-size: 14px;
     width: 100%;
     background: transparent;
     outline: none;
     color: white;
+    transition: border-color 0.2s ease;
 }
 
 .inspect-physical-top-fields input:focus,
 .inspect-physical-top-lwh-fields input:focus {
-    border-bottom: 2px solid #ffffff;
+    border-bottom: 2px solid rgba(255, 255, 255, 0.9);
 }
 
 @media (max-width: 768px) {
@@ -119,23 +125,28 @@
 }
 
 .inspect-physical-description-categories-container {
-    background-color: #3a52a3; 
+    background: linear-gradient(160deg, #3f5ab5, #344d9e);
     border-radius: 15px;
     padding: 20px;
     display: flex;
     flex-direction: column;
     gap: 15px;
-
     height: 400px;
     overflow-y: auto;
     flex-shrink: 0;
-
-    box-shadow: 0 2px 8px rgba(0,0,0,0.05);
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 
+        0 8px 25px rgba(0, 0, 0, 0.35),
+        0 3px 10px rgba(0, 0, 0, 0.25),
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
 .inspect-physical-description-categories-container > label {
     font-weight: 600;
-    color: white;
+    color: rgba(255, 255, 255, 0.85);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
 }
 
 .inspect-physical-categories-grid {
@@ -145,22 +156,23 @@
 }
 
 .inspect-physical-category-item {
-    background-color: white;
+    background: rgba(255, 255, 255, 0.92);
     border-radius: 10px;
     padding: 10px 12px;
-
     display: flex;
     align-items: center;
     gap: 8px;
-
     font-size: 14px;
     cursor: pointer;
-
-    transition: 0.2s ease;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
+    transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
 .inspect-physical-category-item:hover {
-    background-color: #f0f3ff;
+    background-color: #eef1ff;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
 }
 
 .inspect-physical-category-item input {
@@ -172,13 +184,22 @@
     cursor: pointer;
 }
 
-.accordion-text textarea{
+.accordion-text textarea {
     width: 100%;
     height: 150px;
-    padding: 10px;
+    padding: 12px;
     color: white;
-    background-color: #3a52a3;
-    border-radius: 8px;
+    background: linear-gradient(145deg, #3f5ab5, #344d9e);
+    border-radius: 10px;
     outline: none;
-    border-color: white;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    resize: vertical;
+    font-size: 14px;
+    line-height: 1.5;
+    transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-text textarea:focus {
+    border-color: rgba(255, 255, 255, 0.5);
+    box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.06);
 }
