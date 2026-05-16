@@ -1,13 +1,11 @@
-.inspect-acquisition-container{
+.inspect-acquisition-container {
     display: flex;
     flex-direction: column;
     padding: 20px;
     gap: 20px;
-
     height: 88%;
     min-height: 0px;
     overflow: scroll;
-
     zoom: 90%;
 }
 
@@ -17,34 +15,49 @@
     flex-direction: row;
     flex-wrap: wrap;
     justify-content: start;
-    background-color: #283971;
+    background: linear-gradient(160deg, #2d3f7a, #223070);
     gap: 10px;
-    border-radius: 20px;
-
+    border-radius: 15px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow: 
         0 14px 35px rgba(0, 0, 0, 0.55),
         0 6px 14px rgba(0, 0, 0, 0.45),
-        inset 0 2px 3px rgba(255, 255, 255, 0.08);
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.inspect-acquisition-origins-card{
+.inspect-acquisition-origins-card {
     display: flex;
     flex-direction: column;
     color: white;
     padding: 15px;
-    flex: 1;             
-    min-width: 200px; 
+    flex: 1;
+    min-width: 200px;
     border-radius: 8px;
 }
 
-.inspect-acquisition-origins-card input{
+.inspect-acquisition-origins-card label {
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+}
+
+.inspect-acquisition-origins-card input {
     padding: 8px 0;
     border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     background: transparent;
     color: white;
     outline: none;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
+}
+
+.inspect-acquisition-origins-card input:focus {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.9);
 }
 
 .inspect-acquisition-origins-card input[type="number"]::-webkit-outer-spin-button,
@@ -60,97 +73,109 @@
     -moz-appearance: textfield;
 }
 
-
-
 .inspect-acquisition-collection {
-    background-color: #283971;
+    background: linear-gradient(160deg, #2d3f7a, #223070);
     padding: 20px;
-    border-radius: 20px;    
-
+    border-radius: 15px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-
+    gap: 12px;
+    border: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow: 
         0 14px 35px rgba(0, 0, 0, 0.55),
         0 6px 14px rgba(0, 0, 0, 0.45),
-        inset 0 2px 3px rgba(255, 255, 255, 0.08);
-}
-.inspect-acquisition-collection label{
-    color: white;   
+        inset 0 1px 0 rgba(255, 255, 255, 0.08);
 }
 
-.inspect-acquisition-collection-options{
+.inspect-acquisition-collection > label {
+    color: rgba(255, 255, 255, 0.75);
+    font-weight: 600;
+    font-size: 11px;
+    letter-spacing: 0.05em;
+    text-transform: uppercase;
+}
+
+.inspect-acquisition-collection-options {
     display: grid;
-    grid-template-columns: repeat(4,1fr);
-    gap: 10px;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 8px;
 }
 
-.inspect-options-card{
+.inspect-options-card {
     display: flex;
     align-items: center;
     justify-content: space-evenly;
     background-color: #3a52a3;
     color: white;
     padding: 10px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 13px;
     border-radius: 8px;
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
+    cursor: pointer;
+    transition: background 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
 }
 
-.inspect-acquisition-collection-options-special{
+.inspect-options-card:hover {
+    background: linear-gradient(145deg, #4663c4, #3b57b0);
+    transform: translateY(-1px);
+    box-shadow: 0 5px 14px rgba(0, 0, 0, 0.3);
+}
+
+.inspect-acquisition-collection-options-special {
     display: flex;
-    flex-direction: start;
+    flex-direction: row;
 }
 
-.inspect-options-card-special{
-    background-color: #3a52a3;
-    padding: 10px;
+.inspect-options-card-special {
+    background: linear-gradient(145deg, #3f5ab5, #344d9e);
+    padding: 10px 14px;
     display: flex;
     justify-content: space-around;
     gap: 15px;
-    font-weight: bold;
+    font-weight: 600;
+    font-size: 13px;
     flex: 1;
     border-radius: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.08);
+    box-shadow: 0 3px 8px rgba(0, 0, 0, 0.25);
 }
 
-.inspect-options-card-special-found{
+.inspect-options-card-special-found {
     display: flex;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-.inspect-options-card-special-price{
+.inspect-options-card-special-price {
     display: flex;
     flex-direction: row;
     align-items: center;
-    gap: 15px;
+    gap: 12px;
 }
 
-.inspect-options-card-special-price input{
+.inspect-options-card-special-price label {
+    color: rgba(255, 255, 255, 0.75);
+    font-size: 11px;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+}
+
+.inspect-options-card-special-price input {
     padding: 4px 0;
     border: none;
-    border-bottom: 1px solid rgba(255,255,255,0.5);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     background: transparent;
     color: white;
     outline: none;
+    font-size: 14px;
+    transition: border-color 0.2s ease;
 }
 
-.inspect-options-card-special-price input:focus{
-    border-bottom: 2px solid #ffffff;
+.inspect-options-card-special-price input:focus {
+    border-bottom: 2px solid rgba(255, 255, 255, 0.9);
 }
-
-.inspect-options-card-special-price input[type="number"]::-webkit-outer-spin-button,
-.inspect-options-card-special-price input[type="number"]::-webkit-inner-spin-button{
-    -webkit-appearance: none;
-    margin: 0;
-}
-
-.inspect-options-card-special-price input[type="number"]{
-    -moz-appearance: textfield;
-}
-
-
 
 .inspect-options-card,
 .inspect-options-card-special-found {
@@ -158,7 +183,7 @@
     align-items: center;
     gap: 10px;
     cursor: pointer;
-    font-size: 16px;
+    font-size: 14px;
 }
 
 .inspect-options-card input[type="radio"],
@@ -166,31 +191,32 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-
-    width: 22px;
-    height: 22px;
-    border: 2px solid #555;
+    width: 20px;
+    height: 20px;
+    border: 2px solid rgba(255, 255, 255, 0.3);
     border-radius: 50%;
     display: inline-block;
     position: relative;
     cursor: pointer;
     transition: all 0.2s ease;
-    background-color: #fff;
+    background-color: rgba(255, 255, 255, 0.9);
+    flex-shrink: 0;
 }
 
 .inspect-options-card input[type="radio"]:hover,
 .inspect-options-card-special-found input[type="radio"]:hover {
-    border-color: #283971;
+    border-color: rgba(255, 255, 255, 0.7);
 }
 
 .inspect-options-card input[type="radio"]:checked,
 .inspect-options-card-special-found input[type="radio"]:checked {
-    border-color: #283971;
+    border-color: white;
     background-color: #283971;
+    box-shadow: inset 0 0 0 3px white;
 }
 
 .inspect-options-card input[type="radio"]:focus,
 .inspect-options-card-special-found input[type="radio"]:focus {
-    outline: 3px solid rgba(40, 57, 113, 0.3);
+    outline: 3px solid rgba(255, 255, 255, 0.2);
     outline-offset: 2px;
 }

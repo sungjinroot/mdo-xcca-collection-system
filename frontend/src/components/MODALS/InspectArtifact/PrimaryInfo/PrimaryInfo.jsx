@@ -14,6 +14,11 @@ function PrimaryInfo({ currentArtifactData }){
                         <label> Catalogue Number </label>
                         <select>
                             <option value=""> {currentArtifactData.artifacts.catalogueNo} </option>
+                            <option value="A1">A1 (Historical)</option>
+                            <option value="A2">A2 (Heritage Heirloom)</option>
+                            <option value="A3">A3 (Ethnological)</option>
+                            <option value="A4">A4 (Archaelogical)</option>
+                            <option value="A5">A5 (Artworks)</option>
                         </select>
                     </div> 
                 </div>
