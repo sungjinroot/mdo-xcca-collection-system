@@ -12,9 +12,8 @@ function Assistants(){
 
             <div className="assistant-creds">
                 
-                <h4> newuser </h4>
+                <h1> newuser </h1>
 
-                <h4> newpassword </h4>
             </div>
 
             

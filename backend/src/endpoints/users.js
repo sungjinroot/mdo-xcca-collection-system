@@ -38,7 +38,7 @@ endpoint.get("/:id", async (req, res) => {
 
 endpoint.post('/', async (req, res) => {
     try {
-        const { username, password } = req.body;
+        const { username, password, canAdd = false } = req.body;
 
         if (!username || !password) {
             return res.status(400).json({
@@ -49,7 +49,7 @@ endpoint.post('/', async (req, res) => {
         const saltRounds = 10;
         const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-        const result = await pool.query(`INSERT INTO users (username, bcryptPassword) VALUES ($1, $2) RETURNING userID, username`, [username, hashedPassword]);
+        const result = await pool.query(`INSERT INTO users (username, bcryptPassword, canAdd)  VALUES ($1, $2, $3) RETURNING userID, username, canAdd`,[username, hashedPassword, canAdd]);
 
         res.status(201).json({
             message: 'User created successfully',
