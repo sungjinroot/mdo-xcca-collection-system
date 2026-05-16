@@ -13,9 +13,7 @@ function PrimaryInfo({ currentArtifactData }){
                     <div className="artifact-info-identifier-fields">
                         <label> Catalogue Number </label>
                         <select>
-                            <option> 1 </option>
-                            <option> 2 </option>
-                            <option> 3 </option>
+                            <option value=""> {currentArtifactData.artifacts.catalogueNo} </option>
                         </select>
                     </div> 
                 </div>

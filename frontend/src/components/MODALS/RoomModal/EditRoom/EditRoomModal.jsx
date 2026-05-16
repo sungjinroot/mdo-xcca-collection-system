@@ -3,9 +3,9 @@ import Modal from 'react-bootstrap/Modal';
 import './EditRoomModal.css';
 import Tooltip from '@mui/material/Tooltip';
 
-const DEBOUNCE_DELAY = 500; 
+const DEBOUNCE_DELAY = 500;
 
-function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, setRoomIndex, setChanged }) {
+function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, setRoomIndex, setRooms }) {
   const [title, setTitle] = useState("");
   const [roomName, setRoomName] = useState("");
   const [caption, setCaption] = useState("");
@@ -14,27 +14,22 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
   const debounceTimer = useRef(null);
   const isFirstLoad = useRef(true);
 
-  function setRoomData(title, roomName, caption) {
-    setTitle(title);
-    setRoomName(roomName);
-    setCaption(caption);
-  }
-
-  
   useEffect(() => {
     if (!roomId) return;
-    isFirstLoad.current = true; 
+    isFirstLoad.current = true;
     setSaveStatus("idle");
 
     const fetchData = async () => {
       try {
         const response = await fetch(`http://127.0.0.1:3000/api/v1/rooms/${roomId}`);
         const result = await response.json();
-        setRoomData(result.title, result.roomname, result.caption);
+        setTitle(result.title);
+        setRoomName(result.roomname);
+        setCaption(result.caption);
       } catch (error) {
         console.error("Fetch error:", error);
       } finally {
-        setTimeout(() => { isFirstLoad.current = false; }, 0);
+        setTimeout(() => { isFirstLoad.current = false; }, 100);
       }
     };
 
@@ -43,7 +38,6 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
 
   const debouncedSave = useCallback((updatedFields) => {
     if (debounceTimer.current) clearTimeout(debounceTimer.current);
-
     setSaveStatus("saving");
 
     debounceTimer.current = setTimeout(async () => {
@@ -55,17 +49,24 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
         });
 
         if (!response.ok) throw new Error(`PUT failed: ${response.status}`);
-        setChanged((c) => c + 1);
-        console.log("Room updated:", await response.json());
-        setSaveStatus("saved");
 
+        const normalized = {};
+        if ('roomName' in updatedFields) normalized.roomname = updatedFields.roomName;
+        if ('title' in updatedFields) normalized.title = updatedFields.title;
+        if ('caption' in updatedFields) normalized.caption = updatedFields.caption;
+
+        setRooms(prev =>
+          prev.map(r => r.roomid === roomId ? { ...r, ...normalized } : r)
+        );
+
+        setSaveStatus("saved");
         setTimeout(() => setSaveStatus("idle"), 2000);
       } catch (error) {
         console.error("Save error:", error);
         setSaveStatus("error");
       }
     }, DEBOUNCE_DELAY);
-  }, [roomId]);
+  }, [roomId, setRooms]);
 
   useEffect(() => {
     if (isFirstLoad.current) return;
@@ -82,7 +83,6 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
     debouncedSave({ caption });
   }, [caption]);
 
-  
   useEffect(() => {
     return () => { if (debounceTimer.current) clearTimeout(debounceTimer.current); };
   }, []);
@@ -99,8 +99,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
         throw new Error(errData.code || `Failed to delete room: ${response.status}`);
       }
 
-      console.log(`Room ${roomId} deleted successfully`);
-      setChanged((c) => c + 1);
+      setRooms(prev => prev.filter(r => r.roomid !== roomId));
       setRoomIndex(null);
       setRoomId(null);
       setShowEdit(false);
@@ -123,7 +122,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
       <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center justify-content-between">
         <h3 style={{ color: 'white' }}>Modify Room</h3>
         {statusLabel && (
-          <span style={{color: saveStatus === "error" ? "#ff6b6b" : "#90ee90", fontSize: "0.85rem", marginLeft: "auto", marginRight: "0.75rem"}}>
+          <span style={{ color: saveStatus === "error" ? "#ff6b6b" : "#90ee90", fontSize: "0.85rem", marginLeft: "auto", marginRight: "0.75rem" }}>
             {statusLabel}
           </span>
         )}
@@ -132,23 +131,22 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
         <div className="room-modal-body">
           <div className="room-field">
             <label>Modify Title</label>
-            
             <Tooltip title="Type to edit" placement="left">
-              <input type="text" placeholder="edit text" value={title} onChange={(e) => setTitle(e.target.value)}/>
+              <input type="text" placeholder="edit text" value={title} onChange={(e) => setTitle(e.target.value)} />
             </Tooltip>
           </div>
+
           <div className="room-field">
             <label>Modify Room Name</label>
-
             <Tooltip title="Type to edit" placement="left">
-              <input type="text" placeholder="edit text" value={roomName} onChange={(e) => setRoomName(e.target.value)}/>
+              <input type="text" placeholder="edit text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
             </Tooltip>
           </div>
+
           <div className="room-field">
             <label>Modify Caption</label>
-
             <Tooltip title="Type to edit" placement="left">
-              <input type="text" placeholder="edit text" value={caption} onChange={(e) => setCaption(e.target.value)}/>
+              <input type="text" placeholder="edit text" value={caption} onChange={(e) => setCaption(e.target.value)} />
             </Tooltip>
           </div>
 

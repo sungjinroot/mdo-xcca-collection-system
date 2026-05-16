@@ -41,8 +41,10 @@ function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoo
   };
 
   function handleSearchQuery(query) {
-    setRoomIndex(null);
-    setRoomId(null);
+    if (query) {
+      setRoomIndex(null);
+      setRoomId(null);
+    }
     setSearchQuery(query);
   }
 

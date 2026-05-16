@@ -18,7 +18,7 @@ function InspectContacts(props) {
         "E": "Date of when the artifact was purchased"
     };
 
-    const role = roleLabelMap[props.collectionType];
+    const role = roleLabelMap[props.currentArtifactData.acquisition.collectionType];
 
 
 
@@ -49,7 +49,7 @@ function InspectContacts(props) {
             <div className="inspect-contacts-box">
                 <div className="inspect-contacts-row">
                     <div className="inspect-contacts-fields">
-                        <label>{promptMap[props.collectionType]}</label>
+                        <label>{promptMap[props.currentArtifactData.acquisition.collectionType]}</label>
                         <input type="date" value={props.currentArtifactData.contactpersons.dateCollectedByContactPerson?.split('T')[0]}/>
                     </div>
 
