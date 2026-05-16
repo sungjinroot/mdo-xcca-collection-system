@@ -26,7 +26,7 @@ const categoriesEndpoint = require('./endpoints/categories')
 const usersEndpoint = require('./endpoints/users')
 const authEndpoint = require('./endpoints/auth')
 const statisticsEndpoint = require('./endpoints/statistics')
-
+const roomCleanupEndpoint = require('./endpoints/room-picturecleanup');
 
 
 app.use('/api/v1/artifacts',artifactEndpoint);
@@ -36,6 +36,7 @@ app.use('/api/v1/rooms', roomEndpoint);
 app.use('/api/v1/categories', categoriesEndpoint);
 app.use('/api/v1/users', usersEndpoint);
 app.use('/api/v1/statistics', statisticsEndpoint);
+app.use('/api/v1/rooms', roomCleanupEndpoint);
 
 //AALV endpoints
 const uploadEndpoint = require('./endpoints/upload')

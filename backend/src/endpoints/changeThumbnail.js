@@ -30,7 +30,7 @@ endpoint.put("/:artifactId/:pictureId", async (req, res) => {
 
         // Set selected picture to true
         await pool.query('UPDATE pictures SET isprofilepicture = true WHERE pictureId = $1',[pictureId]);
-
+        
         res.status(200).json({
             message: "Profile picture updated"
         });
