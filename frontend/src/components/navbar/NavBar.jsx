@@ -9,7 +9,7 @@ const images = [
   'src/assets/mdo.jpg',
 ];
 
-function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex }) {
+function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex, onLogout }) {
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -29,6 +29,11 @@ function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoo
 
   const handleMenuOpen = (event) => setAnchorEl(event.currentTarget);
   const handleClose = () => setAnchorEl(null);
+
+  const handleLogout = () => {
+  handleClose();
+  onLogout();
+};
 
   const handleChange = (event) => {
     setCategory(event.target.value);
@@ -78,7 +83,7 @@ function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoo
 
         <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
           <MenuItem onClick={handleClose}>User Manual</MenuItem>
-          <MenuItem onClick={handleClose}>Logout</MenuItem>
+          <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </div>
     </nav>

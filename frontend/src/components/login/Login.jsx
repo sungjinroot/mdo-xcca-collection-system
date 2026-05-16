@@ -47,7 +47,8 @@ function Login({ onLoginSuccess }) {
       <div className="login-container">
         <div className="login-card">
           <img src="src/assets/xu-logo.png" className="card-logo" />
-          <h1 className="login-title">Museo de Oro Inventory System</h1>
+          <h1 className="login-title">Museo de Oro Collection Inventory Management System</h1>
+          
 
           {error && (
             <div className="error-message" style={{ color: 'red', marginBottom: '1rem', fontSize: '0.9rem' }}>
