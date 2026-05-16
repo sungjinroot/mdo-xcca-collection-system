@@ -61,7 +61,7 @@ function InspectArtifact(props){
             <Modal.Body> 
                 <div className="artifact-info-container">
                     <div className="artifact-info-left">
-                        <PrimaryView/>
+                        <PrimaryView pictures={props.pictures} setPictures={props.setPictures}/>
                         <PrimaryInfo currentArtifactData={props.currentArtifactData}/>
                     </div>
 

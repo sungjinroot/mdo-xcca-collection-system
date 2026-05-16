@@ -135,7 +135,7 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
         </div>
       </div>
 
-      <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData}/>
+      <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures}/>
       <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch} />
     </>
   );
