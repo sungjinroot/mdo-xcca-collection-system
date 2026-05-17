@@ -4,14 +4,13 @@ import { jwtDecode } from 'jwt-decode'
 import './Login.css'
 
 function Login({ onLoginSuccess }) {
-  const [email, setEmail] = useState('')
+  const [username, setUsername] = useState('')
   const [password, setPassword] = useState('')
   const [showPassword, setShowPassword] = useState(false)
   const [error, setError] = useState('')
 
   const handleSubmit = (e) => {
     e.preventDefault()
-    alert('Andrei way buot')
   }
 
   const handleGoogleSuccess = (credentialResponse) => {
@@ -39,11 +38,7 @@ function Login({ onLoginSuccess }) {
 
   return (
     <div className="login-page">
-      <nav className="nav-container">
-        <div className="logo">
-          <img src="src/assets/logo.png" />
-        </div>
-      </nav>
+  
       <div className="login-container">
         <div className="login-card">
           <img src="src/assets/xu-logo.png" className="card-logo" />
@@ -57,22 +52,18 @@ function Login({ onLoginSuccess }) {
           )}
 
           <form onSubmit={handleSubmit} className="login-form">
-            <label htmlFor="email">Email</label>
-            <input
-              id="email" type="email" placeholder="Type your email"
-              value={email} onChange={(e) => setEmail(e.target.value)}
-            />
+            <label htmlFor="email">Username</label>
+            
+            <input id="email" type="text" placeholder="Type your username" value={username} onChange={(e) => setUsername(e.target.value)}/>
             <label htmlFor="password">Password</label>
             <div className="password-wrapper">
-              <input
-                id="password" type={showPassword ? 'text' : 'password'}
-                placeholder="Type your password"
-                value={password} onChange={(e) => setPassword(e.target.value)}
-              />
-              <button type="button" className="show-password-btn"
-                onClick={() => setShowPassword(!showPassword)}>
-                {showPassword ? 'Hide' : 'Show'}
+
+              <input id="password" type={showPassword ? 'text' : 'password'} placeholder="Type your password" value={password} onChange={(e) => setPassword(e.target.value)}/>
+              
+              <button type="button" className="show-password-btn" onClick={() => setShowPassword(!showPassword)}>
+                {showPassword ? 'Hide' : 'Show'}    
               </button>
+
             </div>
             <button type="submit" className="login-btn">Login</button>
           </form>

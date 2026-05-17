@@ -95,7 +95,7 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
       <Modal.Header closeButton style={{ backgroundColor: '#283971' }} className="d-flex align-items-center justify-content-between">
         <div className="d-flex align-items-center gap-3">
           <h3 style={{ color: 'white', margin: 0 }}> Users </h3>
-          {error && <p style={{ color: '#ff6b6b', margin: 0, fontSize: '0.85rem' }}>{error}</p>}
+          {error && <p style={{ color: '#ec282a', margin: 0, fontSize: '0.85rem' }}>{error}</p>}
           {success && <p style={{ color: 'white', margin: 0, fontSize: '0.85rem' }}>{success}</p>}
         </div>
       </Modal.Header>

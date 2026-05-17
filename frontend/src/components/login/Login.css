@@ -7,15 +7,6 @@
     font-family: 'Outfit', sans-serif;
 }
 
-.nav-container {
-    background-color: #283971;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
-    overflow: visible;
-    height: 80px;
-}
-
 .login-container {
     flex: 1;
     display: flex;

@@ -74,9 +74,9 @@ function InspectPhysical({ currentArtifactData }){
                                 <div className="inspect-physical-category-item">
                                     <input type="checkbox" id="cat3" />
                                     <label htmlFor="cat3">Third</label>
+                                </div>
                             </div>
                         </div>
-                    </div>
 
                     </AccordionDetails>
                 </Accordion>

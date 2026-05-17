@@ -44,11 +44,14 @@ const insertPhotoEndpoint = require('./endpoints/artifactImages');
 const changeThumbnail = require('./endpoints/changeThumbnail');
 const changeRoom = require('./endpoints/changeRoom');
 
+const artifactCategories = require('./endpoints/artifactCategories');
+
 //AALV endpoints
 app.use('/api/v1/upload/',uploadEndpoint);
 app.use('/api/v1/images/', insertPhotoEndpoint);
 app.use('/api/v1/thumbnail', changeThumbnail);
 app.use('/api/v1/changeroom',changeRoom);
+app.use('/api/v1/artifact/categories',artifactCategories);
 
 app.get("/test-db", async (req, res) => {
     try {
