@@ -13,7 +13,7 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
 
-  const [users,setUsers] = useState([]);
+  const [users, setUsers] = useState([]);
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -72,6 +72,7 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
         clearMessageAfterDelay();
       } else {
         setSuccess(`User "${data.user.username}" created successfully!`);
+        setUsers(prev => [...prev, data.user]);
         setUsername('');
         setPassword('');
         setIsAssistant(false);
@@ -83,6 +84,10 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
     } finally {
       setLoading(false);
     }
+  };
+
+  const handleDeleteUser = (userid) => {
+    setUsers(prev => prev.filter(user => user.userid !== userid));
   };
 
   return (
@@ -112,10 +117,10 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
             </div>
           </div>
 
-        {users.map(user => (
-          <Assistants key={user.userid} username={user.username} canAdd={user.canadd}/>
-        ))}
-  
+          {users.map(user => (
+            <Assistants key={user.userid} userid={user.userid} username={user.username} canAdd={user.canadd} onDelete={handleDeleteUser}/>
+          ))}
+
         </div>
       </Modal.Body>
     </Modal>
