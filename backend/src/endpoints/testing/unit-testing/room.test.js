@@ -91,7 +91,7 @@ describe("mock POST /rooms/", () => {
         pool.query.mockResolvedValueOnce({
             rows: [{
                 roomid: 1,
-                roomname: "Hall A",
+                roomName: "Hall A",
                 title: "Ancient Artifacts",
                 caption: "Early period items",
                 roompictureurl: "https://example.com/hall-a.jpg"
@@ -109,7 +109,7 @@ describe("mock POST /rooms/", () => {
 
         expect(res.statusCode).toBe(201);
         expect(res.body).toHaveProperty("roomid");
-        expect(res.body.roomname).toBe("Hall A");
+        expect(res.body.roomName).toBe("Hall A");
     });
 
     it("should return 400 if roomName is missing", async () => {
@@ -129,6 +129,14 @@ describe("mock POST /rooms/", () => {
         expect(res.statusCode).toBe(400);
         expect(res.body).toHaveProperty("error");
     });
+
+    it("should return 400 if roomPicture is missing", async () => {
+        const res = await request(app)
+            .post("/rooms/")
+            .send({ roomName: "Hall A" , title:"Ancient Artifacts"});
+            expect(res.statusCode).toBe(400);
+            expect(res.body.error).toContain("roomPictureURL");
+    })
 
     it("should return 500 on database error", async () => {
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
@@ -205,16 +213,31 @@ describe("DELETE /rooms/:id", () => {
         const res = await request(app).delete("/rooms/1");
 
         expect(res.status).toBe(200);
-        expect(res.body.message).toBe("Room deleted");
+        expect(res.body.message).toBe("Room ID 1 is deleted");
     });
+    
 
-    test("returns 409 when room has artifacts or does not exist", async () => {
+
+
+    test ("returns 404 when room does not exists"), async () => {
+        pool.query.mockResolvedValueOnce({ rowCount: 0});
+        pool.query.mockResolvedValueOnce({rows: [{room_exists: false}]});
+
+        const res = await request(app).delete("/rooms/999");
+
+        expect(res.stauts).toBe(404);
+        expect(res.body.message).toBe("Room ID 999 does not exists");
+    }
+
+    test("returns 409 when room has existing artifacts", async () => {
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
+
+        pool.query.mockResolvedValue({ rows: [{room_exists: true}]});
 
         const res = await request(app).delete("/rooms/1");
 
         expect(res.status).toBe(409);
-        expect(res.body.error).toBe("Room cannot be deleted");
+        expect(res.body.error).toBe("Room cannot be deleted since it still has artifacts inside");
     });
 
     test("returns 500 on database error", async () => {
