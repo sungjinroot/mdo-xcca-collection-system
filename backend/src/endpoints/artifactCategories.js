@@ -14,5 +14,42 @@ endpoint.get('/:id', async (req, res) => {
     }
 });
 
+endpoint.post('/', async (req,res) => {
+    const {categoryId, artifactId} = req.body
+
+    try{
+        const result = await pool.query('INSERT INTO artifactcategories (artifactid,categoryid) VALUES ($1,$2)',[artifactId,categoryId]);
+
+        res.status(201).json({
+            message: "Artifact Successfully Categorized",
+        });
+
+    } catch (err) {
+        console.error('DB ERROR:', err)
+        res.status(500).json({ error: err.message })
+    }
+});
+
+endpoint.delete('/', async (req,res) => {
+    const {categoryId, artifactId} = req.body
+
+    try{
+        const result = await pool.query('DELETE FROM artifactcategories WHERE artifactId = $1 AND categoryId = $2',[artifactId,categoryId]);
+
+        res.status(201).json({
+            message: "Artifact Successfully Uncategorized",
+        });
+
+    } catch (err) {
+        console.error('DB ERROR:', err)
+        res.status(500).json({ error: err.message })
+    }
+
+});
+
+
+
+//endpoint.post()
+
 
 module.exports = endpoint;

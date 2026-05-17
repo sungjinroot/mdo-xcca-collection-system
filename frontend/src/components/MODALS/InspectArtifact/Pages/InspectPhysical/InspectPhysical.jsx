@@ -22,6 +22,15 @@ function InspectPhysical({ currentArtifactData }) {
         fetchCategories();
     }, [currentArtifactData.artifacts.artifactID]);
 
+    function categorize(categoryId,artifactId){
+        if (artifactId){
+            alert("delete artifactid from artifactscategory");
+        } else{
+            alert("add artifactsid to artifactscategory");
+        }
+
+    }
+
     
 
     return (
@@ -67,7 +76,7 @@ function InspectPhysical({ currentArtifactData }) {
                             <div className="inspect-physical-categories-grid">
                                 {artifactCategories.map(category => (
                                     <div className="inspect-physical-category-item" key={category.categoryid}>
-                                        <input type="checkbox" id={`cat-${category.categoryid}`} checked={category.artifactid !== null}/>
+                                        <input type="checkbox" id={`cat-${category.categoryid}`} checked={category.artifactid !== null} onClick={() => categorize(category.categoryid,category.artifactid)}/>
                                         <label htmlFor={`cat-${category.categoryid}`}>
                                             {category.categoryname}
                                         </label>
