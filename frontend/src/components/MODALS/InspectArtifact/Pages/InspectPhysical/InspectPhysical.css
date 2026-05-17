@@ -167,6 +167,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
     transition: background-color 0.2s ease, transform 0.15s ease, box-shadow 0.2s ease;
+    user-select: none;
 }
 
 .inspect-physical-category-item:hover {
@@ -182,6 +183,8 @@
 
 .inspect-physical-category-item label {
     cursor: pointer;
+    color: black;
+    width: 100%;
 }
 
 .accordion-text textarea {
@@ -197,6 +200,7 @@
     font-size: 14px;
     line-height: 1.5;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
+    box-sizing: border-box;
 }
 
 .accordion-text textarea:focus {
