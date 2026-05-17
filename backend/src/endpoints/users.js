@@ -36,28 +36,32 @@ endpoint.get("/:id", async (req, res) => {
 
 // POST USERS
 
-
 endpoint.post('/', async (req, res) => {
-  const { username, bcryptPassword } = req.body;
+    try {
+        const { username, password, canAdd = false } = req.body;
 
-  if (!username || !bcryptPassword) {
-    return res.status(400).json({ error: 'username and bcryptPassword are required' });
-  }
+        if (!username || !password) {
+            return res.status(400).json({
+                error: 'Username and password are required'
+            });
+        }
 
-  try {
-    const result = await pool.query(
-      `INSERT INTO Users (username, bcryptPassword)
-       VALUES ($1, $2)
-       RETURNING *`,
-      [username, bcryptPassword]
-    );
+        const saltRounds = 10;
+        const hashedPassword = await bcrypt.hash(password, saltRounds);
 
-    res.status(201).json(result.rows[0]);
+        const result = await pool.query(`INSERT INTO users (username, bcryptPassword, canAdd)  VALUES ($1, $2, $3) RETURNING userID, username, canAdd`,[username, hashedPassword, canAdd]);
 
-  } catch (err) {
-    console.error('DB ERROR:', err);
-    res.status(500).json({ error: err.message });
-  }
+        res.status(201).json({
+            message: 'User created successfully',
+            user: result.rows[0]
+        });
+
+    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({
+            error: err.message
+        });
+    }
 });
 
 

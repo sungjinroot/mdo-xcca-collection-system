@@ -6,7 +6,7 @@ function ArtifactCarousel({ pictures, setPictures }) {
     <Carousel interval={null} indicators={false} className="artifact-carousel">
       {pictures.map((picture) => (
         <Carousel.Item key={picture.pictureid}>
-          <img className="d-block w-100 pan-image-view" src={picture.picturefilepath} alt={picture.anglename} style={{ height: '100%', width: '100%', objectFit: 'cover' }}/>
+          <img className="d-block w-100 pan-image-view" src={picture.picturefilepath} alt={picture.anglename} style={{ height: '100%', width: '100%', objectFit: 'contain' }}/>
           <button className="images-options-left images-options"> Remove Photo </button>
           <button className="images-options-right images-options"> Insert Photo </button>
           <Carousel.Caption>

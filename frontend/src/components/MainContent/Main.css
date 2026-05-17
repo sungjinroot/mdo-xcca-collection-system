@@ -63,9 +63,8 @@ html, body, #root {
     padding-bottom: 150px;
     padding-left: 15px;
     padding-right: 15px;
-
-    background-color: white; 
 }
+
 
 @media (min-width: 1300px) {
   .artifacts-grid {

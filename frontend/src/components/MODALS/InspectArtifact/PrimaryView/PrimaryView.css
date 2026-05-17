@@ -4,7 +4,7 @@
     flex-direction: column;
 
     min-height: 100px;
-    max-height: 450px;
+    max-height: 350px;
 }
 
 .artifact-carousel,
@@ -22,13 +22,22 @@
 
 .pan-image-view{
     animation: zoomOutHold 15s ease-in-out infinite;
-    object-fit: cover;
+    object-fit: contain;
+    background-color: black;
 }
 
 @keyframes zoomOutHold {
-  0% { transform: scale(1.2); }
-  20% { transform: scale(1); }
-  100% { transform: scale(1); }
+  0% { 
+    transform: scale(1.8); 
+  }
+
+  20% { 
+    transform: scale(1); 
+  }
+
+  100% { 
+    transform: scale(1); 
+  }
 }
 
 .images-options{
