@@ -1,24 +1,25 @@
 import './Assistants.css';
 
-function Assistants(){
+function Assistants({ username, canAdd }) {
 
     return (
         <div className="assistants-container">
             <div className="assistant-header">
-                <label> Assistant </label>
+                <label>
+                    {canAdd ? 'Assistant' : 'Guest'}
+                </label>
 
-                <img src="src/assets/delete.png"/>
+                <img src="src/assets/delete.png" alt="delete" />
+                
             </div>
 
             <div className="assistant-creds">
-                
-                <h1> newuser </h1>
-
+                <h1>
+                    {username}
+                </h1>
             </div>
-
-            
         </div>
-    )
+    );
 }
 
 export default Assistants;

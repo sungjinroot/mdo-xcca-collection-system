@@ -1,4 +1,4 @@
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import Modal from 'react-bootstrap/Modal';
 import Assistants from './Assistants/Assistants.jsx';
 import './AssistantsModalHeight.css';
@@ -12,6 +12,29 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
   const [loading, setLoading] = useState(false);
   const [error, setError] = useState('');
   const [success, setSuccess] = useState('');
+
+  const [users,setUsers] = useState([]);
+
+  useEffect(() => {
+    const fetchUsers = async () => {
+      setLoading(true);
+      try {
+        const response = await fetch('http://127.0.0.1:3000/api/v1/users');
+        const data = await response.json();
+        if (!response.ok) {
+          setError(data.error || 'Failed to fetch users.');
+        } else {
+          setUsers(data);
+        }
+      } catch (err) {
+        setError('Network error. Please try again.');
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchUsers();
+  }, []);
 
   const clearMessageAfterDelay = () => {
     setTimeout(() => {
@@ -72,6 +95,7 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
         </div>
       </Modal.Header>
       <Modal.Body className="p-0">
+
         <div className="assistants-grid">
           <div className="add-assistants">
             <label> Create User </label>
@@ -88,11 +112,10 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
             </div>
           </div>
 
-          <Assistants/>
-          <Assistants/>
-          <Assistants/>
+        {users.map(user => (
+          <Assistants key={user.userid} username={user.username} canAdd={user.canadd}/>
+        ))}
   
-
         </div>
       </Modal.Body>
     </Modal>
