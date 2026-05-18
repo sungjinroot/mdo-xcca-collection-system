@@ -42,7 +42,7 @@ function Rooms({ roomIndex, setRoomIndex, roomId, setRoomId, categories, setCate
     <>
       <Carousel interval={null} indicators={false} style={{ zoom: '80%' }} onSelect={handleRoomSelect} activeIndex={roomIndex === null ? 0 : roomIndex + 1}>
         <Carousel.Item>
-          <img className="d-block w-100 pan-image" src="https://host.javanielsen.dk/wp-content/uploads/2016/10/x5.jpg" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+          <img className="d-block w-100 pan-image" src="https://static.tripzilla.ph/media/116105/conversions/94513_800x-w768.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
           <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
           <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
           <Carousel.Caption>

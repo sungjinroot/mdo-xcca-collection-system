@@ -9,29 +9,44 @@ function InspectPhysical({ currentArtifactData }) {
 
     const [artifactCategories, setArtifactCategories] = useState([]);
 
-    useEffect(() => {
-        const fetchCategories = async () => {
-            try {
-                const res = await fetch(`http://127.0.0.1:3000/api/v1/artifact/categories/${currentArtifactData.artifacts.artifactID}`);
-                const data = await res.json();
-                setArtifactCategories(data);
-            } catch (err) {
-                console.error('Failed to fetch categories:', err);
-            }
-        };
-        fetchCategories();
-    }, [currentArtifactData.artifacts.artifactID]);
+    const artifactId = currentArtifactData.artifacts.artifactID;
 
-    function categorize(categoryId,artifactId){
-        if (artifactId){
-            alert("delete artifactid from artifactscategory");
-        } else{
-            alert("add artifactsid to artifactscategory");
+    const fetchCategories = async () => {
+        try {
+            const res = await fetch(`http://127.0.0.1:3000/api/v1/artifact/categories/${artifactId}`);
+            const data = await res.json();
+            setArtifactCategories(data);
+        } catch (err) {
+            console.error('Failed to fetch categories:', err);
         }
+    };
 
-    }
+    useEffect(() => {
+        fetchCategories();
+    }, [artifactId]);
 
-    
+    const categorize = async (categoryId, artifactid) => {
+        const isChecked = artifactid !== null;
+        const method = isChecked ? 'DELETE' : 'POST';
+
+        try {
+            const res = await fetch('http://127.0.0.1:3000/api/v1/artifact/categories', {
+                method,
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ categoryId, artifactId }),
+            });
+
+            if (!res.ok) {
+                const err = await res.json();
+                console.error('Failed to update category:', err);
+                return;
+            }
+
+            await fetchCategories();
+        } catch (err) {
+            console.error('Network error:', err);
+        }
+    };
 
     return (
         <div className="inspect-physical-container">
@@ -76,7 +91,7 @@ function InspectPhysical({ currentArtifactData }) {
                             <div className="inspect-physical-categories-grid">
                                 {artifactCategories.map(category => (
                                     <div className="inspect-physical-category-item" key={category.categoryid}>
-                                        <input type="checkbox" id={`cat-${category.categoryid}`} checked={category.artifactid !== null} onClick={() => categorize(category.categoryid,category.artifactid)}/>
+                                        <input type="checkbox" id={`cat-${category.categoryid}`} checked={category.artifactid !== null} onChange={() => categorize(category.categoryid, category.artifactid)}/>
                                         <label htmlFor={`cat-${category.categoryid}`}>
                                             {category.categoryname}
                                         </label>

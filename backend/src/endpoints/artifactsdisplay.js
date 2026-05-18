@@ -117,4 +117,3 @@ const getRoomProfilePicture = async (req, res  ) => {
 };
 */
 
-module.exports = endpoint;
