@@ -86,35 +86,36 @@ endpoint.get('/', async (req, res) => {
     }
 });
  
+
+
+endpoint.get('/', async (req, res) => {
+    try {
+       const statisticsQuery = `
+       SELECT
+            r.roomID,
+            r.roomName,
+            COUNT(a.artifactID) AS totalArtifact
+        FROM Rooms r
+        LEFT JOIN Artifacts a ON r.roomID = a.roomID
+        GROUP BY r.roomID, r.roomName
+        ORDER BY r.roomID;`
+        
+
+            ;
+
+        const result = await pool.query(statisticsQuery);
+
+        
+
+       res.status(200).json(result.rows); 
+  
+    } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: "Failed to fetch artifacts" });
+    }
+  });
+
+
 module.exports = endpoint;
  
 
-/*
-const getRoomProfilePicture = async (req, res  ) => {
-    const roomIDProfilepicture = req.params.roomID ? parseInt(req.params.roomID, 10) : null;
-
-
-    try {
-        let result;
-
-
-        if (roomID != null && !NaN(roomID)){
-            result = await.pool.query(
-                'SELECT 
-                pool.PictureID,
-                p.angleName,
-                p.pictureFilePath,
-                p.artifactID
-                FROM Picture p
-                JOIN Artifacts a ON p.artifactID = a'
-            )
-
-
-        }
-
-    }
-  
-};
-*/
-
-module.exports = endpoint;
