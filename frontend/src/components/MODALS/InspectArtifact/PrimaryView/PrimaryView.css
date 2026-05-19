@@ -21,14 +21,14 @@
 }
 
 .pan-image-view{
-    animation: zoomOutHold 15s ease-in-out infinite;
+    animation: zoomOutHold 8s ease-in-out infinite;
     object-fit: contain;
     background-color: black;
 }
 
 @keyframes zoomOutHold {
   0% { 
-    transform: scale(1.8); 
+    transform: scale(4.8); 
   }
 
   20% { 
