@@ -37,7 +37,7 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
           }}
         >
           <SpeedDialAction
-            icon={<span style={{ fontSize: "20px" }}>A</span>}
+            icon={<img src="src/assets/add-artifact.png" style={{ width: 32, height: 32 }} />}
             tooltipTitle="New Artifact"
             onClick={() => setShow(true)}
             FabProps={{
@@ -49,7 +49,7 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
           />
 
           <SpeedDialAction
-            icon={<span style={{ fontSize: "20px" }}>B</span>}
+            icon={<img src="src/assets/add-user.png" style={{ width: 32, height: 32 }} />}
             tooltipTitle="New User"
             onClick={() => setShowAssistants(true)}
             FabProps={{
