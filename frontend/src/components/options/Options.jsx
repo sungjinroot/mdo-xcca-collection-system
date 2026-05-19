@@ -17,16 +17,16 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
         <SpeedDial
           ariaLabel="Simple SpeedDial"
           open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}
+            onClick={() => setOpen((prev) => !prev)}
+            disableHoverListener
           icon={<span style={{ fontSize: "28px" }}>+</span>}
           FabProps={{
             sx: {
               backgroundColor: "#283971",
               color: "#fff",
               "&:hover": { backgroundColor: "#3a52a3" },
-              width: 80,
-              height: 80,
+              width: 60,
+              height: 60,
             },
           }}
           sx={{
