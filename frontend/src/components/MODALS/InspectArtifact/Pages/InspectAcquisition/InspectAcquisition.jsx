@@ -62,9 +62,9 @@ function InspectAcquisition(props) {
                             <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "E"}/>
                         </label>
 
-                        <div className="inspect-options-card-special-price" style={{visibility: props.collectionType === "E" ? "visible" : "hidden"}}>
+                        <div className="inspect-options-card-special-price" style={{visibility: props.currentArtifactData.acquisition.collectionType === "E" ? "visible" : "hidden"}}>
                             <label>Price</label>
-                            <input type="number" />
+                            <input type="number" value={props.currentArtifactData.acquisition.price}/>
                         </div>
 
                     </div>

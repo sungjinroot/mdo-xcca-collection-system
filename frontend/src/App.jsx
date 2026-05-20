@@ -31,6 +31,8 @@ function App() {
 
   const [artifacts,setArtifacts] = useState([]);
 
+  const [statistics,setStatistics] = useState({});
+
   // Auth state — persist across refresh
   const [user, setUser] = useState(() => {
     const saved = sessionStorage.getItem('user');
@@ -47,11 +49,13 @@ function App() {
       const result = await response.json();
       setTotalPages(result.pagination.totalPages);
       setArtifacts(result.data);
+      setStatistics(result.statistics);
     } else {
       const response = await fetch(`http://127.0.0.1:3000/api/v1/artifactsdisplay/?search=${searchQuery}&categoryID=${categoryId}&page=${currentPage}`);
       const result = await response.json();
       setTotalPages(result.pagination.totalPages);
       setArtifacts(result.data);
+      setStatistics(result.statistics);
     }
   }, [searchQuery, categoryId, roomId, currentPage]);
 
@@ -127,7 +131,7 @@ function App() {
 
     const MainApp = (
       <>
-        <NavBar categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex} onLogout={handleLogout}/>
+        <NavBar statistics={statistics} categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex} onLogout={handleLogout}/>
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage}/> 
 
         <MainContent categories={categories} rooms={rooms} artifacts={artifacts} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch}/>

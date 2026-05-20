@@ -9,7 +9,7 @@ const images = [
   'src/assets/mdo.jpg',
 ];
 
-function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex, onLogout }) {
+function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex, onLogout }) {
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -56,8 +56,8 @@ function NavBar({ categories, setCategoryId, searchQuery, setSearchQuery, setRoo
       </div>
 
       <div className="nav-stats">
-        <h5>Artifacts Collected: 234</h5>
-        <h5>Artifacts in this room: 157</h5>
+        <h5>Artifacts Collected: {statistics.overallTotal}</h5>
+        <h5>Artifacts in this room: {statistics.currentRoomTotal || statistics.overallTotal}</h5>
       </div>
 
       <div className="nav-functions-container">
