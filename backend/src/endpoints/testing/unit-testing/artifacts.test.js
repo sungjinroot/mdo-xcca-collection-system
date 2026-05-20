@@ -295,13 +295,27 @@ describe("PUT /artifacts/:id/artifactDetails", () => {
         jest.clearAllMocks();
     });
 
-    const body = { accessionNo: "ACC-001-UPDATED", catalogueNo: "A2", roomID: 2, categoryID: 1 };
-
-    it("returns 200 when artifactDetails is successfully updated", async () => {
+    it("returns 200 when artifactDetails is successfully updated with partial fields", async () => {
+        const body = { accessionNo: "ACC-001-UPDATED" };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
         pool.query.mockResolvedValueOnce({});              // UPDATE Artifacts
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+
+        const res = await request(app).put("/artifacts/1/artifactDetails").send(body);
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("artifactDetails updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE Artifacts SET accessionNo = $1'),
+            expect.arrayContaining(["ACC-001-UPDATED", "1"])
+        );
+    });
+
+    it("returns 200 when updating catalogueNo with valid value", async () => {
+        const body = { catalogueNo: "A3" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/artifactDetails").send(body);
 
@@ -309,8 +323,38 @@ describe("PUT /artifacts/:id/artifactDetails", () => {
         expect(res.body.message).toBe("artifactDetails updated successfully");
     });
 
+    it("returns 200 when updating storageLocation only", async () => {
+        const body = { storageLocation: "Shelf B2" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
+
+        const res = await request(app).put("/artifacts/1/artifactDetails").send(body);
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("artifactDetails updated successfully");
+    });
+
+    it("returns 400 when catalogueNo has invalid value", async () => {
+        const body = { catalogueNo: "B1" };
+
+        const res = await request(app).put("/artifacts/1/artifactDetails").send(body);
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("catalogueNo must be one of: A1, A2, A3, A4, A5");
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/artifactDetails").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
+    });
+
     it("returns 404 when artifact is not found", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 0 }); // SELECT check returns nothing
+        const body = { accessionNo: "ACC-001-UPDATED" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/artifactDetails").send(body);
 
@@ -319,6 +363,8 @@ describe("PUT /artifacts/:id/artifactDetails", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { accessionNo: "ACC-001-UPDATED" };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/artifactDetails").send(body);
@@ -333,21 +379,32 @@ describe("PUT /artifacts/:id/artifactNames", () => {
         jest.clearAllMocks();
     });
 
-    const body = { englishName: "Updated Jar", vernacularName: "Banga", categoryID: 1 };
-
-    it("returns 200 when artifactNames is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE ArtifactNames
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+    it("returns 200 when artifactNames is successfully updated with partial fields", async () => {
+        const body = { englishName: "Updated Jar Only" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/artifactNames").send(body);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("artifactNames updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE ArtifactNames SET englishName = $1'),
+            expect.arrayContaining(["Updated Jar Only", "1"])
+        );
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/artifactNames").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
     });
 
     it("returns 404 when artifact is not found", async () => {
+        const body = { englishName: "Updated Jar" };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/artifactNames").send(body);
@@ -357,6 +414,8 @@ describe("PUT /artifacts/:id/artifactNames", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { englishName: "Updated Jar" };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/artifactNames").send(body);
@@ -371,21 +430,32 @@ describe("PUT /artifacts/:id/artifactProvenance", () => {
         jest.clearAllMocks();
     });
 
-    const body = { ethnicGroup: "Maranao", locality: "Lanao del Sur", placeOfOrigin: "Mindanao", categoryID: 1 };
-
-    it("returns 200 when artifactProvenance is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE ArtifactProvenance
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+    it("returns 200 when artifactProvenance is successfully updated with partial fields", async () => {
+        const body = { ethnicGroup: "Tausug" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/artifactProvenance").send(body);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("artifactProvenance updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE ArtifactProvenance SET ethnicGroup = $1'),
+            expect.arrayContaining(["Tausug", "1"])
+        );
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/artifactProvenance").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
     });
 
     it("returns 404 when artifact is not found", async () => {
+        const body = { ethnicGroup: "Tausug" };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/artifactProvenance").send(body);
@@ -395,6 +465,8 @@ describe("PUT /artifacts/:id/artifactProvenance", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { ethnicGroup: "Tausug" };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/artifactProvenance").send(body);
@@ -409,28 +481,32 @@ describe("PUT /artifacts/:id/contactPersons", () => {
         jest.clearAllMocks();
     });
 
-    const body = {
-        contactPersonFullName: "Juan dela Cruz",
-        dateCollectedByContactPerson: "2023-01-15",
-        receiverFullName: "Maria Santos",
-        receivedByReceiverDate: "2023-02-01",
-        recordedBy: "Dr. Reyes",
-        categoryID: 1,
-    };
-
-    it("returns 200 when contactPersons is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE ContactPersons
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+    it("returns 200 when contactPersons is successfully updated with partial fields", async () => {
+        const body = { recordedBy: "Dr. Cruz" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/contactPersons").send(body);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("contactPersons updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE ContactPersons SET recordedBy = $1'),
+            expect.arrayContaining(["Dr. Cruz", "1"])
+        );
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/contactPersons").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
     });
 
     it("returns 404 when artifact is not found", async () => {
+        const body = { recordedBy: "Dr. Cruz" };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/contactPersons").send(body);
@@ -440,6 +516,8 @@ describe("PUT /artifacts/:id/contactPersons", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { recordedBy: "Dr. Cruz" };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/contactPersons").send(body);
@@ -454,21 +532,32 @@ describe("PUT /artifacts/:id/dimensions", () => {
         jest.clearAllMocks();
     });
 
-    const body = { artifactLength: 20.5, artifactWidth: 15.0, artifactHeight: 30.0, artifactDiameter: 18.0, categoryID: 1 };
-
-    it("returns 200 when dimensions is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE Dimensions
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+    it("returns 200 when dimensions is successfully updated with partial fields", async () => {
+        const body = { artifactLength: 25.5, artifactHeight: 35.0 };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/dimensions").send(body);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("dimensions updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE Dimensions SET artifactLength = $1, artifactHeight = $2'),
+            expect.arrayContaining([25.5, 35.0, "1"])
+        );
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/dimensions").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
     });
 
     it("returns 404 when artifact is not found", async () => {
+        const body = { artifactLength: 25.5 };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/dimensions").send(body);
@@ -478,6 +567,8 @@ describe("PUT /artifacts/:id/dimensions", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { artifactLength: 25.5 };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/dimensions").send(body);
@@ -492,27 +583,32 @@ describe("PUT /artifacts/:id/physicalDescription", () => {
         jest.clearAllMocks();
     });
 
-    const body = {
-        artifactDetails: "Earthenware jar with geometric patterns",
-        artifactFunction: "Used in ceremonial rituals",
-        conditionUponReceipt: "Good",
-        specialRemarks: "None",
-        categoryID: 1,
-    };
-
-    it("returns 200 when physicalDescription is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE PhysicalDescription
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+    it("returns 200 when physicalDescription is successfully updated with partial fields", async () => {
+        const body = { specialRemarks: "Handle with care" };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/physicalDescription").send(body);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("physicalDescription updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE PhysicalDescription SET specialRemarks = $1'),
+            expect.arrayContaining(["Handle with care", "1"])
+        );
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/physicalDescription").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
     });
 
     it("returns 404 when artifact is not found", async () => {
+        const body = { specialRemarks: "Handle with care" };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/physicalDescription").send(body);
@@ -522,6 +618,8 @@ describe("PUT /artifacts/:id/physicalDescription", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { specialRemarks: "Handle with care" };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/physicalDescription").send(body);
@@ -536,21 +634,32 @@ describe("PUT /artifacts/:id/acquisition", () => {
         jest.clearAllMocks();
     });
 
-    const body = { collectionType: "DON01", price: null, categoryID: 1 };
-
-    it("returns 200 when acquisition is successfully updated", async () => {
-        pool.query.mockResolvedValueOnce({ rowCount: 1 }); // SELECT check
-        pool.query.mockResolvedValueOnce({});              // UPDATE Acquisition
-        pool.query.mockResolvedValueOnce({});              // DELETE ArtifactCategories
-        pool.query.mockResolvedValueOnce({});              // INSERT ArtifactCategories
+    it("returns 200 when acquisition is successfully updated with partial fields", async () => {
+        const body = { price: 500.00 };
+        
+        pool.query.mockResolvedValueOnce({ rowCount: 1 });
+        pool.query.mockResolvedValueOnce({});
 
         const res = await request(app).put("/artifacts/1/acquisition").send(body);
 
         expect(res.status).toBe(200);
         expect(res.body.message).toBe("acquisition updated successfully");
+        expect(pool.query).toHaveBeenCalledWith(
+            expect.stringContaining('UPDATE Acquisition SET price = $1'),
+            expect.arrayContaining([500.00, "1"])
+        );
+    });
+
+    it("returns 400 when no fields are provided", async () => {
+        const res = await request(app).put("/artifacts/1/acquisition").send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("No fields provided for update");
     });
 
     it("returns 404 when artifact is not found", async () => {
+        const body = { price: 500.00 };
+        
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
 
         const res = await request(app).put("/artifacts/999/acquisition").send(body);
@@ -560,6 +669,8 @@ describe("PUT /artifacts/:id/acquisition", () => {
     });
 
     it("returns 500 on database error", async () => {
+        const body = { price: 500.00 };
+        
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
 
         const res = await request(app).put("/artifacts/1/acquisition").send(body);
