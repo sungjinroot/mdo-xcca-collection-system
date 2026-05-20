@@ -17,16 +17,16 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
         <SpeedDial
           ariaLabel="Simple SpeedDial"
           open={open}
-          onOpen={() => setOpen(true)}
-          onClose={() => setOpen(false)}
+            onClick={() => setOpen((prev) => !prev)}
+            disableHoverListener
           icon={<span style={{ fontSize: "28px" }}>+</span>}
           FabProps={{
             sx: {
               backgroundColor: "#283971",
               color: "#fff",
               "&:hover": { backgroundColor: "#3a52a3" },
-              width: 80,
-              height: 80,
+              width: 60,
+              height: 60,
             },
           }}
           sx={{
@@ -37,7 +37,7 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
           }}
         >
           <SpeedDialAction
-            icon={<span style={{ fontSize: "20px" }}>A</span>}
+            icon={<img src="src/assets/add-artifact.png" style={{ width: 32, height: 32 }} />}
             tooltipTitle="New Artifact"
             onClick={() => setShow(true)}
             FabProps={{
@@ -49,7 +49,7 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
           />
 
           <SpeedDialAction
-            icon={<span style={{ fontSize: "20px" }}>B</span>}
+            icon={<img src="src/assets/add-user.png" style={{ width: 32, height: 32 }} />}
             tooltipTitle="New User"
             onClick={() => setShowAssistants(true)}
             FabProps={{
