@@ -308,9 +308,11 @@ endpoint.post('/', async (req, res) => {
 endpoint.put('/:id/artifactDetails', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, accessionNo, catalogueNo, roomID  
+        accessionNo, catalogueNo, storageLocation
     } = req.body;
  
+    
+
     try {
         const check = await pool.query(
             'SELECT artifactID FROM Artifacts WHERE artifactID = $1',
@@ -320,19 +322,14 @@ endpoint.put('/:id/artifactDetails', async (req, res) => {
             return res.status(404).json({ error: 'Artifact not found' });
         }
         await pool.query(
-            'UPDATE Artifacts SET accessionNo = $1, catalogueNo = $2, roomID = $3 WHERE artifactID = $4',
-            [accessionNo, catalogueNo, roomID, id]
-        );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
+            'UPDATE Artifacts SET accessionNo = $1, catalogueNo = $2 WHERE artifactID = $4',
+            [accessionNo, catalogueNo, id]
         );
         res.status(200).json({ message: 'artifactDetails updated successfully' });
- 
+        await pool.query(
+            'UPDATE Artifacts SET storageLocation = $1 WHERE artifactID = $2',
+            [storageLocation, id]
+        );
     } catch (err) {
         console.error('DB ERROR:', err);
         res.status(500).json({ error: err.message });
@@ -342,7 +339,7 @@ endpoint.put('/:id/artifactDetails', async (req, res) => {
 endpoint.put('/:id/artifactNames', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, englishName, vernacularName    
+        englishName, vernacularName    
     } = req.body;
  
     try {
@@ -357,14 +354,6 @@ endpoint.put('/:id/artifactNames', async (req, res) => {
             'UPDATE ArtifactNames SET englishName = $1, vernacularName = $2 WHERE artifactID = $3',
             [englishName, vernacularName, id]
         );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
-        );
         res.status(200).json({ message: 'artifactNames updated successfully' });
  
     } catch (err) {
@@ -376,7 +365,7 @@ endpoint.put('/:id/artifactNames', async (req, res) => {
 endpoint.put('/:id/artifactProvenance', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, ethnicGroup, locality, placeOfOrigin  
+        ethnicGroup, locality, placeOfOrigin  
     } = req.body;
  
     try {
@@ -391,14 +380,6 @@ endpoint.put('/:id/artifactProvenance', async (req, res) => {
             'UPDATE ArtifactProvenance SET ethnicGroup = $1, locality = $2, placeOfOrigin = $3 WHERE artifactID = $4',
             [ethnicGroup, locality, placeOfOrigin, id]
         );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
-        );
         res.status(200).json({ message: 'artifactProvenance updated successfully' });
  
     } catch (err) {
@@ -410,7 +391,7 @@ endpoint.put('/:id/artifactProvenance', async (req, res) => {
 endpoint.put('/:id/contactPersons', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy 
+        contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy 
     } = req.body;
  
     try {
@@ -425,14 +406,6 @@ endpoint.put('/:id/contactPersons', async (req, res) => {
             'UPDATE ContactPersons SET contactPersonFullName = $1, dateCollectedByContactPerson = $2, receiverFullName = $3, receivedByReceiverDate = $4, recordedBy = $5 WHERE artifactID = $6',
             [contactPersonFullName, dateCollectedByContactPerson, receiverFullName, receivedByReceiverDate, recordedBy, id]
         );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
-        );
         res.status(200).json({ message: 'contactPersons updated successfully' });
  
     } catch (err) {
@@ -444,7 +417,7 @@ endpoint.put('/:id/contactPersons', async (req, res) => {
 endpoint.put('/:id/dimensions', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, artifactLength, artifactWidth, artifactHeight, artifactDiameter
+        artifactLength, artifactWidth, artifactHeight, artifactDiameter
     } = req.body;
  
     try {
@@ -459,14 +432,6 @@ endpoint.put('/:id/dimensions', async (req, res) => {
             'UPDATE Dimensions SET artifactLength = $1, artifactWidth = $2, artifactHeight = $3, artifactDiameter = $4 WHERE artifactID = $5',
             [artifactLength, artifactWidth, artifactHeight, artifactDiameter, id]
         );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
-        );
         res.status(200).json({ message: 'dimensions updated successfully' });
  
     } catch (err) {
@@ -478,7 +443,7 @@ endpoint.put('/:id/dimensions', async (req, res) => {
 endpoint.put('/:id/physicalDescription', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks
+        artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks
     } = req.body;
  
     try {
@@ -493,14 +458,6 @@ endpoint.put('/:id/physicalDescription', async (req, res) => {
             'UPDATE PhysicalDescription SET artifactDetails = $1, artifactFunction = $2, conditionUponReceipt = $3, specialRemarks = $4 WHERE artifactID = $5',
             [artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks, id]
         );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
-        );
         res.status(200).json({ message: 'physicalDescription updated successfully' });
  
     } catch (err) {
@@ -512,7 +469,7 @@ endpoint.put('/:id/physicalDescription', async (req, res) => {
 endpoint.put('/:id/acquisition', async (req, res) => {
     const { id } = req.params;
     const {
-        categoryID, collectionType, price
+        collectionType, price
     } = req.body;
  
     try {
@@ -526,14 +483,6 @@ endpoint.put('/:id/acquisition', async (req, res) => {
         await pool.query(
             'UPDATE Acquisition SET collectionType = $1, price = $2 WHERE artifactID = $3',
             [collectionType, price, id]
-        );
-        await pool.query(
-            'DELETE FROM ArtifactCategories WHERE artifactID = $1',
-            [id]
-        );
-        await pool.query(
-            'INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES ($1, $2)',
-            [id, categoryID]
         );
         res.status(200).json({ message: 'acquisition updated successfully' });
  
