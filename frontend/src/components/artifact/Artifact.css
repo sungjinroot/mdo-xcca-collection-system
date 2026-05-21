@@ -79,10 +79,16 @@
   font-size: 23px;
 }
 
-.artifact-display-data span{
-  background-color: #283971;
+.artifact-display-data span {
+  background-color: rgba(40, 57, 113, 0.4);
+  color: #FFFFF0;
   padding: 8px;
   border-radius: 8px;
+  transition: background-color 0.3s ease;
+}
+
+.card-container:hover .artifact-display-data span {
+  background-color: rgba(40, 57, 113, 1);
 }
 
 .basic-functions {
