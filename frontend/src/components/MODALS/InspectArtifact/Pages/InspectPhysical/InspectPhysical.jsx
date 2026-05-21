@@ -8,8 +8,24 @@ import AccordionDetails from '@mui/material/AccordionDetails';
 function InspectPhysical({ currentArtifactData }) {
 
     const [artifactCategories, setArtifactCategories] = useState([]);
+    const [dimensions, setDimensions] = useState({
+        artifactDiameter: currentArtifactData.dimensions.artifactDiameter,
+        artifactLength: currentArtifactData.dimensions.artifactLength,
+        artifactWidth: currentArtifactData.dimensions.artifactWidth,
+        artifactHeight: currentArtifactData.dimensions.artifactHeight,
+    });
 
     const artifactId = currentArtifactData.artifacts.artifactID;
+
+    const handleMeasurementChange = (field, value) => {
+        const regex = /^\d*\.?\d*$/;
+        if (value === "" || regex.test(value)) {
+            setDimensions(prev => ({
+                ...prev,
+                [field]: value
+            }));
+        }
+    };
 
     const fetchCategories = async () => {
         try {
@@ -53,21 +69,21 @@ function InspectPhysical({ currentArtifactData }) {
             <div className="inspect-physical-dimensions">
                 <div className="inspect-physical-top-fields">
                     <label> Diameter (for round artifact) </label>
-                    <input type="number" value={currentArtifactData.dimensions.artifactDiameter} />
+                    <input type="text" value={dimensions.artifactDiameter} onChange={(e) => handleMeasurementChange('artifactDiameter', e.target.value)} />
                 </div>
 
                 <div className="inspect-physical-lwh">
                     <div className="inspect-physical-top-lwh-fields">
                         <label> Length (cm) </label>
-                        <input type="number" value={currentArtifactData.dimensions.artifactLength} />
+                        <input type="text" value={dimensions.artifactLength} onChange={(e) => handleMeasurementChange('artifactLength', e.target.value)} />
                     </div>
                     <div className="inspect-physical-top-lwh-fields">
                         <label> Width (cm) </label>
-                        <input type="number" value={currentArtifactData.dimensions.artifactWidth} />
+                        <input type="text" value={dimensions.artifactWidth} onChange={(e) => handleMeasurementChange('artifactWidth', e.target.value)} />
                     </div>
                     <div className="inspect-physical-top-lwh-fields">
                         <label> Height (cm) </label>
-                        <input type="number" value={currentArtifactData.dimensions.artifactHeight} />
+                        <input type="text" value={dimensions.artifactHeight} onChange={(e) => handleMeasurementChange('artifactHeight', e.target.value)} />
                     </div>
                 </div>
             </div>
