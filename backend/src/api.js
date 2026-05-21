@@ -16,20 +16,55 @@ app.use(cors({
 }));
 
 
-/* JWT middleware for assistants */
-function authenticateToken(req, res, next) {                  
+/* JWT middleware for all */
+async function authenticateToken(req, res, next) {
   const authHeader = req.headers['authorization'];
-  const token = authHeader && authHeader.split(' ')[1];       
+  const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) {                                              
-    return res.sendStatus(401);
+  if (!token) return res.sendStatus(401);
+
+  //SSO
+  try {
+    const decoded = jwt.decode(token, { complete: true });
+    const issuer = decoded?.payload?.iss;
+
+    if (issuer === 'https://accounts.google.com' || issuer === 'accounts.google.com') {
+      const client = new OAuth2Client("1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com"); //USE ENVIRONMENT VARS
+      const ticket = await client.verifyIdToken({
+        idToken: token,
+        audience: process.env.GOOGLE_CLIENT_ID || "1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com",
+      });
+      const payload = ticket.getPayload();
+      req.user = { 
+        email: payload.email, 
+        name: payload.name, 
+        googleId: payload.sub, 
+        role: 'admin',
+        canAdd: true,
+      };
+      return next();
+
+    //NON SSO
+    } else {
+
+      jwt.verify(token, process.env.JWT_SECRET || 'secretkey', (err, user) => {
+        if (err) return res.sendStatus(403);
+        req.user = user;
+        next();
+      });
+    }
+  } catch (err) {
+    console.error('Auth error:', err);
+    return res.sendStatus(403);
   }
+}
 
-  jwt.verify(token, process.env.JWT_SECRET || "secretkey", (err, user) => {
-    if (err) return res.sendStatus(403);                      
-    req.user = user;
-    next();                                                   
-  });
+function requireRole(...allowedRoles) {
+  return (req, res, next) => {
+    if (!req.user) return res.sendStatus(401);
+    if (!allowedRoles.includes(req.user.role)) return res.sendStatus(403);
+    next();
+  };
 }
 
 //Routes to Upload Folder

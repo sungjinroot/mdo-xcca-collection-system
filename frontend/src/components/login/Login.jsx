@@ -39,21 +39,11 @@ function Login({ onLoginSuccess }) {
 
   const handleGoogleSuccess = (credentialResponse) => {
     try {
-      const decoded = jwtDecode(credentialResponse.credential);
-      const email = decoded.email;
-      
-      if (!email.endsWith('@my.xu.edu.ph')) {
-        setError('Access restricted to @my.xu.edu.ph accounts only.');
-        return;
-      }
-
-      setError('');
-      const userData = { email, name: decoded.name, picture: decoded.picture };
+      const userData = { credential: credentialResponse.credential };
       sessionStorage.setItem('user', JSON.stringify(userData));
       onLoginSuccess(userData);
-    
     } catch (err) {
-      console.error('Failed to decode token:', err);
+      console.error('Failed to process login:', err);
       setError('Login failed. Please try again.');
     }
   };
