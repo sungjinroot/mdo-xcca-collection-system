@@ -18,14 +18,14 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
           ariaLabel="Simple SpeedDial"
           open={open}
             onClick={() => setOpen((prev) => !prev)}
-          icon={<span style={{ fontSize: "28px" }}>+</span>}
+          icon={<span style={{ fontSize: "28px", transition: "transform 0.3s ease", display: "inline-block", transform: open ? "rotate(180deg)" : "rotate(0deg)" }}>↑</span>}
           FabProps={{
             sx: {
               backgroundColor: "#283971",
               color: "#fff",
               "&:hover": { backgroundColor: "#3a52a3" },
-              width: 60,
-              height: 60,
+              width: 80,
+              height: 80,
             },
           }}
           sx={{

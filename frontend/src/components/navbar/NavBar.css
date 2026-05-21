@@ -1,3 +1,14 @@
+@font-face {
+  font-family: 'Outfit';
+  src: url('/src/assets/fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
+* {
+  font-family: 'Outfit', sans-serif;
+}
+
 .nav-container {
     background-color: #283971;
     padding: 5px;

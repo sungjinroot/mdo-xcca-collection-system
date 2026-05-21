@@ -45,11 +45,16 @@
 }
 
 .highlight{
-    background-color: #283971;
+    background-color: transparent;
     padding: 2.4px;
     border-radius: 5px;
     padding-left: 5px;
     padding-right: 5px;
+    transition: background-color 0.3s ease;
+}
+
+.carousel:hover .highlight {
+  background-color: #283971;
 }
 
 .pan-image {
