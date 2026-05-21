@@ -39,7 +39,13 @@ function Login({ onLoginSuccess }) {
 
   const handleGoogleSuccess = (credentialResponse) => {
     try {
-      const userData = { credential: credentialResponse.credential };
+      const decoded = jwtDecode(credentialResponse.credential);
+      const userData = {
+        credential: credentialResponse.credential,
+        ...decoded,
+        role: 'admin',
+        canAdd: true,
+      };
       sessionStorage.setItem('user', JSON.stringify(userData));
       onLoginSuccess(userData);
     } catch (err) {

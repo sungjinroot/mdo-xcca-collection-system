@@ -35,6 +35,7 @@ async function authenticateToken(req, res, next) {
         audience: process.env.GOOGLE_CLIENT_ID || "1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com",
       });
       const payload = ticket.getPayload();
+
       req.user = { 
         email: payload.email, 
         name: payload.name, 
@@ -42,6 +43,7 @@ async function authenticateToken(req, res, next) {
         role: 'admin',
         canAdd: true,
       };
+      
       return next();
 
     //NON SSO
@@ -95,12 +97,14 @@ const changeThumbnail = require('./endpoints/changeThumbnail');
 const changeRoom = require('./endpoints/changeRoom');
 const artifactCategories = require('./endpoints/artifactCategories');
 
+
 //AALV endpoints
 app.use('/api/v1/upload/',uploadEndpoint);
 app.use('/api/v1/images/', insertPhotoEndpoint);
 app.use('/api/v1/thumbnail', changeThumbnail);
 app.use('/api/v1/changeroom',changeRoom);
 app.use('/api/v1/artifact/categories',artifactCategories);
+
 
 /*Ping Database*/
 app.get("/test-db", async (req, res) => {
