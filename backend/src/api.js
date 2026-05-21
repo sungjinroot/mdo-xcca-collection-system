@@ -19,17 +19,18 @@ app.use(cors({
 //Routes to Upload Folder
 app.use('/uploads', express.static('/app/uploads'));
 
-const artifactEndpoint = require('./endpoints/artifacts')
-const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay')
-const roomEndpoint = require('./endpoints/rooms')
-const categoriesEndpoint = require('./endpoints/categories')
-const usersEndpoint = require('./endpoints/users')
-const authEndpoint = require('./endpoints/auth')
+const artifactEndpoint = require('./endpoints/artifacts');
+const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay');
+const roomEndpoint = require('./endpoints/rooms');
+const categoriesEndpoint = require('./endpoints/categories');
+const usersEndpoint = require('./endpoints/users');
+const authEndpoint = require('./endpoints/auth');
 const roomCleanupEndpoint = require('./endpoints/room-picturecleanup');
-
+const downloadEndpoint = require('./endpoints/download');
 
 app.use('/api/v1/artifacts',artifactEndpoint);
 app.use('/api/v1/artifactsdisplay', artifactDisplayEndpoint);
+app.use('/api/v1/download', downloadEndpoint);
 app.use('/api/v1/auth', authEndpoint);
 app.use('/api/v1/rooms', roomEndpoint);
 app.use('/api/v1/categories', categoriesEndpoint);
@@ -41,7 +42,6 @@ const uploadEndpoint = require('./endpoints/upload');
 const insertPhotoEndpoint = require('./endpoints/artifactImages');
 const changeThumbnail = require('./endpoints/changeThumbnail');
 const changeRoom = require('./endpoints/changeRoom');
-
 const artifactCategories = require('./endpoints/artifactCategories');
 
 //AALV endpoints

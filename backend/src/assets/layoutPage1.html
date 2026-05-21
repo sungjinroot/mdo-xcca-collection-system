@@ -2,77 +2,149 @@
 <html>
 <head>
     <style>
-        @page {
-        size: A4;
-        margin: 0; /* Adjust margins as needed */
-        }
-        body { 
-            font-family: 'Helvetica', Arial, sans-serif;
-            padding: 40px;
-            color: #333;
-        }
-        .header {   
-            border-bottom: 2px solid #007bff;
-            padding-bottom: 10px;
-            margin-bottom: 30px;
-        }
-        .header h1 {
-            color: #0f1d2c;
-            text-align: center;
-            margin: 0;
-        }
-        .header img{
-                width: 100px;
-                height: 100px;
-        }
-        .logo img{
-            position: absolute;
-            top: 10px;
-            right: 100px;
-            width: 100px;
-            height: 100px;
-        }
-        .content {
-            line-height: 1.6;
-        }
-        table {
-            width: 100%;
-            border-collapse: collapse;
-            margin: 20px 0;
-        }
-        th, td {
-            border: 1px solid #ddd;
-            padding: 8px;
-            text-align: left;
-        }
-        th {
-            background-color: #f2f2f2;
-        }
-        .footer {
-            position: fixed;
-            bottom: 0;
-            width: 100%;
-            text-align: center;
-            font-size: 10px;
-            color: #666;
-        }
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body { font-family: Arial, sans-serif; font-size: 12px; padding: 30px; }
+        
+        .header { display: flex; justify-content: space-between; align-items: center; margin-bottom: 20px; }
+        .header-logos { display: flex; gap: 10px; align-items: center; }
+        .header-logos img { height: 60px; }
+        .header-title { font-size: 20px; font-weight: bold; letter-spacing: 4px; text-align: center; }
+        
+        .main-section { display: flex; gap: 20px; margin-bottom: 20px; }
+        .main-image img { width: 200px; height: 200px; object-fit: cover; }
+        .main-info { flex: 1; }
+        .main-info p { margin-bottom: 8px; }
+        .main-info strong { font-weight: bold; }
+
+        .accession-row { display: flex; gap: 40px; margin-bottom: 20px; }
+        
+        .three-col { display: flex; gap: 20px; margin-top: 20px; }
+        .col { flex: 1; }
+        .col-title { font-weight: bold; text-decoration: underline; margin-bottom: 10px; font-size: 13px; }
+        .field-label { font-weight: bold; font-size: 10px; margin-top: 8px; }
+        .field-value { font-size: 11px; color: #333; }
+        .bottom-section { margin-top: 20px; }
+
+        .page-break { page-break-before: always; }
+        .page2-header { text-align: center; margin-bottom: 20px; }
+        .page2-logos { display: flex; justify-content: center; gap: 10px; margin-bottom: 10px; }
+        .page2-logos img { height: 60px; }
+        .page2-title { font-size: 20px; font-weight: bold; letter-spacing: 4px; }
+        .artifact-name { font-size: 16px; letter-spacing: 3px; margin: 15px 0; }
+        .images-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 20px; }
+        .image-box { text-align: center; }
+        .image-box img { width: 100%; height: 250px; object-fit: cover; }
+        .image-label { font-weight: bold; margin-top: 8px; font-size: 11px; }
     </style>
 </head>
 <body>
-    <div class="header"> 
-        <h1>MUSEO DE ORO</h1>
-        <img src="images/omm.jpg">
-        <img src="images/xcca.png">
-        <img src="images/mdo.jpg">
+
+    <!-- PAGE 1 -->
+    <div class="header">
+        <div class="header-logos">
+            {{ommLogo}}
+            {{xccaLogo}}
+            {{mdoLogo}}
+        </div>
+        <div class="header-title">MUSEO DE ORO</div>
     </div>
-    <div class="logo">
-        <img src="images/logo.png">
+
+    <div class="main-section">
+        <div class="main-image">
+            {{profileImage}}
+        </div>
+        <div class="main-info">
+            <p><strong>ENGLISH NAME:</strong> {{englishname}}</p>
+            <p><strong>VERNACULAR NAME:</strong> {{vernacularname}}</p>
+            <p><strong>STORAGE LOCATION:</strong> {{storagelocation}}</p>
+        </div>
     </div>
-    <div class="content">
-        {{content}}
+
+    <div class="accession-row">
+        <p><strong>ACCESSION NUMBER:</strong> {{accessionno}}</p>
+        <p><strong>CATALOGUE NUMBER:</strong> {{catalogueno}}</p>
     </div>
-    <div class="footer">
-        Page <span class="pageNumber"></span> of <span class="totalPages"></span>
+
+    <div class="three-col">
+        <div class="col">
+            <div class="col-title">PHYSICAL</div>
+            <div class="field-label">DIAMETER</div>
+            <div class="field-value">{{artifactdiameter}}</div>
+            <div class="field-label">LENGTH (CM)</div>
+            <div class="field-value">{{artifactlength}}</div>
+            <div class="field-label">WIDTH (CM)</div>
+            <div class="field-value">{{artifactwidth}}</div>
+            <div class="field-label">HEIGHT (CM)</div>
+            <div class="field-value">{{artifactheight}}</div>
+        </div>
+
+        <div class="col">
+            <div class="col-title">CONTACTS</div>
+            <div class="field-label">DATE GIVEN</div>
+            <div class="field-value">{{datecollectedbycontactperson}}</div>
+            <div class="field-label">DATE RECEIVED</div>
+            <div class="field-value">{{receivedbyreceiverdate}}</div>
+            <div class="field-label">RECORDED BY</div>
+            <div class="field-value">{{recordedby}}</div>
+            <div class="field-label">RECEIVER'S NAME</div>
+            <div class="field-value">{{receiverfullname}}</div>
+            <div class="field-label">DONOR'S NAME</div>
+            <div class="field-value">{{contactpersonfullname}}</div>
+        </div>
+
+        <div class="col">
+            <div class="col-title">PROVENANCE</div>
+            <div class="field-label">ETHNIC GROUP</div>
+            <div class="field-value">{{ethnicgroup}}</div>
+            <div class="field-label">PLACE OF ORIGIN</div>
+            <div class="field-value">{{placeoforigin}}</div>
+            <div class="field-label">LOCALITY</div>
+            <div class="field-value">{{locality}}</div>
+            <div class="field-label">HOW ARTIFACT WAS COLLECTED</div>
+            <div class="field-value">{{collectiontype}}</div>
+        </div>
     </div>
+
+    <div class="bottom-section">
+        <div class="field-label">FUNCTION</div>
+        <div class="field-value">{{artifactfunction}}</div>
+        <div class="field-label" style="margin-top:12px">DETAILS</div>
+        <div class="field-value">{{artifactdetails}}</div>
+        <div class="field-label" style="margin-top:12px">CONDITION UPON RECEIPT</div>
+        <div class="field-value">{{conditionuponreceipt}}</div>
+    </div>
+
+    <!-- PAGE 2 -->
+    <div class="page-break">
+        <div class="page2-header">
+            <div class="page2-logos">
+                {{ommLogo}}
+                {{xccaLogo}}
+                {{mdoLogo}}
+            </div>
+            <div class="page2-title">MUSEO DE ORO</div>
+            <div class="artifact-name">{{englishnameUpper}}</div>
+        </div>
+
+        <div class="images-grid">
+            <div class="image-box">
+                {{frontImage}}
+                <div class="image-label">FRONT</div>
+            </div>
+            <div class="image-box">
+                {{backImage}}
+                <div class="image-label">BACK</div>
+            </div>
+            <div class="image-box">
+                {{leftImage}}
+                <div class="image-label">LEFT SIDE</div>
+            </div>
+            <div class="image-box">
+                {{rightImage}}
+                <div class="image-label">RIGHT SIDE</div>
+            </div>
+        </div>
+    </div>
+
 </body>
 </html>
