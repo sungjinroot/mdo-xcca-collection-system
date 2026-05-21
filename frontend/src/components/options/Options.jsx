@@ -18,7 +18,6 @@ function Options( { categories, rooms, initiateArtifactSearch } ) {
           ariaLabel="Simple SpeedDial"
           open={open}
             onClick={() => setOpen((prev) => !prev)}
-            disableHoverListener
           icon={<span style={{ fontSize: "28px" }}>+</span>}
           FabProps={{
             sx: {

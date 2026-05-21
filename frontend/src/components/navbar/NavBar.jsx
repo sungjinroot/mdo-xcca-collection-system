@@ -57,7 +57,7 @@ function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQu
 
       <div className="nav-stats">
         <h5>Artifacts Collected: {statistics.overallTotal}</h5>
-        <h5>Artifacts in this room: {statistics.currentRoomTotal || statistics.overallTotal}</h5>
+        <h5>Artifacts in this room: {statistics.currentRoomTotal ?? statistics.overallTotal}</h5>
       </div>
 
       <div className="nav-functions-container">

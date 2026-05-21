@@ -16,6 +16,22 @@ app.use(cors({
 }));
 
 
+/* JWT middleware for assistants */
+function authenticateToken(req, res, next) {                  
+  const authHeader = req.headers['authorization'];
+  const token = authHeader && authHeader.split(' ')[1];       
+
+  if (!token) {                                              
+    return res.sendStatus(401);
+  }
+
+  jwt.verify(token, process.env.JWT_SECRET || "secretkey", (err, user) => {
+    if (err) return res.sendStatus(403);                      
+    req.user = user;
+    next();                                                   
+  });
+}
+
 //Routes to Upload Folder
 app.use('/uploads', express.static('/app/uploads'));
 
@@ -35,7 +51,7 @@ app.use('/api/v1/auth', authEndpoint);
 app.use('/api/v1/rooms', roomEndpoint);
 app.use('/api/v1/categories', categoriesEndpoint);
 app.use('/api/v1/users', usersEndpoint);
-app.use('/api/v1/rooms', roomCleanupEndpoint);
+/*app.use('/api/v1/rooms', roomCleanupEndpoint);*/
 
 //AALV endpoints
 const uploadEndpoint = require('./endpoints/upload');
@@ -51,6 +67,7 @@ app.use('/api/v1/thumbnail', changeThumbnail);
 app.use('/api/v1/changeroom',changeRoom);
 app.use('/api/v1/artifact/categories',artifactCategories);
 
+/*Ping Database*/
 app.get("/test-db", async (req, res) => {
     try {
         const result = await pool.query("SELECT 1");

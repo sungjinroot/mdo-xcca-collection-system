@@ -43,7 +43,7 @@ endpoint.post('/login', async (req, res) => {
                 canAdd: user.canadd,
             },
             process.env.JWT_SECRET || "secretkey",
-            { expiresIn: "120d" }
+            { expiresIn: "1d" }
         );
 
         res.status(200).json({ token });
