@@ -1,21 +1,65 @@
 import './InspectPhysical.css';
 import '../../../NewArtifact/Pages/PhysicalDescription/PhysicalDescription.css';
-import { useState, useEffect } from 'react';
+import { useState, useEffect, useRef, useCallback } from 'react';
 import Accordion from '@mui/material/Accordion';
 import AccordionSummary from '@mui/material/AccordionSummary';
 import AccordionDetails from '@mui/material/AccordionDetails';
+
+const DEBOUNCE_DELAY = 500;
 
 function InspectPhysical({ currentArtifactData }) {
 
     const [artifactCategories, setArtifactCategories] = useState([]);
     const [dimensions, setDimensions] = useState({
-        artifactDiameter: currentArtifactData.dimensions.artifactDiameter,
+        artifactDiameter: currentArtifactData.dimensions.artifactDiameter ?? '',
         artifactLength: currentArtifactData.dimensions.artifactLength,
         artifactWidth: currentArtifactData.dimensions.artifactWidth,
         artifactHeight: currentArtifactData.dimensions.artifactHeight,
     });
+    const [saveStatus, setSaveStatus] = useState("idle");
 
     const artifactId = currentArtifactData.artifacts.artifactID;
+    const debounceTimer = useRef(null);
+    const isFirstLoad = useRef(true);
+
+    useEffect(() => {
+        isFirstLoad.current = true;
+        setSaveStatus("idle");
+
+        setDimensions({
+            artifactDiameter: currentArtifactData.dimensions.artifactDiameter ?? '',
+            artifactLength: currentArtifactData.dimensions.artifactLength,
+            artifactWidth: currentArtifactData.dimensions.artifactWidth,
+            artifactHeight: currentArtifactData.dimensions.artifactHeight,
+        });
+
+        setTimeout(() => { isFirstLoad.current = false; }, 100);
+    }, [artifactId]);
+
+    const debouncedSaveDimensions = useCallback((updatedFields) => {
+        if (debounceTimer.current) clearTimeout(debounceTimer.current);
+        setSaveStatus("saving");
+
+        debounceTimer.current = setTimeout(async () => {
+            try {
+                const res = await fetch(`http://127.0.0.1:3000/api/v1/artifacts/${artifactId}/dimensions`, {
+                    method: 'PUT',
+                    headers: { 'Content-Type': 'application/json' },
+                    body: JSON.stringify(updatedFields),
+                });
+
+                if (!res.ok) {
+                    const err = await res.json();
+                    throw new Error(err.error || `PUT failed: ${res.status}`);
+                }
+
+                setSaveStatus("idle");
+            } catch (err) {
+                console.error('Save failed:', err);
+                setSaveStatus("error");
+            }
+        }, DEBOUNCE_DELAY);
+    }, [artifactId]);
 
     const handleMeasurementChange = (field, value) => {
         const regex = /^\d*\.?\d*$/;
@@ -26,6 +70,30 @@ function InspectPhysical({ currentArtifactData }) {
             }));
         }
     };
+
+    useEffect(() => {
+        if (isFirstLoad.current) return;
+        debouncedSaveDimensions({ artifactDiameter: dimensions.artifactDiameter || null });
+    }, [dimensions.artifactDiameter]);
+
+    useEffect(() => {
+        if (isFirstLoad.current || !dimensions.artifactLength) return;
+        debouncedSaveDimensions({ artifactLength: dimensions.artifactLength });
+    }, [dimensions.artifactLength]);
+
+    useEffect(() => {
+        if (isFirstLoad.current || !dimensions.artifactWidth) return;
+        debouncedSaveDimensions({ artifactWidth: dimensions.artifactWidth });
+    }, [dimensions.artifactWidth]);
+
+    useEffect(() => {
+        if (isFirstLoad.current || !dimensions.artifactHeight) return;
+        debouncedSaveDimensions({ artifactHeight: dimensions.artifactHeight });
+    }, [dimensions.artifactHeight]);
+
+    useEffect(() => {
+        return () => { if (debounceTimer.current) clearTimeout(debounceTimer.current); };
+    }, []);
 
     const fetchCategories = async () => {
         try {
@@ -66,6 +134,7 @@ function InspectPhysical({ currentArtifactData }) {
 
     return (
         <div className="inspect-physical-container">
+
             <div className="inspect-physical-dimensions">
                 <div className="inspect-physical-top-fields">
                     <label> Diameter (for round artifact) </label>
@@ -88,8 +157,18 @@ function InspectPhysical({ currentArtifactData }) {
                 </div>
             </div>
 
-            <div className="accordion-container">
+            {saveStatus === "saving" && (
+                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
+                    Saving...
+                </div>
+            )}
+            {saveStatus === "error" && (
+                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
+                    Save failed
+                </div>
+            )}
 
+            <div className="accordion-container">
                 <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
                     <AccordionSummary>Special remarks</AccordionSummary>
                     <AccordionDetails>
@@ -144,7 +223,6 @@ function InspectPhysical({ currentArtifactData }) {
                         </div>
                     </AccordionDetails>
                 </Accordion>
-
             </div>
         </div>
     );
