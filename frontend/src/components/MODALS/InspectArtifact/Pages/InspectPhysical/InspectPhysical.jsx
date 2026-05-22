@@ -157,16 +157,7 @@ function InspectPhysical({ currentArtifactData }) {
                 </div>
             </div>
 
-            {saveStatus === "saving" && (
-                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
-                    Saving...
-                </div>
-            )}
-            {saveStatus === "error" && (
-                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
-                    Save failed
-                </div>
-            )}
+
 
             <div className="accordion-container">
                 <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
@@ -224,6 +215,17 @@ function InspectPhysical({ currentArtifactData }) {
                     </AccordionDetails>
                 </Accordion>
             </div>
+
+            {saveStatus === "saving" && (
+                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
+                    Saving...
+                </div>
+            )}
+            {saveStatus === "error" && (
+                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
+                    Save failed
+                </div>
+            )}
         </div>
     );
 }

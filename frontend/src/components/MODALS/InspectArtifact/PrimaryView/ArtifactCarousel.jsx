@@ -13,6 +13,7 @@ function ArtifactCarousel({ pictures, setPictures }) {
             <h1 style={{ color: 'white' }}>
               <span className="highlight"> {picture.anglename} </span>
             </h1>
+            
           </Carousel.Caption>
         </Carousel.Item>
       ))}
