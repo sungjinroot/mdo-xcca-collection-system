@@ -49,10 +49,8 @@ function App() {
 
     if (decoded.iss === "https://accounts.google.com"){
       role = "admin"
-      alert(role);
     } else{
       role = decoded.role;
-      alert(role);
     }
 
   }

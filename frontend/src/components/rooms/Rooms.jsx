@@ -62,23 +62,14 @@ function Rooms({ statistics, setStatistics, roomIndex, setRoomIndex, roomId, set
 
                 {rooms.map((room) => (
                     <Carousel.Item key={room.roomid}>
-                        <img
-                            className="d-block w-100 pan-image"
-                            onClick={() => handleEditRoom(room)}
-                            src={room.roompictureurl}
-                            alt={room.roomname}
-                            style={{ height: '200px', width: '100%', objectFit: 'cover', cursor: isRestricted ? 'default' : 'pointer' }}
-                        />
+                        <img className="d-block w-100 pan-image" onClick={() => handleEditRoom(room)} src={room.roompictureurl} alt={room.roomname} style={{ height: '200px', width: '100%', objectFit: 'cover', cursor: isRestricted ? 'default' : 'pointer' }}/>
                         {!isRestricted && (
                             <>
                                 <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
                                 <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
                             </>
                         )}
-                        <Carousel.Caption
-                            onClick={() => handleEditRoom(room)}
-                            style={{ cursor: isRestricted ? 'default' : 'pointer' }}
-                        >
+                        <Carousel.Caption onClick={() => handleEditRoom(room)} style={{ cursor: isRestricted ? 'default' : 'pointer' }}>
                             <h2 style={{ color: 'white' }}><span className="highlight">{room.title}</span></h2>
                             <h3 style={{ color: 'white' }}><span className="highlight">{room.roomname}</span></h3>
                             <p style={{ color: 'white' }}><span className="highlight">{room.caption}</span></p>

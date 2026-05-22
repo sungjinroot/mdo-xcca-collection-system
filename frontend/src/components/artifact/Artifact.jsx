@@ -5,7 +5,7 @@ import ArtifactData from './ArtifactData';
 import InspectArtifact from '../MODALS/InspectArtifact/InspectArtifact.jsx';
 import WarningConfirmation from '../MODALS/ModalPrompts/WarningConfirmation/WarningConfirmation.jsx';
 
-function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArtifactSearch, currentRoomId, currentRoomName }) {
+function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArtifactSearch, currentRoomId, currentRoomName, role }) {
   const [show, setShow] = useState(false);
   const [showWarning, setShowWarning] = useState(false);
   const [currentPicture, setCurrentPicture] = useState(null);
@@ -17,7 +17,9 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
     currentRoomName: currentRoomName
   });
 
-  const [currentArtifactData,setCurrentArtifactData] = useState(null); 
+  const [currentArtifactData, setCurrentArtifactData] = useState(null);
+
+  const isAdmin = role === 'admin';
 
   useEffect(() => {
     const fetchData = async () => {
@@ -80,14 +82,12 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
     return <div className="card-container">Loading...</div>;
   }
 
-  //Todo later. when editing via debounce... call this api again
-
   const getSpecificData = async () => {
     try {
       const response = await fetch(`http://127.0.0.1:3000/api/v1/artifacts/${artifactId}`);
       const result = await response.json();
       setCurrentArtifactData(result);
-      setShow(true);                
+      setShow(true);
     } catch (error) {
       console.error("Failed to fetch artifact data:", error);
     }
@@ -97,46 +97,52 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
     <>
       <div className="card-container">
         <div className="card-img">
-          <img src={currentPicture} onClick={() => getSpecificData()} />
-          <div className="thumbnail-chooser">
-            <select onChange={handleThumbnailChange}>
-              {pictures.map((picture) => (
-                <option key={picture.pictureid} value={picture.picturefilepath}>
-                  {picture.anglename}
-                </option>
-              ))}
-            </select>
-          </div>
-          <button className="delete-button" onClick={() => setShowWarning(true)}>
-            <img src="src/assets/delete.png" />
-          </button>
+          <img src={currentPicture} onClick={isAdmin ? () => getSpecificData() : undefined} style={!isAdmin ? { cursor: 'default' } : {}}/>
+          {isAdmin && (
+            <>
+              <div className="thumbnail-chooser">
+                <select onChange={handleThumbnailChange}>
+                  {pictures.map((picture) => (
+                    <option key={picture.pictureid} value={picture.picturefilepath}>
+                      {picture.anglename}
+                    </option>
+                  ))}
+                </select>
+              </div>
+              <button className="delete-button" onClick={() => setShowWarning(true)}>
+                <img src="src/assets/delete.png" />
+              </button>
+            </>
+          )}
         </div>
         <div className="card-info">
-          <div className="basic-info" onClick={() => getSpecificData()}>
+          <div className="basic-info" onClick={isAdmin ? () => getSpecificData() : undefined} style={!isAdmin ? { cursor: 'default' } : {}}>
             <ArtifactData style={"artifact-display-data"} englishName={englishName} vernacularName={vernacularName} />
           </div>
-          <div className="basic-functions">
-            <button className="card-functions">Download</button>
-
-            
-            <select className="card-functions" value={currentRoom.roomId} onChange={handleRoomChange}>
-              <option value={currentRoom.roomId}>
-                {currentRoom.currentRoomName}
-              </option>
-
-              {rooms.filter(room => room.roomid !== currentRoom.roomId).map((room) => (
-                <option key={room.roomid} value={room.roomid}>
-                  {room.roomname}
+          {isAdmin && (
+            <div className="basic-functions">
+              <button className="card-functions">Download</button>
+              <select className="card-functions" value={currentRoom.roomId} onChange={handleRoomChange}>
+                <option value={currentRoom.roomId}>
+                  {currentRoom.currentRoomName}
                 </option>
-              ))}
-            </select>
-
-          </div>
+                {rooms.filter(room => room.roomid !== currentRoom.roomId).map((room) => (
+                  <option key={room.roomid} value={room.roomid}>
+                    {room.roomname}
+                  </option>
+                ))}
+              </select>
+            </div>
+          )}
         </div>
       </div>
 
-      <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures}/>
-      <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch} />
+      {isAdmin && (
+        <>
+          <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures} />
+          <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch} />
+        </>
+      )}
     </>
   );
 }
