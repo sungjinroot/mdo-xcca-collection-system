@@ -1,9 +1,7 @@
 import './InspectPhysical.css';
 import '../../../NewArtifact/Pages/PhysicalDescription/PhysicalDescription.css';
 import { useState, useEffect, useRef, useCallback } from 'react';
-import Accordion from '@mui/material/Accordion';
-import AccordionSummary from '@mui/material/AccordionSummary';
-import AccordionDetails from '@mui/material/AccordionDetails';
+import InspectPhysicalDescription from './InspectPhysicalDescription.jsx';
 
 const DEBOUNCE_DELAY = 500;
 
@@ -159,62 +157,9 @@ function InspectPhysical({ currentArtifactData }) {
 
 
 
-            <div className="accordion-container">
-                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
-                    <AccordionSummary>Special remarks</AccordionSummary>
-                    <AccordionDetails>
-                        <div className="accordion-text">
-                            <textarea>{currentArtifactData.physicaldescription.specialRemarks}</textarea>
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
+            {/*Description here*/}
 
-                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
-                    <AccordionSummary>Artifact Categorization</AccordionSummary>
-                    <AccordionDetails>
-                        <div className="inspect-physical-description-categories-container">
-                            <label>Categorization</label>
-                            <div className="inspect-physical-categories-grid">
-                                {artifactCategories.map(category => (
-                                    <div className="inspect-physical-category-item" key={category.categoryid}>
-                                        <input type="checkbox" id={`cat-${category.categoryid}`} checked={category.artifactid !== null} onChange={() => categorize(category.categoryid, category.artifactid)}/>
-                                        <label htmlFor={`cat-${category.categoryid}`}>
-                                            {category.categoryname}
-                                        </label>
-                                    </div>
-                                ))}
-                            </div>
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
-                    <AccordionSummary>Details</AccordionSummary>
-                    <AccordionDetails>
-                        <div className="accordion-text">
-                            <textarea>{currentArtifactData.physicaldescription.artifactDetails}</textarea>
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
-                    <AccordionSummary>Function</AccordionSummary>
-                    <AccordionDetails>
-                        <div className="accordion-text">
-                            <textarea>{currentArtifactData.physicaldescription.artifactFunction}</textarea>
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
-
-                <Accordion sx={{ color: 'white', backgroundColor: '#283971', boxShadow: '0 2px 6px rgba(0,0,0,0.25), 0 8px 20px rgba(0,0,0,0.18)', transition: 'transform 0.2s ease, box-shadow 0.2s ease', '&:hover': { transform: 'translateY(-2px)', boxShadow: '0 6px 12px rgba(0,0,0,0.30), 0 14px 30px rgba(0,0,0,0.25)' } }}>
-                    <AccordionSummary>Condition of the artifact upon receipt</AccordionSummary>
-                    <AccordionDetails>
-                        <div className="accordion-text">
-                            <textarea>{currentArtifactData.physicaldescription.conditionUponReceipt}</textarea>
-                        </div>
-                    </AccordionDetails>
-                </Accordion>
-            </div>
+            <InspectPhysicalDescription currentArtifactData={currentArtifactData} artifactCategories={artifactCategories} categorize={categorize}/>
 
             {saveStatus === "saving" && (
                 <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
