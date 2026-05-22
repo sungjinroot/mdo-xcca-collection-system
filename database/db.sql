@@ -18,7 +18,7 @@ CREATE TABLE IF NOT EXISTS Rooms ( /*Passed Manual Test*/
 
 CREATE TABLE IF NOT EXISTS Artifacts ( /*Passed Manual Test*/
     artifactID SERIAL PRIMARY KEY,
-    accessionNo varchar(255) UNIQUE,
+    accessionNo varchar(255) UNIQUE NOT NULL,
     catalogueNo varchar(5) NOT NULL,
     roomID INT NOT NULL,
     storageLocation varchar(225),

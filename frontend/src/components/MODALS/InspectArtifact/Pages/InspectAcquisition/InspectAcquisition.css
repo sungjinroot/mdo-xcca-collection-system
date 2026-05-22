@@ -125,6 +125,7 @@
 .inspect-acquisition-collection-options-special {
     display: flex;
     flex-direction: row;
+    color: white;
 }
 
 .inspect-options-card-special {

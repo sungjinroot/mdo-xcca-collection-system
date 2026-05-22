@@ -5,7 +5,7 @@ import SpeedDialAction from "@mui/material/SpeedDialAction";
 import NewArtifact from "../MODALS/NewArtifact/NewArtifact";
 import AssistantsModal from "../MODALS/Assistants/AssistantsModal.jsx";
 
-function Options( { categories, rooms, initiateArtifactSearch } ) {
+function Options( { categories, rooms, initiateArtifactSearch, role } ) {
   const [open, setOpen] = useState(false);
 
   const [show, setShow] = useState(false);

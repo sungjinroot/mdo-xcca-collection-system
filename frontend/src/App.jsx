@@ -39,6 +39,24 @@ function App() {
     return saved ? JSON.parse(saved) : null;
   });
 
+  const token = sessionStorage.getItem("user");
+
+  let role = "";
+
+  if (token) {
+
+    const decoded = JSON.parse(atob(token.split(".")[1]));
+
+    if (decoded.iss === "https://accounts.google.com"){
+      role = "admin"
+      alert(role);
+    } else{
+      role = decoded.role;
+      alert(role);
+    }
+
+  }
+
 
 
 
@@ -132,9 +150,9 @@ function App() {
     const MainApp = (
       <>
         <NavBar statistics={statistics} categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex} onLogout={handleLogout}/>
-        <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage}/> 
+        <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage} role={role}/> 
 
-        <MainContent categories={categories} rooms={rooms} artifacts={artifacts} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch}/>
+        <MainContent categories={categories} rooms={rooms} artifacts={artifacts} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch} role={role}/>
 
         <Footer totalPages={totalPages} setTotalPages={setTotalPages} currentPage={currentPage} setCurrentPage={setCurrentPage}/>
       </>
