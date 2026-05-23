@@ -1,9 +1,9 @@
 import { useState } from 'react';
 import Carousel from 'react-bootstrap/Carousel';
 import InsertPhoto from '../../ModalPrompts/WarningConfirmation/InsertPhoto.jsx';
-import './PrimaryView.css'
+import './PrimaryView.css';
 
-function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow }) {
+function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow, refreshThumbnails }) {
   const [activeIndex, setActiveIndex] = useState(0);
   const [showImageInsert, setShowImageInsert] = useState(false);
 
@@ -17,6 +17,8 @@ function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow 
       const pics = Array.isArray(result) ? result : [];
       setPictures(pics);
       setActiveIndex((prev) => Math.min(prev, (pics.length || 1) - 1));
+      
+      if (refreshThumbnails) await refreshThumbnails();
     } catch (error) {
       console.error('Error refreshing pictures:', error);
       setPictures([]);
@@ -48,7 +50,6 @@ function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow 
             Insert Photo
           </button>
         </div>
-        
         <InsertPhoto showImageInsert={showImageInsert} setShowImageInsert={setShowImageInsert} artifactId={artifactID} onUploadSuccess={refreshPictures}/>
       </>
     );
@@ -59,7 +60,7 @@ function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow 
       <Carousel interval={null} indicators={false} className="artifact-carousel" activeIndex={activeIndex} onSelect={(selectedIndex) => setActiveIndex(selectedIndex)}>
         {pictures.map((picture) => (
           <Carousel.Item key={picture.pictureid}>
-            <img className="d-block w-100 pan-image-view" src={picture.picturefilepath} alt={picture.anglename} style={{ height: '100%', width: '100%', objectFit: 'contain' }}/>
+            <img className="d-block w-100 pan-image-view" src={picture.picturefilepath} alt={picture.anglename} style={{ height: '100%', width: '100%', objectFit: 'contain' }} />
             <button className="images-options-left images-options" onClick={handleRemovePhoto}>
               Remove Photo
             </button>
@@ -74,7 +75,7 @@ function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow 
           </Carousel.Item>
         ))}
       </Carousel>
-      
+
       <InsertPhoto showImageInsert={showImageInsert} setShowImageInsert={setShowImageInsert} artifactId={artifactID} onUploadSuccess={refreshPictures}/>
     </>
   );

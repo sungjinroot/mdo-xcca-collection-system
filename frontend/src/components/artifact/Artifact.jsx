@@ -21,22 +21,26 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
 
   const isAdmin = role === 'admin';
 
-  useEffect(() => {
-    const fetchData = async () => {
-      try {
-        const response = await fetch(`http://127.0.0.1:3000/api/v1/thumbnail/${artifactId}`);
-        const result = await response.json();
-        if (result && result.length > 0) {
-          setPictures(result);
-          setCurrentPicture(result[0].picturefilepath);
-        }
-      } catch (error) {
-        console.error("Failed to fetch thumbnails:", error);
-      } finally {
-        setLoading(false);
+  const fetchThumbnails = async () => {
+    try {
+      const response = await fetch(`http://127.0.0.1:3000/api/v1/thumbnail/${artifactId}`);
+      const result = await response.json();
+      if (result && result.length > 0) {
+        setPictures(result);
+        setCurrentPicture(result[0].picturefilepath);
+      } else {
+        setPictures([]);
+        setCurrentPicture(null);
       }
-    };
-    fetchData();
+    } catch (error) {
+      console.error("Failed to fetch thumbnails:", error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  useEffect(() => {
+    fetchThumbnails();
   }, []);
 
   const handleThumbnailChange = async (e) => {
@@ -139,7 +143,7 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
 
       {isAdmin && (
         <>
-          <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures} initiateArtifactSearch={initiateArtifactSearch}/>
+          <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures} initiateArtifactSearch={initiateArtifactSearch} refreshThumbnails={fetchThumbnails}/> 
           <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch} />
         </>
       )}
