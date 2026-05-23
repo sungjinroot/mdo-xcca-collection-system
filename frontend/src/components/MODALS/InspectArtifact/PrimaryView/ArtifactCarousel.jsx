@@ -39,6 +39,23 @@ function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow 
     setShowImageInsert(true); 
   }
 
+  if (!pictures || pictures.length === 0) {
+    return (
+      <>
+        <div className="artifact-carousel d-flex flex-column align-items-center justify-content-center"
+          style={{ height: '400px', background: '#f0f0f0', borderRadius: '8px' }}>
+          <p className="text-muted">No photos available</p>
+          <button className="empty-photos" onClick={() => setShowImageInsert(true)}>
+            Insert Photo
+          </button>
+        </div>
+        
+        <InsertPhoto showImageInsert={showImageInsert} setShowImageInsert={setShowImageInsert} artifactId={artifactID}/>
+        
+      </>
+    );
+  }
+
   return (
     <>
       <Carousel interval={null} indicators={false} className="artifact-carousel" activeIndex={activeIndex} onSelect={(selectedIndex) => setActiveIndex(selectedIndex)}>

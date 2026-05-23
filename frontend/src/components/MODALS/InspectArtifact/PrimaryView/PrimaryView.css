@@ -110,3 +110,10 @@
   background-color: #3a4fb0;
 }
 
+.empty-photos{
+  padding: 10px;
+  border: none;
+  background-color: #283971;
+  color: white;
+  border-radius: 12px;
+}
