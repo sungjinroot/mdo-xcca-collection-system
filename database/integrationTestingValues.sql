@@ -53,12 +53,6 @@ INSERT INTO Collection (collectionType, collectionName) VALUES
 ('E', 'Purchased')
 ON CONFLICT (collectionType) DO NOTHING;
 
--- Insert test-specific collection types (insert one by one to avoid complete failure)
-INSERT INTO Collection (collectionType, collectionName) VALUES ('DON01', 'Donation Test') ON CONFLICT (collectionType) DO NOTHING;
-INSERT INTO Collection (collectionType, collectionName) VALUES ('TEST1', 'Test Collection') ON CONFLICT (collectionType) DO NOTHING;
-INSERT INTO Collection (collectionType, collectionName) VALUES ('POST1', 'Post Collection') ON CONFLICT (collectionType) DO NOTHING;
-INSERT INTO Collection (collectionType, collectionName) VALUES ('NEWTY', 'New Type') ON CONFLICT (collectionType) DO NOTHING;
-
 -- ============================================
 -- INSERT DEFAULT CATEGORIES
 -- ============================================
@@ -110,13 +104,12 @@ INSERT INTO Dimensions (artifactID, artifactLength, artifactWidth, artifactHeigh
 INSERT INTO PhysicalDescription (artifactID, artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks) VALUES 
 (1, 'Earthenware jar', 'Ceremonial', 'Good', 'None');
 
--- Acquisition (using DON which exists in Collection table)
-INSERT INTO Acquisition (artifactID, collectionType, price) VALUES 
-(1, 'DON', NULL);
-
 -- ArtifactCategories
 INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES 
 (1, 1);
+
+INSERT INTO Acquisition (artifactID, collectionType, price) VALUES
+(1, 'A', 0);
 
 -- ============================================
 -- INSERT TEST ARTIFACT 2 (For 404/Delete Testing)
@@ -149,11 +142,7 @@ INSERT INTO PhysicalDescription (artifactID, artifactDetails, artifactFunction, 
 (1000, 'Test Details', 'Test Function', 'Good', 'Test Remarks');
 
 INSERT INTO Acquisition (artifactID, collectionType, price) VALUES
-(1, 'A', 0),
-(2, 'C', 0),
-(3, 'E', 1500),
-(4, 'D', 0),
-(5, 'B', 0);
+(1000, 'C', 0);
 
 -- ============================================
 -- INSERT POST TEST ARTIFACT DATA

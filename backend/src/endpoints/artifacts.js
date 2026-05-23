@@ -560,17 +560,16 @@ endpoint.put('/:id/physicalDescription', async (req, res) => {
 endpoint.put('/:id/acquisition', async (req, res) => {
     const { id } = req.params;
     const {
-        collectionType, price
+        price
     } = req.body;
 
     const updates = [];
     const values = [];
 
-    if (collectionType !== undefined) updates.push(`collectionType = $${updates.length + 1}`), values.push(collectionType);
     if (price !== undefined) updates.push(`price = $${updates.length + 1}`), values.push(price);
 
     if (updates.length === 0) {
-        return res.status(400).json({ error: 'No fields provided for update' });
+        return res.status(400).json({ error: 'price must not be empty' });
     }
 
     try {
@@ -589,7 +588,7 @@ endpoint.put('/:id/acquisition', async (req, res) => {
             values
         );
         
-        res.status(200).json({ message: 'acquisition updated successfully' });
+        res.status(200).json({ message: 'acquisition price updated successfully' });
     } catch (err) {
         console.error('DB ERROR:', err);
         res.status(500).json({ error: err.message });
