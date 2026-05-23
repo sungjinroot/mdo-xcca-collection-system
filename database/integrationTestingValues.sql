@@ -34,23 +34,23 @@ ALTER SEQUENCE pictures_pictureid_seq RESTART WITH 1;
 -- ============================================
 -- INSERT DEFAULT CATALOGUE VALUES (A1, A2, A3, A4, A5)
 -- ============================================
-INSERT INTO Catalogue (catalogueNo, catalogueName) VALUES 
-('A1', 'Artifact Type 1'),
-('A2', 'Artifact Type 2'),
-('A3', 'Artifact Type 3'),
-('A4', 'Artifact Type 4'),
-('A5', 'Artifact Type 5')
+INSERT INTO Catalogue (catalogueNo, catalogueName) VALUES
+('A1', 'Prehistoric Items'),
+('A2', 'Ethnographic Objects'),
+('A3', 'Colonial Era Artifacts'),
+('A4', 'Religious Items'),
+('A5', 'Household Objects')
 ON CONFLICT (catalogueNo) DO NOTHING;
 
 -- ============================================
 -- INSERT DEFAULT COLLECTION TYPES (all 5 chars or less)
 -- ============================================
-INSERT INTO Collection (collectionType, collectionName) VALUES 
-('DON', 'Donated'),
-('LOAN', 'On Loan'),
-('EXC', 'Excavated'),
-('FOUND', 'Found'),
-('PUR', 'Purchased')
+INSERT INTO Collection (collectionType, collectionName) VALUES
+('A', 'Donated'),
+('B', 'On Loan'),
+('C', 'Excavated'),
+('D', 'Found'),
+('E', 'Purchased')
 ON CONFLICT (collectionType) DO NOTHING;
 
 -- Insert test-specific collection types (insert one by one to avoid complete failure)
@@ -148,8 +148,12 @@ INSERT INTO Dimensions (artifactID, artifactLength, artifactWidth, artifactHeigh
 INSERT INTO PhysicalDescription (artifactID, artifactDetails, artifactFunction, conditionUponReceipt, specialRemarks) VALUES 
 (1000, 'Test Details', 'Test Function', 'Good', 'Test Remarks');
 
-INSERT INTO Acquisition (artifactID, collectionType, price) VALUES 
-(1000, 'TEST1', 100.00);
+INSERT INTO Acquisition (artifactID, collectionType, price) VALUES
+(1, 'A', 0),
+(2, 'C', 0),
+(3, 'E', 1500),
+(4, 'D', 0),
+(5, 'B', 0);
 
 -- ============================================
 -- INSERT POST TEST ARTIFACT DATA

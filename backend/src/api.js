@@ -79,11 +79,11 @@ const categoriesEndpoint = require('./endpoints/categories');
 const usersEndpoint = require('./endpoints/users');
 const authEndpoint = require('./endpoints/auth');
 const roomCleanupEndpoint = require('./endpoints/room-picturecleanup');
-const downloadEndpoint = require('./endpoints/download');
+//const downloadEndpoint = require('./endpoints/download');
 
 app.use('/api/v1/artifacts',artifactEndpoint);
 app.use('/api/v1/artifactsdisplay', artifactDisplayEndpoint);
-app.use('/api/v1/download', downloadEndpoint);
+//app.use('/api/v1/download', downloadEndpoint);
 app.use('/api/v1/auth', authEndpoint);
 app.use('/api/v1/rooms', roomEndpoint);
 app.use('/api/v1/categories', categoriesEndpoint);
