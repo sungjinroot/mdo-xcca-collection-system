@@ -22,13 +22,14 @@
     display: flex;
     height: 100%;
     gap: 12px;
+    overflow: hidden;
 }
 
 .artifact-info-left {
     flex: 1.5;
     display: flex;
     flex-direction: column;
-    overflow: scroll;
+    overflow: hidden;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.025);
     border: 1px solid rgba(255, 255, 255, 0.07);
@@ -88,4 +89,8 @@
         0 0 16px rgba(255, 255, 255, 0.07),
         inset 0 1px 2px rgba(255, 255, 255, 0.22),
         inset 0 -2px 8px rgba(0, 0, 0, 0.28);
+}
+
+.ModalSizeHeight {
+  overflow: hidden;
 }
