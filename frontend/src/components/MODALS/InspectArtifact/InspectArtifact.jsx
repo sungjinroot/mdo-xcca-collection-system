@@ -58,14 +58,14 @@ function InspectArtifact(props){
             
             </Modal.Header>
             
-            <Modal.Body> 
-                <div className="artifact-info-container">
-                    <div className="artifact-info-left">
+            <Modal.Body style={{ overflowX: 'hidden' }}>
+                <div className="artifact-info-container" style={{ overflow: 'hidden' }}>
+                    <div className="artifact-info-left" style={{ overflow: 'hidden' }}>
                         <PrimaryView pictures={props.pictures} setPictures={props.setPictures} currentArtifactData={props.currentArtifactData} setShow={props.setShow}/>
                         <PrimaryInfo currentArtifactData={props.currentArtifactData}/>
                     </div>
 
-                    <div className="artifact-info-right">
+                    <div className="artifact-info-right" style={{ overflow: 'hidden' }}>
 
                         <div className="tab-options">
                             <Tabs value={value} onChange={handleChange}>
