@@ -3,14 +3,14 @@ import ArtifactCarousel from './ArtifactCarousel.jsx';
 
 
 
-function PrimaryView({ pictures, setPictures }) {
+function PrimaryView({ pictures, setPictures, currentArtifactData }) {
 
     /*ADD CATEGORIES SOON */
     
 
   return (
         <div className="primary-view-container">
-            <ArtifactCarousel pictures={pictures} setPictures={setPictures}/>
+            <ArtifactCarousel pictures={pictures} setPictures={setPictures} currentArtifactData={currentArtifactData}/>
         </div>
   );
 }
