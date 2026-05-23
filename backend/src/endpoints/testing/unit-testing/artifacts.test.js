@@ -643,7 +643,7 @@ describe("PUT /artifacts/:id/acquisition", () => {
         const res = await request(app).put("/artifacts/1/acquisition").send(body);
 
         expect(res.status).toBe(200);
-        expect(res.body.message).toBe("acquisition updated successfully");
+        expect(res.body.message).toBe("acquisition price updated successfully");
         expect(pool.query).toHaveBeenCalledWith(
             expect.stringContaining('UPDATE Acquisition SET price = $1'),
             expect.arrayContaining([500.00, "1"])
@@ -654,7 +654,7 @@ describe("PUT /artifacts/:id/acquisition", () => {
         const res = await request(app).put("/artifacts/1/acquisition").send({});
 
         expect(res.status).toBe(400);
-        expect(res.body.error).toBe("No fields provided for update");
+        expect(res.body.error).toBe("price must not be empty");
     });
 
     it("returns 404 when artifact is not found", async () => {
