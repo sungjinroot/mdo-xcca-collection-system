@@ -7,7 +7,9 @@ const app = express();
 app.use(express.json());
 app.use("/artifacts", endpoint);
 
-/**
+/** IMPORTANT: run "docker exec -i mdo-xcca-collection-system-db-1 psql -U postgres -d mydb < integrationTestingValues.sql"
+ *             before running the test
+ * 
  * Integration Tests for Artifacts API - PUT Endpoints
  * 
  * These tests verify that we can successfully update artifact information
