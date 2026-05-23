@@ -42,9 +42,7 @@ function Login({ onLoginSuccess }) {
       const decoded = jwtDecode(credentialResponse.credential);
       const userData = {
         credential: credentialResponse.credential,
-        ...decoded,
-        role: 'admin',
-        canAdd: true,
+        ...decoded
       };
       sessionStorage.setItem('user', JSON.stringify(userData));
       onLoginSuccess(userData);

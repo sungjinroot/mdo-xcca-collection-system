@@ -6,75 +6,87 @@ import NewRoomModal from '../MODALS/RoomModal/NewRoom/NewRoomModal.jsx';
 import EditRoomModal from '../MODALS/RoomModal/EditRoom/EditRoomModal.jsx';
 import CategoriesModal from '../MODALS/Categories/CategoriesModal.jsx';
 
-function Rooms({ statistics,setStatistics,roomIndex, setRoomIndex, roomId, setRoomId, categories, setCategories, rooms, setRooms, setCurrentPage }) {
-  const [showAdd, setShowAdd] = useState(false);
-  const [showEdit, setShowEdit] = useState(false);
-  const [showCategories, setShowCategories] = useState(false);
+function Rooms({ statistics, setStatistics, roomIndex, setRoomIndex, roomId, setRoomId, categories, setCategories, rooms, setRooms, setCurrentPage, role }) {
+    const [showAdd, setShowAdd] = useState(false);
+    const [showEdit, setShowEdit] = useState(false);
+    const [showCategories, setShowCategories] = useState(false);
+    const [changed, setChanged] = useState(0);
 
-  const [changed, setChanged] = useState(0);
+    useEffect(() => {
+        const fetchData = async () => {
+            const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
+            const result = await response.json();
+            setRooms([...result]);
+        };
+        fetchData();
+    }, [changed]);
 
-  useEffect(() => {
-    const fetchData = async () => {
-      const response = await fetch('http://127.0.0.1:3000/api/v1/rooms');
-      const result = await response.json();
-      setRooms([...result]);
+    const isRestricted = role === 'guest' || role === 'assistant';
+
+    const handleEditRoom = () => {
+        if (isRestricted) return;
+        setShowEdit(true);
     };
-    fetchData();
-  }, [changed]);
 
-  const handleEditRoom = () => {
-    setShowEdit(true);
-  };
+    const handleRoomSelect = (selectedIndex) => {
+        if (selectedIndex === 0) {
+            setRoomIndex(null);
+            setRoomId(null);
+        } else {
+            const index = selectedIndex - 1;
+            setRoomIndex(index);
+            setRoomId(rooms[index].roomid);
+        }
+        setCurrentPage(1);
+    };
 
-  const handleRoomSelect = (selectedIndex) => {
-    if (selectedIndex === 0) {
-      setRoomIndex(null);
-      setRoomId(null);
-    } else {
-      const index = selectedIndex - 1;
-      setRoomIndex(index);
-      setRoomId(rooms[index].roomid);
-    }
-    setCurrentPage(1);
-  };
+    return (
+        <>
+            <Carousel interval={null} indicators={false} style={{ zoom: '80%' }} onSelect={handleRoomSelect} activeIndex={roomIndex === null ? 0 : roomIndex + 1}>
+                <Carousel.Item>
+                    <img className="d-block w-100 pan-image" src="https://static.tripzilla.ph/media/116105/conversions/94513_800x-w768.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+                    {!isRestricted && (
+                        <>
+                            <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
+                            <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
+                        </>
+                    )}
+                    <Carousel.Caption>
+                        <h2 style={{ color: 'white' }}><span className="highlight">Entire Artifact Collection</span></h2>
+                        <h3 style={{ color: 'white' }}><span className="highlight">Museo De Oro</span></h3>
+                        <p style={{ color: 'white' }}>
+                            <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
+                        </p>
+                    </Carousel.Caption>
+                </Carousel.Item>
 
-  return (
-    <>
-      <Carousel interval={null} indicators={false} style={{ zoom: '80%' }} onSelect={handleRoomSelect} activeIndex={roomIndex === null ? 0 : roomIndex + 1}>
-        <Carousel.Item>
-          <img className="d-block w-100 pan-image" src="https://static.tripzilla.ph/media/116105/conversions/94513_800x-w768.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
-          <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
-          <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
-          <Carousel.Caption>
-            <h2 style={{ color: 'white' }}><span className="highlight">Entire Artifact Collection</span></h2>
-            <h3 style={{ color: 'white' }}><span className="highlight">Museo De Oro</span></h3>
-            <p style={{ color: 'white' }}>
-              <span className="highlight"> Museo de Oro, dubbed as the first folkloric museum in the country, is not an abode of dead things. It is, by all means, bursting with life, clad with vivid imagination and rich history. </span>
-            </p>
-          </Carousel.Caption>
-        </Carousel.Item>
+                {rooms.map((room) => (
+                    <Carousel.Item key={room.roomid}>
+                        <img className="d-block w-100 pan-image" onClick={() => handleEditRoom(room)} src={room.roompictureurl} alt={room.roomname} style={{ height: '200px', width: '100%', objectFit: 'cover', cursor: isRestricted ? 'default' : 'pointer' }}/>
+                        {!isRestricted && (
+                            <>
+                                <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
+                                <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
+                            </>
+                        )}
+                        <Carousel.Caption onClick={() => handleEditRoom(room)} style={{ cursor: isRestricted ? 'default' : 'pointer' }}>
+                            <h2 style={{ color: 'white' }}><span className="highlight">{room.title}</span></h2>
+                            <h3 style={{ color: 'white' }}><span className="highlight">{room.roomname}</span></h3>
+                            <p style={{ color: 'white' }}><span className="highlight">{room.caption}</span></p>
+                        </Carousel.Caption>
+                    </Carousel.Item>
+                ))}
+            </Carousel>
 
-        {rooms.map((room) => (
-          <Carousel.Item key={room.roomid}>
-            <img className="d-block w-100 pan-image" onClick={() => handleEditRoom(room)} src={room.roompictureurl} alt={room.roomname} style={{ height: '200px', width: '100%', objectFit: 'cover', cursor: 'pointer' }}/>
-            <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>
-            <button className="button-utils-right utils" onClick={() => setShowAdd(true)}>New Room</button>
-            <Carousel.Caption onClick={() => handleEditRoom(room)} style={{ cursor: 'pointer' }}>
-              <h2 style={{ color: 'white' }}><span className="highlight">{room.title}</span></h2>
-              <h3 style={{ color: 'white' }}><span className="highlight">{room.roomname}</span></h3>
-              <p style={{ color: 'white' }}><span className="highlight">{room.caption}</span></p>
-            </Carousel.Caption>
-          </Carousel.Item>
-        ))}
-      </Carousel>
-
-      <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} setChanged={setChanged}/>
-
-      <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex} setRooms={setRooms}/>
-
-      <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories} categories={categories} setCategories={setCategories}/>
-    </>
-  );
+            {!isRestricted && (
+                <>
+                    <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} setChanged={setChanged}/>
+                    <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex} setRooms={setRooms}/>
+                    <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories} categories={categories} setCategories={setCategories}/>
+                </>
+            )}
+        </>
+    );
 }
 
 export default Rooms;

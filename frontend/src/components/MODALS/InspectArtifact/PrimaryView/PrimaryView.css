@@ -21,24 +21,11 @@
 }
 
 .pan-image-view{
-    animation: zoomOutHold 8s ease-in-out infinite;
     object-fit: contain;
     background-color: black;
 }
 
-@keyframes zoomOutHold {
-  0% { 
-    transform: scale(4.8); 
-  }
 
-  20% { 
-    transform: scale(1); 
-  }
-
-  100% { 
-    transform: scale(1); 
-  }
-}
 
 .images-options{
   padding: 8px;
@@ -108,4 +95,12 @@
 
 .images-options-right:hover{
   background-color: #3a4fb0;
+}
+
+.empty-photos{
+  padding: 10px;
+  border: none;
+  background-color: #283971;
+  color: white;
+  border-radius: 12px;
 }
