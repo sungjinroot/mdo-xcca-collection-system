@@ -139,7 +139,7 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
 
       {isAdmin && (
         <>
-          <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures} />
+          <InspectArtifact show={show} setShow={setShow} currentArtifactData={currentArtifactData} pictures={pictures} setPictures={setPictures} initiateArtifactSearch={initiateArtifactSearch}/>
           <WarningConfirmation showWarning={showWarning} setShowWarning={setShowWarning} artifactId={artifactId} initiateArtifactSearch={initiateArtifactSearch} />
         </>
       )}
