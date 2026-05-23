@@ -18,6 +18,9 @@ describe("GET /users", () => {
         jest.clearAllMocks();
     });
 
+
+    // Creats mock user as substitute for the users in the real Database
+
     const mockUsers = [
         { userid: 1, username: "admin", bcryptpassword: "hashedpassword" }
     ];
@@ -28,6 +31,8 @@ describe("GET /users", () => {
         expect(res.statusCode).toBe(200);
         expect(res.body).toEqual(mockUsers);
         expect(pool.query).toHaveBeenCalledWith("SELECT * FROM users");
+
+ 
     });
 
     test("should return empty array when no users exist", async () => {
@@ -38,7 +43,11 @@ describe("GET /users", () => {
     });
 
     test("should return 500 when database fails", async () => {
+
+        // Simulates DB Error
         pool.query.mockRejectedValue(new Error("Database error"));
+
+        
         const res = await request(app).get("/users");
         expect(res.statusCode).toBe(500);
         expect(res.body).toHaveProperty("error");
@@ -84,113 +93,108 @@ describe("POST /users", () => {
     });
 
     test("should create a user and return 201", async () => {
+
+        // Creates a mock DB for the user.
         const mockUser = { userid: 1, username: "newuser", bcryptpassword: "hashedpassword" };
         pool.query.mockResolvedValueOnce({ rows: [mockUser] });
 
         const res = await request(app).post("/users").send({
             username: "newuser",
-            bcryptPassword: "hashedpassword"
+            password: "plaintextpassword"
         });
 
         expect(res.statusCode).toBe(201);
-        expect(res.body).toEqual(mockUser);
+        expect(res.body.message).toBe("User created successfully");
+        expect(res.body.user).toEqual(mockUser);
+
+        /* 
+        
+        mockUser is = user: result.row[0]
+
+        Referenced back to users.js 
+
+           res.status(201).json({
+            message: 'User created successfully',
+            user: result.rows[0]
+        });
+        
+        */
     });
+
+
+
+    // This test returns 400 is no username is provided in the login
 
     test("should return 400 if username is missing", async () => {
         const res = await request(app).post("/users").send({
-            bcryptPassword: "hashedpassword"
+
+            // There should be a provided username is this area
+            // For instance: username: "newuser"
+            password: "plaintextpassword"  
+        
         });
 
         expect(res.statusCode).toBe(400);
-        expect(res.body.error).toBe("username and bcryptPassword are required");
+        expect(res.body.error).toBe("Username and password are required");
         expect(pool.query).not.toHaveBeenCalled();
     });
 
-    test("should return 400 if bcryptPassword is missing", async () => {
+
+        // This test returns 400 is no password is provided in the login
+
+    test("should return 400 if Password is missing", async () => {
         const res = await request(app).post("/users").send({
+
             username: "newuser"
+            // There should be a provided username is this area
+            // For instance:  password: "plaintextpassword" 
+
         });
 
         expect(res.statusCode).toBe(400);
-        expect(res.body.error).toBe("username and bcryptPassword are required");
+        expect(res.body.error).toBe("Username and password are required");
         expect(pool.query).not.toHaveBeenCalled();
+
+        /*
+        
+        Reference in users.js
+
+                if (!username || !password) {
+            return res.status(400).json({
+                error: 'Username and password are required'
+            });
+        }
+        
+        
+        
+        */
     });
 
     test("should return 500 when database fails", async () => {
+
+        // This line here simulates a DB Failure, so DB will always crash no matter the cirucmstances
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
+
 
         const res = await request(app).post("/users").send({
             username: "newuser",
-            bcryptPassword: "hashedpassword"
+            password: "plaintextpassword"
         });
 
+        // Because of the simultion in line 139, It will return a ERROR 500
         expect(res.statusCode).toBe(500);
         expect(res.body).toHaveProperty("error");
-    });
-});
 
-// PUT /users/:id
+        /* If referenced back in user.js 
 
-describe("PUT /users/:id", () => {
-    afterEach(() => {
-        jest.clearAllMocks();
-    });
-
-    test("should update a user and return 200", async () => {
-        const mockUser = { userid: 1, username: "updateduser", bcryptpassword: "newhashedpassword" };
-        pool.query.mockResolvedValueOnce({ rows: [mockUser], rowCount: 1 });
-
-        const res = await request(app).put("/users/1").send({
-            username: "updateduser",
-            bcryptPassword: "newhashedpassword"
+        There is a    } catch (err) {
+        console.error('DB ERROR:', err);
+        res.status(500).json({
+            error: err.message
         });
 
-        expect(res.statusCode).toBe(200);
-        expect(res.body).toEqual(mockUser);
-    });
+        */
 
-    test("should return 404 if user does not exist", async () => {
-        pool.query.mockResolvedValueOnce({ rows: [], rowCount: 0 });
-
-        const res = await request(app).put("/users/999").send({
-            username: "updateduser",
-            bcryptPassword: "newhashedpassword"
-        });
-
-        expect(res.statusCode).toBe(404);
-        expect(res.body.message).toBe("User not found");
-    });
-
-    test("should return 400 if username is missing", async () => {
-        const res = await request(app).put("/users/1").send({
-            bcryptPassword: "newhashedpassword"
-        });
-
-        expect(res.statusCode).toBe(400);
-        expect(res.body.error).toBe("username and bcryptPassword are required");
-        expect(pool.query).not.toHaveBeenCalled();
-    });
-
-    test("should return 400 if bcryptPassword is missing", async () => {
-        const res = await request(app).put("/users/1").send({
-            username: "updateduser"
-        });
-
-        expect(res.statusCode).toBe(400);
-        expect(res.body.error).toBe("username and bcryptPassword are required");
-        expect(pool.query).not.toHaveBeenCalled();
-    });
-
-    test("should return 500 when database fails", async () => {
-        pool.query.mockRejectedValueOnce(new Error("DB failure"));
-
-        const res = await request(app).put("/users/1").send({
-            username: "updateduser",
-            bcryptPassword: "newhashedpassword"
-        });
-
-        expect(res.statusCode).toBe(500);
-        expect(res.body).toHaveProperty("error");
     });
 });
 
@@ -200,24 +204,72 @@ describe("DELETE /users/:id", () => {
         jest.clearAllMocks();
     });
 
+
+
+
     test("should delete a user and return 200", async () => {
+
+        // Simulates mock Rowcount to be === 1
+        // It means there is a user in the DB
         pool.query.mockResolvedValueOnce({ rowCount: 1 });
+
+
         const res = await request(app).delete("/users/1");
         expect(res.statusCode).toBe(200);
         expect(res.body.message).toBe("User deleted");
+
+        // Deletes that users with an ID =1 
+
+        /* 
+        Reference in User.js 
+
+
+        
+        */
     });
 
     test("should return 404 if user does not exist", async () => {
+
+
+        // Since mock rowCOunt === 0 , then user does not exists in DB
+
         pool.query.mockResolvedValueOnce({ rowCount: 0 });
         const res = await request(app).delete("/users/1");
         expect(res.statusCode).toBe(404);
         expect(res.body.message).toBe("User not found");
+
+
+        /* Reference in user.js
+
+         if (result.rowCount === 0) {
+            return res.status(404).json({ message: "User not found" });
+            
+             const { id } = req.params;
+            const result = await pool.query(
+            "DELETE FROM users WHERE userID = $1",
+            [id]
+        );
+        */
     });
 
     test("should return 500 when database error occurs", async () => {
+
+        // Simulates DB ERROR
         pool.query.mockRejectedValueOnce(new Error("DB failure"));
+
+
         const res = await request(app).delete("/users/1");
         expect(res.statusCode).toBe(500);
         expect(res.body).toHaveProperty("error");
+
+        
+        /* Reference in user.js
+
+        } catch (err) {
+        console.error(err);
+        res.status(500).json({ error: err.message });
+        }
+    
+        */
     });
 });

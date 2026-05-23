@@ -20,6 +20,10 @@ describe("POST /auth/login", () => {
     });
 
     test("returns 200 and token on successful login", async () => {
+
+        const mockUser = { userid: 1, username: "newuser", bcryptpassword: "hashedpassword" };
+
+        
         pool.query.mockResolvedValueOnce({
             rows: [{ userid: 1, username: "admin", bcryptpassword: "hashedpassword", canadd: true }]
         });
