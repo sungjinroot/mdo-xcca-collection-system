@@ -52,10 +52,10 @@ function ArtifactCarousel({ pictures, setPictures, currentArtifactData, setShow 
                 <span className="highlight"> {picture.anglename} </span>
               </h1>
             </Carousel.Caption>
-          </Carousel.Item>
+          </Carousel.Item>  
         ))}
       </Carousel>
-      <InsertPhoto showImageInsert={showImageInsert} setShowImageInsert={setShowImageInsert} />
+      <InsertPhoto showImageInsert={showImageInsert} setShowImageInsert={setShowImageInsert} artifactId={artifactID}/>
     </>
   );
 }
