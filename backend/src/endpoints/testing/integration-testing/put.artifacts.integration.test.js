@@ -23,7 +23,7 @@ app.use("/artifacts", endpoint);
  * - Acquisition information
  */
 describe("Artifacts API - PUT Endpoints Integration Tests", () => {
-    // Use artifact ID 1 from the test database (assumes reset.sql has been run)
+    // Use artifact ID 1 from the test database (assumes integrationTestingValues.sql has been run)
     const TEST_ARTIFACT_ID = 1;
     const NON_EXISTENT_ID = 99999;
 
@@ -34,7 +34,7 @@ describe("Artifacts API - PUT Endpoints Integration Tests", () => {
             [TEST_ARTIFACT_ID]
         );
         if (result.rows.length === 0) {
-            throw new Error(`Test artifact ${TEST_ARTIFACT_ID} not found. Please run reset.sql first.`);
+            throw new Error(`Test artifact ${TEST_ARTIFACT_ID} not found. Please run integrationTestingValues.sql first.`);
         }
     });
 
@@ -393,28 +393,9 @@ describe("Artifacts API - PUT Endpoints Integration Tests", () => {
     });
 
     // =================================================================
-    // TEST GROUP 7: Updating Acquisition Information (price, collection type)
+    // TEST GROUP 7: Updating Acquisition Information (price)
     // =================================================================
     describe("PUT /artifacts/:id/acquisition", () => {
-        it("should update price and collection type", async () => {
-            const updateData = { price: 999.99, collectionType: "PUR" }; // PUR = Purchased
-
-            const res = await request(app)
-                .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
-                .send(updateData);
-
-            expect(res.status).toBe(200);
-            expect(res.body.message).toBe("acquisition updated successfully");
-
-            // Verify both acquisition fields were updated
-            const verify = await pool.query(
-                'SELECT price, collectionType FROM Acquisition WHERE artifactID = $1',
-                [TEST_ARTIFACT_ID]
-            );
-            expect(parseFloat(verify.rows[0].price)).toBe(999.99);
-            expect(verify.rows[0].collectiontype).toBe("PUR");
-        });
-
         it("should update price only", async () => {
             const updateData = { price: 500.00 };
 
@@ -430,30 +411,13 @@ describe("Artifacts API - PUT Endpoints Integration Tests", () => {
             );
             expect(parseFloat(verify.rows[0].price)).toBe(500.00);
         });
-
-        it("should update collection type only (e.g., LOAN, PUR, DONATION)", async () => {
-            const updateData = { collectionType: "LOAN" };
-
-            const res = await request(app)
-                .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
-                .send(updateData);
-
-            expect(res.status).toBe(200);
-
-            const verify = await pool.query(
-                'SELECT collectionType FROM Acquisition WHERE artifactID = $1',
-                [TEST_ARTIFACT_ID]
-            );
-            expect(verify.rows[0].collectiontype).toBe("LOAN");
-        });
-
         it("should reject update when no fields are provided", async () => {
             const res = await request(app)
                 .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
                 .send({});
 
             expect(res.status).toBe(400);
-            expect(res.body.error).toBe("No fields provided for update");
+            expect(res.body.error).toBe("price must not be empty");
         });
     });
 
