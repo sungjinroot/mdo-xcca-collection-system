@@ -13,6 +13,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
 
   const debounceTimer = useRef(null);
   const isFirstLoad = useRef(true);
+  const fileInputRef = useRef(null);
 
   useEffect(() => {
     if (!roomId) return;
@@ -110,6 +111,44 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
     }
   };
 
+  const handleChangePhoto = async () => {
+    const file = fileInputRef.current?.files[0];
+    if (!file) return alert("Please select a file first.");
+
+    const formData = new FormData();
+    formData.append("roomPicture", file);
+
+    try {
+      const uploadResponse = await fetch(`http://127.0.0.1:3000/api/v1/upload/room`, {
+        method: "POST",
+        body: formData,
+      });
+
+      const uploadData = await uploadResponse.json();
+      if (!uploadData.success) throw new Error("Upload failed");
+
+      const roomPictureURL = 'http://127.0.0.1:3000' + uploadData.filename.replace('/app', '');
+
+      const updateResponse = await fetch(`http://127.0.0.1:3000/api/v1/rooms/${roomId}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ roomPictureURL }),
+      });
+
+      if (!updateResponse.ok) throw new Error(`Update failed: ${updateResponse.status}`);
+
+      setRooms(prev =>
+        prev.map(r => r.roomid === roomId ? { ...r, roompictureurl: roomPictureURL } : r)
+      );
+
+      setSaveStatus("saved");
+      setTimeout(() => setSaveStatus("idle"), 2000);
+    } catch (error) {
+      console.error("Upload error:", error);
+      setSaveStatus("error");
+    }
+  };
+
   const statusLabel = {
     idle: null,
     saving: "Saving...",
@@ -154,9 +193,9 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
             <div className="file-input-wrapper">
               <div className="file-input">
                 <label>Modify Room Photo</label>
-                <input type="file" />
+                <input type="file" ref={fileInputRef} />
               </div>
-              <button className="submit-btn">Change Photo</button>
+              <button className="submit-btn" onClick={handleChangePhoto}>Change Photo</button>
             </div>
           </div>
 
