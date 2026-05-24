@@ -2,7 +2,7 @@ import { useState } from 'react';
 import './NewRoomModal.css';
 import Modal from 'react-bootstrap/Modal';
 
-function NewRoomModal({ showAdd, setShowAdd, setChanged }) {
+function NewRoomModal({ showAdd, setShowAdd, setChanged, setRoomIndex, setRoomId }) {
 
     const [roomData, setRoomData] = useState({
         title: '',
@@ -71,6 +71,8 @@ function NewRoomModal({ showAdd, setShowAdd, setChanged }) {
             setChanged((c) => c + 1);
             setFileKey(Date.now());
             setShowAdd(false);
+            setRoomIndex(null); 
+            setRoomId(null);    
 
         } catch (err) {
             console.error(err);

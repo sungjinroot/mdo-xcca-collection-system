@@ -9,36 +9,35 @@ function InspectAcquisition(props) {
   const [ethnicGroup, setEthnicGroup] = useState(props.currentArtifactData.artifactprovenance.ethnicGroup);
   const [placeOfOrigin, setPlaceOfOrigin] = useState(props.currentArtifactData.artifactprovenance.placeOfOrigin);
   const [locality, setLocality] = useState(props.currentArtifactData.artifactprovenance.locality);
+  const [collectionType, setCollectionType] = useState(props.currentArtifactData.acquisition.collectionType);
   const [price, setPrice] = useState(props.currentArtifactData.acquisition.price);
-  const [saveStatus, setSaveStatus] = useState("idle");
 
-  const debounceTimer = useRef(null);
+  const [provenanceSaveStatus, setProvenanceSaveStatus] = useState("idle");
+  const [acquisitionSaveStatus, setAcquisitionSaveStatus] = useState("idle");
+
+  const provenanceTimer = useRef(null);
+  const acquisitionTimer = useRef(null);
   const isFirstLoad = useRef(true);
 
   useEffect(() => {
     isFirstLoad.current = true;
-    setSaveStatus("idle");
+    setProvenanceSaveStatus("idle");
+    setAcquisitionSaveStatus("idle");
 
     setEthnicGroup(props.currentArtifactData.artifactprovenance.ethnicGroup);
     setPlaceOfOrigin(props.currentArtifactData.artifactprovenance.placeOfOrigin);
     setLocality(props.currentArtifactData.artifactprovenance.locality);
+    setCollectionType(props.currentArtifactData.acquisition.collectionType);
     setPrice(props.currentArtifactData.acquisition.price);
 
     setTimeout(() => { isFirstLoad.current = false; }, 100);
   }, [artifactID]);
 
-  useEffect(() => {
-    if (isFirstLoad.current) return;
-    if (props.currentArtifactData.acquisition.collectionType !== "E") {
-      setPrice("");
-    }
-  }, [props.currentArtifactData.acquisition.collectionType]);
-
   const debouncedSaveProvenance = useCallback((updatedFields) => {
-    if (debounceTimer.current) clearTimeout(debounceTimer.current);
-    setSaveStatus("saving");
+    if (provenanceTimer.current) clearTimeout(provenanceTimer.current);
+    setProvenanceSaveStatus("saving");
 
-    debounceTimer.current = setTimeout(async () => {
+    provenanceTimer.current = setTimeout(async () => {
       try {
         const res = await fetch(`http://127.0.0.1:3000/api/v1/artifacts/${artifactID}/artifactProvenance`, {
           method: 'PUT',
@@ -51,10 +50,35 @@ function InspectAcquisition(props) {
           throw new Error(err.error || `PUT failed: ${res.status}`);
         }
 
-        setSaveStatus("idle");
+        setProvenanceSaveStatus("idle");
       } catch (err) {
-        console.error('Save failed:', err);
-        setSaveStatus("error");
+        console.error('Provenance save failed:', err);
+        setProvenanceSaveStatus("error");
+      }
+    }, DEBOUNCE_DELAY);
+  }, [artifactID]);
+
+  const debouncedSaveAcquisition = useCallback((updatedFields) => {
+    if (acquisitionTimer.current) clearTimeout(acquisitionTimer.current);
+    setAcquisitionSaveStatus("saving");
+
+    acquisitionTimer.current = setTimeout(async () => {
+      try {
+        const res = await fetch(`http://127.0.0.1:3000/api/v1/artifacts/${artifactID}/acquisition`, {
+          method: 'PUT',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify(updatedFields),
+        });
+
+        if (!res.ok) {
+          const err = await res.json();
+          throw new Error(err.error || `PUT failed: ${res.status}`);
+        }
+
+        setAcquisitionSaveStatus("idle");
+      } catch (err) {
+        console.error('Acquisition save failed:', err);
+        setAcquisitionSaveStatus("error");
       }
     }, DEBOUNCE_DELAY);
   }, [artifactID]);
@@ -76,11 +100,25 @@ function InspectAcquisition(props) {
 
   useEffect(() => {
     if (isFirstLoad.current) return;
-    debouncedSaveProvenance({ price });
+    if (collectionType !== "E") {
+      setPrice("");
+      debouncedSaveAcquisition({ collectionType, price: null });
+    } else {
+      debouncedSaveAcquisition({ collectionType });
+    }
+  }, [collectionType]);
+
+  useEffect(() => {
+    if (isFirstLoad.current) return;
+    if (collectionType !== "E") return; 
+    debouncedSaveAcquisition({ price });
   }, [price]);
 
   useEffect(() => {
-    return () => { if (debounceTimer.current) clearTimeout(debounceTimer.current); };
+    return () => {
+      if (provenanceTimer.current) clearTimeout(provenanceTimer.current);
+      if (acquisitionTimer.current) clearTimeout(acquisitionTimer.current);
+    };
   }, []);
 
   const handlePriceChange = (value) => {
@@ -93,6 +131,17 @@ function InspectAcquisition(props) {
       setPrice(value);
     }
   };
+
+  const handleCollectionTypeChange = (type) => {
+    setCollectionType(type);
+  };
+
+  const saveStatus =
+    provenanceSaveStatus === "saving" || acquisitionSaveStatus === "saving"
+      ? "saving"
+      : provenanceSaveStatus === "error" || acquisitionSaveStatus === "error"
+      ? "error"
+      : "idle";
 
   return (
     <div className="inspect-acquisition-container">
@@ -115,33 +164,27 @@ function InspectAcquisition(props) {
       <div className="inspect-acquisition-collection">
         <label>How artifact was collected</label>
         <div className="inspect-acquisition-collection-options">
-          <label className="inspect-options-card">
-            Donated
-            <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "A"} />
-          </label>
-          <label className="inspect-options-card">
-            On Loan
-            <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "B"} />
-          </label>
-          <label className="inspect-options-card">
-            Excavated
-            <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "C"} />
-          </label>
-          <label className="inspect-options-card">
-            Found
-            <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "D"} />
-          </label>
+          {[
+            { label: "Donated",   value: "A" },
+            { label: "On Loan",   value: "B" },
+            { label: "Excavated", value: "C" },
+            { label: "Found",     value: "D" },
+          ].map(({ label, value }) => (
+            <label className="inspect-options-card" key={value}>
+              {label}
+              <input type="radio" name="acquisition-radio" checked={collectionType === value} onChange={() => handleCollectionTypeChange(value)}/>
+            </label>
+          ))}
         </div>
-        
+
         <div className="inspect-acquisition-collection-options-special">
           <div className="inspect-options-card-special">
-            
             <label className="inspect-options-card-special-found">
               Purchased
-              <input type="radio" name="acquisition-radio" checked={props.currentArtifactData.acquisition.collectionType === "E"} />
+              <input type="radio" name="acquisition-radio" checked={collectionType === "E"} onChange={() => handleCollectionTypeChange("E")}/>
             </label>
 
-            <div className="inspect-options-card-special-price" style={{ visibility: props.currentArtifactData.acquisition.collectionType === "E" ? "visible" : "hidden" }}>
+            <div className="inspect-options-card-special-price" style={{ visibility: collectionType === "E" ? "visible" : "hidden" }}>
               <label>Price</label>
               <input type="text" value={price} onChange={(e) => handlePriceChange(e.target.value)}/>
             </div>
@@ -154,7 +197,7 @@ function InspectAcquisition(props) {
           Saving...
         </div>
       )}
-      
+
       {saveStatus === "error" && (
         <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
           Save failed

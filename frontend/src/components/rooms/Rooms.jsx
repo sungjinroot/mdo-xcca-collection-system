@@ -80,7 +80,7 @@ function Rooms({ statistics, setStatistics, roomIndex, setRoomIndex, roomId, set
 
             {!isRestricted && (
                 <>
-                    <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} setChanged={setChanged}/>
+                    <NewRoomModal showAdd={showAdd} setShowAdd={setShowAdd} setChanged={setChanged} setRoomIndex={setRoomIndex} setRoomId={setRoomId}/>
                     <EditRoomModal showEdit={showEdit} setShowEdit={setShowEdit} roomId={roomId} setRoomId={setRoomId} roomIndex={roomIndex} setRoomIndex={setRoomIndex} setRooms={setRooms}/>
                     <CategoriesModal showCategories={showCategories} setShowCategories={setShowCategories} categories={categories} setCategories={setCategories}/>
                 </>
