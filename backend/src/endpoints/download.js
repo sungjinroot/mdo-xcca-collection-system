@@ -4,7 +4,7 @@ const pool = require('../db');
 const puppeteer = require('puppeteer');
 const path = require('path');
 const fs = require('fs');
-
+/*
 // helper to convert image file to base64 img tag
 const imageToBase64Tag = (filePath, style = '') => {
     if (!filePath) return '<div style="height:200px;background:#eee;"></div>'
@@ -118,6 +118,7 @@ endpoint.get("/pdf/:id", async (req, res) => {
         const pdfBuffer = await page.pdf({ format: 'A4', printBackground: true })
 
         // 6. Send PDF as response
+
         res.setHeader('Content-Type', 'application/pdf')
         res.setHeader('Content-Disposition', `attachment; filename="artifact-${id}.pdf"`)
         res.send(pdfBuffer)
@@ -127,6 +128,32 @@ endpoint.get("/pdf/:id", async (req, res) => {
         res.status(500).json({ error: error.message })
     } finally {
         if (browser) await browser.close()
+    }
+})
+
+*/
+endpoint.get('/pdf', async (req, res) => {
+    let browser;
+    try {
+        const templatePath = path.resolve(__dirname, '../assets/layoutPage1.html')
+        let html = fs.readFileSync(templatePath, 'utf8')
+
+        browser = await puppeteer.launch({
+            args: ['--no-sandbox', '--disable-setuid-sandbox']
+        });
+        const page = await browser.newPage();
+
+        await page.setContent(html, { waitUntil: 'networkidle0' });
+
+        const pdfBuffer = await page.pdf({ format: 'A4', printBackground: false });
+
+        res.set({ 'Content-Type': 'application/pdf' });
+        res.send(pdfBuffer);
+    } catch(error) {
+        console.error(error);
+        res.status(500).send("Failed to generate PDF");
+    } finally {
+        if (browser) await browser.close();
     }
 })
 
