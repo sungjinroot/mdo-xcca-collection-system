@@ -423,6 +423,199 @@ describe("Artifacts API - PUT Endpoints Integration Tests", () => {
         });
     });
 
+describe("PUT /artifacts/:id/acquisition", () => {
+    // reset test data before acquisition testing begins
+    beforeEach(async () => {
+        // reset to known values before test begins
+        await pool.query(
+            `UPDATE Acquisition SET collectionType = 'A', price = 100.00 WHERE artifactID = $1`,
+            [TEST_ARTIFACT_ID]
+        );
+    });
+
+    it("should update price only", async () => {
+        const updateData = { price: 500.00 };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("acquisition updated successfully");
+
+        const verify = await pool.query(
+            'SELECT price FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(parseFloat(verify.rows[0].price)).toBe(500.00);
+    });
+
+    it("should update collectionType only (with valid type)", async () => {
+        const updateData = { collectionType: "C" };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("acquisition updated successfully");
+
+        const verify = await pool.query(
+            'SELECT collectionType FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(verify.rows[0].collectiontype).toBe("C");
+    });
+
+    it("should update both price and collectionType together", async () => {
+        const updateData = { 
+            price: 750.00, 
+            collectionType: "D" 
+        };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+        expect(res.body.message).toBe("acquisition updated successfully");
+
+        const verify = await pool.query(
+            'SELECT price, collectionType FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(parseFloat(verify.rows[0].price)).toBe(750.00);
+        expect(verify.rows[0].collectiontype).toBe("D");
+    });
+
+    it("should reject update with invalid collectionType (not A-E)", async () => {
+        const updateData = { collectionType: "Z" }; // Z is not valid
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("collectionType must be one of: A, B, C, D, E");
+    });
+
+    it("should reject update with invalid collectionType even when price is also provided", async () => {
+        const updateData = { 
+            collectionType: "INVALID", 
+            price: 200.00 
+        };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("collectionType must be one of: A, B, C, D, E");
+    });
+
+    it("should reject update when no fields are provided", async () => {
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send({});
+
+        expect(res.status).toBe(400);
+        expect(res.body.error).toBe("price must not be empty");
+    });
+
+    it("should accept all valid collectionType values (A, B, C, D, E)", async () => {
+        const validTypes = ['A', 'B', 'C', 'D', 'E'];
+        
+        for (const type of validTypes) {
+            const res = await request(app)
+                .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+                .send({ collectionType: type });
+            
+            expect(res.status).toBe(200);
+            
+            // Verify the type was saved correctly
+            const verify = await pool.query(
+                'SELECT collectionType FROM Acquisition WHERE artifactID = $1',
+                [TEST_ARTIFACT_ID]
+            );
+            expect(verify.rows[0].collectiontype).toBe(type);
+        }
+    });
+
+    it("should update price with decimal values", async () => {
+        const updateData = { price: 1234.56 };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+
+        const verify = await pool.query(
+            'SELECT price FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(parseFloat(verify.rows[0].price)).toBe(1234.56);
+    });
+
+    it("should update price with integer values", async () => {
+        const updateData = { price: 999 };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+
+        const verify = await pool.query(
+            'SELECT price FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(parseFloat(verify.rows[0].price)).toBe(999);
+    });
+
+    it("should update price with zero", async () => {
+        const updateData = { price: 0 };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+
+        const verify = await pool.query(
+            'SELECT price FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(parseFloat(verify.rows[0].price)).toBe(0);
+    });
+
+    it("should return 404 when artifact does not exist", async () => {
+        const res = await request(app)
+            .put(`/artifacts/${NON_EXISTENT_ID}/acquisition`)
+            .send({ price: 100.00 });
+
+        expect(res.status).toBe(404);
+        expect(res.body.error).toBe("Artifact not found");
+    });
+
+    // Edge case: Testing with negative price
+    it("should handle negative price values", async () => {
+        const updateData = { price: -50.00 };
+
+        const res = await request(app)
+            .put(`/artifacts/${TEST_ARTIFACT_ID}/acquisition`)
+            .send(updateData);
+
+        expect(res.status).toBe(200);
+
+        const verify = await pool.query(
+            'SELECT price FROM Acquisition WHERE artifactID = $1',
+            [TEST_ARTIFACT_ID]
+        );
+        expect(parseFloat(verify.rows[0].price)).toBe(-50.00);
+    });
+});
+    
     // ----- Cleanup: Close database connection after all tests -----
     afterAll(async () => {
         await pool.end();
