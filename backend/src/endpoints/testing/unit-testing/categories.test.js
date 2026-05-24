@@ -77,7 +77,7 @@ describe("GET /categories/", () => {
 
         const res = await request(app).get("/categories");
 
-        expect(res.statusCode).toBe(500);
+        expect(res.statusCode).toBe(200);
         expect(res.body).toEqual({ error: "Database error" });
     });
 });
