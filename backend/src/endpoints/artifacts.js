@@ -560,12 +560,23 @@ endpoint.put('/:id/physicalDescription', async (req, res) => {
 endpoint.put('/:id/acquisition', async (req, res) => {
     const { id } = req.params;
     const {
-        price
+        collectionType, price
     } = req.body;
+
+    // collectionType validator
+    if (collectionType !== undefined) {
+        const validCollectionTypes = ['A', 'B', 'C', 'D', 'E'];
+        if (!validCollectionTypes.includes(collectionType)) {
+            return res.status(400).json({ error: 'collectionType must be one of: A, B, C, D, E' });
+        }
+    }
+
+    // himo ug price validator kung need pa
 
     const updates = [];
     const values = [];
 
+    if (collectionType !== undefined) updates.push(`collectionType = $${updates.length + 1}`), values.push(collectionType);
     if (price !== undefined) updates.push(`price = $${updates.length + 1}`), values.push(price);
 
     if (updates.length === 0) {
@@ -588,7 +599,7 @@ endpoint.put('/:id/acquisition', async (req, res) => {
             values
         );
         
-        res.status(200).json({ message: 'acquisition price updated successfully' });
+        res.status(200).json({ message: 'acquisition updated successfully' });
     } catch (err) {
         console.error('DB ERROR:', err);
         res.status(500).json({ error: err.message });
