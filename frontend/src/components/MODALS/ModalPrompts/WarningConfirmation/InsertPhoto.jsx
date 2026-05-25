@@ -96,7 +96,7 @@ function InsertPhoto({ showImageInsert, setShowImageInsert, artifactId, onUpload
           <div className="stepper-upload" style={{ height: '150px', marginBottom: '20px' }}>
             <label htmlFor="modalImageUpload" className="image-upload-label">
               <div className="upload-box">
-                Click or Drag & Drop to Upload
+                Click Here to Upload
               </div>
 
               <input type="file" id="modalImageUpload" accept="image/*" className="image-upload-input" multiple onChange={autoUpload}/>
