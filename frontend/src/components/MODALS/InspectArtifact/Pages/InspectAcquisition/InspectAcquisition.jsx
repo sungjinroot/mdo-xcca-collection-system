@@ -101,7 +101,6 @@ function InspectAcquisition(props) {
   useEffect(() => {
     if (isFirstLoad.current) return;
     if (collectionType !== "E") {
-      setPrice("");
       debouncedSaveAcquisition({ collectionType, price: null });
     } else {
       debouncedSaveAcquisition({ collectionType });
@@ -110,7 +109,7 @@ function InspectAcquisition(props) {
 
   useEffect(() => {
     if (isFirstLoad.current) return;
-    if (collectionType !== "E") return; 
+    if (collectionType !== "E") return;
     debouncedSaveAcquisition({ price });
   }, [price]);
 
@@ -186,7 +185,7 @@ function InspectAcquisition(props) {
 
             <div className="inspect-options-card-special-price" style={{ visibility: collectionType === "E" ? "visible" : "hidden" }}>
               <label>Price</label>
-              <input type="text" value={price} onChange={(e) => handlePriceChange(e.target.value)}/>
+              <input type="text" value={price ?? ""} onChange={(e) => handlePriceChange(e.target.value)}/>
             </div>
           </div>
         </div>
