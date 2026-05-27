@@ -37,7 +37,6 @@
       margin: 0 auto 3rem;
       padding: 2.4rem 2.8rem 2.8rem;
       box-shadow: 0 4px 24px rgba(0,0,0,.18), 0 1px 4px rgba(0,0,0,.12);
-      border-top: 4px solid var(--gold);
       position: relative;
     }
 
@@ -340,7 +339,7 @@
     <!-- Header -->
     <div class="page-header">
       <div class="header-logos">
-        <!-- Replace src with actual logo paths -->
+        <!-- Logos will be injected dynamically -->
       </div>
       <span class="museum-title">M U S E O &nbsp; D E &nbsp; O R O</span>
       <div class="header-xu-logo">
@@ -352,26 +351,28 @@
     <div class="top-section">
 
       <!-- Artifact main photo -->
-      <div class="artifact-photo-placeholder">ARTIFACT PHOTO</div>
+      <div class="artifact-photo-placeholder" id="main-photo">
+          MAIN_PHOTO_PLACEHOLDER
+      </div>
 
       <div class="top-right">
         <!-- Three institution logos -->
         <div class="top-logos">
-          <img src="xcca-logo.png" alt="Xavier University Center for Culture and the Arts" />
-          <img src="mdo-logo.png" alt="Museo de Oro" />
-          <img src="omm-logo.png" alt="Office of Mission and Ministry" />
+          <img src="xcca-logo.png"/>
+          <img src="mdo-logo.png"/>
+          <img src="omm-logo.png"/>
         </div>
 
         <!-- Quick identification fields -->
         <div class="quick-fields">
           <span class="qlabel">Vernacular Name</span>
-          <span class="qvalue" data-field="vernacular_name">TEST ENGLISH NAME</span>
+          <span class="qvalue" data-field="vernacular_name">Loading...</span>
 
           <span class="qlabel">English Name</span>
-          <span class="qvalue" data-field="english_name">TEST VERNACULAR NAME</span>
+          <span class="qvalue" data-field="english_name">Loading...</span>
 
           <span class="qlabel">Storage Loc</span>
-          <span class="qvalue" data-field="storage_location">ROOM 1</span>
+          <span class="qvalue" data-field="storage_location">Loading...</span>
         </div>
       </div>
     </div>
@@ -380,11 +381,11 @@
     <div class="id-row">
       <div class="id-field">
         <span class="id-label">Accession Number:</span>
-        <span class="id-value" data-field="accession_number">Test number</span>
+        <span class="id-value" data-field="accession_number">Loading...</span>
       </div>
       <div class="id-field">
         <span class="id-label">Catalogue Number:</span>
-        <span class="id-value" data-field="catalogue_number">Test number</span>
+        <span class="id-value" data-field="catalogue_number">Loading...</span>
       </div>
     </div>
 
@@ -395,20 +396,20 @@
       <div>
         <div class="section-heading">Physical</div>
         <div class="field">
-          <div class="field-label">Diameter</div>
-          <div class="field-value" data-field="diameter">Testing</div>
+          <div class="field-label">Diameter (cm)</div>
+          <div class="field-value" data-field="diameter">Loading...</div>
         </div>
         <div class="field">
-          <div class="field-label">Length (CM)</div>
-          <div class="field-value" data-field="length_cm">Testing</div>
+          <div class="field-label">Length (cm)</div>
+          <div class="field-value" data-field="length_cm">Loading...</div>
         </div>
         <div class="field">
-          <div class="field-label">Width (CM)</div>
-          <div class="field-value" data-field="width_cm">Testing</div>
+          <div class="field-label">Width (cm)</div>
+          <div class="field-value" data-field="width_cm">Loading...</div>
         </div>
         <div class="field">
-          <div class="field-label">Height (CM)</div>
-          <div class="field-value" data-field="height_cm">Testing</div>
+          <div class="field-label">Height (cm)</div>
+          <div class="field-value" data-field="height_cm">Loading...</div>
         </div>
       </div>
 
@@ -416,24 +417,24 @@
       <div>
         <div class="section-heading">Contacts</div>
         <div class="field">
-          <div class="field-label">Date Given</div>
-          <div class="field-value" data-field="date_given">5/1/26</div>
+          <div class="field-label">Date Collected</div>
+          <div class="field-value" data-field="date_given">Loading...</div>
         </div>
         <div class="field">
           <div class="field-label">Date Received</div>
-          <div class="field-value" data-field="date_received">5/1/26</div>
+          <div class="field-value" data-field="date_received">Loading...</div>
         </div>
         <div class="field">
           <div class="field-label">Recorded By</div>
-          <div class="field-value" data-field="recorded_by">Test recorder</div>
+          <div class="field-value" data-field="recorded_by">Loading...</div>
         </div>
         <div class="field">
           <div class="field-label">Receiver's Name</div>
-          <div class="field-value" data-field="receiver_name">Test receiver</div>
+          <div class="field-value" data-field="receiver_name">Loading...</div>
         </div>
         <div class="field">
           <div class="field-label">Donor's Name</div>
-          <div class="field-value" data-field="donor_name">Test donor</div>
+          <div class="field-value" data-field="donor_name">Loading...</div>
         </div>
       </div>
 
@@ -442,19 +443,19 @@
         <div class="section-heading">Provenance</div>
         <div class="field">
           <div class="field-label">Ethnic Group</div>
-          <div class="field-value" data-field="ethnic_group">Test group</div>
+          <div class="field-value" data-field="ethnic_group">Loading...</div>
         </div>
         <div class="field">
           <div class="field-label">Place of Origin</div>
-          <div class="field-value" data-field="place_of_origin">Test place</div>
+          <div class="field-value" data-field="place_of_origin">Loading...</div>
         </div>
         <div class="field">
           <div class="field-label">Locality</div>
-          <div class="field-value" data-field="locality">Test locality</div>
+          <div class="field-value" data-field="locality">Loading...</div>
         </div>
         <div class="field">
-          <div class="field-label">How Artifact Was Collected</div>
-          <div class="field-value" data-field="how_collected">DONATED</div>
+          <div class="field-label">Collection Type</div>
+          <div class="field-value" data-field="how_collected">Loading...</div>
         </div>
       </div>
 
@@ -464,15 +465,15 @@
     <div class="bottom-section">
       <div class="field">
         <div class="field-label">Function</div>
-        <div class="field-value" data-field="function">NO FUNCTION TESTING</div>
+        <div class="field-value" data-field="function">Loading...</div>
       </div>
       <div class="field">
         <div class="field-label">Details</div>
-        <div class="field-value" data-field="details">GOOD UPON RECEIVED</div>
+        <div class="field-value" data-field="details">Loading...</div>
       </div>
       <div class="field">
         <div class="field-label">Condition Upon Receipt</div>
-        <div class="field-value" data-field="condition">GOOD kaayo</div>
+        <div class="field-value" data-field="condition">Loading...</div>
       </div>
     </div>
 
@@ -507,39 +508,35 @@
     </div>
 
     <!-- Artifact name title -->
-    <div class="gallery-title" data-field="english_name">E N G L I S H &nbsp; N A M E</div>
+    <div class="gallery-title" data-field="english_name_upper">ARTIFACT NAME</div>
 
     <!-- 2×2 photo grid -->
     <div class="photo-grid">
 
       <div class="photo-cell">
-        <div class="photo-box">
-          <!-- <img src="" alt="Front view" data-photo="front" /> -->
-          <span class="photo-placeholder-text">FRONT PHOTO</span>
+        <div class="photo-box" data-photo="front">
+          <div class="photo-placeholder-text">FRONT PHOTO</div>
         </div>
         <div class="photo-caption">Front</div>
       </div>
 
       <div class="photo-cell">
-        <div class="photo-box">
-          <!-- <img src="" alt="Back view" data-photo="back" /> -->
-          <span class="photo-placeholder-text">BACK PHOTO</span>
+        <div class="photo-box" data-photo="back">
+          <div class="photo-placeholder-text">NO IMAGE</div>
         </div>
         <div class="photo-caption">Back</div>
       </div>
 
       <div class="photo-cell">
-        <div class="photo-box">
-          <!-- <img src="" alt="Left side view" data-photo="left" /> -->
-          <span class="photo-placeholder-text">LEFT SIDE PHOTO</span>
+        <div class="photo-box" data-photo="left">
+          <div class="photo-placeholder-text">NO IMAGE</div>
         </div>
         <div class="photo-caption">Left Side</div>
       </div>
 
       <div class="photo-cell">
-        <div class="photo-box">
-          <!-- <img src="" alt="Right side view" data-photo="right" /> -->
-          <span class="photo-placeholder-text">RIGHT SIDE PHOTO</span>
+        <div class="photo-box" data-photo="right">
+          <div class="photo-placeholder-text">NO IMAGE</div>
         </div>
         <div class="photo-caption">Right Side</div>
       </div>
