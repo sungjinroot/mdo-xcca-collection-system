@@ -20,7 +20,7 @@ describe("DELETE /images/:artifactId/:pictureId", () => {
 
         pool.query
             .mockResolvedValueOnce({ rowCount: 1 })   // This line checks if a picture exists, mock data rowCount = 1
-            .mockResolvedValueOnce({});               // DELETE call success
+            .mockResolvedValueOnce({});            
 
         const res = await request(app).delete("/images/123/456"); // MOCKS an artifact ID and Picture ID
 

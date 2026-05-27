@@ -24,7 +24,7 @@ describe("GET /artifact/categories/:id", () => {
         pool.query.mockResolvedValueOnce({
             rows: [
                 { categoryid: 1, categoryname: "Pottery", artifactid: "42" },
-                { categoryid: 2, categoryname: "Textile", artifactid: null }, // not linked to this artifact
+                { categoryid: 2, categoryname: "Textile", artifactid: null }, 
             ],
         });
 
