@@ -1,28 +1,52 @@
 .assistants-container{
+    background-color: #3a52a3;
+    border-radius: 9px;
+    display: grid;
+    grid-template-columns: 132px minmax(0, 1fr) 40px;
+    align-items: center;
+    width: 100%;
+    min-height: 62px;
+    padding: 0 12px;
+    border: 1px solid #283971;
+    box-shadow: 0 3px 10px rgba(40, 57, 113, 0.16);
+    transition: background-color 0.2s ease, box-shadow 0.2s ease, transform 0.2s ease;
+}
+
+.assistants-container:hover{
     background-color: #283971;
-    border-radius: 8px;
-    display: flex;
-    flex-direction: column;
-    width: 250px;
-    height: 155px;
+    box-shadow: 0 8px 18px rgba(40, 57, 113, 0.24);
+    transform: translateY(-1px);
 }
 
 .assistant-header{
-    border-top-left-radius: 8px;
-    border-top-right-radius: 8px;
-    background-color: #3a52a3;
-    padding: 10px;
-    display: flex;
-    justify-content: space-between;
+    display: contents;
+}
+
+.assistant-header label{
+    grid-column: 1;
+    grid-row: 1;
+    justify-self: start;
+    align-self: center;
+    margin-left: 0;
+    padding: 6px 12px;
+    border-radius: 999px;
+    background-color: #283971;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 800;
 }
 
 .assistant-header img {
-    width: 30px;         
-    height: 30px;
+    grid-column: 3;
+    grid-row: 1;
+    justify-self: center;
+    align-self: center;
+    width: 24px;         
+    height: 24px;
     cursor: pointer;
     opacity: 0;
     transform: scale(0.95);
-    transition: transform 0.3s ease, opacity 0.4s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
 .assistants-container:hover .assistant-header img {
@@ -30,34 +54,30 @@
     transform: scale(1);
 }
 
-.assistant-header:hover img {
-    opacity: 1;
-    transform: scale(1.15);
-}
-
 .assistant-header img:hover {
-    opacity: 1;
-    transform: scale(1.2);
+    transform: scale(1.12);
 }
 
 .assistant-header img:active {
-    transform: scale(0.9);
-    opacity: 0.6;
+    transform: scale(0.92);
+    opacity: 0.7;
 }
 
 .assistant-creds{
-    height: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    gap: 10px;
-    color: white;
+    grid-column: 2;
+    grid-row: 1;
+    min-width: 0;
+    color: #ffffff;
+    align-self: center;
 }
 
-.assistant-header label{
-    color: white;
+.assistant-creds h3{
+    margin: 0;
     font-size: 18px;
+    font-weight: 800;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
 }
 
 .assistant-creds h4 {
@@ -68,4 +88,19 @@
     overflow: hidden;
     text-overflow: ellipsis;
     transition: transform 0.3s ease, background 0.3s ease;
+}
+
+@media (max-width: 640px) {
+    .assistants-container{
+        grid-template-columns: minmax(0, 1fr) 36px;
+        gap: 8px;
+        padding: 12px;
+    }
+
+    .assistant-header label,
+    .assistant-creds,
+    .assistant-header img{
+        grid-column: auto;
+        margin-left: 0;
+    }
 }
