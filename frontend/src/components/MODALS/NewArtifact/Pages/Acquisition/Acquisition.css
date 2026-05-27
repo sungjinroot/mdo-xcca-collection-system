@@ -1,13 +1,14 @@
 .stepper-acquisition-provenance-container {
-  background-color: white;
+  background-color: #ffffff;
   height: auto; 
-  margin-bottom: 15px;
-  border-radius: 16px;
-  padding: 20px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(40, 57, 113, 0.14);
+  box-shadow: 0 4px 12px rgba(40, 57, 113, 0.06);
 }
 
 .stepper-acquisition-provenance-fields {
@@ -23,17 +24,17 @@
 }
 
 .stepper-acquisition-provenance-fields input {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
   font-size: 14px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stepper-acquisition-provenance-fields input:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+  border-color: #283971;
+  box-shadow: 0 0 0 3px rgba(40, 57, 113, 0.15);
 }
 
 .stepper-acquisition-provenance-container h3 {
@@ -45,15 +46,16 @@
 
 .stepper-acquisition-collection-means-container-usual,
 .stepper-acquisition-collection-means-container-special {
-  background-color: white;
+  background-color: #ffffff;
   height: auto;
-  margin-bottom: 15px;
-  border-radius: 16px;
-  padding: 20px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(40, 57, 113, 0.14);
+  box-shadow: 0 4px 12px rgba(40, 57, 113, 0.06);
 }
 
 .stepper-acquisition-collection-means-container-usual h3 {
@@ -75,18 +77,19 @@
   flex: 1;
   padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #283971;
+  background-color: #3a52a3;
 }
 
 .stepper-acquisition-collection-means-forms input {
-  accent-color: #6366f1;
+  accent-color: #283971;
   transform: scale(1.1);
 }
 
 .stepper-acquisition-collection-means-forms label {
   font-size: 15.5px;
-  font-weight: 500;
-  color: #374151;
+  font-weight: 600;
+  color: #ffffff;
   cursor: pointer;
 }
 
@@ -105,7 +108,7 @@
 }
 
 .stepper-acquisition-collection-means-container-special input {
-  accent-color: #6366f1;
+  accent-color: #283971;
   transform: scale(1.15);
 }
 
@@ -117,7 +120,13 @@
   width: 30%;
   padding: 12px 14px;
   border-radius: 10px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #283971;
+  background-color: #3a52a3;
+  color: #ffffff;
+}
+
+.stepper-acquisition-purchased-option label {
+  color: #ffffff;
 }
 
 .stepper-acquisition-price-input{
@@ -129,9 +138,9 @@
 }
 
 .stepper-acquisition-price-input input{
-  padding: 6px;
+  padding: 8px 10px;
   border-radius: 8px;
-  border: 1px solid #d1d5db;
+  border: 1px solid #cbd5e1;
 
 }
 

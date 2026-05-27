@@ -7,7 +7,65 @@
     justify-content: center;
 }
 
+.mdo-header h3 {
+  margin: 0;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
 .required {
-  color: red;
+  color: #dc2626;
   margin-left: 4px;
+}
+
+.ModalSizeHeight {
+  border-radius: 12px !important;
+  overflow: hidden;
+  background-color: #f6f8fc !important;
+  box-shadow: 0 22px 60px rgba(15, 23, 42, 0.35);
+}
+
+.ModalSizeHeight .modal-header {
+  min-height: 64px;
+  border-bottom: 0 !important;
+  background: #283971 !important;
+  box-shadow: 0 6px 18px rgba(40, 57, 113, 0.24);
+}
+
+.ModalSizeHeight .modal-body {
+  height: calc(91vh - 64px);
+  padding: 18px 22px 20px !important;
+  background:
+    linear-gradient(180deg, rgba(40, 57, 113, 0.06) 0%, rgba(255, 255, 255, 0) 32%),
+    #f6f8fc;
+  overflow: hidden;
+}
+
+.ModalSizeHeight .MuiStepper-root {
+  padding: 14px 18px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  background-color: #ffffff;
+  border: 1px solid rgba(40, 57, 113, 0.18);
+  box-shadow: 0 5px 14px rgba(40, 57, 113, 0.08);
+}
+
+.ModalSizeHeight .MuiStepLabel-label {
+  font-family: 'Outfit', sans-serif;
+  font-weight: 800 !important;
+  color: #5b6474 !important;
+}
+
+.ModalSizeHeight .MuiStepLabel-label.Mui-active,
+.ModalSizeHeight .MuiStepLabel-label.Mui-completed {
+  color: #283971 !important;
+}
+
+.ModalSizeHeight .MuiStepIcon-root.Mui-active,
+.ModalSizeHeight .MuiStepIcon-root.Mui-completed {
+  color: #283971 !important;
+}
+
+.ModalSizeHeight .MuiStepIcon-root.Mui-completed {
+  color: #283971 !important;
 }

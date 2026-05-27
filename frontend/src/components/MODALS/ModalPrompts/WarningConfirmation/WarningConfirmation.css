@@ -1,0 +1,108 @@
+.warning-confirmation-modal {
+  border: none;
+  border-radius: 14px;
+  overflow: hidden;
+  box-shadow: 0 22px 55px rgba(15, 23, 42, 0.32);
+}
+
+.warning-confirmation-header {
+  min-height: 50px;
+  padding: 10px 14px;
+  background-color: #283971;
+  border-bottom: none;
+}
+
+.warning-confirmation-header .btn-close {
+  filter: invert(1);
+  opacity: 0.8;
+}
+
+.warning-confirmation-header .btn-close:hover {
+  opacity: 1;
+}
+
+.warning-confirmation-body {
+  padding: 28px 32px 30px;
+  text-align: center;
+  background: #ffffff;
+}
+
+.warning-confirmation-icon {
+  width: 48px;
+  height: 48px;
+  margin: 0 auto 14px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background-color: #fff1f2;
+  color: #dc3545;
+  border: 1px solid #fecdd3;
+  font-size: 26px;
+  font-weight: 900;
+  line-height: 1;
+}
+
+.warning-confirmation-body h4 {
+  margin: 0 0 8px;
+  color: #1f2937;
+  font-size: 1.35rem;
+  font-weight: 800;
+}
+
+.warning-confirmation-body p {
+  margin: 0 auto 24px;
+  max-width: 360px;
+  color: #667085;
+  font-size: 0.98rem;
+  line-height: 1.45;
+}
+
+.warning-confirmation-body p span {
+  display: block;
+  margin-top: 2px;
+}
+
+.warning-confirmation-actions {
+  display: flex;
+  justify-content: center;
+  gap: 12px;
+}
+
+.warning-confirmation-actions button {
+  min-width: 104px;
+  min-height: 42px;
+  padding: 10px 18px;
+  border-radius: 8px;
+  font-weight: 800;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, transform 0.2s ease, box-shadow 0.2s ease;
+}
+
+.warning-confirmation-actions button:hover {
+  transform: translateY(-1px);
+}
+
+.warning-confirmation-cancel {
+  border: 1px solid #cbd5e1;
+  background-color: #ffffff;
+  color: #1f2937;
+}
+
+.warning-confirmation-cancel:hover {
+  background-color: #f8fafc;
+  border-color: #94a3b8;
+}
+
+.warning-confirmation-delete {
+  border: 1px solid #dc3545;
+  background-color: #dc3545;
+  color: #ffffff;
+  box-shadow: 0 8px 18px rgba(220, 53, 69, 0.24);
+}
+
+.warning-confirmation-delete:hover {
+  background-color: #bb2d3b;
+  border-color: #bb2d3b;
+  box-shadow: 0 10px 22px rgba(220, 53, 69, 0.3);
+}

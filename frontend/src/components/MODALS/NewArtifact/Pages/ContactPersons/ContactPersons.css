@@ -1,13 +1,14 @@
 .stepper-contact-person-container-left {
   background-color: #ffffff;
   height: auto;
-  margin-bottom: 15px;
-  border-radius: 16px;
-  padding: 20px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(40, 57, 113, 0.14);
+  box-shadow: 0 4px 12px rgba(40, 57, 113, 0.06);
 }
 
 .stepper-contact-person-fields {
@@ -23,29 +24,30 @@
 }
 
 .stepper-contact-person-fields input {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
   font-size: 14px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stepper-contact-person-fields input:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+  border-color: #283971;
+  box-shadow: 0 0 0 3px rgba(40, 57, 113, 0.15);
 }
 
 .stepper-contact-person-container-right {
   background-color: #ffffff;
   height: auto;
-  margin-bottom: 15px;
-  border-radius: 16px;
-  padding: 20px;
+  margin-bottom: 14px;
+  border-radius: 12px;
+  padding: 18px;
   display: flex;
   flex-direction: column;
   gap: 15px;
-  box-shadow: 0 12px 32px rgba(0, 0, 0, 0.35);
+  border: 1px solid rgba(40, 57, 113, 0.14);
+  box-shadow: 0 4px 12px rgba(40, 57, 113, 0.06);
 }
 
 .stepper-contact-person-date-fields {
@@ -61,15 +63,15 @@
 }
 
 .stepper-contact-person-date-fields input {
-  padding: 10px 12px;
-  border-radius: 10px;
-  border: 1px solid #d1d5db;
+  padding: 11px 12px;
+  border-radius: 8px;
+  border: 1px solid #cbd5e1;
   font-size: 14px;
   transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .stepper-contact-person-date-fields input:focus {
   outline: none;
-  border-color: #6366f1;
-  box-shadow: 0 0 0 3px rgba(99, 102, 241, 0.35);
+  border-color: #283971;
+  box-shadow: 0 0 0 3px rgba(40, 57, 113, 0.15);
 }
