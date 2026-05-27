@@ -72,6 +72,9 @@ function requireRole(...allowedRoles) {
 //Routes to Upload Folder
 app.use('/uploads', express.static('/app/uploads'));
 
+//route for temporary storage of sample pictures
+app.use('/src/assets/temp', express.static('src/assets/temp'));
+
 const artifactEndpoint = require('./endpoints/artifacts');
 const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay');
 const roomEndpoint = require('./endpoints/rooms');
