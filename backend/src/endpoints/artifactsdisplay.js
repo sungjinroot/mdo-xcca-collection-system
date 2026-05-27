@@ -65,12 +65,10 @@ endpoint.get('/', async (req, res) => {
             params.push(categoryID);
         }
 
-        // Final where clause
         const whereClause = conditions.length
             ? `WHERE ${conditions.join(' AND ')}`
             : '';
 
-        // Base query
         const baseQuery = `
             FROM Artifacts a
             LEFT JOIN ArtifactNames an
@@ -80,7 +78,6 @@ endpoint.get('/', async (req, res) => {
             ${whereClause}
         `;
 
-        // Total Count
         const countResult = await pool.query(
             `
             SELECT COUNT(DISTINCT a.artifactID)
@@ -92,7 +89,6 @@ endpoint.get('/', async (req, res) => {
         const totalRows = parseInt(countResult.rows[0].count, 10);
         const totalPages = Math.ceil(totalRows / limit);
 
-        // Main data Query
         const artifactResult = await pool.query(
             `
             SELECT DISTINCT
@@ -110,7 +106,6 @@ endpoint.get('/', async (req, res) => {
             [...params, limit, offset]
         );
 
-        // OVERALL TOTAL
         const overallCountResult = await pool.query(`
             SELECT COUNT(*) AS total
             FROM Artifacts
@@ -121,7 +116,6 @@ endpoint.get('/', async (req, res) => {
             10
         );
 
-        // Current room total
         let currentRoomTotal = null;
 
         if (roomID) {
@@ -140,7 +134,6 @@ endpoint.get('/', async (req, res) => {
             );
         }
 
-        // RESPONSE
         res.status(200).json({
             data: artifactResult.rows,
 
