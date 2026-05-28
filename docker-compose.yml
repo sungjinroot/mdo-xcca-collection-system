@@ -14,6 +14,7 @@ services:
       - ./backend/src:/app/src  
       - /app/node_modules       
       - ./uploads:/app/uploads
+      - ./backend/src/assets/temp:/app/src/assets/temp
 
   frontend:
     build: ./frontend

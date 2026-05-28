@@ -57,9 +57,9 @@ ON CONFLICT (collectionType) DO NOTHING;
 -- INSERT ROOMS
 -- ============================================
 INSERT INTO Rooms (roomID, roomName, title, caption, roomPictureURL) VALUES
-(1, 'Heritage Gallery', 'Ancient Artifacts Exhibit', 'Discover the rich cultural heritage of pre-colonial Philippines', 'http://127.0.0.1:3000/uploads/rooms/1779890410103-859789368.jpg'),
-(2, 'Textile Wing', 'Weaving Traditions', 'Traditional Filipino textiles and weaving techniques from various ethnic groups', 'http://127.0.0.1:3000/uploads/rooms/1779890709095-786932618.jpg'),
-(3, 'Maritime Gallery', 'Ancient Sea Trade', 'Discover balangays, trading vessels, and maritime artifacts that connected the Philippines to Southeast Asia', 'http://127.0.0.1:3000/uploads/rooms/1779890872018-383596357.jpg')
+(1, 'Heritage Gallery', 'Ancient Artifacts Exhibit', 'Discover the rich cultural heritage of pre-colonial Philippines', 'http://127.0.0.1:3000/src/assets/temp/rooms/1779890410103-859789368.jpg'),
+(2, 'Textile Wing', 'Weaving Traditions', 'Traditional Filipino textiles and weaving techniques from various ethnic groups', 'http://127.0.0.1:3000/src/assets/temp/rooms/1779890709095-786932618.jpg'),
+(3, 'Maritime Gallery', 'Ancient Sea Trade', 'Discover balangays, trading vessels, and maritime artifacts that connected the Philippines to Southeast Asia', 'http://127.0.0.1:3000/src/assets/temp/rooms/1779890872018-383596357.jpg')
 ON CONFLICT (roomID) DO NOTHING;
 
 -- Reset room sequence if needed
@@ -193,13 +193,13 @@ INSERT INTO ArtifactCategories (artifactID, categoryID) VALUES
 -- INSERT PICTURES
 -- ============================================
 INSERT INTO Pictures (pictureID, angleName, pictureFilePath, artifactID, isProfilePicture) VALUES
-(1, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779892285814-260203947.jpg', 1, true),
-(2, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779892875266-767021167.jpg', 2, true),
-(3, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779893795930-585253248.jpg', 3, true),
-(4, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779893858185-418998507.jpg', 4, true),
-(5, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779893921032-612967179.png', 5, true),
-(6, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779894006125-906346455.jpg', 6, true),
-(7, 'front', 'http://127.0.0.1:3000/uploads/artifacts/1779894051578-709314079.jpg', 7, true)
+(1, 'front', 'http://127.0.0.1:3000/src/assets/temp/artifacts/1779892285814-260203947.jpg', 1, true),
+(2, 'front', 'http://127.0.0.1:3000/src/assets/temp/artifacts/1779892875266-767021167.jpg', 2, true),
+(3, 'front', 'http://127.0.0.1:3000/src/assets/temp/artifacts/1779893795930-585253248.jpg', 3, true),
+(4, 'front', 'http://127.0.0.1:3000/src/assets/temp/artifacts/1779893858185-418998507.jpg', 4, true),
+(5, 'front', 'http://127.0.0.1:3000/src/assets/temp/artifacts/1779893921032-612967179.png', 5, true),
+(6, 'front', 'http://127.0.0.1:3000/src/assets/temp//artifacts/1779894006125-906346455.jpg', 6, true),
+(7, 'front', 'http://127.0.0.1:3000/src/assets/temp/artifacts/1779894051578-709314079.jpg', 7, true)
 ON CONFLICT (pictureID) DO NOTHING;
 
 -- Reset pictures sequence
