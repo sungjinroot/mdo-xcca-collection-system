@@ -40,6 +40,10 @@ function Login({ onLoginSuccess }) {
   const handleGoogleSuccess = (credentialResponse) => {
     try {
       const decoded = jwtDecode(credentialResponse.credential);
+      if (!decoded.email.endsWith('@my.xu.edu.ph')) {
+        setError('Access restricted to @my.xu.edu.ph accounts only.');
+        return;
+      }
       const userData = {
         credential: credentialResponse.credential,
         ...decoded

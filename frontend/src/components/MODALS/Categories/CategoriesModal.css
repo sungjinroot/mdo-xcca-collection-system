@@ -78,27 +78,54 @@ button.categories-input-form:hover {
     color: white;
 }
 
-.category-list li button {
-    background-color: #ec282a;
+.category-list li .category-delete-button {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 24px;
+    height: 24px;
+    background-color: transparent;
     color: white;
     border: none;
-    padding: 6px 12px;
-    border-radius: 6px;
+    padding: 0;
+    border-radius: 0;
     cursor: pointer;
 
     opacity: 0;
     visibility: hidden;
-    transform: translateX(10px);
+    transform: scale(0.95);
 
-    transition: all 0.2s ease;
+    transition: transform 0.2s ease, opacity 0.2s ease;
 }
 
-.category-list li:hover button {
+.category-list li:hover .category-delete-button {
     opacity: 1;
     visibility: visible;
-    transform: translateX(0);
+    transform: scale(1);
 }
 
-.category-list li button:hover {
-    background-color: #c91f21;
+.category-list li .category-delete-button:hover {
+    transform: scale(1.12);
+}
+
+.category-list li .category-delete-button:active {
+    transform: scale(0.92);
+    opacity: 0.7;
+}
+
+.category-list li .category-delete-button:disabled {
+    cursor: not-allowed;
+}
+
+.category-delete-button img {
+    width: 24px;
+    height: 24px;
+    display: block;
+}
+
+.category-delete-status {
+    font-size: 0.72rem;
+    font-weight: 700;
+    color: #ffffff;
+    white-space: nowrap;
 }

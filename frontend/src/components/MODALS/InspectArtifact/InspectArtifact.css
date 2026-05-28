@@ -21,8 +21,9 @@
 .artifact-info-container {
     display: flex;
     height: 100%;
-    gap: 12px;
+    gap: 14px;
     overflow: hidden;
+    font-family: inherit;
 }
 
 .artifact-info-left {
@@ -51,6 +52,12 @@
 
 .artifact-info-right {
     flex: 1;
+    display: flex;
+    flex-direction: column;
+    min-width: 0;
+    min-height: 0;
+    overflow: hidden;
+    padding: 16px;
     border-radius: 12px;
     background: rgba(255, 255, 255, 0.015);
     border: 1px solid rgba(255, 255, 255, 0.05);
@@ -63,32 +70,57 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    gap: 6px;
-    padding: 6px;
-    border-radius: 999px;
-    margin-left: 50px;
-    margin-right: 50px;
+    padding: 5px 8px;
+    width: min(452px, 100%);
+    border-radius: 14px;
+    margin: 0 auto 18px;
+    flex-shrink: 0;
     background: rgba(255, 255, 255, 0.07);
     backdrop-filter: blur(14px);
     -webkit-backdrop-filter: blur(14px);
     border: 1px solid rgba(255, 255, 255, 0.13);
     box-shadow:
-        0 10px 30px rgba(0, 0, 0, 0.4),
-        0 3px 10px rgba(0, 0, 0, 0.25),
-        0 0 12px rgba(255, 255, 255, 0.05),
-        inset 0 1px 2px rgba(255, 255, 255, 0.18),
-        inset 0 -2px 8px rgba(0, 0, 0, 0.25);
+        0 6px 16px rgba(0, 0, 0, 0.26),
+        inset 0 1px 2px rgba(255, 255, 255, 0.16);
     transition: box-shadow 0.25s ease, border-color 0.25s ease;
+}
+
+.tab-options .MuiTabs-root,
+.tab-options .MuiButtonBase-root {
+    font-family: inherit;
+}
+
+.tab-options .MuiTabs-root {
+    min-height: 42px;
+    width: 100%;
+}
+
+.tab-options .MuiTabs-flexContainer {
+    align-items: center;
+    justify-content: space-between;
+    gap: 4px;
+}
+
+.tab-options .MuiTab-root {
+    min-height: 42px;
+    padding: 0 16px;
+    border-radius: 10px;
+    font-size: 13px;
+    font-weight: 700;
+    letter-spacing: 0;
+    text-transform: uppercase;
+}
+
+.tab-options .MuiTabs-indicator {
+    height: 2px;
+    border-radius: 999px;
 }
 
 .tab-options:hover {
     border-color: rgba(255, 255, 255, 0.2);
     box-shadow:
-        0 12px 35px rgba(0, 0, 0, 0.45),
-        0 4px 12px rgba(0, 0, 0, 0.3),
-        0 0 16px rgba(255, 255, 255, 0.07),
-        inset 0 1px 2px rgba(255, 255, 255, 0.22),
-        inset 0 -2px 8px rgba(0, 0, 0, 0.28);
+        0 8px 18px rgba(0, 0, 0, 0.3),
+        inset 0 1px 2px rgba(255, 255, 255, 0.18);
 }
 
 .ModalSizeHeight {

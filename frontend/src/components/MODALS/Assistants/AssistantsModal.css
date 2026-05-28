@@ -19,12 +19,37 @@
     box-shadow: 0 4px 12px rgba(40, 57, 113, 0.18);
 }
 
-.add-assistants > label {
-    display: block;
+.add-assistants-header {
+    display: flex;
+    align-items: center;
+    gap: 18px;
+    margin-bottom: 12px;
+}
+
+.add-assistants-header > label {
     color: #ffffff;
     font-size: 16px;
     font-weight: 800;
-    margin-bottom: 12px;
+}
+
+.assistant-toggle {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    white-space: nowrap;
+}
+
+.assistant-toggle label {
+    margin: 0;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 700;
+}
+
+.assistant-toggle input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    accent-color: #283971;
 }
 
 .new-assistant-form{
@@ -37,22 +62,9 @@
 .assistant-priv{
     display: flex;
     align-items: center;
-    gap: 12px;
+    justify-content: flex-end;
     white-space: nowrap;
     min-height: 42px;
-}
-
-.assistant-priv label {
-    margin: 0;
-    color: #ffffff;
-    font-size: 14px;
-    font-weight: 700;
-}
-
-.assistant-priv input[type="checkbox"] {
-    width: 16px;
-    height: 16px;
-    accent-color: #283971;
 }
 
 .assistant-priv button{
@@ -100,7 +112,6 @@
 
     .assistant-priv{
         justify-content: flex-start;
-        flex-wrap: wrap;
     }
 }
 

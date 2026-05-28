@@ -1,32 +1,42 @@
 .inspect-physical-container {
-    height: 88%;
-    padding: 20px;
+    flex: 1;
+    height: auto;
+    padding: 0 4px 4px;
     display: flex;
     flex-direction: column;
-    gap: 40px;
+    gap: 18px;
     min-height: 0;
     min-width: 0;
-    overflow: hidden;
-    zoom: 90%;
+    overflow-y: auto;
+    overflow-x: hidden;
+    font-family: inherit;
 }
 
 .accordion-container {
     padding: 10px;
     border-radius: 12px;
     background: linear-gradient(145deg, #2d3f7a, #243268);
+    font-family: inherit;
     box-shadow: 
         0 4px 12px rgba(0, 0, 0, 0.5),
         0 8px 20px rgba(0, 0, 0, 0.45),
         inset 0 1px 0 rgba(255, 255, 255, 0.07);
 }
 
+.accordion-container .MuiAccordion-root,
+.accordion-container .MuiAccordionSummary-root,
+.accordion-container .MuiAccordionDetails-root,
+.accordion-container .MuiTypography-root {
+    font-family: inherit;
+}
+
 .inspect-physical-dimensions {
     background: linear-gradient(160deg, #2d3f7a, #223070);
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 20px;
+    gap: 16px;
     border: 1px solid rgba(255, 255, 255, 0.07);
     box-shadow: 
         0 14px 35px rgba(0, 0, 0, 0.55),
@@ -37,9 +47,9 @@
 .inspect-physical-top-fields {
     display: flex;
     flex-direction: column;
-    gap: 10px;
+    gap: 8px;
     border-radius: 8px;
-    padding: 10px;
+    padding: 8px;
 }
 
 .inspect-physical-top-fields label {
@@ -47,8 +57,9 @@
     margin-bottom: 5px;
     color: rgba(255, 255, 255, 0.75);
     font-size: 12px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-family: inherit;
 }
 
 .inspect-physical-top-fields input {
@@ -57,6 +68,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
     background: transparent;
     outline: none;
     color: white;
@@ -78,7 +91,7 @@
 
 .inspect-physical-lwh {
     display: flex;
-    gap: 15px;
+    gap: 16px;
     justify-content: space-between;
 }
 
@@ -86,8 +99,8 @@
     flex: 1;
     display: flex;
     flex-direction: column;
-    gap: 5px;
-    padding: 10px;
+    gap: 8px;
+    padding: 8px;
     border-radius: 8px;
     color: white;
 }
@@ -96,8 +109,9 @@
     font-weight: 600;
     color: rgba(255, 255, 255, 0.75);
     font-size: 12px;
-    letter-spacing: 0.04em;
+    letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-family: inherit;
 }
 
 .inspect-physical-top-lwh-fields input {
@@ -106,6 +120,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
     width: 100%;
     background: transparent;
     outline: none;
@@ -126,12 +142,12 @@
 
 .inspect-physical-description-categories-container {
     background: linear-gradient(160deg, #3f5ab5, #344d9e);
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
-    gap: 15px;
-    height: 400px;
+    gap: 14px;
+    min-height: 320px;
     overflow-y: auto;
     flex-shrink: 0;
     border: 1px solid rgba(255, 255, 255, 0.08);
@@ -147,6 +163,7 @@
     font-size: 12px;
     letter-spacing: 0.05em;
     text-transform: uppercase;
+    font-family: inherit;
 }
 
 .inspect-physical-categories-grid {
@@ -163,6 +180,7 @@
     align-items: center;
     gap: 8px;
     font-size: 14px;
+    font-family: inherit;
     cursor: pointer;
     border: 1px solid rgba(255, 255, 255, 0.2);
     box-shadow: 0 2px 6px rgba(0, 0, 0, 0.15);
@@ -184,6 +202,7 @@
     cursor: pointer;
     color: black;
     width: 100%;
+    font-family: inherit;
 }
 
 .accordion-text textarea {
@@ -197,6 +216,7 @@
     border: 1px solid rgba(255, 255, 255, 0.2);
     resize: vertical;
     font-size: 14px;
+    font-family: inherit;
     line-height: 1.5;
     transition: border-color 0.2s ease, box-shadow 0.2s ease;
     box-sizing: border-box;
