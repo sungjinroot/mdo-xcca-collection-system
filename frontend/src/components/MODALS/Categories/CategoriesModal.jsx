@@ -14,8 +14,12 @@ function CategoryItem({ category, onNameChange, onDelete, deletingId, savingId }
           {savingId === category.categoryid && (
             <span style={{ fontSize: '0.75rem', color: '#888' }}>Saving...</span>
           )}
-          <button onClick={() => onDelete(category.categoryid)} disabled={deletingId === category.categoryid}>
-            {deletingId === category.categoryid ? "Deleting..." : "Delete"}
+          <button className="category-delete-button" onClick={() => onDelete(category.categoryid)} disabled={deletingId === category.categoryid} aria-label={`Delete ${category.categoryname}`}>
+            {deletingId === category.categoryid ? (
+              <span className="category-delete-status">Deleting...</span>
+            ) : (
+              <img src="src/assets/delete.png" alt="" aria-hidden="true" />
+            )}
           </button>
         </div>
       </li>

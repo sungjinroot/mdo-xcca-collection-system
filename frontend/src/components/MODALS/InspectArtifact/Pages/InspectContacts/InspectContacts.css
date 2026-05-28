@@ -1,17 +1,19 @@
 .inspect-contacts-container {
     display: flex;
     flex-direction: column;
-    padding: 20px;
-    gap: 20px;
+    padding: 0 4px 4px;
+    gap: 18px;
     overflow: auto;
-    height: 90%;
-    zoom: 90%;
+    flex: 1;
+    height: auto;
+    min-height: 0;
+    font-family: inherit;
 }
 
 .inspect-contacts-box {
     background: linear-gradient(160deg, #2d3f7a, #223070);
-    border-radius: 15px;
-    padding: 20px;
+    border-radius: 12px;
+    padding: 18px;
     display: flex;
     flex-direction: column;
     gap: 20px;
@@ -28,11 +30,12 @@
     font-size: 12px;
     letter-spacing: 0.04em;
     text-transform: uppercase;
+    font-family: inherit;
 }
 
 .inspect-contacts-row {
     display: flex;
-    gap: 20px;
+    gap: 16px;
 }
 
 .inspect-contacts-row .inspect-contacts-fields {
@@ -55,6 +58,8 @@
     border-bottom: 1px solid rgba(255, 255, 255, 0.25);
     border-radius: 0;
     font-size: 14px;
+    font-weight: 700;
+    font-family: inherit;
     background: transparent;
     outline: none;
     color: white;

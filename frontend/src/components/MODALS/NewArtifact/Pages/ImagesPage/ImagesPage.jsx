@@ -119,7 +119,7 @@ function ImagesPage({ prevStep, setShow, submitArtifact, resetAllForm, resetStep
                     <div className="stepper-upload">
                         <label htmlFor="imageUpload" className="image-upload-label">
                             <div className="upload-box">
-                                Click or Drag & Drop to Upload
+                                Click Here to Upload
                             </div>
 
                             <input type="file" id="imageUpload" accept="image/*" className="image-upload-input" multiple onChange={autoUpload}/>

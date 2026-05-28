@@ -103,13 +103,17 @@ function AssistantsModal({ showAssistants, setShowAssistants }) {
 
         <div className="assistants-grid">
           <div className="add-assistants">
-            <label> Create User </label>
+            <div className="add-assistants-header">
+              <label> Create User </label>
+              <div className="assistant-toggle">
+                <label> Is Assistant? </label>
+                <input type="checkbox" checked={isAssistant} onChange={(e) => setIsAssistant(e.target.checked)} />
+              </div>
+            </div>
             <div className="new-assistant-form">
               <input type="text" placeholder='Username' value={username} onChange={(e) => setUsername(e.target.value)} />
               <input type="password" placeholder='Password' value={password} onChange={(e) => setPassword(e.target.value)} />
               <div className="assistant-priv">
-                <label> Is Assistant? </label>
-                <input type="checkbox" checked={isAssistant} onChange={(e) => setIsAssistant(e.target.checked)} />
                 <button onClick={handleCreateUser} disabled={loading}>
                   {loading ? 'Creating...' : 'New User'}
                 </button>
