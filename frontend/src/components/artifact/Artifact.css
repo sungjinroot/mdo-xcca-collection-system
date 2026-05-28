@@ -80,7 +80,7 @@
 }
 
 .artifact-display-data span {
-  background-color: rgba(40, 57, 113, 0.4);
+  background-color: rgba(40, 57, 113, 1);
   color: #FFFFF0;
   padding: 8px;
   border-radius: 8px;
