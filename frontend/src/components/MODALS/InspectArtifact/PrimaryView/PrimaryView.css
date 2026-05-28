@@ -20,6 +20,18 @@
     overflow: hidden;
 }
 
+.artifact-carousel .carousel-caption {
+  opacity: 0;
+  transform: translateY(8px);
+  transition: opacity 0.25s ease, transform 0.25s ease;
+  pointer-events: none;
+}
+
+.artifact-carousel:hover .carousel-caption {
+  opacity: 1;
+  transform: translateY(0);
+}
+
 .pan-image-view{
     object-fit: contain;
     background-color: black;
