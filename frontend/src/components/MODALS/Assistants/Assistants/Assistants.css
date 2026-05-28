@@ -33,7 +33,7 @@
     background-color: #283971;
     color: #ffffff;
     font-size: 14px;
-    font-weight: 800;
+    font-weight: 500;
 }
 
 .assistant-header img {
@@ -74,7 +74,7 @@
 .assistant-creds h3{
     margin: 0;
     font-size: 18px;
-    font-weight: 800;
+    font-weight: 500;
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
