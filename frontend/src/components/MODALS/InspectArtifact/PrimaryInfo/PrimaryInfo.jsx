@@ -119,17 +119,6 @@ function PrimaryInfo({ currentArtifactData }) {
   return (
     <div className="artifact-info-bottom">
 
-      {saveStatus === "saving" && (
-        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
-          Saving...
-        </div>
-      )}
-      {saveStatus === "error" && (
-        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
-          Save failed
-        </div>
-      )}
-
       <div className="artifact-info-first-line">
         <div className="artifact-info-first-identifier">
           <div className="artifact-info-identifier-fields">
@@ -138,12 +127,7 @@ function PrimaryInfo({ currentArtifactData }) {
           </div>
           <div className="artifact-info-identifier-fields">
             <label>Catalogue Number</label>
-            <select value={catalogueNo} onChange={(e) => setCatalogueNo(e.target.value)}>
-              <option value="">Select...</option>
-              {catalogues.map((opt) => (
-                <option key={opt.value} value={opt.value}>{opt.label}</option>
-              ))}
-            </select>
+              <input type="text" value={catalogueNo} onChange={(e) => setCatalogueNo(e.target.value)}/>
           </div>
         </div>
       </div>
@@ -169,8 +153,21 @@ function PrimaryInfo({ currentArtifactData }) {
           </div>
         </div>
       </div>
+      
+      {saveStatus === "saving" && (
+        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
+          Saving...
+        </div>
+      )}
+      {saveStatus === "error" && (
+        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
+          Save failed
+        </div>
+      )}
 
     </div>
+
+    
   );
 }
 

@@ -31,16 +31,6 @@ ALTER SEQUENCE categories_categoryid_seq RESTART WITH 1;
 ALTER SEQUENCE users_userid_seq RESTART WITH 1;
 ALTER SEQUENCE pictures_pictureid_seq RESTART WITH 1;
 
--- ============================================
--- INSERT DEFAULT CATALOGUE VALUES (A1, A2, A3, A4, A5)
--- ============================================
-INSERT INTO Catalogue (catalogueNo, catalogueName) VALUES
-('A1', 'Prehistoric Items'),
-('A2', 'Ethnographic Objects'),
-('A3', 'Colonial Era Artifacts'),
-('A4', 'Religious Items'),
-('A5', 'Household Objects')
-ON CONFLICT (catalogueNo) DO NOTHING;
 
 -- ============================================
 -- INSERT DEFAULT COLLECTION TYPES

@@ -11,12 +11,14 @@ INSERT INTO Categories (categoryName) VALUES
 ('Jewelry');
 
 -- Catalogue
+/*
 INSERT INTO Catalogue (catalogueNo, catalogueName) VALUES
 ('A1', 'Prehistoric Items'),
 ('A2', 'Ethnographic Objects'),
 ('A3', 'Colonial Era Artifacts'),
 ('A4', 'Religious Items'),
 ('A5', 'Household Objects');
+*/
 
 -- Rooms
 INSERT INTO Rooms (title, roomName, caption, roomPictureURL) VALUES

@@ -3,10 +3,12 @@ CREATE TABLE IF NOT EXISTS Categories ( /*Passed Manual Test*/
     categoryName varchar(255)
 );  
 
+/*
 CREATE TABLE IF NOT EXISTS Catalogue ( /*has default values A1 A2 A3 A4 A5 and so on...*/ /*Passed Manual Test*/
     catalogueNo varchar(5) PRIMARY KEY,
     catalogueName varchar(255)
 );
+*/
 
 CREATE TABLE IF NOT EXISTS Rooms ( /*Passed Manual Test*/
     roomID SERIAL PRIMARY KEY,
@@ -19,13 +21,9 @@ CREATE TABLE IF NOT EXISTS Rooms ( /*Passed Manual Test*/
 CREATE TABLE IF NOT EXISTS Artifacts ( /*Passed Manual Test*/
     artifactID SERIAL PRIMARY KEY,
     accessionNo varchar(255) UNIQUE NOT NULL,
-    catalogueNo varchar(5) NOT NULL,
+    catalogueNo varchar(255) NOT NULL,
     roomID INT NOT NULL,
     storageLocation varchar(225),
-
-    CONSTRAINT fk_catalogue 
-        FOREIGN KEY (catalogueNo) 
-        REFERENCES Catalogue(catalogueNo),
 
     CONSTRAINT fk_room 
         FOREIGN KEY (roomID) 

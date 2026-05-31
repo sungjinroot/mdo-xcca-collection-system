@@ -88,14 +88,7 @@ function BasicInformation({ nextStep, artifactNames, setArtifactNames, artifactI
                             <div className="stepper-artifact-identifier-form">
                                 <input type="text" className="identifier-form-size" name="accessionNo" value={artifactIdentifiers.accessionNo} onChange={handleArtifactIdentifierChange}/>
 
-                                <select className="identifier-form-size" name="catalogueNo" value={artifactIdentifiers.catalogueNo} onChange={handleArtifactIdentifierChange}>
-                                    <option value="">Tap to select</option>
-                                    <option value="A1">A1 (Historical)</option>
-                                    <option value="A2">A2 (Heritage Heirloom)</option>
-                                    <option value="A3">A3 (Ethnological)</option>
-                                    <option value="A4">A4 (Archaelogical)</option>
-                                    <option value="A5">A5 (Artworks)</option>
-                                </select>
+                                <input type="text" className="identifier-form-size" name="catalogueNo" value={artifactIdentifiers.catalogueNo} onChange={handleArtifactIdentifierChange}/>
                             </div>
                         </div>
                     </div>

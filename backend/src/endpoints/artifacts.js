@@ -311,14 +311,6 @@ endpoint.put('/:id/artifactDetails', async (req, res) => {
         accessionNo, catalogueNo, storageLocation
     } = req.body;
     
-    // catalogueNo validator
-    if (catalogueNo !== undefined) {
-        const validCatalogueNos = ['A1', 'A2', 'A3', 'A4', 'A5'];
-        if (!validCatalogueNos.includes(catalogueNo)) {
-            return res.status(400).json({ error: 'catalogueNo must be one of: A1, A2, A3, A4, A5' });
-        }
-    }
-
     const updates = [];
     const values = [];
 
