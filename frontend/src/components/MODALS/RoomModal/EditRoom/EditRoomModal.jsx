@@ -176,7 +176,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
           </div>
 
           <div className="room-field">
-            <label>Modify Room Name</label>
+            <label>Modify Room Location</label>
             <Tooltip title="Type to edit" placement="left">
               <input type="text" placeholder="edit text" value={roomName} onChange={(e) => setRoomName(e.target.value)} />
             </Tooltip>

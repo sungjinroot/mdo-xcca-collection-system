@@ -94,7 +94,7 @@ function NewRoomModal({ showAdd, setShowAdd, setChanged, setRoomIndex, setRoomId
                     </div>
 
                     <div className="room-field">
-                        <label>Room Name</label>
+                        <label>Room Location</label>
                         <input type="text" name="roomName" value={roomData.roomName} onChange={handleChange}/>
                     </div>
 
