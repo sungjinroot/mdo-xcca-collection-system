@@ -80,6 +80,7 @@ endpoint.post("/artifact", uploadArtifact.array("photos"), async (req, res) => {
     const imagePath = "http://127.0.0.1:3000" + photo.path.replace("/app", "");
     await pool.query('INSERT INTO pictures (angleName, pictureFilePath, artifactID, isProfilePicture) VALUES ($1, $2, $3, $4)',[angle, imagePath, artifactId, photo === files[0]]);
   }
+  // Bug found that can possibly interfere with download API. Kung i tinagsa ug upload ang artifact kay isprofilepicture = true sila tanan.
 
     res.json({
       success: true,
