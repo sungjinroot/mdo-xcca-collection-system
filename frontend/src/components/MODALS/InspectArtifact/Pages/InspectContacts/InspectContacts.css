@@ -18,10 +18,7 @@
     flex-direction: column;
     gap: 20px;
     border: 1px solid rgba(255, 255, 255, 0.07);
-    box-shadow: 
-        0 14px 35px rgba(0, 0, 0, 0.55),
-        0 6px 15px rgba(0, 0, 0, 0.45),
-        inset 0 1px 0 rgba(255, 255, 255, 0.08);
+    box-shadow: 0 5px 14px rgba(40, 57, 113, 0.14);
 }
 
 .inspect-contacts-box label {
