@@ -8,11 +8,11 @@
   <style>
     /* ─── CSS Variables ─────────────────────────────────────── */
     :root {
-      --gold:        #b5922a;
-      --gold-light:  #d4af6a;
+      --gold:        #ffffff;
+      --gold-light:  #ffffff;
       --ink:         #1a1a18;
       --paper:       #ffffff;
-      --rule:        #c8bfa8;
+      --rule:        #000000;
       --muted:       #6b6659;
       --label-font:  'Raleway', sans-serif;
       --value-font:  'Courier Prime', monospace;
@@ -38,6 +38,8 @@
       padding: 2.4rem 2.8rem 2.8rem;
       box-shadow: 0 4px 24px rgba(0,0,0,.18), 0 1px 4px rgba(0,0,0,.12);
       position: relative;
+      page-break-after: always;
+      break-inside: avoid;
     }
 
     /* ─── Page Header (shared) ──────────────────────────────── */
@@ -55,13 +57,13 @@
     }
 
     .header-logos img {
-      height: 56px;
+      height: 70px;
       width: auto;
       object-fit: contain;
     }
 
     .header-xu-logo img {
-      height: 72px;
+      height: 120px;
     }
 
     .museum-title {
@@ -84,7 +86,7 @@
     .top-section {
       display: flex;
       gap: 1.6rem;
-      margin-top: 4rem;       /* clear the absolute title */
+      margin-top: 4rem;
       margin-bottom: 1.4rem;
       align-items: flex-start;
     }
@@ -94,7 +96,6 @@
       width: 200px;
       height: 200px;
       object-fit: cover;
-      border: 1px solid var(--rule);
       background: #e5e0d5;
     }
 
@@ -102,7 +103,6 @@
       flex-shrink: 0;
       width: 200px;
       height: 200px;
-      border: 1px solid var(--rule);
       background: #e5e0d5;
       display: flex;
       align-items: center;
@@ -127,10 +127,9 @@
     }
 
     .top-logos img {
-      height: 60px;
+      height: 100px;
       width: auto;
       object-fit: contain;
-      border: 1px solid var(--rule);
       padding: 2px;
       background: #fff;
     }
@@ -239,7 +238,7 @@
       display: flex;
       justify-content: flex-end;
       margin-top: 2rem;
-      padding-top: .6rem;
+      padding-top: 1rem;
       border-top: 1px solid var(--rule);
     }
 
@@ -259,7 +258,7 @@
       vertical-align: middle;
     }
 
-    /* ─── Page 2: Photo Gallery ─────────────────────────────── */
+    /* ─── Photo Gallery Pages (Comprehensive Fix) ───────────── */
     .gallery-title {
       font-family: var(--title-font);
       font-weight: 700;
@@ -273,8 +272,11 @@
 
     .photo-grid {
       display: grid;
-      grid-template-columns: 1fr 1fr;
+      grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
       gap: 1.4rem 2rem;
+      width: 100%;
+      page-break-inside: avoid;
+      break-inside: avoid;
     }
 
     .photo-cell {
@@ -282,30 +284,39 @@
       flex-direction: column;
       align-items: center;
       gap: .55rem;
-    }
-
-    .photo-box {
       width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #dbd7ce;
-      border: 1px solid var(--rule);
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
+      min-width: 0;
+      break-inside: avoid;
+      page-break-inside: avoid;
+      page-break-after: avoid;
     }
+.photo-box {
+    width: 100%;
+    max-width: 100%;
+    aspect-ratio: 1 / 1;
+    background: #ffffff;
+    border: 1px solid var(--rule);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+}
 
-    .photo-box img {
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-    }
-
+.photo-box img {
+    min-width: 100%;
+    min-height: 100%;
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+    object-position: center;
+}   
     .photo-placeholder-text {
       font-family: var(--label-font);
       font-size: .7rem;
       letter-spacing: .08em;
       color: var(--muted);
+      text-align: center;
+      padding: 1rem;
     }
 
     .photo-caption {
@@ -315,6 +326,8 @@
       letter-spacing: .14em;
       text-transform: uppercase;
       color: var(--ink);
+      text-align: center;
+      word-break: break-word;
     }
 
     /* ─── Print styles ──────────────────────────────────────── */
@@ -325,6 +338,17 @@
         margin: 0;
         border-top: 3px solid #b5922a;
         page-break-after: always;
+        break-after: page;
+      }
+      
+      .photo-grid {
+        break-inside: avoid;
+        page-break-inside: avoid;
+      }
+      
+      .photo-cell {
+        break-inside: avoid;
+        page-break-inside: avoid;
       }
     }
   </style>
@@ -485,65 +509,7 @@
   </div><!-- /page-info -->
 
 
-  <!-- ══════════════════════════════════════════
-       PAGE 2 — Artifact Photo Gallery
-  ══════════════════════════════════════════ -->
-  <div class="page" id="page-gallery">
-
-    <!-- Header -->
-    <div class="page-header">
-      <div class="header-logos">
-      </div>
-      <span class="museum-title">M U S E O &nbsp; D E &nbsp; O R O</span>
-      <div class="header-xu-logo">
-        <img src="xu-logo.png" alt="Xavier University logo" />
-      </div>
-    </div>
-
-    <!-- Institution logos row -->
-    <div class="top-logos" style="justify-content:center; margin-top:3.5rem; margin-bottom:1rem;">
-      <img src="xcca-logo.png" alt="Xavier University Center for Culture and the Arts" />
-      <img src="mdo-logo.png" alt="Museo de Oro" />
-      <img src="omm-logo.png" alt="Office of Mission and Ministry" />
-    </div>
-
-    <!-- Artifact name title -->
-    <div class="gallery-title" data-field="english_name_upper">ARTIFACT NAME</div>
-
-    <!-- 2×2 photo grid -->
-    <div class="photo-grid">
-
-      <div class="photo-cell">
-        <div class="photo-box" data-photo="front">
-          <div class="photo-placeholder-text">FRONT PHOTO</div>
-        </div>
-        <div class="photo-caption">Front</div>
-      </div>
-
-      <div class="photo-cell">
-        <div class="photo-box" data-photo="back">
-          <div class="photo-placeholder-text">NO IMAGE</div>
-        </div>
-        <div class="photo-caption">Back</div>
-      </div>
-
-      <div class="photo-cell">
-        <div class="photo-box" data-photo="left">
-          <div class="photo-placeholder-text">NO IMAGE</div>
-        </div>
-        <div class="photo-caption">Left Side</div>
-      </div>
-
-      <div class="photo-cell">
-        <div class="photo-box" data-photo="right">
-          <div class="photo-placeholder-text">NO IMAGE</div>
-        </div>
-        <div class="photo-caption">Right Side</div>
-      </div>
-
-    </div><!-- /photo-grid -->
-
-  </div><!-- /page-gallery -->
+  <!-- GALLERY_PAGES_WILL_BE_INSERTED_HERE -->
 
 </body>
 </html>

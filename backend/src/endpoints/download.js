@@ -17,10 +17,116 @@ const getImagePath = (filePath) => {
     return path.resolve(__dirname, '../images', filePath);
 };
 
-// Helper to get logo file path (no base64 conversion)
-const getLogoPath = (filename) => {
-    if (!filename) return null;
-    return path.resolve(__dirname, '../assets', filename);
+
+// Helper to generate dynamic gallery pages (add this after your existing helpers)
+const generateGalleryPages = (pictures, artifactName, getImagePath, logoToBase64) => {
+    if (!pictures || pictures.length === 0) {
+        return generateEmptyGalleryPage(artifactName, logoToBase64);
+    }
+    
+    const photosPerPage = 4;
+    const totalPages = Math.ceil(pictures.length / photosPerPage);
+    let allPages = '';
+    
+    for (let pageNum = 0; pageNum < totalPages; pageNum++) {
+        const startIndex = pageNum * photosPerPage;
+        const endIndex = Math.min(startIndex + photosPerPage, pictures.length);
+        const pagePhotos = pictures.slice(startIndex, endIndex);
+        
+        allPages += generateGalleryPage(pagePhotos, artifactName, pageNum + 1, totalPages, getImagePath, logoToBase64);
+    }
+    
+    return allPages;
+};
+
+const generateGalleryPage = (photos, artifactName, pageNum, totalPages, getImagePath, logoToBase64) => {
+    // Get logo base64 for this page
+    const xccaLogoBase64 = logoToBase64('xcca-logo.png');
+    const mdoLogoBase64 = logoToBase64('mdo-logo.png');
+    const ommLogoBase64 = logoToBase64('omm-logo.png');
+    const xuLogoBase64 = logoToBase64('xu-logo.png');
+    
+    // Generate the 2x2 grid
+    let gridItems = '';
+    for (let i = 0; i < 4; i++) {
+        if (i < photos.length) {
+            const photo = photos[i];
+            const imageSrc = getImagePath(photo.picturefilepath);
+            const imageTag = imageSrc && imageSrc.startsWith('http') 
+            ? `<img src="${imageSrc}" style="width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;"/>`
+            : `<img src="file://${imageSrc}" style="width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;"/>`;
+            const caption = photo.anglename || 'View';
+            const isProfile = photo.isprofilepicture ? ' (Profile)' : '';
+            
+            gridItems += `
+                <div class="photo-cell">
+                    <div class="photo-box">
+                        ${imageTag}
+                    </div>
+                    <div class="photo-caption">${caption}${isProfile}</div>
+                </div>
+            `;
+        }
+    }
+    
+    return `
+        <div class="page" id="page-gallery-${pageNum}" style="page-break-after: always; break-inside: avoid; page-break-inside: avoid;">
+            <!-- Header -->
+            <div class="page-header">
+                <div class="header-logos"></div>
+                <span class="museum-title">M U S E O &nbsp; D E &nbsp; O R O</span>
+                <div class="header-xu-logo">
+                    <img src="${xuLogoBase64}" alt="Xavier University logo" style="height:50px;" />
+                </div>
+            </div>
+
+            <!-- Institution logos row -->
+            <div class="top-logos" style="justify-content:center;">
+                <img src="${xccaLogoBase64}" style="height:100px;" />
+                <img src="${mdoLogoBase64}" style="height:100px;" />
+                <img src="${ommLogoBase64}" style="height:100px;" />
+            </div>
+
+            <!-- Artifact name title -->
+            <div class="gallery-title">${(artifactName || 'ARTIFACT').toUpperCase().split('').join(' &nbsp; ')}</div>
+
+            <!-- 2×2 photo grid -->
+            <div class="photo-grid">
+                ${gridItems}
+            </div>
+        </div>
+    `;
+};
+
+const generateEmptyGalleryPage = (artifactName, logoToBase64) => {
+    const xccaLogoBase64 = logoToBase64('xcca-logo.png');
+    const mdoLogoBase64 = logoToBase64('mdo-logo.png');
+    const ommLogoBase64 = logoToBase64('omm-logo.png');
+    const xuLogoBase64 = logoToBase64('xu-logo.png');
+    
+    return `
+        <div class="page" id="page-gallery-empty">
+            <div class="page-header">
+                <div class="header-logos"></div>
+                <span class="museum-title">M U S E O &nbsp; D E &nbsp; O R O</span>
+                <div class="header-xu-logo">
+                    <img src="${xuLogoBase64}" alt="Xavier University logo" style="height:80px;" />
+                </div>
+            </div>
+
+            <div class="top-logos" style="justify-content:center; margin-top:0rem; margin-bottom:1rem;">
+                <img src="${xccaLogoBase64}" style="height:100px;" />
+                <img src="${mdoLogoBase64}" style="height:100px;" />
+                <img src="${ommLogoBase64}" style="height:100px;" />
+            </div>
+
+            <div class="gallery-title">${(artifactName || 'ARTIFACT').toUpperCase().split('').join(' &nbsp; ')}</div>
+            
+            <div style="text-align: center; padding: 2rem; font-family: var(--label-font); color: var(--muted);">
+                No photos available for this artifact.
+            </div>
+        </div>
+    `;
 };
 
 endpoint.get('/pdf/:id', async (req, res) => {
@@ -87,9 +193,9 @@ endpoint.get('/pdf/:id', async (req, res) => {
 
         const pictures = picturesResult.rows;
         
-        const getPicturePath = (angleName) => {
-            const pic = pictures.find(p => p.anglename?.toLowerCase() === angleName.toLowerCase());
-            return pic ? pic.picturefilepath : null;
+        const getProfilePicture = () => {
+            const profilePic = pictures.find(p => p.isprofilepicture === true);
+            return profilePic ? profilePic.picturefilepath : null;
         };
 
         // 3. Read HTML template
@@ -115,7 +221,7 @@ endpoint.get('/pdf/:id', async (req, res) => {
         html = html.replace(/src="xu-logo.png"/g, `src="${xuLogoBase64}"`);
         
     // Replace main photo
-    const mainPhotoPath = getPicturePath('front');
+    const mainPhotoPath = getProfilePicture();
         if (mainPhotoPath) {
         const imageSrc = getImagePath(mainPhotoPath);
         // If it's a URL, use it directly
@@ -128,22 +234,13 @@ endpoint.get('/pdf/:id', async (req, res) => {
         }
 
 }
-        
-        // Replace gallery photos
-        const photos = {
-            'FRONT PHOTO': getPicturePath('front'),
-            'BACK PHOTO': getPicturePath('back'),
-            'LEFT SIDE PHOTO': getPicturePath('left'),
-            'RIGHT SIDE PHOTO': getPicturePath('right')
-        };
-        
-        Object.entries(photos).forEach(([placeholder, photoPath]) => {
-            if (photoPath) {
-                const resolvedPath = getImagePath(photoPath);
-                html = html.replace(placeholder, `<img src="file://${resolvedPath}" style="width:100%;height:100%;object-fit:cover;"/>`);
-            }
-        });
-        
+
+// Generate dynamic gallery pages
+const galleryPages = generateGalleryPages(pictures, artifact.englishname, getImagePath, logoToBase64);
+
+// Replace the placeholder (ONLY ONCE)
+const beforeReplace = html.length;
+html = html.replace('<!-- GALLERY_PAGES_WILL_BE_INSERTED_HERE -->', galleryPages);       
         // Replace text content
         html = html.replace('TEST ENGLISH NAME', artifact.englishname || 'N/A');
         html = html.replace('TEST VERNACULAR NAME', artifact.vernacularname || 'N/A');
