@@ -6,7 +6,7 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import App from './App.jsx'
 
 createRoot(document.getElementById('root')).render(
-  <GoogleOAuthProvider clientId="1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com"> {/*USE ENVIRONMENT VARS*/}
+  <GoogleOAuthProvider clientId={import.meta.env.VITE_GOOGLE_CLIENT_ID}> 
     <BrowserRouter>
       <App />
     </BrowserRouter>
