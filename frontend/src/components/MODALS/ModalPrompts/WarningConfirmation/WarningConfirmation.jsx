@@ -29,7 +29,6 @@ function WarningConfirmation(props) {
       <Modal.Header closeButton className="warning-confirmation-header">
       </Modal.Header>
       <Modal.Body className="warning-confirmation-body">
-        <div className="warning-confirmation-icon">!</div>
         <h4>Confirm Deletion</h4>
         <p>
           Are you sure you want to delete this record?

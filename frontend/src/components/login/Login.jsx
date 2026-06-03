@@ -66,6 +66,7 @@ function Login({ onLoginSuccess }) {
         <div className="login-card">
           <img src="src/assets/xu-logo.png" className="card-logo" />
           <h1 className="login-title">Museo de Oro Collection Inventory Management System</h1>
+          <p className="login-access-note">Assistant and Guest accounts use username and password.</p>
           
           {error && (
             <div className="error-message" style={{ color: 'red', marginBottom: '1rem', fontSize: '0.9rem' }}>
@@ -88,6 +89,9 @@ function Login({ onLoginSuccess }) {
           </form>
 
           <div className="google-login-wrapper">
+            <div className="login-divider">
+              <span>Admins use Google Login</span>
+            </div>
             <GoogleLogin onSuccess={handleGoogleSuccess} onError={handleGoogleError} />
           </div>
 
