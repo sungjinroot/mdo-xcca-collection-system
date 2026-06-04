@@ -51,7 +51,7 @@ function InspectPhysical({ currentArtifactData }) {
                     throw new Error(err.error || `PUT failed: ${res.status}`);
                 }
 
-                setSaveStatus("idle");
+                setSaveStatus("success");
             } catch (err) {
                 console.error('Save failed:', err);
                 setSaveStatus("error");
@@ -155,8 +155,6 @@ function InspectPhysical({ currentArtifactData }) {
                 </div>
             </div>
 
-
-
             {/*Description here*/}
 
             <InspectPhysicalDescription currentArtifactData={currentArtifactData} artifactCategories={artifactCategories} categorize={categorize}/>
@@ -164,6 +162,11 @@ function InspectPhysical({ currentArtifactData }) {
             {saveStatus === "saving" && (
                 <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
                     Saving...
+                </div>
+            )}
+            {saveStatus === "success" && (
+                <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#283971', marginBottom: '0.5rem' }}>
+                    Edited successfully! Please exit and re-enter to fully reflect these changes.
                 </div>
             )}
             {saveStatus === "error" && (

@@ -50,7 +50,7 @@ function InspectAcquisition(props) {
           throw new Error(err.error || `PUT failed: ${res.status}`);
         }
 
-        setProvenanceSaveStatus("idle");
+        setProvenanceSaveStatus("success");
       } catch (err) {
         console.error('Provenance save failed:', err);
         setProvenanceSaveStatus("error");
@@ -75,7 +75,7 @@ function InspectAcquisition(props) {
           throw new Error(err.error || `PUT failed: ${res.status}`);
         }
 
-        setAcquisitionSaveStatus("idle");
+        setAcquisitionSaveStatus("success");
       } catch (err) {
         console.error('Acquisition save failed:', err);
         setAcquisitionSaveStatus("error");
@@ -140,6 +140,8 @@ function InspectAcquisition(props) {
       ? "saving"
       : provenanceSaveStatus === "error" || acquisitionSaveStatus === "error"
       ? "error"
+      : provenanceSaveStatus === "success" || acquisitionSaveStatus === "success"
+      ? "success"
       : "idle";
 
   return (
@@ -196,7 +198,11 @@ function InspectAcquisition(props) {
           Saving...
         </div>
       )}
-
+      {saveStatus === "success" && (
+        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#283971', marginBottom: '0.5rem' }}>
+          Edited successfully! Please exit and re-enter to fully reflect these changes.
+        </div>
+      )}
       {saveStatus === "error" && (
         <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
           Save failed

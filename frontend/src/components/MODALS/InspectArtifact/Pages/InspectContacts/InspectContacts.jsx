@@ -63,7 +63,7 @@ function InspectContacts(props) {
           throw new Error(err.error || `PUT failed: ${res.status}`);
         }
 
-        setSaveStatus("idle");
+        setSaveStatus("success");
       } catch (err) {
         console.error('Save failed:', err);
         setSaveStatus("error");
@@ -83,8 +83,6 @@ function InspectContacts(props) {
 
   return (
     <div className="inspect-contacts-container">
-
-
 
       <div className="inspect-contacts-box">
         <div className="inspect-contacts-row">
@@ -119,16 +117,21 @@ function InspectContacts(props) {
         </div>
       </div>
 
-        {saveStatus === "saving" && (
-            <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
-                Saving...
-            </div>
-        )}
-        {saveStatus === "error" && (
-            <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
-                Save failed
-            </div>
-        )}
+      {saveStatus === "saving" && (
+        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#aaaaaa', marginBottom: '0.5rem' }}>
+          Saving...
+        </div>
+      )}
+      {saveStatus === "success" && (
+        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#283971', marginBottom: '0.5rem' }}>
+          Edited successfully! Please exit and re-enter to fully reflect these changes.
+        </div>
+      )}
+      {saveStatus === "error" && (
+        <div style={{ textAlign: 'right', fontSize: '0.85rem', color: '#ff6b6b', marginBottom: '0.5rem' }}>
+          Save failed
+        </div>
+      )}
 
     </div>
   );

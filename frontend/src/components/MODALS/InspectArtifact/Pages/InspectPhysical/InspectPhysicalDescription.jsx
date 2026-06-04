@@ -64,7 +64,7 @@ function InspectPhysicalDescription({ currentArtifactData, artifactCategories, c
                     throw new Error(err.error || `PUT failed: ${res.status}`);
                 }
 
-                setSaveStatus(prev => ({ ...prev, [field]: 'idle' }));
+                setSaveStatus(prev => ({ ...prev, [field]: 'success' }));
             } catch (err) {
                 console.error('Save failed:', err);
                 setSaveStatus(prev => ({ ...prev, [field]: 'error' }));
@@ -104,6 +104,11 @@ function InspectPhysicalDescription({ currentArtifactData, artifactCategories, c
         if (saveStatus[field] === 'saving') return (
             <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#aaaaaa', fontWeight: 'normal' }}>
                 Saving...
+            </span>
+        );
+        if (saveStatus[field] === 'success') return (
+            <span style={{ marginLeft: '0.75rem', fontSize: '0.8rem', color: '#ffffff', fontWeight: 'normal' }}>
+                Edited successfully! Please exit and re-enter to fully reflect these changes.
             </span>
         );
         if (saveStatus[field] === 'error') return (
