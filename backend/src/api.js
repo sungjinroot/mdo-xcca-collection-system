@@ -1,8 +1,10 @@
+require('dotenv').config({ path: '../../../.env'});
 const express = require('express');
 const pool = require("./db");
 const app = express();
 const cors = require('cors');
 
+const perms = require("./middleware")
 
 app.use(express.json()); 
 
@@ -15,15 +17,13 @@ app.use(cors({
   ]
 }));
 
-/* Admin */
-async function authenticateGoogleSSO(req, res, next) {
+// MIDDLEWARE: Admin Only (Google SSO)
+async function requireAdmin(req, res, next) {
   try {
     const authHeader = req.headers.authorization;
     const token = authHeader && authHeader.split(' ')[1];
 
-    if (!token) {
-      return res.sendStatus(401);
-    }
+    if (!token) return res.sendStatus(401);
 
     const ticket = await googleClient.verifyIdToken({
       idToken: token,
@@ -31,7 +31,6 @@ async function authenticateGoogleSSO(req, res, next) {
     });
 
     const payload = ticket.getPayload();
-
     req.user = {
       email: payload.email,
       name: payload.name,
@@ -42,32 +41,46 @@ async function authenticateGoogleSSO(req, res, next) {
 
     next();
   } catch (err) {
-    console.error('Google SSO Auth Error:', err);
+    console.error('Admin Auth Error:', err);
     return res.sendStatus(403);
   }
 }
 
-/* Internal */
-function authenticateJWT(req, res, next) {
+// MIDDLEWARE: Admin (SSO) or Assistant (JWT)
+async function requireAdminOrAssistant(req, res, next) {
   const authHeader = req.headers.authorization;
   const token = authHeader && authHeader.split(' ')[1];
 
-  if (!token) {
-    return res.sendStatus(401);
+  if (!token) return res.sendStatus(401);
+
+  // Try Google SSO first (admin)
+  try {
+    const ticket = await googleClient.verifyIdToken({
+      idToken: token,
+      audience: process.env.VITE_GOOGLE_CLIENT_ID,
+    });
+
+    const payload = ticket.getPayload();
+    req.user = {
+      email: payload.email,
+      name: payload.name,
+      googleId: payload.sub,
+      role: 'admin',
+      canAdd: true,
+    };
+
+    return next();
+  } catch {
+    console.log("Not admin... checking assistant privileges now")
   }
 
-  jwt.verify(
-    token,
-    process.env.JWT_SECRET,
-    (err, user) => {
-      if (err) {
-        return res.sendStatus(403);
-      }
-
-      req.user = user;
-      next();
-    }
-  );
+  // Try JWT (assistant)
+  jwt.verify(token, process.env.JWT_SECRET, (err, user) => {
+    if (err) return res.sendStatus(403);
+    if (user.role !== 'assistant') return res.sendStatus(403);
+    req.user = user;
+    return next();
+  });
 }
 
 //Routes to Upload Folder
@@ -84,28 +97,28 @@ const usersEndpoint = require('./endpoints/users');
 const authEndpoint = require('./endpoints/auth');
 const downloadEndpoint = require('./endpoints/download');
 
-app.use('/api/v1/artifacts',artifactEndpoint);
-app.use('/api/v1/artifactsdisplay', artifactDisplayEndpoint);
-app.use('/api/v1/download', downloadEndpoint);
-app.use('/api/v1/auth', authEndpoint);
-app.use('/api/v1/rooms', roomEndpoint);
-app.use('/api/v1/categories', categoriesEndpoint);
-app.use('/api/v1/users', usersEndpoint);
+app.use('/api/v1/artifacts',artifactEndpoint); //admin
+app.use('/api/v1/artifactsdisplay',artifactDisplayEndpoint); //guest admin assistant
+app.use('/api/v1/download', downloadEndpoint); //admin
+app.use('/api/v1/auth', authEndpoint); //public
+app.use('/api/v1/rooms', roomEndpoint); //public
+app.use('/api/v1/categories', categoriesEndpoint); //admin for deletion and edit. 
+app.use('/api/v1/users', usersEndpoint); //admin
 
 //AALV endpoints
-const uploadEndpoint = require('./endpoints/upload');
-const imageEndpoint = require('./endpoints/artifactImages');
-const changeThumbnail = require('./endpoints/changeThumbnail');
-const changeRoom = require('./endpoints/changeRoom');
-const artifactCategories = require('./endpoints/artifactCategories');
+const uploadEndpoint = require('./endpoints/upload'); //admin
+const imageEndpoint = require('./endpoints/artifactImages'); 
+const changeThumbnail = require('./endpoints/changeThumbnail'); //admin 
+const changeRoom = require('./endpoints/changeRoom'); //admin
+const artifactCategories = require('./endpoints/artifactCategories'); //admin
 
 
 //AALV endpoints
-app.use('/api/v1/upload/',uploadEndpoint);
-app.use('/api/v1/images/', imageEndpoint);
-app.use('/api/v1/thumbnail', changeThumbnail);
-app.use('/api/v1/changeroom',changeRoom);
-app.use('/api/v1/artifact/categories',artifactCategories);
+app.use('/api/v1/upload/',uploadEndpoint); //admin
+app.use('/api/v1/images/', imageEndpoint); //admin
+app.use('/api/v1/thumbnail', changeThumbnail); //admin 
+app.use('/api/v1/changeroom',changeRoom); //admin
+app.use('/api/v1/artifact/categories',artifactCategories); //admin
 
 
 /*Ping Database*/

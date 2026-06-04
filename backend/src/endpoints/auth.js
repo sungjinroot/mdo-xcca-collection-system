@@ -4,6 +4,7 @@ const pool = require('../db');
 const bcrypt = require('bcrypt');
 const jwt = require('jsonwebtoken');
 
+
 // LOGIN
 endpoint.post('/login', async (req, res) => {
     try {
@@ -42,7 +43,7 @@ endpoint.post('/login', async (req, res) => {
                 role: role,
                 canAdd: user.canadd,
             },
-            process.env.JWT_SECRET || "secretkey",
+            process.env.JWT_SECRET,
             { expiresIn: "1d" }
         );
 

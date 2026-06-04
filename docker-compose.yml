@@ -10,6 +10,10 @@ services:
       DB_USER: postgres
       DB_PASSWORD: postgres
       DB_NAME: mydb
+      JWT_SECRET: AMINOTSECRETENOUGHFORYOU???YOUCANTCRACKTHIS!!!IAMTOOSTRONGFORYOUTOCRACK!!!ff23083
+
+      #Please configure with your own google client id here...
+      VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     volumes:
       - ./backend/src:/app/src  
       - /app/node_modules       
@@ -20,6 +24,8 @@ services:
     build: ./frontend
     ports:
       - "5173:5173"
+    environment: #Please conffigure with your own google client id here...
+      VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     depends_on:
       - backend
     volumes:
