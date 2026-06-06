@@ -97,6 +97,8 @@ const usersEndpoint = require('./endpoints/users');
 const authEndpoint = require('./endpoints/auth');
 const downloadEndpoint = require('./endpoints/download');
 
+
+//Someone pls implement the middleware... please... im tired asf
 app.use('/api/v1/artifacts',artifactEndpoint); //admin
 app.use('/api/v1/artifactsdisplay',artifactDisplayEndpoint); //guest admin assistant
 app.use('/api/v1/download', downloadEndpoint); //admin

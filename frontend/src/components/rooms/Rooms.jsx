@@ -44,7 +44,7 @@ function Rooms({ statistics, setStatistics, roomIndex, setRoomIndex, roomId, set
         <>
             <Carousel interval={null} indicators={false} style={{ zoom: '80%' }} onSelect={handleRoomSelect} activeIndex={roomIndex === null ? 0 : roomIndex + 1}>
                 <Carousel.Item>
-                    <img className="d-block w-100 pan-image" src="https://static.tripzilla.ph/media/116105/conversions/94513_800x-w768.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
+                    <img className="d-block w-100 pan-image" src="/src/assets/temp-museo.webp" alt="First slide" style={{ height: '200px', width: '100%', objectFit: 'cover' }}/>
                     {!isRestricted && (
                         <>
                             <button className="button-utils-left utils" onClick={() => setShowCategories(true)}>Categories</button>

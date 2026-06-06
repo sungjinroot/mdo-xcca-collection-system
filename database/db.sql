@@ -3,7 +3,7 @@ CREATE TABLE IF NOT EXISTS Categories ( /*Passed Manual Test*/
     categoryName varchar(255)
 );  
 
-/*
+/* Irrelevant after client's last minute changes
 CREATE TABLE IF NOT EXISTS Catalogue ( /*has default values A1 A2 A3 A4 A5 and so on...*/ /*Passed Manual Test*/
     catalogueNo varchar(5) PRIMARY KEY,
     catalogueName varchar(255)
@@ -150,3 +150,10 @@ CREATE TABLE IF NOT EXISTS Users (
     bcryptPassword VARCHAR(255) NOT NULL,
     canAdd BOOLEAN DEFAULT FALSE
 );
+
+INSERT INTO Collection (collectionType, collectionName) VALUES
+('A', 'Donated'),
+('B', 'On Loan'),
+('C', 'Excavated'),
+('D', 'Found'),
+('E', 'Purchased');
