@@ -11,6 +11,7 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
   const [currentPicture, setCurrentPicture] = useState(null);
   const [pictures, setPictures] = useState([]);
   const [loading, setLoading] = useState(true);
+  const [downloading, setDownloading] = useState(false);
 
   const [currentRoom, setCurrentRoom] = useState({
     roomId: currentRoomId,
@@ -20,6 +21,21 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
   const [currentArtifactData, setCurrentArtifactData] = useState(null);
 
   const isAdmin = role === 'admin';
+
+const handleDownload = async () => {
+  setDownloading(true);
+  try {
+    const response = await fetch(`http://127.0.0.1:3000/api/v1/download/pdf/${artifactId}`);
+    const blob = await response.blob();
+    const url = window.URL.createObjectURL(blob);
+    window.open(url, '_blank');
+    window.URL.revokeObjectURL(url);
+  } catch (error) {
+    console.error('Download error:', error);
+  } finally {
+    setDownloading(false);
+  }
+};
 
   const fetchThumbnails = async () => {
     try {
@@ -125,7 +141,13 @@ function Artifact({ artifactId, englishName, rooms, vernacularName, initiateArti
           </div>
           {isAdmin && (
             <div className="basic-functions">
-              <button className="card-functions">Download</button>
+              <button 
+                className="card-functions" 
+                onClick={handleDownload}
+                disabled={downloading}
+              >
+                {downloading ? 'Downloading...' : 'Download'}
+              </button>
               <select className="card-functions" value={currentRoom.roomId} onChange={handleRoomChange}>
                 <option value={currentRoom.roomId}>
                   {currentRoom.currentRoomName}
