@@ -19,7 +19,7 @@ const getImagePath = (filePath) => {
 
 
 // Helper to generate dynamic gallery pages (add this after your existing helpers)
-const generateGalleryPages = (pictures, artifactName, getImagePath, logoToBase64) => {
+const generateGalleryPages = (pictures, artifactName, getImagePath, logoToBase64, watermarkBase64) => {
     if (!pictures || pictures.length === 0) {
         return generateEmptyGalleryPage(artifactName, logoToBase64);
     }
@@ -33,14 +33,12 @@ const generateGalleryPages = (pictures, artifactName, getImagePath, logoToBase64
         const endIndex = Math.min(startIndex + photosPerPage, pictures.length);
         const pagePhotos = pictures.slice(startIndex, endIndex);
         
-        allPages += generateGalleryPage(pagePhotos, artifactName, pageNum + 1, totalPages, getImagePath, logoToBase64);
+        allPages += generateGalleryPage(pagePhotos, artifactName, pageNum + 1, totalPages, getImagePath, logoToBase64, watermarkBase64);
     }
     
     return allPages;
 };
-
-const generateGalleryPage = (photos, artifactName, pageNum, totalPages, getImagePath, logoToBase64) => {
-    // Get logo base64 for this page
+const generateGalleryPage = (photos, artifactName, pageNum, totalPages, getImagePath, logoToBase64, watermarkBase64) => {    // Get logo base64 for this page
     const xccaLogoBase64 = logoToBase64('xcca-logo.png');
     const mdoLogoBase64 = logoToBase64('mdo-logo.png');
     const ommLogoBase64 = logoToBase64('omm-logo.png');
@@ -52,9 +50,18 @@ const generateGalleryPage = (photos, artifactName, pageNum, totalPages, getImage
         if (i < photos.length) {
             const photo = photos[i];
             const imageSrc = getImagePath(photo.picturefilepath);
+            const watermarkTagSmall = watermarkBase64 ? `<img src="${watermarkBase64}" style="position: absolute; bottom: 8px; right: 8px; width: 20px; height: 20px; opacity: 0.4; pointer-events: none; z-index: 2;" />` : '';
+
             const imageTag = imageSrc && imageSrc.startsWith('http') 
-            ? `<img src="${imageSrc}" style="width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;"/>`
-            : `<img src="file://${imageSrc}" style="width:auto;height:auto;max-width:100%;max-height:100%;object-fit:contain;"/>`;
+                ? `<div style="position: relative; width: 100%; height: 100%;">
+                    <img src="${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>
+                    ${watermarkTagSmall}
+                </div>`
+                : `<div style="position: relative; width: 100%; height: 100%;">
+                    <img src="file://${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>
+                    ${watermarkTagSmall}
+                </div>`;
+        
             const caption = photo.anglename || 'View';
             const isProfile = photo.isprofilepicture ? ' (Profile)' : '';
             
@@ -76,7 +83,7 @@ const generateGalleryPage = (photos, artifactName, pageNum, totalPages, getImage
                 <div class="header-logos"></div>
                 <span class="museum-title">M U S E O &nbsp; D E &nbsp; O R O</span>
                 <div class="header-xu-logo">
-                    <img src="${xuLogoBase64}" alt="Xavier University logo" style="height:50px;" />
+                    <img src="${xuLogoBase64}" alt="Xavier University logo" style="height:75px" />
                 </div>
             </div>
 
@@ -202,6 +209,17 @@ endpoint.get('/pdf/:id', async (req, res) => {
         const templatePath = path.resolve(__dirname, '../assets/layoutPage1.html');
         let html = fs.readFileSync(templatePath, 'utf8');
 
+    // Helper function to convert watermark to base64
+    const getWatermarkBase64 = () => {
+        const watermarkPath = path.resolve(__dirname, '../assets/watermark.png');
+        if (!fs.existsSync(watermarkPath)) return '';
+        const base64 = fs.readFileSync(watermarkPath).toString('base64');
+        return `data:image/png;base64,${base64}`;
+    };
+
+    // Then after you have the HTML content, add the watermark CSS:
+    const watermarkBase64 = getWatermarkBase64();
+
         const logoToBase64 = (filename) => {
             const resolved = path.resolve(__dirname, '../assets', filename);
             if (!fs.existsSync(resolved)) return '';
@@ -220,23 +238,33 @@ endpoint.get('/pdf/:id', async (req, res) => {
         html = html.replace(/src="omm-logo.png"/g, `src="${ommLogoBase64}"`);
         html = html.replace(/src="xu-logo.png"/g, `src="${xuLogoBase64}"`);
         
-    // Replace main photo
-    const mainPhotoPath = getProfilePicture();
-        if (mainPhotoPath) {
+// Replace main photo with watermark wrapper
+const mainPhotoPath = getProfilePicture();
+const watermarkTag = watermarkBase64 ? `<img src="${watermarkBase64}" style="position: absolute;top: 5px; left: 10px; width: 160px; height: 190px; opacity: 0.4; pointer-events: none; z-index: 2;" />` : '';
+
+    if (mainPhotoPath) {
         const imageSrc = getImagePath(mainPhotoPath);
         // If it's a URL, use it directly
         if (imageSrc.startsWith('http')) {
-            // CHANGE THIS LINE - wrap imageSrc in an img tag
-            html = html.replace('MAIN_PHOTO_PLACEHOLDER', `<img src="${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>`);
+            html = html.replace('MAIN_PHOTO_PLACEHOLDER', `
+                <div style="position: relative; width: 100%; height: 100%;">
+                    <img src="${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>
+                    ${watermarkTag}
+                </div>
+            `);
         } else {
             // Local file path
-            html = html.replace('MAIN_PHOTO_PLACEHOLDER', `<img src="file://${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>`);
+            html = html.replace('MAIN_PHOTO_PLACEHOLDER', `
+                <div style="position: relative; width: 100%; height: 100%;">
+                    <img src="file://${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>
+                    ${watermarkTag}
+                </div>
+            `);
         }
-
-}
+    }
 
 // Generate dynamic gallery pages
-const galleryPages = generateGalleryPages(pictures, artifact.englishname, getImagePath, logoToBase64);
+const galleryPages = generateGalleryPages(pictures, artifact.englishname, getImagePath, logoToBase64, watermarkBase64);
 
 // Replace the placeholder (ONLY ONCE)
 const beforeReplace = html.length;
