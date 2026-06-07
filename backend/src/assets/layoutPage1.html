@@ -10,10 +10,10 @@
     :root {
       --gold:        #ffffff;
       --gold-light:  #ffffff;
-      --ink:         #1a1a18;
+      --ink:         #000000;
       --paper:       #ffffff;
       --rule:        #000000;
-      --muted:       #6b6659;
+      --muted:       #000000;
       --label-font:  'Raleway', sans-serif;
       --value-font:  'Courier Prime', monospace;
       --title-font:  'Raleway', sans-serif;
@@ -63,18 +63,18 @@
     }
 
     .header-xu-logo img {
-      height: 120px;
+      height: 100px;
     }
 
     .museum-title {
       position: absolute;
       left: 50%;
       transform: translateX(-50%);
-      top: 2.4rem;
+      top: 4.4rem;
       font-family: var(--title-font);
       font-weight: 700;
       font-size: 1.25rem;
-      letter-spacing: .55em;
+      letter-spacing: .25em;
       text-transform: uppercase;
       color: var(--ink);
       white-space: nowrap;
@@ -195,10 +195,10 @@
       font-family: var(--label-font);
       font-weight: 700;
       font-size: .8rem;
-      letter-spacing: .12em;
+      letter-spacing: .7em;
       text-transform: uppercase;
       text-decoration: underline;
-      text-underline-offset: 3px;
+      text-underline-offset: 5px;
       margin-bottom: .7rem;
       color: var(--ink);
     }
@@ -237,8 +237,8 @@
     .signature-row {
       display: flex;
       justify-content: flex-end;
-      margin-top: 2rem;
-      padding-top: 3rem;
+      margin-top: 1rem;
+      padding-top: 15%;
       border-top: 1px solid var(--rule);
     }
 
@@ -290,25 +290,26 @@
       page-break-inside: avoid;
       page-break-after: avoid;
     }
-  .photo-box {
-      width: 100%;
-      max-width: 100%;
-      aspect-ratio: 1 / 1;
-      background: #ffffff;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      overflow: hidden;
-  }
 
-  .photo-box img {
-      min-width: 100%;
-      min-height: 100%;
-      width: 100%;
-      height: 100%;
-      object-fit: cover;
-      object-position: center;
-  }   
+    .photo-box {
+        width: 100%;
+        max-width: 100%;
+        aspect-ratio: 1 / 1;
+        background: #ffffff;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        overflow: hidden;
+    }
+
+    .photo-box img {
+        min-width: 100%;
+        min-height: 100%;
+        width: 100%;
+        height: 100%;
+        object-fit: cover;
+        object-position: center;
+    }   
     .photo-placeholder-text {
       font-family: var(--label-font);
       font-size: .7rem;
@@ -327,6 +328,20 @@
       color: var(--ink);
       text-align: center;
       word-break: break-word;
+    }
+
+    .watermark-overlay {
+    position: absolute;
+    bottom: 8px;
+    right: 0px;
+    width: 300px;
+    height: 300px;
+    background-size: contain;
+    background-repeat: no-repeat;
+    background-position: center;
+    opacity: 0.4;
+    pointer-events: none;
+    z-index: 10;
     }
 
     /* ─── Print styles ──────────────────────────────────────── */
@@ -353,15 +368,11 @@
 </head>
 <body>
 
-  <!-- ══════════════════════════════════════════
-       PAGE 1 — Artifact Information
-  ══════════════════════════════════════════ -->
+  <!--PAGE 1 — Artifact Information-->
   <div class="page" id="page-info">
 
-    <!-- Header -->
     <div class="page-header">
       <div class="header-logos">
-        <!-- Logos will be injected dynamically -->
       </div>
       <span class="museum-title">M U S E O &nbsp; D E &nbsp; O R O</span>
       <div class="header-xu-logo">
@@ -369,23 +380,19 @@
       </div>
     </div>
 
-    <!-- Top: Photo + Institution logos + Quick fields -->
     <div class="top-section">
 
-      <!-- Artifact main photo -->
       <div class="artifact-photo-placeholder" id="main-photo">
           MAIN_PHOTO_PLACEHOLDER
       </div>
 
       <div class="top-right">
-        <!-- Three institution logos -->
         <div class="top-logos">
           <img src="xcca-logo.png"/>
           <img src="mdo-logo.png"/>
           <img src="omm-logo.png"/>
         </div>
 
-        <!-- Quick identification fields -->
         <div class="quick-fields">
           <span class="qlabel">Vernacular Name</span>
           <span class="qvalue" data-field="vernacular_name">Loading...</span>
@@ -399,7 +406,6 @@
       </div>
     </div>
 
-    <!-- Accession / Catalogue numbers -->
     <div class="id-row">
       <div class="id-field">
         <span class="id-label">Accession Number:</span>
@@ -411,10 +417,8 @@
       </div>
     </div>
 
-    <!-- Physical / Contacts / Provenance -->
     <div class="three-col">
 
-      <!-- PHYSICAL -->
       <div>
         <div class="section-heading">Physical</div>
         <div class="field">
@@ -435,9 +439,20 @@
         </div>
       </div>
 
-      <!-- CONTACTS -->
       <div>
         <div class="section-heading">Contacts</div>
+        <div class="field">
+          <div class="field-label">Donor's Name</div>
+          <div class="field-value" data-field="donor_name">Loading...</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Receiver's Name</div>
+          <div class="field-value" data-field="receiver_name">Loading...</div>
+        </div>
+        <div class="field">
+          <div class="field-label">Recorded By</div>
+          <div class="field-value" data-field="recorded_by">Loading...</div>
+        </div>
         <div class="field">
           <div class="field-label">Date Collected</div>
           <div class="field-value" data-field="date_given">Loading...</div>
@@ -446,21 +461,8 @@
           <div class="field-label">Date Received</div>
           <div class="field-value" data-field="date_received">Loading...</div>
         </div>
-        <div class="field">
-          <div class="field-label">Recorded By</div>
-          <div class="field-value" data-field="recorded_by">Loading...</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Receiver's Name</div>
-          <div class="field-value" data-field="receiver_name">Loading...</div>
-        </div>
-        <div class="field">
-          <div class="field-label">Donor's Name</div>
-          <div class="field-value" data-field="donor_name">Loading...</div>
-        </div>
       </div>
 
-      <!-- PROVENANCE -->
       <div>
         <div class="section-heading">Provenance</div>
         <div class="field">
@@ -476,14 +478,13 @@
           <div class="field-value" data-field="locality">Loading...</div>
         </div>
         <div class="field">
-          <div class="field-label">Collection Type</div>
+          <div class="field-label">How Artifact Was Collected</div>
           <div class="field-value" data-field="how_collected">Loading...</div>
         </div>
       </div>
 
-    </div><!-- /three-col -->
+    </div>
 
-    <!-- Function / Details / Condition -->
     <div class="bottom-section">
       <div class="field">
         <div class="field-label">Function</div>
@@ -499,13 +500,11 @@
       </div>
     </div>
 
-    <!-- Signature -->
     <div class="signature-row">
       <span class="signature-line">Signed by:</span>
     </div>
 
-  </div><!-- /page-info -->
-
+  </div>
 
   <!-- GALLERY_PAGES_WILL_BE_INSERTED_HERE -->
 
