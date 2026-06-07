@@ -42,3 +42,10 @@ Known Bugs that cannot seem to be fixed (?):
 6. Assistant and Guest cannot go into edit mode.
 7. Should have default rooms and artifacts folder in uploads
 8. If there are no pictures, you cannot add anything...
+
+
+
+
+
+//Deployment
+//npm run build
