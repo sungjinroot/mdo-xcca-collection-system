@@ -50,8 +50,9 @@ const generateGalleryPage = (photos, artifactName, pageNum, totalPages, getImage
         if (i < photos.length) {
             const photo = photos[i];
             const imageSrc = getImagePath(photo.picturefilepath);
-            const watermarkTagSmall = watermarkBase64 ? `<img src="${watermarkBase64}" style="position: absolute; bottom: 8px; right: 8px; width: 20px; height: 20px; opacity: 0.4; pointer-events: none; z-index: 2;" />` : '';
-
+            const watermarkTagSmall = watermarkBase64 ? `<div class="watermark-overlay"
+                                                         style="background-image: url('${watermarkBase64}');">
+                                                         </div>` : '';
             const imageTag = imageSrc && imageSrc.startsWith('http') 
                 ? `<div style="position: relative; width: 100%; height: 100%;">
                     <img src="${imageSrc}" style="width:100%;height:100%;object-fit:cover;"/>
@@ -174,7 +175,9 @@ endpoint.get('/pdf/:id', async (req, res) => {
         pd.specialRemarks,
 
         ac.collectionType,
-        ac.price
+        ac.price,
+
+        c.collectionName
 
     FROM Artifacts a
     LEFT JOIN ArtifactNames an ON a.artifactID = an.artifactID
@@ -183,6 +186,7 @@ endpoint.get('/pdf/:id', async (req, res) => {
     LEFT JOIN Dimensions d ON a.artifactID = d.artifactID
     LEFT JOIN PhysicalDescription pd ON a.artifactID = pd.artifactID
     LEFT JOIN Acquisition ac ON a.artifactID = ac.artifactID
+    LEFT JOIN Collection c ON ac.collectionType = c.collectionType
     WHERE a.artifactID = $1
 `, [id]);
 
@@ -301,7 +305,7 @@ html = html.replace('<!-- GALLERY_PAGES_WILL_BE_INSERTED_HERE -->', galleryPages
         html = html.replace('Test group', artifact.ethnicgroup || 'N/A');
         html = html.replace('Test place', artifact.placeoforigin || 'N/A');
         html = html.replace('Test locality', artifact.locality || 'N/A');
-        html = html.replace('DONATED', artifact.collectiontype || 'N/A');
+        html = html.replace('DONATED', artifact.collectionname || 'N/A');
         html = html.replace('NO FUNCTION TESTING', artifact.artifactfunction || 'N/A');
         html = html.replace('GOOD UPON RECEIVED', artifact.artifactdetails || 'N/A');
         html = html.replace('GOOD kaayo', artifact.conditionuponreceipt || 'N/A');
@@ -329,7 +333,7 @@ html = html.replace('<!-- GALLERY_PAGES_WILL_BE_INSERTED_HERE -->', galleryPages
             'ethnic_group': artifact.ethnicgroup,
             'place_of_origin': artifact.placeoforigin,
             'locality': artifact.locality,
-            'how_collected': artifact.collectiontype,
+            'how_collected': artifact.collectionname,
             'function': artifact.artifactfunction,
             'details': artifact.artifactdetails,
             'condition': artifact.conditionuponreceipt
