@@ -15,23 +15,18 @@ services:
       #Please configure with your own google client id here...
       VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     volumes:
-      - ./backend/src:/app/src  
-      - /app/node_modules       
       - ./uploads:/app/uploads
       - ./backend/src/assets/temp:/app/src/assets/temp
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     ports:
-      - "5173:5173"
-    environment: #Please conffigure with your own google client id here...
-      VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
+      - "5173:80"
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app
-      - ./uploads:/app/uploads
-      - /app/node_modules       
 
 
 
