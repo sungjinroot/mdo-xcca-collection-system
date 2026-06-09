@@ -16,7 +16,7 @@
     "bcrypt": "^6.0.0",
     "cors": "^2.8.6",
     "dotenv": "^17.4.2",
-    "exprhttps://docs.google.com/document/d/1M7PGtKbRBlDU_6DX49Sl3TLb3_59gtnjMKrgSjJDICY/edit?usp=sharingess": "^5.2.1",
+    "express": "^5.2.1",
     "jsonwebtoken": "^9.0.3",
     "multer": "^2.1.1",
     "pg": "^8.20.0",
