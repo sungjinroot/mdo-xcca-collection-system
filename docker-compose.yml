@@ -11,28 +11,26 @@ services:
       DB_PASSWORD: postgres
       DB_NAME: mydb
       JWT_SECRET: AMINOTSECRETENOUGHFORYOU???YOUCANTCRACKTHIS!!!IAMTOOSTRONGFORYOUTOCRACK!!!ff23083
-
-      #Please configure with your own google client id here...
       VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     volumes:
-      - ./backend/src:/app/src  
-      - /app/node_modules       
+      - ./backend/src:/app/src
+      - /app/node_modules
       - ./uploads:/app/uploads
-      - ./backend/src/assets/temp:/app/src/assets/temp
+
+      - ./backend/assets:/app/assets
+
+
+
 
   frontend:
-    build: ./frontend
+    build:
+      context: ./frontend
+      args:
+        VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     ports:
       - "5173:5173"
-    environment: #Please conffigure with your own google client id here...
-      VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
     depends_on:
       - backend
-    volumes:
-      - ./frontend:/app
-      - ./uploads:/app/uploads
-      - /app/node_modules       
-
 
 
   db:
@@ -47,6 +45,6 @@ services:
     volumes:
       - pgdata:/var/lib/postgresql/data
       - ./database/db.sql:/docker-entrypoint-initdb.d/01_schema.sql
-      - ./database/dummyData.sql:/docker-entrypoint-initdb.d/02_data.sql
+
 volumes:
-  pgdata:  
+  pgdata:

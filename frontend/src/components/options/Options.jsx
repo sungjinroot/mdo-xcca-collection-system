@@ -36,7 +36,7 @@ function Options( { categories, rooms, initiateArtifactSearch, role } ) {
                     }}
                 >
                     <SpeedDialAction
-                        icon={<img src="src/assets/add-artifact.png" style={{ width: 32, height: 32 }} />}
+                        icon={<img src="http://127.0.0.1:3000/assets/add-artifact.png" style={{ width: 32, height: 32 }} />}
                         tooltipTitle="New Artifact"
                         onClick={() => setShow(true)}
                         FabProps={{
@@ -48,7 +48,7 @@ function Options( { categories, rooms, initiateArtifactSearch, role } ) {
                     />
                     {!isRestricted && (
                         <SpeedDialAction
-                            icon={<img src="src/assets/add-user.png" style={{ width: 32, height: 32 }} />}
+                            icon={<img src="http://127.0.0.1:3000/assets/add-user.png" style={{ width: 32, height: 32 }} />}
                             tooltipTitle="New User"
                             onClick={() => setShowAssistants(true)}
                             FabProps={{

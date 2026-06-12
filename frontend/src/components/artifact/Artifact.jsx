@@ -130,7 +130,7 @@ const handleDownload = async () => {
                 </select>
               </div>
               <button className="delete-button" onClick={() => setShowWarning(true)}>
-                <img src="src/assets/delete.png" />
+                <img src="http://127.0.0.1:3000/assets/delete.png" />
               </button>
             </>
           )}

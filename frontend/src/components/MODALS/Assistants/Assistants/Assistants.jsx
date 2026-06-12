@@ -24,7 +24,7 @@ function Assistants({ userid, username, canAdd, onDelete }) {
         <label>
           {canAdd ? 'Assistant' : 'Guest'}
         </label>
-        <img src="src/assets/delete.png" alt="delete" onClick={handleDelete} style={{ cursor: 'pointer' }} />
+        <img src="http://127.0.0.1:3000/assets/delete.png" alt="delete" onClick={handleDelete} style={{ cursor: 'pointer' }} />
       </div>
       <div className="assistant-creds">
         <h3>

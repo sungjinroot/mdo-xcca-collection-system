@@ -1,6 +1,6 @@
 @font-face {
   font-family: 'Outfit';
-  src: url('/src/assets/fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+  src: url('http://127.0.0.1:3000/assets/fonts/Outfit-VariableFont_wght.ttf') format('truetype');
   font-weight: 100 900;
   font-style: normal;
 }

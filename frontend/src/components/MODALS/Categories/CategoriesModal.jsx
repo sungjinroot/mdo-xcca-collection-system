@@ -18,7 +18,7 @@ function CategoryItem({ category, onNameChange, onDelete, deletingId, savingId }
             {deletingId === category.categoryid ? (
               <span className="category-delete-status">Deleting...</span>
             ) : (
-              <img src="src/assets/delete.png" alt="" aria-hidden="true" />
+              <img src="http://127.0.0.1:3000/assets/delete.png" alt="" aria-hidden="true" />
             )}
           </button>
         </div>

@@ -4,9 +4,9 @@ import MenuItem from '@mui/material/MenuItem';
 import { useState, useEffect } from 'react';
 
 const images = [
-  'src/assets/xcca.png',
-  'src/assets/omm.jpg',
-  'src/assets/mdo.jpg',
+  'http://127.0.0.1:3000/assets/xcca.png',
+  'http://127.0.0.1:3000/assets/omm.jpg',
+  'http://127.0.0.1:3000/assets/mdo.jpg',
 ];
 
 function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex, onLogout }) {
@@ -51,8 +51,8 @@ function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQu
   return (
     <nav className="nav-container">
       <div className="nav-left">
-        <img src="src/assets/logo.png" alt="centennial" />
-        <img src="src/assets/centennial.png" alt="centennial" />
+        <img src="http://127.0.0.1:3000/assets/logo.png" alt="centennial" />
+        <img src="http://127.0.0.1:3000/assets/centennial.png" alt="centennial" />
       </div>
 
       <div className="nav-stats">

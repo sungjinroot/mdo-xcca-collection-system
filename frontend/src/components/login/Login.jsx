@@ -8,8 +8,7 @@ function Login({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-
- 
+   
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -65,8 +64,8 @@ function Login({ onLoginSuccess }) {
     <div className="login-page">
       <div className="login-container">
         <div className="login-card">
-          <img src="src/assets/xu-logo.png" className="card-logo" />
-          <h1 className="login-title">Museo de Oro Collection Inventory Management System</h1>
+          <img src="http://127.0.0.1:3000/assets/xu-logo.png" className="card-logo" />
+          <h1 className="login-title">Museo de Oro Collection & Inventory Management System</h1>
           <p className="login-access-note">Assistant and Guest accounts use username and password.</p>
           
           {error && (

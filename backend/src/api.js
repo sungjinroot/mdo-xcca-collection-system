@@ -13,7 +13,7 @@ app.use(cors({
     'http://localhost:3000',
     'http://localhost:5173',
     'http://127.0.0.1:3000', 
-    'http://127.0.0.1:5173' 
+    'http://127.0.0.1:5173',
   ]
 }));
 
@@ -85,9 +85,10 @@ async function requireAdminOrAssistant(req, res, next) {
 
 //Routes to Upload Folder
 app.use('/uploads', express.static('/app/uploads'));
+app.use('/assets', express.static('/app/assets'));
 
-//route for temporary storage of sample pictures
-app.use('/src/assets/temp', express.static('src/assets/temp'));
+
+
 
 const artifactEndpoint = require('./endpoints/artifacts');
 const artifactDisplayEndpoint = require('./endpoints/artifactsdisplay');
