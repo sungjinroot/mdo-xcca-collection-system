@@ -106,7 +106,7 @@ function EditRoomModal({ showEdit, setShowEdit, roomId, setRoomId, roomIndex, se
       setShowEdit(false);
     } catch (error) {
       console.error('Error deleting room:', error);
-      alert("Replace this with a proper modal soon. Cannot delete room if it houses artifacts");
+      alert("Cannot delete room if it houses artifacts");
       setShowEdit(false);
     }
   };
