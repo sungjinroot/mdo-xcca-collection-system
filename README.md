@@ -1,24 +1,22 @@
 
-HOW TO ENTER THE BACKEND SHELL
+In case of google SSO errors. 
 
-sudo docker exec -it mdo-xcca-collection-system-backend-1 bash
+Please follow these steps to fix the issue. 
 
+Step 1: Go to https://console.cloud.google.com
 
-HOW TO ENTER THE DOCKERIZED DATABASE
+Step 2: Create a project 
 
-docker exec -it mdo-xcca-collection-system-db-1 psql -U postgres -d mydb
+Step 3: Authorize the following origins
 
+    'http://localhost:3000',
+    'http://localhost:5173',
+    'http://127.0.0.1:3000', 
+    'http://127.0.0.1:5173',
 
+Step 4. Copy the google client id and paste it on the VITE_GOOGLE_CLIENT_ID on the .env file
 
-
-DATABASE PROPAGATION
-
-Propagate the necessary tables:
-cd mdo-xcca-collection-system/database
-docker exec -i mdo-xcca-collection-system-db-1 psql -U postgres -d mydb < db.sql
-
-
-
+Step 5. Run docker system prune, and then docker compose up.
 
 
 

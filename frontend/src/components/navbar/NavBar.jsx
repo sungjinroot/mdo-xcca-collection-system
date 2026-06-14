@@ -85,7 +85,7 @@ function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQu
 
 
         <Menu id="basic-menu" anchorEl={anchorEl} open={open} onClose={handleClose} MenuListProps={{ 'aria-labelledby': 'basic-button' }}>
-          <MenuItem onClick={handleClose}>User Manual</MenuItem>
+          <MenuItem onClick={() => { window.open('http://127.0.0.1:3000/assets/manual.pdf', '_blank'); handleClose(); }}> User Manual </MenuItem>          
           <MenuItem onClick={handleLogout}>Logout</MenuItem>
         </Menu>
       </div>
