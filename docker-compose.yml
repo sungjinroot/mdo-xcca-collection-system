@@ -7,39 +7,34 @@ services:
       - db
     environment:
       DB_HOST: db
-      DB_USER: postgres
-      DB_PASSWORD: postgres
-      DB_NAME: mydb
-      JWT_SECRET: AMINOTSECRETENOUGHFORYOU???YOUCANTCRACKTHIS!!!IAMTOOSTRONGFORYOUTOCRACK!!!ff23083
-      VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
+      DB_USER: ${DB_USER}
+      DB_PASSWORD: ${DB_PASSWORD}
+      DB_NAME: ${DB_NAME}
+      JWT_SECRET: ${JWT_SECRET}
+      VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID}
     volumes:
       - ./backend/src:/app/src
       - /app/node_modules
       - ./uploads:/app/uploads
-
       - ./backend/assets:/app/assets
-
-
-
 
   frontend:
     build:
       context: ./frontend
       args:
-        VITE_GOOGLE_CLIENT_ID: 1004129401046-42tsa627e6q856qqrbghtiue4kouvfgv.apps.googleusercontent.com
+        VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID}
     ports:
       - "5173:5173"
     depends_on:
       - backend
 
-
   db:
     image: postgres:15
     restart: always
     environment:
-      POSTGRES_USER: postgres
-      POSTGRES_PASSWORD: postgres
-      POSTGRES_DB: mydb
+      POSTGRES_USER: ${DB_USER}
+      POSTGRES_PASSWORD: ${DB_PASSWORD}
+      POSTGRES_DB: ${DB_NAME}
     ports:
       - "5432:5432"
     volumes:

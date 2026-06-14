@@ -9,7 +9,7 @@ const images = [
   'http://127.0.0.1:3000/assets/mdo.jpg',
 ];
 
-function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex, onLogout }) {
+function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQuery, setRoomId, setRoomIndex, onLogout, setCurrentPage }) {
   const [category, setCategory] = useState('');
   const [anchorEl, setAnchorEl] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
@@ -42,6 +42,7 @@ function NavBar({ statistics,categories, setCategoryId, searchQuery, setSearchQu
 
   function handleSearchQuery(query) {
     if (query) {
+      setCurrentPage(1); 
       setRoomIndex(null);
       setRoomId(null);
     }

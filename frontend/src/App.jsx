@@ -149,7 +149,7 @@ function App() {
 
     const MainApp = (
       <>
-        <NavBar statistics={statistics} categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex} onLogout={handleLogout}/>
+        <NavBar statistics={statistics} categories={categories} setCategoryId={setCategoryId} searchQuery={searchQuery} setSearchQuery={setSearchQuery} setRoomId={setRoomId} setRoomIndex={setRoomIndex} onLogout={handleLogout} setCurrentPage={setCurrentPage}/>
         <Rooms roomIndex={roomIndex} setRoomIndex={setRoomIndex} roomId={roomId} setRoomId={setRoomId} rooms={rooms} setRooms={setRooms} categories={categories} setCategories={setCategories} setCurrentPage={setCurrentPage} role={role}/> 
 
         <MainContent categories={categories} rooms={rooms} artifacts={artifacts} searchQuery={searchQuery} categoryId={categoryId} roomId={roomId} currentPage={currentPage} initiateArtifactSearch={initiateArtifactSearch} role={role}/>
