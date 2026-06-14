@@ -1,6 +1,7 @@
 services:
   backend:
     build: ./backend
+    restart: always
     ports:
       - "3000:3000"
     depends_on:
@@ -23,6 +24,7 @@ services:
       context: ./frontend
       args:
         VITE_GOOGLE_CLIENT_ID: ${VITE_GOOGLE_CLIENT_ID}
+    restart: always
     ports:
       - "5173:5173"
     depends_on:
@@ -30,7 +32,7 @@ services:
 
   db:
     image: postgres:15
-    restart: always
+    restart: always   
     environment:
       POSTGRES_USER: ${DB_USER}
       POSTGRES_PASSWORD: ${DB_PASSWORD}
