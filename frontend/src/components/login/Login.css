@@ -1,3 +1,10 @@
+@font-face {
+  font-family: 'Outfit';
+  src: url('http://127.0.0.1:3000/assets/fonts/Outfit-VariableFont_wght.ttf') format('truetype');
+  font-weight: 100 900;
+  font-style: normal;
+}
+
 .login-page {
     min-height: 100vh;
     background-color: #f2f2f2;
