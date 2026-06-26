@@ -1,6 +1,7 @@
 import { useState } from 'react'
 import { GoogleLogin } from '@react-oauth/google'
 import { jwtDecode } from 'jwt-decode'
+import { useEffect } from 'react'
 import './Login.css'
 
 function Login({ onLoginSuccess }) {
@@ -8,7 +9,25 @@ function Login({ onLoginSuccess }) {
   const [password, setPassword] = useState('');
   const [showPassword, setShowPassword] = useState(false);
   const [error, setError] = useState('');
-   
+
+  useEffect(() => {
+    const fontUrl = `http://${window.location.hostname}:3000/assets/fonts/Outfit-VariableFont_wght.ttf`;
+    const style = document.createElement('style');
+    style.textContent = `
+      @font-face {
+        font-family: 'Outfit';
+        src: url('${fontUrl}') format('truetype');
+        font-weight: 100 900;
+        font-style: normal;
+      }
+    `;
+    document.head.appendChild(style);
+
+    return () => {
+      document.head.removeChild(style);
+    };
+  }, []);
+
   const handleSubmit = async (e) => {
     e.preventDefault();
     setError('');
@@ -67,18 +86,18 @@ function Login({ onLoginSuccess }) {
           <img src="http://127.0.0.1:3000/assets/xu-logo.png" className="card-logo" />
           <h1 className="login-title">Museo de Oro Collection & Inventory Management System</h1>
           <p className="login-access-note">Assistant and Guest accounts use username and password.</p>
-          
+
           {error && (
             <div className="error-message" style={{ color: 'red', marginBottom: '1rem', fontSize: '0.9rem' }}>
               {error}
             </div>
           )}
-          
+
           <form onSubmit={handleSubmit} className="login-form">
             <label htmlFor="email">Username</label>
             <input id="email" type="text" placeholder="Type your username" value={username} onChange={(e) => setUsername(e.target.value)} />
             <label htmlFor="password">Password</label>
-            
+
             <div className="password-wrapper">
               <input id="password" type={showPassword ? 'text' : 'password'} placeholder="Type your password" value={password} onChange={(e) => setPassword(e.target.value)} />
               <button type="button" className="show-password-btn" onClick={() => setShowPassword(!showPassword)}>
